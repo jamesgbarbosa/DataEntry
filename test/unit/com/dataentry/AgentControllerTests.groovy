@@ -7,7 +7,7 @@ import grails.test.mixin.*
 
 @Ignore
 @TestFor(AgentController)
-@Mock(Agent)
+@Mock([Agent,Client])
 class AgentControllerTests {
 
     def populateValidParams(params) {

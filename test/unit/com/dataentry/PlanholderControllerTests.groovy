@@ -6,7 +6,7 @@ import org.junit.*
 import grails.test.mixin.*
 
 @TestFor(PlanholderController)
-@Mock(Planholder)
+@Mock([Planholder, Client])
 class PlanholderControllerTests {
 
     def populateValidParams(params) {

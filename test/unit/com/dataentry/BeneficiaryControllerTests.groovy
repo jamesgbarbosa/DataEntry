@@ -6,7 +6,7 @@ import org.junit.*
 import grails.test.mixin.*
 
 @TestFor(BeneficiaryController)
-@Mock(Beneficiary)
+@Mock([Beneficiary,Client])
 class BeneficiaryControllerTests {
 
     def populateValidParams(params) {
