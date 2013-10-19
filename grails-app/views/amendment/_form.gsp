@@ -34,11 +34,5 @@
 	<g:datePicker name="filingDate" precision="day"  value="${amendmentInstance?.filingDate}"  />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'plan', 'error')} required">
-	<label for="plan">
-		<g:message code="amendment.plan.label" default="Plan" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="plan" name="plan.id" from="${com.dataentry.Plan.list()}" optionKey="id" required="" value="${amendmentInstance?.plan?.id}" class="many-to-one"/>
-</div>
+<g:hiddenField id="plan" name="plan.id" value="${amendmentInstance?.plan?.id}" />
 

@@ -177,10 +177,8 @@
 					<g:hiddenField name="id" value="${planInstance?.id}" />
 					<g:link class="edit" action="edit" id="${planInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    <li class="add">
-                        <g:link controller="beneficiary" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'beneficiary.label', default: 'Beneficiary')])}</g:link>
-                        <g:link controller="amendment" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'amendment.label', default: 'Amendment')])}</g:link>
-                    </li>
+                    <g:link controller="beneficiary" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'beneficiary.label', default: 'Beneficiary')])}</g:link>
+                    <g:link controller="amendment" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'amendment.label', default: 'Amendment')])}</g:link>
 				</fieldset>
 			</g:form>
 		</div>
