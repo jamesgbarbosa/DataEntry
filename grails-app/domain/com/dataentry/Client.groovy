@@ -42,7 +42,7 @@ class Client {
 
     boolean validateClientUniqueness() {
         if(this.firstName && this.lastName && this.birthdate && this.gender ){
-            def clients = this.withCriteria {
+            def clients = Client.withCriteria {
                 eq("firstName",this.firstName)
                 eq("lastName", this.lastName)
                 eq("birthdate", this.birthdate)
