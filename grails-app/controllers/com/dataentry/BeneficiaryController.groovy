@@ -26,6 +26,11 @@ class BeneficiaryController {
             return
         }
 
+        if (params.planId) {
+            def planInstance = Plan.get(params.planId)
+            planInstance.addToBeneficiaries(beneficiaryInstance)
+        }
+
         flash.message = message(code: 'default.created.message', args: [message(code: 'beneficiary.label', default: 'Beneficiary'), beneficiaryInstance.id])
         redirect(action: "show", id: beneficiaryInstance.id)
     }
@@ -63,8 +68,8 @@ class BeneficiaryController {
         if (version != null) {
             if (beneficiaryInstance.version > version) {
                 beneficiaryInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'beneficiary.label', default: 'Beneficiary')] as Object[],
-                        "Another user has updated this Beneficiary while you were editing")
+                          [message(code: 'beneficiary.label', default: 'Beneficiary')] as Object[],
+                          "Another user has updated this Beneficiary while you were editing")
                 render(view: "edit", model: [beneficiaryInstance: beneficiaryInstance])
                 return
             }

@@ -6,7 +6,7 @@ class Beneficiary extends Client {
     String relationship
 
 
-    static belongsTo = [plan: Plan]
+//    static belongsTo = [plan: Plan]
     static constraints = {
         designation blank:  true, nullable:  true
         relationship blank:  true, nullable:  true
