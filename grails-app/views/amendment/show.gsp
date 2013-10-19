@@ -58,16 +58,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${amendmentInstance?.plan}">
-				<li class="fieldcontain">
-					<span id="plan-label" class="property-label"><g:message code="amendment.plan.label" default="Plan" /></span>
-					
-						<span class="property-value" aria-labelledby="plan-label"><g:link controller="plan" action="show" id="${amendmentInstance?.plan?.id}">${amendmentInstance?.plan?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
+
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

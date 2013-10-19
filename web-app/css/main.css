@@ -108,7 +108,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	/*background: #abbf78;*/
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -593,4 +593,12 @@ th:hover, tr:hover {
 a.skip {
 	position: absolute;
 	left: -9999px;
+}
+
+
+/*Custom*/
+
+#appLogo {
+    font-size: 2em;
+
 }
