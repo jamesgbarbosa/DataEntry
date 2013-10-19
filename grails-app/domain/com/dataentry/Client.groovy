@@ -20,11 +20,13 @@ class Client {
     String gender
 
     static constraints = {
-        clientType blank:  true, nullable:  true
-        lastName blank:  true, nullable:  true
-        firstName blank:  true, nullable:  true
+        clientType blank:  false, nullable:  false, inList:['Plan Holder','Beneficiary','Agent' ]
+        lastName blank:  false, nullable:  false
+        firstName blank:  false, nullable:  false
         middleName blank:  true, nullable:  true
-        birthdate blank:  true, nullable:  true
+        gender blank:  false, nullable:  false, inList: ['Male','Female']
+        birthdate blank:  false, nullable:  false
+        email blank:  true, nullable:  true
         address1 blank:  true, nullable:  true
         address2 blank:  true, nullable:  true
         address3 blank:  true, nullable:  true
@@ -34,7 +36,24 @@ class Client {
         landline blank:  true, nullable:  true
         mobile blank:  true, nullable:  true
         officenumber blank:  true, nullable:  true
-        email blank:  true, nullable:  true
-        gender blank:  true, nullable:  true
+
+
+    }
+
+    boolean validateClientUniqueness() {
+        if(this.firstName && this.lastName && this.birthdate && this.gender ){
+            def clients = this.withCriteria {
+                eq("firstName",this.firstName)
+                eq("lastName", this.lastName)
+                eq("birthdate", this.birthdate)
+                eq("gender", this.gender)
+            }
+
+            if(clients) {
+                return false
+            }
+
+            return true
+        }
     }
 }

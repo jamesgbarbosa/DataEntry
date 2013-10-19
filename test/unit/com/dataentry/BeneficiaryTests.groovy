@@ -11,7 +11,24 @@ import org.junit.*
 @TestFor(Beneficiary)
 class BeneficiaryTests {
 
-    void testSomething() {
-        fail "Implement me"
+    def beneficiary
+
+    @Before
+    void setUp() {
+
+        beneficiary = new Beneficiary()
+        beneficiary.designation = "test"
+        beneficiary.relationship = "test"
+        beneficiary.firstName = "James"
+        beneficiary.lastName = "Barbosa"
+        beneficiary.clientType = "Beneficiary"
+        beneficiary.birthdate = new Date()
+        beneficiary.gender = "Male"
     }
+
+
+    void testSuccessfulValidation() {
+        assertTrue beneficiary.validate()
+    }
+
 }

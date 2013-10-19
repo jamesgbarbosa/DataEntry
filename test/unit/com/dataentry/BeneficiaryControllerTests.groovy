@@ -12,7 +12,13 @@ class BeneficiaryControllerTests {
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params.designation = "test"
+        params.relationship = "test"
+        params.firstName = "James"
+        params.lastName = "Barbosa"
+        params.clientType = "Beneficiary"
+        params.birthdate = new Date()
+        params.gender = "Male"
     }
 
     void testIndex() {
@@ -101,8 +107,8 @@ class BeneficiaryControllerTests {
 
         // test invalid parameters in update
         params.id = beneficiary.id
-        //TODO: add invalid values to params object
-
+        populateValidParams(params)
+        params.clientType = 'Test' // Invalid client type
         controller.update()
 
         assert view == "/beneficiary/edit"

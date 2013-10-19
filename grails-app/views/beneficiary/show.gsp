@@ -13,7 +13,6 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="show-beneficiary" class="content scaffold-show" role="main">
@@ -59,11 +58,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${beneficiaryInstance?.gender}">
+				<li class="fieldcontain">
+					<span id="gender-label" class="property-label"><g:message code="beneficiary.gender.label" default="Gender" /></span>
+					
+						<span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${beneficiaryInstance}" field="gender"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${beneficiaryInstance?.birthdate}">
 				<li class="fieldcontain">
 					<span id="birthdate-label" class="property-label"><g:message code="beneficiary.birthdate.label" default="Birthdate" /></span>
 					
 						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${beneficiaryInstance?.birthdate}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${beneficiaryInstance?.email}">
+				<li class="fieldcontain">
+					<span id="email-label" class="property-label"><g:message code="beneficiary.email.label" default="Email" /></span>
+					
+						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${beneficiaryInstance}" field="email"/></span>
 					
 				</li>
 				</g:if>
@@ -145,24 +162,6 @@
 					<span id="officenumber-label" class="property-label"><g:message code="beneficiary.officenumber.label" default="Officenumber" /></span>
 					
 						<span class="property-value" aria-labelledby="officenumber-label"><g:fieldValue bean="${beneficiaryInstance}" field="officenumber"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${beneficiaryInstance?.email}">
-				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="beneficiary.email.label" default="Email" /></span>
-					
-						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${beneficiaryInstance}" field="email"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${beneficiaryInstance?.gender}">
-				<li class="fieldcontain">
-					<span id="gender-label" class="property-label"><g:message code="beneficiary.gender.label" default="Gender" /></span>
-					
-						<span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${beneficiaryInstance}" field="gender"/></span>
 					
 				</li>
 				</g:if>

@@ -7,7 +7,7 @@
 		<g:message code="beneficiary.clientType.label" default="Client Type" />
 		
 	</label>
-	<g:textField name="clientType" value="${beneficiaryInstance?.clientType}"/>
+	<g:select name="clientType" from="${beneficiaryInstance.constraints.clientType.inList}" value="${beneficiaryInstance?.clientType}" valueMessagePrefix="beneficiary.clientType" noSelection="['': '']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'lastName', 'error')} ">
@@ -34,12 +34,28 @@
 	<g:textField name="middleName" value="${beneficiaryInstance?.middleName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'birthdate', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'gender', 'error')} required">
+	<label for="gender">
+		<g:message code="beneficiary.gender.label" default="Gender" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="gender" from="${beneficiaryInstance.constraints.gender.inList}" required="" value="${beneficiaryInstance?.gender}" valueMessagePrefix="beneficiary.gender"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'birthdate', 'error')} required">
 	<label for="birthdate">
 		<g:message code="beneficiary.birthdate.label" default="Birthdate" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="birthdate" precision="day"  value="${beneficiaryInstance?.birthdate}"  />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'email', 'error')} ">
+	<label for="email">
+		<g:message code="beneficiary.email.label" default="Email" />
 		
 	</label>
-	<g:datePicker name="birthdate" precision="day"  value="${beneficiaryInstance?.birthdate}" default="none" noSelection="['': '']" />
+	<g:textField name="email" value="${beneficiaryInstance?.email}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'address1', 'error')} ">
@@ -112,22 +128,6 @@
 		
 	</label>
 	<g:textField name="officenumber" value="${beneficiaryInstance?.officenumber}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'email', 'error')} ">
-	<label for="email">
-		<g:message code="beneficiary.email.label" default="Email" />
-		
-	</label>
-	<g:textField name="email" value="${beneficiaryInstance?.email}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'gender', 'error')} ">
-	<label for="gender">
-		<g:message code="beneficiary.gender.label" default="Gender" />
-		
-	</label>
-	<g:textField name="gender" value="${beneficiaryInstance?.gender}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'designation', 'error')} ">

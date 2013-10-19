@@ -21,10 +21,23 @@ class BeneficiaryController {
 
     def save() {
         def beneficiaryInstance = new Beneficiary(params)
-        if (!beneficiaryInstance.save(flush: true)) {
+        //validate uniqeness
+
+        if(beneficiaryInstance.validate()) {
+            if(!beneficiaryInstance.validateClientUniqueness()) {
+                flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+                render(view: "create", model: [beneficiaryInstance: beneficiaryInstance])
+                return
+            }
+            if (!beneficiaryInstance.save(flush: true)) {
+                render(view: "create", model: [beneficiaryInstance: beneficiaryInstance])
+                return
+            }
+        } else {
             render(view: "create", model: [beneficiaryInstance: beneficiaryInstance])
             return
         }
+
 
         if (params.planId) {
             def planInstance = Plan.get(params.planId)
