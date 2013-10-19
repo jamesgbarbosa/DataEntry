@@ -12,7 +12,11 @@ class AmendmentControllerTests {
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params.amendmentType = "test"
+        params.approvedBy = "test"
+        params.effectiveDate = new Date()
+        params.filingDate = new Date()
+        params.plan = new Plan()
     }
 
     void testIndex() {
@@ -101,7 +105,7 @@ class AmendmentControllerTests {
 
         // test invalid parameters in update
         params.id = amendment.id
-        //TODO: add invalid values to params object
+        params.plan = null
 
         controller.update()
 

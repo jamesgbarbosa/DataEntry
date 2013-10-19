@@ -5,6 +5,7 @@ package com.dataentry
 import org.junit.*
 import grails.test.mixin.*
 
+@Ignore
 @TestFor(PlanController)
 @Mock(Plan)
 class PlanControllerTests {

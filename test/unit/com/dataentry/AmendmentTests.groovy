@@ -11,7 +11,19 @@ import org.junit.*
 @TestFor(Amendment)
 class AmendmentTests {
 
-    void testSomething() {
-        fail "Implement me"
+    def amendment
+
+    @Before
+    public void setUp() {
+        amendment = new Amendment()
+        amendment.amendmentType = "test"
+        amendment.approvedBy = "test"
+        amendment.effectiveDate = new Date()
+        amendment.filingDate = new Date()
+        amendment.plan = new Plan()
+    }
+
+    void testSuccessfulValidate() {
+        assertTrue amendment.validate()
     }
 }

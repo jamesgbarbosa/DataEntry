@@ -5,6 +5,7 @@ package com.dataentry
 import org.junit.*
 import grails.test.mixin.*
 
+@Ignore
 @TestFor(AgentController)
 @Mock(Agent)
 class AgentControllerTests {
@@ -12,7 +13,29 @@ class AgentControllerTests {
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params.agency = "test"
+        params.agentCode = "test"
+        params.appointmentDate = new Date()
+        params.groupName = "test"
+        params.firstName = "James"
+        params.lastName = "Barbosa"
+        params.clientType = "Agent"
+        params.birthdate = new Date()
+        params.gender = "Male"
+        params.firstName = "James"
+        params.lastName = "Barbosa"
+        params.clientType = "Agent"
+        params.birthdate = new Date()
+        params.gender = "Male"
+        params.address1 = "test"
+        params.address2 = "test"
+        params.address3 = "test"
+        params.address4 = "test"
+        params.address5 = "test"
+        params.address6 = "test"
+        params.email = "myemail@gmail.com"
+        params.landline = "test"
+        params.mobile = "test"
     }
 
     void testIndex() {
@@ -101,6 +124,7 @@ class AgentControllerTests {
 
         // test invalid parameters in update
         params.id = agent.id
+        params.clientType = "Does not exist"
         //TODO: add invalid values to params object
 
         controller.update()

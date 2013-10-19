@@ -10,8 +10,34 @@ import org.junit.*
  */
 @TestFor(Planholder)
 class PlanholderTests {
-
-    void testSomething() {
-        fail "Implement me"
+    
+    def planHolder
+    
+    @Before
+    void setUp() {
+        planHolder = new Planholder()
+        planHolder.firstName = "James"
+        planHolder.lastName = "Barbosa"
+        planHolder.clientType = "Agent"
+        planHolder.birthdate = new Date()
+        planHolder.gender = "Male"
+        planHolder.firstName = "James"
+        planHolder.lastName = "Barbosa"
+        planHolder.clientType = "Agent"
+        planHolder.birthdate = new Date()
+        planHolder.gender = "Male"
+        planHolder.address1 = "test"
+        planHolder.address2 = "test"
+        planHolder.address3 = "test"
+        planHolder.address4 = "test"
+        planHolder.address5 = "test"
+        planHolder.address6 = "test"
+        planHolder.email = "myemail@gmail.com"
+        planHolder.landline = "test"
+        planHolder.mobile = "test"
+        
+    }
+    void testSuccessfulValidate() {
+        assertTrue planHolder.validate()
     }
 }
