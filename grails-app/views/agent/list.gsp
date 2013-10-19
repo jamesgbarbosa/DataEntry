@@ -12,7 +12,6 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-agent" class="content scaffold-list" role="main">
@@ -32,9 +31,9 @@
 					
 						<g:sortableColumn property="middleName" title="${message(code: 'agent.middleName.label', default: 'Middle Name')}" />
 					
-						<g:sortableColumn property="birthdate" title="${message(code: 'agent.birthdate.label', default: 'Birthdate')}" />
+						<g:sortableColumn property="gender" title="${message(code: 'agent.gender.label', default: 'Gender')}" />
 					
-						<g:sortableColumn property="address1" title="${message(code: 'agent.address1.label', default: 'Address1')}" />
+						<g:sortableColumn property="birthdate" title="${message(code: 'agent.birthdate.label', default: 'Birthdate')}" />
 					
 					</tr>
 				</thead>
@@ -50,9 +49,9 @@
 					
 						<td>${fieldValue(bean: agentInstance, field: "middleName")}</td>
 					
-						<td><g:formatDate date="${agentInstance.birthdate}" /></td>
+						<td>${fieldValue(bean: agentInstance, field: "gender")}</td>
 					
-						<td>${fieldValue(bean: agentInstance, field: "address1")}</td>
+						<td><g:formatDate date="${agentInstance.birthdate}" /></td>
 					
 					</tr>
 				</g:each>

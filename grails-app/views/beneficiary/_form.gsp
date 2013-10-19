@@ -2,14 +2,6 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'clientType', 'error')} ">
-	<label for="clientType">
-		<g:message code="beneficiary.clientType.label" default="Client Type" />
-		
-	</label>
-	<g:select name="clientType" from="${beneficiaryInstance.constraints.clientType.inList}" value="${beneficiaryInstance?.clientType}" valueMessagePrefix="beneficiary.clientType" noSelection="['': '']"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'lastName', 'error')} ">
 	<label for="lastName">
 		<g:message code="beneficiary.lastName.label" default="Last Name" />

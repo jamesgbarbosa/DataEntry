@@ -32,9 +32,9 @@
 					
 						<g:sortableColumn property="middleName" title="${message(code: 'planholder.middleName.label', default: 'Middle Name')}" />
 					
-						<g:sortableColumn property="birthdate" title="${message(code: 'planholder.birthdate.label', default: 'Birthdate')}" />
+						<g:sortableColumn property="gender" title="${message(code: 'planholder.gender.label', default: 'Gender')}" />
 					
-						<g:sortableColumn property="address1" title="${message(code: 'planholder.address1.label', default: 'Address1')}" />
+						<g:sortableColumn property="birthdate" title="${message(code: 'planholder.birthdate.label', default: 'Birthdate')}" />
 					
 					</tr>
 				</thead>
@@ -50,9 +50,9 @@
 					
 						<td>${fieldValue(bean: planholderInstance, field: "middleName")}</td>
 					
-						<td><g:formatDate date="${planholderInstance.birthdate}" /></td>
+						<td>${fieldValue(bean: planholderInstance, field: "gender")}</td>
 					
-						<td>${fieldValue(bean: planholderInstance, field: "address1")}</td>
+						<td><g:formatDate date="${planholderInstance.birthdate}" /></td>
 					
 					</tr>
 				</g:each>

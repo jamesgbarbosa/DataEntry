@@ -21,7 +21,18 @@ class AgentController {
 
     def save() {
         def agentInstance = new Agent(params)
-        if (!agentInstance.save(flush: true)) {
+        agentInstance.clientType = 'Agent'
+        if(agentInstance.validate()) {
+            if(!agentInstance.validateClientUniqueness()) {
+                flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+                render(view: "create", model: [agentInstance: agentInstance])
+                return
+            }
+            if (!agentInstance.save(flush: true)) {
+                render(view: "create", model: [agentInstance: agentInstance])
+                return
+            }
+        } else {
             render(view: "create", model: [agentInstance: agentInstance])
             return
         }

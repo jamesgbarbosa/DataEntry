@@ -1,29 +1,20 @@
 <%@ page import="com.dataentry.Planholder" %>
 
 
-
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'clientType', 'error')} ">
-	<label for="clientType">
-		<g:message code="planholder.clientType.label" default="Client Type" />
-		
-	</label>
-	<g:textField name="clientType" value="${planholderInstance?.clientType}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'lastName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="planholder.lastName.label" default="Last Name" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="lastName" value="${planholderInstance?.lastName}"/>
+	<g:textField name="lastName" required="" value="${planholderInstance?.lastName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'firstName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">
 		<g:message code="planholder.firstName.label" default="First Name" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" value="${planholderInstance?.firstName}"/>
+	<g:textField name="firstName" required="" value="${planholderInstance?.firstName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'middleName', 'error')} ">
@@ -34,12 +25,28 @@
 	<g:textField name="middleName" value="${planholderInstance?.middleName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'birthdate', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'gender', 'error')} required">
+	<label for="gender">
+		<g:message code="planholder.gender.label" default="Gender" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="gender" from="${planholderInstance.constraints.gender.inList}" required="" value="${planholderInstance?.gender}" valueMessagePrefix="planholder.gender"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'birthdate', 'error')} required">
 	<label for="birthdate">
 		<g:message code="planholder.birthdate.label" default="Birthdate" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="birthdate" precision="day"  value="${planholderInstance?.birthdate}"  />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'email', 'error')} ">
+	<label for="email">
+		<g:message code="planholder.email.label" default="Email" />
 		
 	</label>
-	<g:datePicker name="birthdate" precision="day"  value="${planholderInstance?.birthdate}" default="none" noSelection="['': '']" />
+	<g:textField name="email" value="${planholderInstance?.email}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'address1', 'error')} ">
@@ -112,21 +119,5 @@
 		
 	</label>
 	<g:textField name="officenumber" value="${planholderInstance?.officenumber}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'email', 'error')} ">
-	<label for="email">
-		<g:message code="planholder.email.label" default="Email" />
-		
-	</label>
-	<g:textField name="email" value="${planholderInstance?.email}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'gender', 'error')} ">
-	<label for="gender">
-		<g:message code="planholder.gender.label" default="Gender" />
-		
-	</label>
-	<g:textField name="gender" value="${planholderInstance?.gender}"/>
 </div>
 

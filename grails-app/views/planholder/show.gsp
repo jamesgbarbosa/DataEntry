@@ -59,11 +59,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${planholderInstance?.gender}">
+				<li class="fieldcontain">
+					<span id="gender-label" class="property-label"><g:message code="planholder.gender.label" default="Gender" /></span>
+					
+						<span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${planholderInstance}" field="gender"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${planholderInstance?.birthdate}">
 				<li class="fieldcontain">
 					<span id="birthdate-label" class="property-label"><g:message code="planholder.birthdate.label" default="Birthdate" /></span>
 					
 						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${planholderInstance?.birthdate}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${planholderInstance?.email}">
+				<li class="fieldcontain">
+					<span id="email-label" class="property-label"><g:message code="planholder.email.label" default="Email" /></span>
+					
+						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${planholderInstance}" field="email"/></span>
 					
 				</li>
 				</g:if>
@@ -145,24 +163,6 @@
 					<span id="officenumber-label" class="property-label"><g:message code="planholder.officenumber.label" default="Officenumber" /></span>
 					
 						<span class="property-value" aria-labelledby="officenumber-label"><g:fieldValue bean="${planholderInstance}" field="officenumber"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${planholderInstance?.email}">
-				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="planholder.email.label" default="Email" /></span>
-					
-						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${planholderInstance}" field="email"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${planholderInstance?.gender}">
-				<li class="fieldcontain">
-					<span id="gender-label" class="property-label"><g:message code="planholder.gender.label" default="Gender" /></span>
-					
-						<span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${planholderInstance}" field="gender"/></span>
 					
 				</li>
 				</g:if>

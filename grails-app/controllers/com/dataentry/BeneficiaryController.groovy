@@ -22,7 +22,7 @@ class BeneficiaryController {
     def save() {
         def beneficiaryInstance = new Beneficiary(params)
         //validate uniqeness
-
+        beneficiaryInstance.clientType = 'Beneficiary'
         if(beneficiaryInstance.validate()) {
             if(!beneficiaryInstance.validateClientUniqueness()) {
                 flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")

@@ -1,29 +1,19 @@
 <%@ page import="com.dataentry.Agent" %>
 
-
-
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'clientType', 'error')} ">
-	<label for="clientType">
-		<g:message code="agent.clientType.label" default="Client Type" />
-		
-	</label>
-	<g:textField name="clientType" value="${agentInstance?.clientType}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'lastName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="agent.lastName.label" default="Last Name" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="lastName" value="${agentInstance?.lastName}"/>
+	<g:textField name="lastName" required="" value="${agentInstance?.lastName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'firstName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">
 		<g:message code="agent.firstName.label" default="First Name" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" value="${agentInstance?.firstName}"/>
+	<g:textField name="firstName" required="" value="${agentInstance?.firstName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'middleName', 'error')} ">
@@ -34,12 +24,28 @@
 	<g:textField name="middleName" value="${agentInstance?.middleName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'birthdate', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'gender', 'error')} required">
+	<label for="gender">
+		<g:message code="agent.gender.label" default="Gender" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="gender" from="${agentInstance.constraints.gender.inList}" required="" value="${agentInstance?.gender}" valueMessagePrefix="agent.gender"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'birthdate', 'error')} required">
 	<label for="birthdate">
 		<g:message code="agent.birthdate.label" default="Birthdate" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="birthdate" precision="day"  value="${agentInstance?.birthdate}"  />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'email', 'error')} ">
+	<label for="email">
+		<g:message code="agent.email.label" default="Email" />
 		
 	</label>
-	<g:datePicker name="birthdate" precision="day"  value="${agentInstance?.birthdate}" default="none" noSelection="['': '']" />
+	<g:textField name="email" value="${agentInstance?.email}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'address1', 'error')} ">
@@ -112,22 +118,6 @@
 		
 	</label>
 	<g:textField name="officenumber" value="${agentInstance?.officenumber}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'email', 'error')} ">
-	<label for="email">
-		<g:message code="agent.email.label" default="Email" />
-		
-	</label>
-	<g:textField name="email" value="${agentInstance?.email}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'gender', 'error')} ">
-	<label for="gender">
-		<g:message code="agent.gender.label" default="Gender" />
-		
-	</label>
-	<g:textField name="gender" value="${agentInstance?.gender}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agentCode', 'error')} ">

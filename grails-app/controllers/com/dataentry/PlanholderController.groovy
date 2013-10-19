@@ -21,7 +21,18 @@ class PlanholderController {
 
     def save() {
         def planholderInstance = new Planholder(params)
-        if (!planholderInstance.save(flush: true)) {
+        planholderInstance.clientType = 'Plan Holder'
+        if(planholderInstance.validate()) {
+            if(!planholderInstance.validateClientUniqueness()) {
+                flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+                render(view: "create", model: [planholderInstance: planholderInstance])
+                return
+            }
+            if (!planholderInstance.save(flush: true)) {
+                render(view: "create", model: [planholderInstance: planholderInstance])
+                return
+            }
+        } else {
             render(view: "create", model: [planholderInstance: planholderInstance])
             return
         }

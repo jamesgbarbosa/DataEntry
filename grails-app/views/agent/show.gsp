@@ -59,11 +59,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${agentInstance?.gender}">
+				<li class="fieldcontain">
+					<span id="gender-label" class="property-label"><g:message code="agent.gender.label" default="Gender" /></span>
+					
+						<span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${agentInstance}" field="gender"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${agentInstance?.birthdate}">
 				<li class="fieldcontain">
 					<span id="birthdate-label" class="property-label"><g:message code="agent.birthdate.label" default="Birthdate" /></span>
 					
 						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${agentInstance?.birthdate}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${agentInstance?.email}">
+				<li class="fieldcontain">
+					<span id="email-label" class="property-label"><g:message code="agent.email.label" default="Email" /></span>
+					
+						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${agentInstance}" field="email"/></span>
 					
 				</li>
 				</g:if>
@@ -145,24 +163,6 @@
 					<span id="officenumber-label" class="property-label"><g:message code="agent.officenumber.label" default="Officenumber" /></span>
 					
 						<span class="property-value" aria-labelledby="officenumber-label"><g:fieldValue bean="${agentInstance}" field="officenumber"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${agentInstance?.email}">
-				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="agent.email.label" default="Email" /></span>
-					
-						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${agentInstance}" field="email"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${agentInstance?.gender}">
-				<li class="fieldcontain">
-					<span id="gender-label" class="property-label"><g:message code="agent.gender.label" default="Gender" /></span>
-					
-						<span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${agentInstance}" field="gender"/></span>
 					
 				</li>
 				</g:if>
