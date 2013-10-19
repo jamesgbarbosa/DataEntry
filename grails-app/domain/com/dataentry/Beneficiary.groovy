@@ -11,4 +11,8 @@ class Beneficiary extends Client {
         designation blank:  true, nullable:  true
         relationship blank:  true, nullable:  true
     }
+
+    String toString() {
+        "${firstName} ${lastName} - ${relationship}"
+    }
 }

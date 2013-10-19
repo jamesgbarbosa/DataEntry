@@ -38,4 +38,8 @@ class Plan {
         beneficiaries nullable: true
         amendments nullable: true
     }
+
+    String toString() {
+        product
+    }
 }

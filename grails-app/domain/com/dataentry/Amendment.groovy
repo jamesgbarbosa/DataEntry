@@ -11,4 +11,8 @@ class Amendment {
 
     static constraints = {
     }
+
+    String toString() {
+        amendmentType
+    }
 }

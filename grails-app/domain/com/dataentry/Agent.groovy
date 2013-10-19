@@ -17,4 +17,8 @@ class Agent extends Client {
         groupName blank:  true, nullable:  true
         unit blank:  true, nullable:  true
     }
+
+    String toString() {
+        "${firstName} ${lastName}"
+    }
 }
