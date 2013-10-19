@@ -114,37 +114,5 @@
 	<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'beneficiaries', 'error')} ">
-	<label for="beneficiaries">
-		<g:message code="plan.beneficiaries.label" default="Beneficiaries" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${planInstance?.beneficiaries?}" var="b">
-    <li><g:link controller="beneficiary" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="beneficiary" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'beneficiary.label', default: 'Beneficiary')])}</g:link>
-</li>
-</ul>
 
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'amendments', 'error')} ">
-	<label for="amendments">
-		<g:message code="plan.amendments.label" default="Amendments" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${planInstance?.amendments?}" var="a">
-    <li><g:link controller="amendment" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="amendment" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'amendment.label', default: 'Amendment')])}</g:link>
-</li>
-</ul>
-
-</div>
 
