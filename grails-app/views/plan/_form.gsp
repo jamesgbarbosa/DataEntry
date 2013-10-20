@@ -55,7 +55,8 @@
 		<g:message code="plan.origIssueDate.label" default="Orig Issue Date" />
 		
 	</label>
-	<g:datePicker name="origIssueDate" precision="day"  value="${planInstance?.origIssueDate}" default="none" noSelection="['': '']" />
+    <g:textField id="origIssueDate" name="origIssueDate" value="${formatDate(format:'MM/dd/yyyy',date:planInstance?.origIssueDate)}" />
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'currentIssueDate', 'error')} ">
@@ -63,7 +64,8 @@
 		<g:message code="plan.currentIssueDate.label" default="Current Issue Date" />
 		
 	</label>
-	<g:datePicker name="currentIssueDate" precision="day"  value="${planInstance?.currentIssueDate}" default="none" noSelection="['': '']" />
+    <g:textField id="currentIssueDate" name="currentIssueDate" value="${formatDate(format:'MM/dd/yyyy',date:planInstance?.currentIssueDate)}" />
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'paymentMode', 'error')} ">
@@ -77,7 +79,7 @@
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'planStatus', 'error')} ">
 	<label for="planStatus">
 		<g:message code="plan.planStatus.label" default="Plan Status" />
-		
+
 	</label>
 	<g:textField name="planStatus" value="${planInstance?.planStatus}"/>
 </div>
@@ -85,9 +87,10 @@
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'applicableDate', 'error')} ">
 	<label for="applicableDate">
 		<g:message code="plan.applicableDate.label" default="Applicable Date" />
-		
+
 	</label>
-	<g:datePicker name="applicableDate" precision="day"  value="${planInstance?.applicableDate}" default="none" noSelection="['': '']" />
+    <g:textField id="applicableDate" name="applicableDate" value="${formatDate(format:'MM/dd/yyyy',date:planInstance?.applicableDate)}" />
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'withInsurance', 'error')} ">

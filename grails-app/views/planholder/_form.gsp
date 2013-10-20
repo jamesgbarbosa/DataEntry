@@ -38,7 +38,8 @@
 		<g:message code="planholder.birthdate.label" default="Birthdate" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="birthdate" precision="day"  value="${planholderInstance?.birthdate}"  />
+    <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:planholderInstance?.birthdate)}" />
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'email', 'error')} ">

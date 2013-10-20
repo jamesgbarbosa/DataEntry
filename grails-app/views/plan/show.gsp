@@ -81,7 +81,7 @@
 				<li class="fieldcontain">
 					<span id="origIssueDate-label" class="property-label"><g:message code="plan.origIssueDate.label" default="Orig Issue Date" /></span>
 					
-						<span class="property-value" aria-labelledby="origIssueDate-label"><g:formatDate date="${planInstance?.origIssueDate}" /></span>
+						<span class="property-value" aria-labelledby="origIssueDate-label"><g:formatDate date="${planInstance?.origIssueDate}" format="MM/dd/yyyy" /></span>
 					
 				</li>
 				</g:if>
@@ -90,7 +90,7 @@
 				<li class="fieldcontain">
 					<span id="currentIssueDate-label" class="property-label"><g:message code="plan.currentIssueDate.label" default="Current Issue Date" /></span>
 					
-						<span class="property-value" aria-labelledby="currentIssueDate-label"><g:formatDate date="${planInstance?.currentIssueDate}" /></span>
+						<span class="property-value" aria-labelledby="currentIssueDate-label"><g:formatDate date="${planInstance?.currentIssueDate}" format="MM/dd/yyyy" /></span>
 					
 				</li>
 				</g:if>
@@ -117,7 +117,7 @@
 				<li class="fieldcontain">
 					<span id="applicableDate-label" class="property-label"><g:message code="plan.applicableDate.label" default="Applicable Date" /></span>
 					
-						<span class="property-value" aria-labelledby="applicableDate-label"><g:formatDate date="${planInstance?.applicableDate}" /></span>
+						<span class="property-value" aria-labelledby="applicableDate-label"><g:formatDate date="${planInstance?.applicableDate}" format="MM/dd/yyyy"/></span>
 					
 				</li>
 				</g:if>

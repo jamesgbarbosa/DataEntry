@@ -20,6 +20,9 @@ class BeneficiaryController {
     }
 
     def save() {
+        if(params) {
+            params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
+        }
         def beneficiaryInstance = new Beneficiary(params)
         //validate uniqeness
         beneficiaryInstance.clientType = 'Beneficiary'
@@ -90,7 +93,9 @@ class BeneficiaryController {
                 return
             }
         }
-
+        if(params) {
+            params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
+        }
         beneficiaryInstance.properties = params
 
         if (!beneficiaryInstance.save(flush: true)) {

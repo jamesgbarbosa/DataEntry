@@ -20,6 +20,11 @@ class PlanController {
     }
 
     def save() {
+        if(params) {
+            params.origIssueDate = Date.parse( 'MM/dd/yyyy', params.origIssueDate )
+            params.currentIssueDate = Date.parse( 'MM/dd/yyyy', params.currentIssueDate )
+            params.applicableDate = Date.parse( 'MM/dd/yyyy', params.applicableDate )
+        }
         def planInstance = new Plan(params)
         if (!planInstance.save(flush: true)) {
             render(view: "create", model: [planInstance: planInstance])
@@ -69,7 +74,11 @@ class PlanController {
                 return
             }
         }
-
+        if(params) {
+            params.origIssueDate = Date.parse( 'MM/dd/yyyy', params.origIssueDate )
+            params.currentIssueDate = Date.parse( 'MM/dd/yyyy', params.currentIssueDate )
+            params.applicableDate = Date.parse( 'MM/dd/yyyy', params.applicableDate )
+        }
         planInstance.properties = params
 
         if (!planInstance.save(flush: true)) {

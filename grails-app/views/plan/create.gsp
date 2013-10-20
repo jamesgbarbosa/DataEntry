@@ -5,6 +5,11 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'plan.label', default: 'Plan')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+        <g:javascript>
+            $('#origIssueDate').datepicker()
+            $('#currentIssueDate').datepicker()
+            $('#applicableDate').datepicker()
+        </g:javascript>
 	</head>
 	<body>
 		<a href="#create-plan" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

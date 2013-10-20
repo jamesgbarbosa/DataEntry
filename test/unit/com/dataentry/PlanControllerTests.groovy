@@ -29,6 +29,7 @@ class PlanControllerTests {
         params.planStatus = "test"
         params.product = "Test"
         params.payingPeriod = 1
+
     }
 
     void testIndex() {
@@ -52,6 +53,9 @@ class PlanControllerTests {
 
     void testSave() {
         populateValidParams(params)
+        params.applicableDate = "10/10/2013"
+        params.currentIssueDate = "10/10/2013"
+        params.origIssueDate = "10/10/2013"
         controller.save()
 
         assert response.redirectedUrl == '/plan/show/1'

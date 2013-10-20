@@ -71,7 +71,7 @@
 				<li class="fieldcontain">
 					<span id="birthdate-label" class="property-label"><g:message code="beneficiary.birthdate.label" default="Birthdate" /></span>
 					
-						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${beneficiaryInstance?.birthdate}" /></span>
+						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${beneficiaryInstance?.birthdate}" format="MM/dd/yyyy" /></span>
 					
 				</li>
 				</g:if>

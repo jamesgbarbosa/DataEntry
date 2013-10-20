@@ -56,6 +56,8 @@ class PlanholderControllerTests {
         response.reset()
 
         populateValidParams(params)
+
+        params.birthdate = "10/10/2013"
         controller.save()
 
         assert response.redirectedUrl == '/planholder/show/1'
