@@ -20,6 +20,10 @@ class AgentController {
     }
 
     def save() {
+        if(params) {
+            params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
+            params.appointmentDate = Date.parse( 'MM/dd/yyyy', params.appointmentDate )
+        }
         def agentInstance = new Agent(params)
         agentInstance.clientType = 'Agent'
         if(agentInstance.validate()) {
@@ -64,6 +68,7 @@ class AgentController {
     }
 
     def update(Long id, Long version) {
+
         def agentInstance = Agent.get(id)
         if (!agentInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'agent.label', default: 'Agent'), id])
@@ -80,7 +85,8 @@ class AgentController {
                 return
             }
         }
-
+        params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
+        params.appointmentDate = Date.parse( 'MM/dd/yyyy', params.appointmentDate )
         agentInstance.properties = params
 
         if (!agentInstance.save(flush: true)) {

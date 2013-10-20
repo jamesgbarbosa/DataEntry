@@ -72,7 +72,7 @@
 				<li class="fieldcontain">
 					<span id="birthdate-label" class="property-label"><g:message code="agent.birthdate.label" default="Birthdate" /></span>
 					
-						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${agentInstance?.birthdate}" /></span>
+						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${agentInstance?.birthdate}" format="MM/dd/yyyy" /></span>
 					
 				</li>
 				</g:if>
@@ -189,7 +189,7 @@
 				<li class="fieldcontain">
 					<span id="appointmentDate-label" class="property-label"><g:message code="agent.appointmentDate.label" default="Appointment Date" /></span>
 					
-						<span class="property-value" aria-labelledby="appointmentDate-label"><g:formatDate date="${agentInstance?.appointmentDate}" /></span>
+						<span class="property-value" aria-labelledby="appointmentDate-label"><g:formatDate date="${agentInstance?.appointmentDate}" format="MM/dd/yyyy"/></span>
 					
 				</li>
 				</g:if>

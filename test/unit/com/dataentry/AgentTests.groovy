@@ -25,11 +25,6 @@ class AgentTests {
         agent.clientType = "Agent"
         agent.birthdate = new Date()
         agent.gender = "Male"
-        agent.firstName = "James"
-        agent.lastName = "Barbosa"
-        agent.clientType = "Agent"
-        agent.birthdate = new Date()
-        agent.gender = "Male"
         agent.address1 = "test"
         agent.address2 = "test"
         agent.address3 = "test"

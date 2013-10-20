@@ -47,7 +47,7 @@
 					
 						<td>${fieldValue(bean: clientInstance, field: "gender")}</td>
 					
-						<td><g:formatDate  format="MM-dd-yyyy" date="${clientInstance.birthdate}" /></td>
+						<td><g:formatDate  format="MM/dd/yyyy" date="${clientInstance.birthdate}" /></td>
 					</tr>
 				</g:each>
 				</tbody>

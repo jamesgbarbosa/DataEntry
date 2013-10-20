@@ -37,7 +37,8 @@
 		<g:message code="agent.birthdate.label" default="Birthdate" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="birthdate" precision="day"  value="${agentInstance?.birthdate}"  />
+	%{--<g:datePicker name="birthdate" precision="day"  value="${agentInstance?.birthdate}"  />--}%
+	<g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:agentInstance?.birthdate)}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'email', 'error')} ">
@@ -141,7 +142,8 @@
 		<g:message code="agent.appointmentDate.label" default="Appointment Date" />
 		
 	</label>
-	<g:datePicker name="appointmentDate" precision="day"  value="${agentInstance?.appointmentDate}" default="none" noSelection="['': '']" />
+	%{--<g:datePicker name="appointmentDate" precision="day"  value="${agentInstance?.appointmentDate}" default="none" noSelection="['': '']" />--}%
+	<g:textField id="appointmentDate" name="appointmentDate" value="${formatDate(format:'MM/dd/yyyy',date:agentInstance?.appointmentDate)}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agency', 'error')} ">

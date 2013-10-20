@@ -171,7 +171,15 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${clientInstance?.id}" />
-					<g:link class="edit" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                    <g:if test="${clientInstance.clientType == 'Agent'}">
+                        <g:link class="edit" controller="agent" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                    </g:if>
+                    <g:if test="${clientInstance.clientType == 'Beneficiary'}">
+                        <g:link class="edit" controller="beneficiary" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                    </g:if>
+                    <g:if test="${clientInstance.clientType == 'Plan Holder'}">
+                        <g:link class="edit" controller="planHolder" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                    </g:if>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

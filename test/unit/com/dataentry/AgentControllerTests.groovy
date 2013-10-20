@@ -15,17 +15,12 @@ class AgentControllerTests {
         // TODO: Populate valid properties like...
         params.agency = "test"
         params.agentCode = "test"
-        params.appointmentDate = new Date()
+        params.appointmentDate = "10/10/1992"
         params.groupName = "test"
         params.firstName = "James"
         params.lastName = "Barbosa"
         params.clientType = "Agent"
-        params.birthdate = new Date()
-        params.gender = "Male"
-        params.firstName = "James"
-        params.lastName = "Barbosa"
-        params.clientType = "Agent"
-        params.birthdate = new Date()
+        params.birthdate = "10/10/1992"
         params.gender = "Male"
         params.address1 = "test"
         params.address2 = "test"
@@ -80,6 +75,8 @@ class AgentControllerTests {
         assert response.redirectedUrl == '/agent/list'
 
         populateValidParams(params)
+        params.birthdate = new Date()
+        params.appointmentDate = new Date()
         def agent = new Agent(params)
 
         assert agent.save() != null
@@ -98,6 +95,8 @@ class AgentControllerTests {
         assert response.redirectedUrl == '/agent/list'
 
         populateValidParams(params)
+        params.birthdate = new Date()
+        params.appointmentDate = new Date()
         def agent = new Agent(params)
 
         assert agent.save() != null
@@ -118,11 +117,15 @@ class AgentControllerTests {
         response.reset()
 
         populateValidParams(params)
+        params.birthdate = new Date()
+        params.appointmentDate = new Date()
         def agent = new Agent(params)
 
         assert agent.save() != null
 
+        populateValidParams(params)
         // test invalid parameters in update
+
         params.id = agent.id
         params.clientType = "Does not exist"
         //TODO: add invalid values to params object
@@ -163,6 +166,8 @@ class AgentControllerTests {
         response.reset()
 
         populateValidParams(params)
+        params.birthdate = new Date()
+        params.appointmentDate = new Date()
         def agent = new Agent(params)
 
         assert agent.save() != null
