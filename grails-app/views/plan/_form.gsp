@@ -7,7 +7,7 @@
 		<g:message code="plan.product.label" default="Product" />
 		
 	</label>
-	<g:textField name="product" value="${planInstance?.product}"/>
+	<select:product value="${planInstance?.product}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'payingPeriod', 'error')} required">
@@ -95,10 +95,11 @@
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'withInsurance', 'error')} ">
 	<label for="withInsurance">
-		<g:message code="plan.withInsurance.label" default="With Insurance" />
+		Make Insurance
 		
 	</label>
-	<g:checkBox name="withInsurance" value="${planInstance?.withInsurance}" />
+	%{--<g:checkBox name="withInsurance" value="${planInstance?.withInsurance}" />--}%
+	<g:select name="withInsurance" value="${planInstance?.withInsurance}" optionKey= "value" optionValue="key" from="${['Y':true, 'N':false]}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'planHolder', 'error')} ">
