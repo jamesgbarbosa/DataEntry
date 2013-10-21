@@ -20,9 +20,7 @@ class PlanholderController {
     }
 
     def save() {
-        if(params) {
-            params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
-        }
+        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
         def planholderInstance = new Planholder(params)
         planholderInstance.clientType = 'Plan Holder'
         if(planholderInstance.validate()) {
@@ -84,9 +82,8 @@ class PlanholderController {
             }
         }
 
-        if(params) {
-            params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
-        }
+        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+
         planholderInstance.properties = params
 
         if (!planholderInstance.save(flush: true)) {

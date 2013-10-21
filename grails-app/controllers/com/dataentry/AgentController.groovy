@@ -20,10 +20,8 @@ class AgentController {
     }
 
     def save() {
-        if(params) {
-            params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
-            params.appointmentDate = Date.parse( 'MM/dd/yyyy', params.appointmentDate )
-        }
+        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+        params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
         def agentInstance = new Agent(params)
         agentInstance.clientType = 'Agent'
         if(agentInstance.validate()) {
@@ -85,8 +83,8 @@ class AgentController {
                 return
             }
         }
-        params.birthdate = Date.parse( 'MM/dd/yyyy', params.birthdate )
-        params.appointmentDate = Date.parse( 'MM/dd/yyyy', params.appointmentDate )
+        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+        params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
         agentInstance.properties = params
 
         if (!agentInstance.save(flush: true)) {
