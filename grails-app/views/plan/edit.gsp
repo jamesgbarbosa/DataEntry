@@ -14,7 +14,7 @@
                 $("#agent-autocomplete").autocomplete({
                     source: function(request, response){
                         $.ajax({
-                            url: "/DataEntry/plan/agentslist", // remote datasource
+                            url: "../agentslist", // remote datasource
                             data: request,
                             success: function(data){
                                 response(data); // set the response
@@ -33,7 +33,7 @@
                 $("#planholder-autocomplete").autocomplete({
                     source: function(request, response){
                         $.ajax({
-                            url: "/DataEntry/plan/planholderslist", // remote datasource
+                            url: "../planholderslist", // remote datasource
                             data: request,
                             success: function(data){
                                 response(data); // set the response
