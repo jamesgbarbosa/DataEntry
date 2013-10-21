@@ -6,9 +6,49 @@
 		<g:set var="entityName" value="${message(code: 'plan.label', default: 'Plan')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
         <g:javascript>
-            $('#origIssueDate').datepicker()
-            $('#currentIssueDate').datepicker()
-            $('#applicableDate').datepicker()
+            $(document).ready(function() {
+                $('#origIssueDate').datepicker()
+                $('#currentIssueDate').datepicker()
+                $('#applicableDate').datepicker()
+
+                $("#agent-autocomplete").autocomplete({
+                    source: function(request, response){
+                        $.ajax({
+                            url: "/DataEntry/plan/agentslist", // remote datasource
+                            data: request,
+                            success: function(data){
+                                response(data); // set the response
+                            },
+                            error: function(){ // handle server errors
+                                alert("Unable to retrieve agents.")
+                            }
+                        });
+                    },
+                    minLength: 1, // triggered only after minimum 1 characters have been entered.
+                    select: function(event, ui) { // event handler when user selects a company from the list.
+                        $("#agent\\.id").val(ui.item.id); // update the hidden field.
+                    }
+                });
+
+                $("#planholder-autocomplete").autocomplete({
+                    source: function(request, response){
+                        $.ajax({
+                            url: "/DataEntry/plan/planholderslist", // remote datasource
+                            data: request,
+                            success: function(data){
+                                response(data); // set the response
+                            },
+                            error: function(){ // handle server errors
+                                alert("Unable to retrieve plan holders.")
+                            }
+                        });
+                    },
+                    minLength: 1, // triggered only after minimum 1 characters have been entered.
+                    select: function(event, ui) { // event handler when user selects a company from the list.
+                        $("#planHolder\\.id").val(ui.item.id); // update the hidden field.
+                    }
+                });
+            });
         </g:javascript>
 	</head>
 	<body>

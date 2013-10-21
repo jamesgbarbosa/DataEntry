@@ -1,9 +1,10 @@
 package com.dataentry
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.JSON
 
 class PlanController {
-
+    def autoCompleteService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -13,6 +14,16 @@ class PlanController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [planInstanceList: Plan.list(params), planInstanceTotal: Plan.count()]
+    }
+
+    def agentslist = {
+            params.clientType = "Agent"
+            render autoCompleteService.clientList(params) as JSON
+    }
+
+    def planholderslist = {
+        params.clientType = "Plan Holder"
+        render autoCompleteService.clientList(params) as JSON
     }
 
     def create() {

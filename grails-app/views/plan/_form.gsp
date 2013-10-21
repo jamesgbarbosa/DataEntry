@@ -107,7 +107,9 @@
 		<g:message code="plan.planHolder.label" default="Plan Holder" />
 		
 	</label>
-	<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>
+	%{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
+    <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.id}"/>
+    <g:hiddenField name="planHolder.id"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'agent', 'error')} ">
@@ -115,7 +117,9 @@
 		<g:message code="plan.agent.label" default="Agent" />
 		
 	</label>
-	<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>
+	%{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
+	<g:textField name="agent-autocomplete" value="${planInstance?.agent?.id}"/>
+	<g:hiddenField name="agent.id"/>
 </div>
 
 
