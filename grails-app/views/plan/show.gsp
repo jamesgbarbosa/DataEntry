@@ -23,15 +23,23 @@
 			</g:if>
 			<ol class="property-list plan">
 			
-				<g:if test="${planInstance?.product}">
+				<g:if test="${planInstance?.planNumber}">
 				<li class="fieldcontain">
-					<span id="product-label" class="property-label"><g:message code="plan.product.label" default="Product" /></span>
+					<span id="planNumber-label" class="property-label"><g:message code="plan.planNumber.label" default="Plan Number" /></span>
 					
-						<span class="property-value" aria-labelledby="product-label"><g:fieldValue bean="${planInstance}" field="product"/></span>
+						<span class="property-value" aria-labelledby="product-label"><g:fieldValue bean="${planInstance}" field="planNumber"/></span>
 					
 				</li>
 				</g:if>
-			
+	    		<g:if test="${planInstance?.product}">
+				<li class="fieldcontain">
+					<span id="product-label" class="property-label"><g:message code="plan.product.label" default="Product" /></span>
+
+						<span class="property-value" aria-labelledby="product-label"><g:fieldValue bean="${planInstance}" field="product"/></span>
+
+				</li>
+				</g:if>
+
 				<g:if test="${planInstance?.payingPeriod}">
 				<li class="fieldcontain">
 					<span id="payingPeriod-label" class="property-label"><g:message code="plan.payingPeriod.label" default="Paying Period" /></span>

@@ -2,6 +2,7 @@ package com.dataentry
 
 import org.springframework.dao.DataIntegrityViolationException
 import grails.converters.JSON
+import org.springframework.web.context.request.RequestContextHolder
 
 class PlanController {
     def autoCompleteService
@@ -16,6 +17,67 @@ class PlanController {
         [planInstanceList: Plan.list(params), planInstanceTotal: Plan.count()]
     }
 
+    def createFlow = {
+        startup {
+            action {
+            }
+            on('success').to('init')
+        }
+
+        init {
+            action {
+                flow.planInstance =  new Plan(params)
+                flow.agentInstance =  new Agent(params)
+            }
+            on('success').to('createPlan')
+        }
+
+        //1st state
+        createPlan {
+            on('createAgent'){
+//                flow.book.properties = params
+//                if(!flow.book.validate()) {
+//                    error()
+//                }
+            }.to('createAgent')
+        }
+
+        //2st state
+        createAgent {
+            on("return"){
+                // flow.book.id = params.book.id
+            }.to("createPlan")
+
+            on('saveAgent'){
+//                flow.author.properties = params
+//                if(!flow.author.validate()) {
+//                    error()
+//                }
+            }.to('createPlan')
+        }
+
+
+        last {
+            action {
+                try {
+                    //throw new Exception()
+                    RequestContextHolder.currentRequestAttributes().flashScope.message = 'Success'
+                    createPlan()
+                } catch(Exception e) {
+                    RequestContextHolder.currentRequestAttributes().flashScope.error = 'Service not available'
+                    createAgent()
+                }
+            }
+//            on("second").to("second")
+//            on("buy").to("buy")
+        }
+
+        //End State
+//        buy {
+//            redirect(action: "list")
+//        }
+    }
+
     def agentslist = {
             params.clientType = "Agent"
             render autoCompleteService.clientList(params) as JSON
@@ -26,9 +88,9 @@ class PlanController {
         render autoCompleteService.clientList(params) as JSON
     }
 
-    def create() {
-        [planInstance: new Plan(params)]
-    }
+//    def create() {
+//        [planInstance: new Plan(params)]
+//    }
 
     def save() {
         params.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null

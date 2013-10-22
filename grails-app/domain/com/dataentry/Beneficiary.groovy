@@ -1,6 +1,6 @@
 package com.dataentry
 
-class Beneficiary extends Client {
+class Beneficiary extends Client implements Serializable {
 
     String designation
     String relationship

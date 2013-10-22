@@ -1,6 +1,6 @@
 package com.dataentry
 
-class Amendment {
+class Amendment implements Serializable {
 
     String amendmentType
     Date filingDate

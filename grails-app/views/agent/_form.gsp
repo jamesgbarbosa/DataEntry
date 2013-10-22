@@ -5,7 +5,7 @@
 		<g:message code="agent.lastName.label" default="Last Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="lastName" required="" value="${agentInstance?.lastName}"/>
+	<g:textField name="lastName" value="${agentInstance?.lastName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'firstName', 'error')} required">
@@ -13,7 +13,7 @@
 		<g:message code="agent.firstName.label" default="First Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" required="" value="${agentInstance?.firstName}"/>
+	<g:textField name="firstName" value="${agentInstance?.firstName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'middleName', 'error')} ">
@@ -29,7 +29,7 @@
 		<g:message code="agent.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="gender" from="${agentInstance.constraints.gender.inList}" required="" value="${agentInstance?.gender}" valueMessagePrefix="agent.gender"/>
+	<g:select name="gender" from="${agentInstance?.constraints?.gender?.inList}" required="" value="${agentInstance?.gender}" valueMessagePrefix="agent.gender"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'birthdate', 'error')} required">

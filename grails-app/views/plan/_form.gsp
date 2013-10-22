@@ -1,6 +1,13 @@
 <%@ page import="com.dataentry.Plan" %>
 
 
+<div class="fieldcontain ${hasErrors(bean: planNumber, field: 'planNumber', 'error')} ">
+    <label for="planStatus">
+        <g:message code="plan.planNumber.label" default="Plan Status" />
+
+    </label>
+    <g:textField name="planStatus" value="${planInstance?.planNumber}"/>
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'product', 'error')} ">
 	<label for="product">
@@ -108,7 +115,7 @@
 		
 	</label>
 	%{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-    <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.id}"/>
+    <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.id}" placeholder="Search a plan holder..."/>
     <g:hiddenField name="planHolder.id"/>
 </div>
 
@@ -118,8 +125,11 @@
 		
 	</label>
 	%{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-	<g:textField name="agent-autocomplete" value="${planInstance?.agent?.id}"/>
+	<g:textField name="agent-autocomplete" value="${planInstance?.agent?.id}" placeholder="Search an agent..."/>
 	<g:hiddenField name="agent.id"/>
+    %{--<g:link controller="agent" action="create" params="['plan.id': planInstance?.id]">Create an agent</g:link>--}%
+        <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create an agent"/>
+
 </div>
 
 
