@@ -1,14 +1,6 @@
 <%@ page import="com.dataentry.Plan" %>
 
 
-<div class="fieldcontain ${hasErrors(bean: planNumber, field: 'planNumber', 'error')} ">
-    <label for="planStatus">
-        <g:message code="plan.planNumber.label" default="Plan Status" />
-
-    </label>
-    <g:textField name="planStatus" value="${planInstance?.planNumber}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'product', 'error')} ">
 	<label for="product">
 		<g:message code="plan.product.label" default="Product" />
@@ -63,7 +55,6 @@
 		
 	</label>
     <g:textField id="origIssueDate" name="origIssueDate" value="${formatDate(format:'MM/dd/yyyy',date:planInstance?.origIssueDate)}" />
-
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'currentIssueDate', 'error')} ">

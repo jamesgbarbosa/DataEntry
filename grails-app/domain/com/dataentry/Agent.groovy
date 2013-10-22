@@ -1,6 +1,6 @@
 package com.dataentry
 
-class Agent extends Client implements Serializable {
+class Agent extends Client {
 
     String agentCode
     String position

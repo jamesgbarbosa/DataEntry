@@ -34,8 +34,14 @@ class PlanController {
 
         //1st state
         createPlan {
-            on('createAgent'){
-//                flow.book.properties = params
+            on('createAgent'){ Plan plan ->
+                def x = params
+                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
+                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+                flow.planInstance = plan
+                flow.agentInstance = new Agent()
+//                flow.planInstance.properties = params
 //                if(!flow.book.validate()) {
 //                    error()
 //                }
@@ -49,10 +55,23 @@ class PlanController {
             }.to("createPlan")
 
             on('saveAgent'){
-//                flow.author.properties = params
-//                if(!flow.author.validate()) {
-//                    error()
-//                }
+                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+                params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
+                def agentInstance = new Agent(params)
+                agentInstance.clientType = 'Agent'
+                flow.agentInstance = agentInstance
+                if(agentInstance.validate()) {
+                    if(!agentInstance.validateClientUniqueness()) {
+                        flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+                        return error()
+                    }
+                    if (!agentInstance.save(flush: true)) {
+                        return error()
+                    }
+                    flow.planInstance.agent = agentInstance
+                } else {
+                    return error()
+                }
             }.to('createPlan')
         }
 

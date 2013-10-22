@@ -1,6 +1,6 @@
 package com.dataentry
 
-class Planholder extends Client implements Serializable {
+class Planholder extends Client {
 
     static constraints = {
     }

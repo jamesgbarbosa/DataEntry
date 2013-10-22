@@ -39,8 +39,8 @@
 				</fieldset>
 				<fieldset class="buttons">
 					%{--<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />--}%
-                    <g:submitButton name="saveAgent" event="saveAgent" value="saveAgent" />
-                    <g:submitButton formaction="create" name="return" event="return" value="return" />
+                    <g:submitButton class="save" name="saveAgent" event="saveAgent" value="Create" />
+                    <g:submitButton name="return" event="return" value="Back" />
 				</fieldset>
 			</g:form>
 

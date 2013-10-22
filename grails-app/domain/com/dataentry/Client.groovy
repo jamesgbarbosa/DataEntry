@@ -1,6 +1,6 @@
 package com.dataentry
 
-class Client {
+class Client implements Serializable {
 
     String clientType
     String lastName
