@@ -1,6 +1,6 @@
 package com.dateentry.reftables
 
-class Product {
+class Product implements Serializable{
 
     String name
 

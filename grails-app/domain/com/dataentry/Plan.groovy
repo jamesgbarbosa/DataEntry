@@ -1,7 +1,8 @@
 package com.dataentry
 
-class Plan {
+class Plan implements Serializable {
 
+    Long planNumber
     String product
     int payingPeriod
     int maturityPeriod
@@ -21,6 +22,7 @@ class Plan {
     static hasMany = [ beneficiaries: Beneficiary, amendments: Amendment]
 
     static constraints = {
+        planNumber blank:  true, nullable:  true
         product blank:  true, nullable:  true
         payingPeriod blank:  true, nullable:  true
         maturityPeriod blank:  true, nullable:  true
