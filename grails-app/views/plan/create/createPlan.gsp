@@ -7,9 +7,21 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
         <g:javascript>
             $(document).ready(function() {
-                $('#origIssueDate').datepicker()
-                $('#currentIssueDate').datepicker()
-                $('#applicableDate').datepicker()
+                $('#origIssueDate').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1900:2013"
+                });
+                $('#currentIssueDate').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1900:2013"
+                });
+                $('#applicableDate').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1900:2013"
+                });
 
                 $("#agent-autocomplete").autocomplete({
                     source: function(request, response){

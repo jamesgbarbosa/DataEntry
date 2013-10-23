@@ -6,8 +6,16 @@
 		<g:set var="entityName" value="${message(code: 'agent.label', default: 'Agent')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
         <g:javascript>
-            $('#birthdate').datepicker()
-            $('#appointmentDate').datepicker()
+            $('#birthdate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:2013"
+            });
+            $('#appointmentDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:2013"
+            });
         </g:javascript>
 	</head>
 	<body>
