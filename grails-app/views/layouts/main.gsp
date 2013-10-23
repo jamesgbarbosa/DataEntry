@@ -14,10 +14,19 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
-        <g:javascript library="jquery"/>
-         <r:require modules="jquery,jquery-ui"/>
+
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <g:javascript src="datepicker-config.js"/>
+        <g:javascript src="autocomplete-config.js"/>
+        %{--<g:javascript library="jquery"/>--}%
+         %{--<r:require modules="jquery,jquery-ui"/>--}%
 		<g:layoutHead/>
 		<r:layoutResources />
+
+
 	</head>
 	<body>
 		<div id="appLogo">Data Entry</div>

@@ -5,18 +5,6 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'agent.label', default: 'Agent')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
-        <g:javascript>
-            $('#birthdate').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "1900:2013"
-            });
-            $('#appointmentDate').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "1900:2013"
-            });
-        </g:javascript>
 	</head>
 	<body>
 		<a href="#create-agent" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

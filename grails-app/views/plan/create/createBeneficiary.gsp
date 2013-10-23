@@ -5,13 +5,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'beneficiary.label', default: 'Beneficiary')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
-        <g:javascript>
-            $('#birthdate').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "1900:2013"
-            });
-        </g:javascript>
+
 	</head>
 	<body>
 		<a href="#create-beneficiary" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

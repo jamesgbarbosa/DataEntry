@@ -5,9 +5,6 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'planholder.label', default: 'Planholder')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
-        <g:javascript>
-            $('#birthdate').datepicker()
-        </g:javascript>
 	</head>
 	<body>
 		<a href="#create-planholder" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
