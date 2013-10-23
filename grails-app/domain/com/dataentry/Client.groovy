@@ -20,7 +20,7 @@ class Client implements Serializable {
     String gender
 
     static constraints = {
-        clientType blank:  false, nullable:  false, inList:['Plan Holder','Beneficiary','Agent' ]
+        clientType blank:  true, nullable:  true, inList:['Plan Holder','Beneficiary','Agent' ]
         lastName blank:  false, nullable:  false
         firstName blank:  false, nullable:  false
         middleName blank:  true, nullable:  true

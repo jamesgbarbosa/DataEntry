@@ -1,21 +1,11 @@
 <%@ page import="com.dataentry.Client" %>
 
-
-
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'clientType', 'error')} required">
-	<label for="clientType">
-		<g:message code="client.clientType.label" default="Client Type" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="clientType" from="${clientInstance.constraints.clientType.inList}" required="" value="${clientInstance?.clientType}" valueMessagePrefix="client.clientType"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="client.lastName.label" default="Last Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="lastName" required="" value="${clientInstance?.lastName}"/>
+	<g:textField name="lastName" value="${clientInstance?.lastName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'firstName', 'error')} required">
@@ -23,7 +13,7 @@
 		<g:message code="client.firstName.label" default="First Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" required="" value="${clientInstance?.firstName}"/>
+	<g:textField name="firstName" value="${clientInstance?.firstName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'middleName', 'error')} ">
@@ -47,7 +37,7 @@
 		<g:message code="client.birthdate.label" default="Birthdate" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="birthdate" precision="day"  value="${clientInstance?.birthdate}"  />
+    <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:clientInstance?.birthdate)}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'email', 'error')} ">

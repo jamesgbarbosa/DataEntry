@@ -12,6 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+                <li><g:link class="create" controller="client" action="create">Create Client</g:link>  </li>
                 <li><g:link class="create" controller="agent" action="create">Create Agent</g:link>  </li>
                 <li><g:link class="create" controller="planholder" action="create">Create Plan Holder</g:link>  </li>
                 <li><g:link class="create" controller="beneficiary" action="create">Create Benficiary</g:link>  </li>
@@ -41,9 +42,9 @@
 				<g:each in="${clientInstanceList}" status="i" var="clientInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${clientInstance.id}">${fieldValue(bean: clientInstance, field: "clientType")}</g:link></td>
+						<td>${fieldValue(bean: clientInstance, field: "clientType")}</td>
 					
-						<td>${clientInstance?.firstName} ${clientInstance?.lastName}</td>
+						<td><g:link action="show" id="${clientInstance.id}">${clientInstance?.fullName()}</g:link></td>
 					
 						<td>${fieldValue(bean: clientInstance, field: "gender")}</td>
 					
