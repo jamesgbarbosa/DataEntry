@@ -180,9 +180,9 @@
                     <g:if test="${clientInstance.clientType == 'Plan Holder'}">
                         <g:link class="edit" controller="planHolder" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                     </g:if>
-                    <g:else>
+                    <g:if test="${clientInstance.clientType == ''}">
                         <g:link class="edit" controller="client" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    </g:else>
+                    </g:if>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
