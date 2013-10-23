@@ -135,7 +135,7 @@ class PlanController {
             on('saveBeneficiary'){
                 params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
                 def beneficiaryInstance = new Beneficiary(params)
-                beneficiaryInstance.clientType = 'Plan Holder'
+                beneficiaryInstance.clientType = 'Beneficiary'
                 flow.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.validate()) {
                     if(!beneficiaryInstance.validateClientUniqueness()) {
