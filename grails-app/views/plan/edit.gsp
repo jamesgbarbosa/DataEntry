@@ -39,5 +39,8 @@
 				</fieldset>
 			</g:form>
 		</div>
+        <g:hiddenField name="agentsListLink" value="${createLink(controller: 'plan', action: 'agentslist')}"/>
+        <g:hiddenField name="beneficiaryListLink" value="${createLink(controller: 'plan', action: 'beneficiarieslist')}"/>
+        <g:hiddenField name="planholderListLink" value="${createLink(controller: 'plan', action: 'planholderslist')}"/>
 	</body>
 </html>
