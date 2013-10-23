@@ -28,19 +28,31 @@ class PlanController {
             action {
                 flow.planInstance =  new Plan(params)
                 flow.agentInstance =  new Agent(params)
+                flow.planholderInstance =  new Planholder(params)
             }
             on('success').to('createPlan')
         }
 
-        //1st state
+        //State 1
         createPlan {
+            on('createPlanHolder'){ Plan plan ->
+                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
+                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+                flow.planInstance = plan
+
+                flow.planholderInstance = new Planholder()
+            }.to('createPlanHolder')
+
             on('createAgent'){ Plan plan ->
                 plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
                 flow.planInstance = plan
+
                 flow.agentInstance = new Agent()
             }.to('createAgent')
+
             on('savePlan') { Plan plan ->
                 plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
@@ -55,10 +67,9 @@ class PlanController {
 
         }
 
-        //2st state
+        //State  2.a
         createAgent {
             on("return"){
-                // flow.book.id = params.book.id
             }.to("createPlan")
 
             on('saveAgent'){
@@ -76,6 +87,31 @@ class PlanController {
                         return error()
                     }
                     flow.planInstance.agent = agentInstance
+                } else {
+                    return error()
+                }
+            }.to('createPlan')
+        }
+
+        //State  2.b
+        createPlanHolder {
+            on("return"){
+            }.to("createPlan")
+
+            on('savePlanHolder'){
+                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+                def planHolderInstance = new Planholder(params)
+                planHolderInstance.clientType = 'Plan Holder'
+                flow.planHolderInstance = planHolderInstance
+                if(planHolderInstance.validate()) {
+                    if(!planHolderInstance.validateClientUniqueness()) {
+                        flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+                        return error()
+                    }
+                    if (!planHolderInstance.save(flush: true)) {
+                        return error()
+                    }
+                    flow.planInstance.planHolder = planHolderInstance
                 } else {
                     return error()
                 }

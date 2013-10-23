@@ -6,7 +6,7 @@
 		<g:message code="planholder.lastName.label" default="Last Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="lastName" required="" value="${planholderInstance?.lastName}"/>
+	<g:textField name="lastName" value="${planholderInstance?.lastName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'firstName', 'error')} required">
@@ -14,7 +14,7 @@
 		<g:message code="planholder.firstName.label" default="First Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" required="" value="${planholderInstance?.firstName}"/>
+	<g:textField name="firstName" value="${planholderInstance?.firstName}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'middleName', 'error')} ">
@@ -30,7 +30,7 @@
 		<g:message code="planholder.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="gender" from="${planholderInstance.constraints.gender.inList}" required="" value="${planholderInstance?.gender}" valueMessagePrefix="planholder.gender"/>
+	<g:select name="gender" from="${planholderInstance?.constraints?.gender?.inList}" required="" value="${planholderInstance?.gender}" valueMessagePrefix="planholder.gender"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'birthdate', 'error')} required">

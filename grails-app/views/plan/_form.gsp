@@ -106,8 +106,10 @@
 		
 	</label>
 	%{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-    <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.id}" placeholder="Search a plan holder..."/>
-    <g:hiddenField name="planHolder.id"/>
+    <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.fullName()}" placeholder="Search a plan holder..."/>
+    <g:hiddenField name="planHolder.id" value="${planInstance?.planHolder?.id}"/>
+
+    <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create a Plan Holder"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'agent', 'error')} ">
