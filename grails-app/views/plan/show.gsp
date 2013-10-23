@@ -21,6 +21,9 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+            <g:if test="${params.message}">
+                <div class="message" role="status">${params.message}</div>
+            </g:if>
 			<ol class="property-list plan">
 			
 				<g:if test="${planInstance?.planNumber}">

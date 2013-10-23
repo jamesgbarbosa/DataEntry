@@ -116,8 +116,8 @@
 		
 	</label>
 	%{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-	<g:textField name="agent-autocomplete" value="${planInstance?.agent?.id}" placeholder="Search an agent..."/>
-	<g:hiddenField name="agent.id"/>
+	<g:textField name="agent-autocomplete" value="${planInstance?.agent?.fullName()}" placeholder="Search an agent..."/>
+	<g:hiddenField name="agent.id" value="${planInstance?.agent?.id}"/>
     %{--<g:link controller="agent" action="create" params="['plan.id': planInstance?.id]">Create an agent</g:link>--}%
         <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create an agent"/>
 

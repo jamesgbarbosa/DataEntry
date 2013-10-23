@@ -77,8 +77,10 @@
 				</fieldset>
 				<fieldset class="buttons">
                     %{--TODO fixed this. make this work!--}%
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
+					%{--<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />--}%
+                    <g:submitButton formaction="create" name="savePlan" event="savePlan" value="Create"/>
+
+                </fieldset>
 			</g:form>
 		</div>
 	</body>

@@ -56,4 +56,8 @@ class Client implements Serializable {
             return true
         }
     }
+
+    String fullName() {
+        return "${firstName} ${middleName?middleName: ''} ${lastName}"
+    }
 }

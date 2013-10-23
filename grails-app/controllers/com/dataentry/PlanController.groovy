@@ -35,17 +35,24 @@ class PlanController {
         //1st state
         createPlan {
             on('createAgent'){ Plan plan ->
-                def x = params
                 plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
                 flow.planInstance = plan
                 flow.agentInstance = new Agent()
-//                flow.planInstance.properties = params
-//                if(!flow.book.validate()) {
-//                    error()
-//                }
             }.to('createAgent')
+            on('savePlan') { Plan plan ->
+                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
+                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+                flow.planInstance = plan
+
+                if (!plan.save(flush: true)) {
+                    return error()
+                }
+                flow.myMessage = "Plan ${plan?.id} created."
+            }.to('last')
+
         }
 
         //2st state
@@ -75,26 +82,11 @@ class PlanController {
             }.to('createPlan')
         }
 
-
+        //End State
         last {
-            action {
-                try {
-                    //throw new Exception()
-                    RequestContextHolder.currentRequestAttributes().flashScope.message = 'Success'
-                    createPlan()
-                } catch(Exception e) {
-                    RequestContextHolder.currentRequestAttributes().flashScope.error = 'Service not available'
-                    createAgent()
-                }
-            }
-//            on("second").to("second")
-//            on("buy").to("buy")
+            redirect(action: "show", id: flow.planInstance?.id, params:[message: flow.myMessage])
         }
 
-        //End State
-//        buy {
-//            redirect(action: "list")
-//        }
     }
 
     def agentslist = {
