@@ -109,7 +109,7 @@
     <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.fullName()}" placeholder="Search a plan holder..."/>
     <g:hiddenField name="planHolder.id" value="${planInstance?.planHolder?.id}"/>
 
-    <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create a plan Holder"/>
+    <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create a plan holder"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'agent', 'error')} ">
