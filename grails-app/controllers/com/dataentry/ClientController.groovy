@@ -20,6 +20,7 @@ class ClientController {
     }
 
     def save() {
+        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
         def clientInstance = new Client(params)
         if (!clientInstance.save(flush: true)) {
             render(view: "create", model: [clientInstance: clientInstance])
@@ -69,7 +70,7 @@ class ClientController {
                 return
             }
         }
-
+        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
         clientInstance.properties = params
 
         if (!clientInstance.save(flush: true)) {
