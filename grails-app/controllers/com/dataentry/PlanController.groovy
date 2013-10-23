@@ -53,6 +53,15 @@ class PlanController {
                 flow.agentInstance = new Agent()
             }.to('createAgent')
 
+            on('createBeneficiary'){ Plan plan ->
+                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
+                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+                flow.planInstance = plan
+
+                flow.beneficiaryInstance = new Beneficiary()
+            }.to('createBeneficiary')
+
             on('savePlan') { Plan plan ->
                 plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
@@ -118,6 +127,31 @@ class PlanController {
             }.to('createPlan')
         }
 
+        //State  2.c
+        createBeneficiary {
+            on("return"){
+            }.to("createPlan")
+
+            on('saveBeneficiary'){
+                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+                def beneficiaryInstance = new Beneficiary(params)
+                beneficiaryInstance.clientType = 'Plan Holder'
+                flow.beneficiaryInstance = beneficiaryInstance
+                if(beneficiaryInstance.validate()) {
+                    if(!beneficiaryInstance.validateClientUniqueness()) {
+                        flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+                        return error()
+                    }
+                    if (!beneficiaryInstance.save(flush: true)) {
+                        return error()
+                    }
+                    flow.planInstance.beneficiary = beneficiaryInstance
+                } else {
+                    return error()
+                }
+            }.to('createPlan')
+        }
+
         //End State
         last {
             redirect(action: "show", id: flow.planInstance?.id, params:[message: flow.myMessage])
@@ -132,6 +166,11 @@ class PlanController {
 
     def planholderslist = {
         params.clientType = "Plan Holder"
+        render autoCompleteService.clientList(params) as JSON
+    }
+
+    def beneficiarieslist = {
+        params.clientType = "Beneficiary"
         render autoCompleteService.clientList(params) as JSON
     }
 

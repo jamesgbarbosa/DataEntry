@@ -26,11 +26,6 @@ class BeneficiaryController {
         //validate uniqeness
         beneficiaryInstance.clientType = 'Beneficiary'
 
-        if (params.planId) {
-            def planInstance = Plan.get(params.planId)
-            planInstance.addToBeneficiaries(beneficiaryInstance)
-        }
-
         if(beneficiaryInstance.validate()) {
             if(!beneficiaryInstance.validateClientUniqueness()) {
                 flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")

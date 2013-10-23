@@ -109,7 +109,7 @@
     <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.fullName()}" placeholder="Search a plan holder..."/>
     <g:hiddenField name="planHolder.id" value="${planInstance?.planHolder?.id}"/>
 
-    <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create a Plan Holder"/>
+    <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create a plan Holder"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'agent', 'error')} ">
@@ -122,6 +122,17 @@
 	<g:hiddenField name="agent.id" value="${planInstance?.agent?.id}"/>
     %{--<g:link controller="agent" action="create" params="['plan.id': planInstance?.id]">Create an agent</g:link>--}%
         <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create an agent"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'beneficiary', 'error')} ">
+    <label for="beneficiary">
+        <g:message code="plan.beneficiary.label" default="Beneficiary" />
+
+    </label>
+    <g:textField name="beneficiary-autocomplete" value="${planInstance?.beneficiary?.fullName()}" placeholder="Search an beneficiary..."/>
+    <g:hiddenField name="beneficiary.id" value="${planInstance?.beneficiary?.id}"/>
+    <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
 
 </div>
 

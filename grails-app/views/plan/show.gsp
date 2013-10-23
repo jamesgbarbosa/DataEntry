@@ -159,18 +159,16 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${planInstance?.beneficiaries}">
-				<li class="fieldcontain">
-					<span id="beneficiaries-label" class="property-label"><g:message code="plan.beneficiaries.label" default="Beneficiaries" /></span>
-					
-						<g:each in="${planInstance.beneficiaries}" var="b">
-						<span class="property-value" aria-labelledby="beneficiaries-label"><g:link controller="beneficiary" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
+
+                <g:if test="${planInstance?.beneficiary}">
+                    <li class="fieldcontain">
+                        <span id="agent-label" class="property-label"><g:message code="plan.beneficiary.label" default="Beneficiary" /></span>
+
+                        <span class="property-value" aria-labelledby="beneficiary-label"><g:link controller="beneficiary" action="show" id="${planInstance?.beneficiary?.id}">${planInstance?.beneficiary?.encodeAsHTML()}</g:link></span>
+
+                    </li>
+                </g:if>
+
 				<g:if test="${planInstance?.amendments}">
 				<li class="fieldcontain">
 					<span id="amendments-label" class="property-label"><g:message code="plan.amendments.label" default="Amendments" /></span>
@@ -188,7 +186,6 @@
 					<g:hiddenField name="id" value="${planInstance?.id}" />
 					<g:link class="edit" action="edit" id="${planInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    <g:link controller="beneficiary" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'beneficiary.label', default: 'Beneficiary')])}</g:link>
                     <g:link controller="amendment" action="create" params="['plan.id': planInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'amendment.label', default: 'Amendment')])}</g:link>
 				</fieldset>
 			</g:form>

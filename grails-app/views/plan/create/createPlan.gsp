@@ -48,6 +48,26 @@
                         $("#planHolder\\.id").val(ui.item.id); // update the hidden field.
                     }
                 });
+
+                $("#beneficiary-autocomplete").autocomplete({
+                    source: function(request, response){
+                        $.ajax({
+                            url: "/DataEntry/plan/beneficiarieslist", // remote datasource
+                            data: request,
+                            success: function(data){
+                                response(data); // set the response
+                            },
+                            error: function(){ // handle server errors
+                                alert("Unable to retrieve beneficiaries.")
+                            }
+                        });
+                    },
+                    minLength: 1, // triggered only after minimum 1 characters have been entered.
+                    select: function(event, ui) { // event handler when user selects a company from the list.
+                        $("#beneficiary\\.id").val(ui.item.id); // update the hidden field.
+                    }
+                });
+
             });
         </g:javascript>
 	</head>
