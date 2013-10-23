@@ -111,7 +111,7 @@ class PlanController {
                 params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
                 def planHolderInstance = new Planholder(params)
                 planHolderInstance.clientType = 'Plan Holder'
-                flow.planHolderInstance = planHolderInstance
+                flow.planholderInstance = planHolderInstance
                 if(planHolderInstance.validate()) {
                     if(!planHolderInstance.validateClientUniqueness()) {
                         flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
