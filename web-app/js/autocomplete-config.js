@@ -1,9 +1,12 @@
 jQuery.noConflict();
 jQuery(document).ready(function($){
+    var agentsListLink = $("input[name='agentsListLink']").val()
+    var beneficiaryListLink = $("input[name='beneficiaryListLink']").val()
+    var planholderListLink = $("input[name='planholderListLink']").val()
     $("#agent-autocomplete").autocomplete({
         source: function(request, response){
             $.ajax({
-                url: "/DataEntry/plan/agentslist",
+                url: agentsListLink,
                 data: request,
                 success: function(data){
                     response(data);
