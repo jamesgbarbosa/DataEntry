@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
     $("#planholder-autocomplete").autocomplete({
         source: function(request, response){
             $.ajax({
-                url: "/DataEntry/plan/planholderslist",
+                url: beneficiaryListLink,
                 data: request,
                 success: function(data){
                     response(data);
@@ -44,7 +44,7 @@ jQuery(document).ready(function($){
     $("#beneficiary-autocomplete").autocomplete({
         source: function(request, response){
             $.ajax({
-                url: "/DataEntry/plan/beneficiarieslist",
+                url: planholderListLink,
                 data: request,
                 success: function(data){
                     response(data);
