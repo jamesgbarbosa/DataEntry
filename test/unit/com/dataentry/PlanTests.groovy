@@ -18,7 +18,6 @@ class PlanTests {
         plan.agent = null
         plan.amendments = []
         plan.applicableDate = new Date()
-        plan.beneficiaries = []
         plan.currentIssueDate = new Date()
         plan.maturityPeriod = 1
         plan.modalInstallment = new BigDecimal("1")
