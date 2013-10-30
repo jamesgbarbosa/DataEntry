@@ -18,10 +18,39 @@
     <div id="search-plan" class="content scaffold-list">
         <h1>Search Plans:</h1>
         <g:form action="list">
-            <label>Plan ID</label><g:textField name="planID" value="${params.planID}"></g:textField>
-            <label>Planholder Name</label><g:textField name="planholderName" value="${params.planholderName}"></g:textField>
-            <label>Product ID</label><g:textField name="productID" value="${params.productID}"></g:textField>
-            <g:submitButton name="Submit" value="Submit"/>
+            <table style="width: 500px">
+                <tr>
+                    <td>
+                        <label>Plan ID</label>
+                    </td>
+                    <td>
+                        <g:textField name="planID" value="${params.planID}"></g:textField>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Planholder Name</label>
+                    </td>
+                    <td>
+                        <g:textField name="planholderName" value="${params.planholderName}"></g:textField>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Product ID</label>
+                    </td>
+                    <td>
+                        <g:textField name="productID" value="${params.productID}"></g:textField>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <g:submitButton name="Submit" value="Submit"/>
+                    </td>
+                </tr>
+            </table>
+
+
         </g:form>
     </div>
 		<div id="list-plan" class="content scaffold-list" role="main">

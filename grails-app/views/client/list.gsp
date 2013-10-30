@@ -22,9 +22,22 @@
         <div id="search-client" class="content scaffold-list">
             <h1>Search Clients:</h1>
             <g:form action="list">
-                <label>First Name</label><g:textField name="firstName" value="${params.firstName}"></g:textField>
-                <label>Last Name</label><g:textField name="lastName" value="${params.lastName}"></g:textField>
-                <g:submitButton name="Submit" value="Submit"/>
+                <table style="width: 500px">
+                    <tr>
+                        <td>
+                            <label>Name</label>
+                        </td>
+                        <td>
+                            <g:textField name="fullName" value="${params.fullName}"></g:textField>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <g:submitButton name="Submit" value="Submit"/>
+                        </td>
+                    </tr>
+                </table>
             </g:form>
         </div>
 		<div id="list-client" class="content scaffold-list" role="main">

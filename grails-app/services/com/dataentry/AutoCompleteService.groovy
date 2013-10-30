@@ -5,14 +5,12 @@ class AutoCompleteService {
     def clientList(params) {
         def query = {
             or {
-                like("firstName", "${params.term}%")
-                like("lastName", "${params.term}%")
+                like("fullName", "${params.term}%")
             }
             projections {
                 property("id")
 //                property("nasdaqSymbol")
-                property("firstName")
-                property("lastName")
+                property("fullName")
             }
         }
         def clientList
@@ -29,7 +27,7 @@ class AutoCompleteService {
         clientList.each {
             def clientMap = [:]
             clientMap.put("id", it[0])
-            clientMap.put("value", it[1] + " " +it[2])
+            clientMap.put("value", it[1])
             clientsSelectionList.add(clientMap)
         }
         return clientsSelectionList

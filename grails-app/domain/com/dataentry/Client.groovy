@@ -18,6 +18,16 @@ class Client implements Serializable {
     String officenumber
     String email
     String gender
+    String fullName
+
+    def beforeInsert = {
+        fullName = fullName()
+    }
+
+    def beforeUpdate() {
+        fullName = fullName()
+    }
+
 
     static constraints = {
         clientType blank:  true, nullable:  true, inList:['Plan Holder','Beneficiary','Agent' ]
@@ -36,6 +46,7 @@ class Client implements Serializable {
         landline blank:  true, nullable:  true
         mobile blank:  true, nullable:  true
         officenumber blank:  true, nullable:  true
+        fullName  blank: true, nullable:  true
 
 
     }
@@ -58,6 +69,6 @@ class Client implements Serializable {
     }
 
     String fullName() {
-        return "${firstName} ${middleName?middleName: ''} ${lastName}"
+        return "${firstName}${middleName? " ${middleName}": ''} ${lastName}"
     }
 }
