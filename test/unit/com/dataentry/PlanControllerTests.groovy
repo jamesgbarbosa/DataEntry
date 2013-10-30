@@ -7,7 +7,7 @@ import grails.test.mixin.*
 
 @Ignore
 @TestFor(PlanController)
-@Mock(Plan)
+@Mock([Plan,Planholder])
 class PlanControllerTests {
 
     def populateValidParams(params) {
@@ -158,5 +158,38 @@ class PlanControllerTests {
         assert Plan.count() == 0
         assert Plan.get(plan.id) == null
         assert response.redirectedUrl == '/plan/list'
+    }
+
+    void testOnly() {
+        Plan plan = new Plan(planHolder:         new Planholder(firstName: 'John', lastName: 'test' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true)
+        ,product: 'Sample1', planNumber: 'P1000').save(flush: true)
+
+        params.planID = 'P1000'
+        params.productID = ''
+        params.planholderName = ''
+
+        def model = controller.list()
+
+        assert model.planInstanceList.size() == 1
+    }
+
+    public List<Plan> searchPlans(params) {
+        def plans = Plan.withCriteria {
+            and {
+                if(params.productID!='') {
+                    eq("product","${params.productID}")
+                }
+                if(params.planID!=''){
+                    eq("planNumber","${params.planID}")
+
+                }
+                if(params.planholderName!=''){
+                    planHolder {
+                        ilike("firstName","${params.planholderName}%")
+                    }
+                }
+            }
+        }
+        return plans
     }
 }

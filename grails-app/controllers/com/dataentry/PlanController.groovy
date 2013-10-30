@@ -11,17 +11,36 @@ class PlanController {
     def index() {
         redirect(action: "list", params: params)
     }
+    def test = {
+        def plans = Plan.withCriteria {
+            eq("product","Sample1")
+            eq("planNumber","P1000")
+//            eq("planNumber", params.planID)
+//            planHolder {
+//                ilike("firstName","A%")
+//            }
+//                ilike("planHolder.firstName","${params.planholderName}%")
 
+        }
+        render plans ? plans : "gagali"
+    }
     def list(Integer max) {
         if(params.planID || params.productID || params.planholderName) {
             def plans = Plan.withCriteria {
-                    eq("product","${params.productID}")
-                    eq("planNumber", params.planID)
-                    planHolder {
-                        ilike("firstName","${params.planholderName}%")
+                and {
+                    if(params.productID!='') {
+                        eq("product","${params.productID}")
                     }
-//                ilike("planHolder.firstName","${params.planholderName}%")
+                    if(params.planID!=''){
+                        eq("planNumber","${params.planID}")
 
+                    }
+                    if(params.planholderName!=''){
+                        planHolder {
+                            ilike("firstName","${params.planholderName}%")
+                        }
+                    }
+                }
             }
             params.max = Math.min(max ?: 10, 100)
             [planInstanceList: plans, planInstanceTotal: plans.size()]
