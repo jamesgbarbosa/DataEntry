@@ -60,15 +60,4 @@ class ClientControllerTests {
         assert model.clientInstanceList.size() == 8
         assert model.clientInstanceList!=null
     }
-
-//    List<Client> searchClients(Map params) {
-//        def x = Client.list()
-//        def clients = Client.withCriteria {
-//            ilike("firstName","${params.firstName}%")
-//            ilike("lastName", "${params.lastName}%")
-//        }
-//
-//        return clients
-//
-//    }
 }

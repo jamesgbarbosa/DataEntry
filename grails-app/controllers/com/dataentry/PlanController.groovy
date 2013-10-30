@@ -13,8 +13,23 @@ class PlanController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [planInstanceList: Plan.list(params), planInstanceTotal: Plan.count()]
+        if(params.planID || params.productID || params.planholderName) {
+            def plans = Plan.withCriteria {
+                    eq("product","${params.productID}")
+                    eq("planNumber", params.planID)
+                    planHolder {
+                        ilike("firstName","${params.planholderName}%")
+                    }
+//                ilike("planHolder.firstName","${params.planholderName}%")
+
+            }
+            params.max = Math.min(max ?: 10, 100)
+            [planInstanceList: plans, planInstanceTotal: plans.size()]
+        } else {
+            params.max = Math.min(max ?: 10, 100)
+            [planInstanceList: Plan.list(params), planInstanceTotal: Plan.count()]
+        }
+
     }
 
     def createFlow = {
@@ -36,7 +51,9 @@ class PlanController {
         //State 1
         createPlan {
             on('createPlanHolder'){ Plan plan ->
-                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+                plan.origIssueDate =n
+                n
+                params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
                 flow.planInstance = plan

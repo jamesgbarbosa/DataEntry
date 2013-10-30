@@ -2,7 +2,7 @@ package com.dataentry
 
 class Plan implements Serializable {
 
-    Long planNumber
+    String planNumber
     String product
     int payingPeriod
     int maturityPeriod
