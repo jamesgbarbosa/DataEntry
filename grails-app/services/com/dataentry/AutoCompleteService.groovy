@@ -5,7 +5,7 @@ class AutoCompleteService {
     def clientList(params) {
         def query = {
             or {
-                like("fullName", "${params.term}%")
+                ilike("fullName", "${params.term}%")
             }
             projections {
                 property("id")
