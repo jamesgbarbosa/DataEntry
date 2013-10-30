@@ -45,12 +45,6 @@ class PlanControllerTests {
         assert model.planInstanceTotal == 0
     }
 
-    void testCreate() {
-        def model = controller.create()
-
-        assert model.planInstance != null
-    }
-
     void testSave() {
         populateValidParams(params)
         params.applicableDate = "10/10/2013"

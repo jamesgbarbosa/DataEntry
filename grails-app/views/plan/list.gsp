@@ -15,6 +15,15 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
+    <div id="search-plan" class="content scaffold-list">
+        <h1>Search Plans:</h1>
+        <g:form action="list">
+            <label>Plan ID</label><g:textField name="planID" value="${params.planID}"></g:textField>
+            <label>Planholder Name</label><g:textField name="planholderName" value="${params.planholderName}"></g:textField>
+            <label>Product ID</label><g:textField name="productID" value="${params.productID}"></g:textField>
+            <g:submitButton name="Submit" value="Submit"/>
+        </g:form>
+    </div>
 		<div id="list-plan" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">

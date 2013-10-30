@@ -1,6 +1,14 @@
 <%@ page import="com.dataentry.Plan" %>
 
 
+<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'planNumber', 'error')} ">
+    <label for="product">
+        <g:message code="plan.planNumber.label" default="Plan Number" />
+
+    </label>
+    <g:textField name="planNumber" value="${planInstance?.planNumber}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'product', 'error')} ">
 	<label for="product">
 		<g:message code="plan.product.label" default="Product" />
