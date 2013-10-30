@@ -11,8 +11,17 @@ class ClientController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [clientInstanceList: Client.list(params), clientInstanceTotal: Client.count()]
+        if(params.firstName || params.lastName) {
+            def clients = Client.withCriteria {
+                ilike("firstName","${params.firstName}%")
+                ilike("lastName", "${params.lastName}%")
+            }
+            params.max = Math.min(max ?: 10, 100)
+            [clientInstanceList: clients, clientInstanceTotal: clients.size()]
+        } else {
+            params.max = Math.min(max ?: 10, 100)
+            [clientInstanceList: Client.list(params), clientInstanceTotal: Client.count()]
+        }
     }
 
     def create() {

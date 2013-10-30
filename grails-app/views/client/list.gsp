@@ -19,6 +19,14 @@
 				%{--<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>--}%
 			</ul>
 		</div>
+        <div id="search-client" class="content scaffold-list">
+            <h1>Search Clients:</h1>
+            <g:form action="list">
+                <label>First Name</label><g:textField name="firstName" value="${params.firstName}"></g:textField>
+                <label>Last Name</label><g:textField name="lastName" value="${params.lastName}"></g:textField>
+                <g:submitButton name="Submit" value="Submit"/>
+            </g:form>
+        </div>
 		<div id="list-client" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
