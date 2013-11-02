@@ -1,6 +1,11 @@
 jQuery.noConflict();
 jQuery(document).ready(function($){
-    $('#birthdate').datepicker({
+    $('#docDate').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1900:2013"
+        });
+     $('#birthdate').datepicker({
         changeMonth: true,
         changeYear: true,
         yearRange: "1900:2013"
@@ -8,23 +13,23 @@ jQuery(document).ready(function($){
     $('#appointmentDate').datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange: "1900:2013"
+        yearRange: "1920:2100"
         });
 
     $('#origIssueDate').datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange: "1900:2013"
+        yearRange: "1920:2100"
     });
     $('#currentIssueDate').datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange: "1900:2013"
+        yearRange: "1920:2100"
     });
     $('#applicableDate').datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange: "1900:2013"
+        yearRange: "1920:2100"
     });
 
     $("#agent-autocomplete").autocomplete({
