@@ -5,7 +5,9 @@ import java.util.zip.ZipEntry
 
 class FileOperationsController {
 
-    def index() { }
+    def index() {
+        redirect(action: 'rename')
+    }
 
     def rename() {
         def name = "renamed_files"
@@ -27,15 +29,6 @@ class FileOperationsController {
             return
         } else {
             []
-        }
-    }
-
-    def preview = {
-        render params
-        if(params.files != null) {
-            request.getMultiFileMap().files.each {
-                render it.originalFilename
-            }
         }
     }
 }
