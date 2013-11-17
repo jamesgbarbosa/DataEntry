@@ -18,7 +18,7 @@
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
             </ul>
         </div>
-        <g:uploadForm action="rename">
+        <g:uploadForm action="rename" method="post">
             <div id="search-client" class="content scaffold-list">
                 <h1>File Renaming:</h1>
                     <table style="width: 500px">
@@ -27,7 +27,8 @@
                                 <label>Files:</label>
                             </td>
                             <td>
-                                <input type="file" name="files" id="files" multiple="" directory="" webkitdirectory="" mozdirectory="" />
+                                %{--<input type="file" name="files" id="files" multiple="" directory="" webkitdirectory="" mozdirectory="" />--}%
+                                <input type="file" name="files" id="files" multiple="" />
                             </td>
                         </tr>
                         <tr>
