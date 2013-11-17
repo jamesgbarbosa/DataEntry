@@ -2,7 +2,6 @@ package com.dataentry
 
 class Client implements Serializable {
 
-    String clientType
     String lastName
     String firstName
     String middleName
@@ -21,16 +20,21 @@ class Client implements Serializable {
     String fullName
 
     def beforeInsert = {
+        firstName = firstName?.toUpperCase()
+        middleName = middleName?.toUpperCase()
+        lastName = lastName?.toUpperCase()
         fullName = fullName()
     }
 
     def beforeUpdate() {
+        firstName = firstName?.toUpperCase()
+        middleName = middleName?.toUpperCase()
+        lastName = lastName?.toUpperCase()
         fullName = fullName()
     }
 
 
     static constraints = {
-        clientType blank:  true, nullable:  true, inList:['Plan Holder','Beneficiary','Agent' ]
         lastName blank:  false, nullable:  false
         firstName blank:  false, nullable:  false
         middleName blank:  true, nullable:  true

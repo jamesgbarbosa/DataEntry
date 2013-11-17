@@ -21,6 +21,7 @@
 
         <g:javascript src="datepicker-config.js"/>
         <g:javascript src="autocomplete-config.js"/>
+        <g:javascript src="dynamic-forms.js"/>
         %{--<g:javascript library="jquery"/>--}%
          %{--<r:require modules="jquery,jquery-ui"/>--}%
 		<g:layoutHead/>

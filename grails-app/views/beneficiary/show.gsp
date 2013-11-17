@@ -21,16 +21,7 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list beneficiary">
-			
-				<g:if test="${beneficiaryInstance?.clientType}">
-				<li class="fieldcontain">
-					<span id="clientType-label" class="property-label"><g:message code="beneficiary.clientType.label" default="Client Type" /></span>
-					
-						<span class="property-value" aria-labelledby="clientType-label"><g:fieldValue bean="${beneficiaryInstance}" field="clientType"/></span>
-					
-				</li>
-				</g:if>
-			
+
 				<g:if test="${beneficiaryInstance?.lastName}">
 				<li class="fieldcontain">
 					<span id="lastName-label" class="property-label"><g:message code="beneficiary.lastName.label" default="Last Name" /></span>

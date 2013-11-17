@@ -1,8 +1,9 @@
 jQuery.noConflict();
 jQuery(document).ready(function($){
-    var agentsListLink = $("input[name='agentsListLink']").val()
-    var beneficiaryListLink = $("input[name='beneficiaryListLink']").val()
-    var planholderListLink = $("input[name='planholderListLink']").val()
+    var agentsListLink = $("input[name='clientsListLink']").val()
+    var beneficiaryListLink = $("input[name='clientsListLink']").val()
+    var planholderListLink = $("input[name='clientsListLink']").val()
+
     $('#agent-autocomplete').click(function() {
         $('#agent-autocomplete').trigger("focus"); //or "click", at least one should work
     });

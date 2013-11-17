@@ -16,11 +16,10 @@ class Plan implements Serializable {
     Date applicableDate
     boolean withInsurance
 
-    Planholder planHolder
-    Agent agent
-    Beneficiary beneficiary
+    Client planHolder
+    Client agent
 
-    static hasMany = [amendments: Amendment]
+    static hasMany = [beneficiaries: Client,amendments: Amendment]
 
     static constraints = {
         planNumber blank:  true, nullable:  true
@@ -38,7 +37,7 @@ class Plan implements Serializable {
         withInsurance blank:  true, nullable:  true
         planHolder nullable:  true
         agent nullable:  true
-        beneficiary nullable: true
+        beneficiaries nullable: true
         amendments nullable: true
     }
 

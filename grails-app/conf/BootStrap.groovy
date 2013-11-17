@@ -3,6 +3,7 @@ import com.dataentry.Beneficiary
 import com.dataentry.Planholder
 import com.dateentry.reftables.Product
 import com.dateentry.reftables.AmendmentTypes
+import com.dataentry.Client
 
 class BootStrap {
 
@@ -29,26 +30,26 @@ class BootStrap {
 
 
 
-        new Agent(firstName: 'Agent1', lastName: 'test' , birthdate: new Date(), gender: 'Male', clientType: 'Agent').save(flush: true, failOnError: true)
-        new Agent(firstName: 'Agent2', lastName: 'apple' , birthdate: new Date(), gender: 'Male', clientType: 'Agent').save(flush: true, failOnError: true)
-        new Agent(firstName: 'Agent3', lastName: 'hello' , birthdate: new Date(), gender: 'Male', clientType: 'Agent').save(flush: true, failOnError: true)
-        new Agent(firstName: 'Agent4', lastName: 'orange' , birthdate: new Date(), gender: 'Male', clientType: 'Agent').save(flush: true, failOnError: true)
-        new Agent(firstName: 'Agent5', lastName: 'red' , birthdate: new Date(), gender: 'Male', clientType: 'Agent').save(flush: true, failOnError: true)
-        new Agent(firstName: 'Agent6', lastName: 'blue' , birthdate: new Date(), gender: 'Male', clientType: 'Agent').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent1', lastName: 'test' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent2', lastName: 'apple' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent3', lastName: 'hello' , birthdate: new Date(), gender: 'Male' ).save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent4', lastName: 'orange' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent5', lastName: 'red' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent6', lastName: 'blue' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
 
-        new Planholder(firstName: 'John', lastName: 'test' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true, failOnError: true)
-        new Planholder(firstName: 'James', lastName: 'apple' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true, failOnError: true)
-        new Planholder(firstName: 'Edward', lastName: 'hello' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true, failOnError: true)
-        new Planholder(firstName: 'Richard', lastName: 'orange' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true, failOnError: true)
-        new Planholder(firstName: 'Ben', lastName: 'red' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true, failOnError: true)
-        new Planholder(firstName: 'Michael', lastName: 'blue' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true, failOnError: true)
+        new Client(firstName: 'John', lastName: 'test' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'James', lastName: 'apple' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Edward', lastName: 'hello' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Richard', lastName: 'orange' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Ben', lastName: 'red' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Michael', lastName: 'blue' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
 
-        new Beneficiary(firstName: 'Diana', lastName: 'test' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true, failOnError: true)
-        new Beneficiary(firstName: 'Rona', lastName: 'apple' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true, failOnError: true)
-        new Beneficiary(firstName: 'Angelica', lastName: 'hello' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true, failOnError: true)
-        new Beneficiary(firstName: 'Elena', lastName: 'orange' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true, failOnError: true)
-        new Beneficiary(firstName: 'Zafina', lastName: 'red' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true, failOnError: true)
-        new Beneficiary(firstName: 'Anne', lastName: 'blue' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true, failOnError: true)
+        new Client(firstName: 'Diana', lastName: 'test' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Rona', lastName: 'apple' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Angelica', lastName: 'hello' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Elena', lastName: 'orange' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Zafina', lastName: 'red' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Anne', lastName: 'blue' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
 
     }
     def destroy = {

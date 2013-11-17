@@ -146,7 +146,7 @@
 				<li class="fieldcontain">
 					<span id="planHolder-label" class="property-label"><g:message code="plan.planHolder.label" default="Plan Holder" /></span>
 					
-						<span class="property-value" aria-labelledby="planHolder-label"><g:link controller="planholder" action="show" id="${planInstance?.planHolder?.id}">${planInstance?.planHolder?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="planHolder-label"><g:link controller="planholder" action="show" id="${planInstance?.planHolder?.id}">${planInstance?.planHolder?.getFullName()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -155,16 +155,18 @@
 				<li class="fieldcontain">
 					<span id="agent-label" class="property-label"><g:message code="plan.agent.label" default="Agent" /></span>
 					
-						<span class="property-value" aria-labelledby="agent-label"><g:link controller="agent" action="show" id="${planInstance?.agent?.id}">${planInstance?.agent?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="agent-label"><g:link controller="agent" action="show" id="${planInstance?.agent?.id}">${planInstance?.agent?.getFullName()}</g:link></span>
 					
 				</li>
 				</g:if>
 
-                <g:if test="${planInstance?.beneficiary}">
+                <g:if test="${planInstance?.beneficiaries}">
                     <li class="fieldcontain">
-                        <span id="agent-label" class="property-label"><g:message code="plan.beneficiary.label" default="Beneficiary" /></span>
+                        <span id="agent-label" class="property-label"><g:message code="plan.beneficiary.label" default="Beneficiaries" /></span>
 
-                        <span class="property-value" aria-labelledby="beneficiary-label"><g:link controller="beneficiary" action="show" id="${planInstance?.beneficiary?.id}">${planInstance?.beneficiary?.encodeAsHTML()}</g:link></span>
+                        <g:each in="${planInstance.beneficiaries}" var="a">
+                            <span class="property-value" aria-labelledby="amendments-label"><g:link controller="amendment" action="show" id="${a.id}">${a?.fullName()}</g:link></span>
+                        </g:each>
 
                     </li>
                 </g:if>

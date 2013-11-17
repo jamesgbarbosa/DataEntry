@@ -11,19 +11,7 @@ class PlanController {
     def index() {
         redirect(action: "list", params: params)
     }
-    def test = {
-        def plans = Plan.withCriteria {
-            eq("product","Sample1")
-            eq("planNumber","P1000")
-//            eq("planNumber", params.planID)
-//            planHolder {
-//                ilike("firstName","A%")
-//            }
-//                ilike("planHolder.firstName","${params.planholderName}%")
 
-        }
-        render plans ? plans : "gagali"
-    }
     def list(Integer max) {
         if(params.planID || params.productID || params.planholderName) {
             def plans = Plan.withCriteria {
@@ -61,8 +49,9 @@ class PlanController {
         init {
             action {
                 flow.planInstance =  new Plan(params)
-                flow.agentInstance =  new Agent(params)
-                flow.planholderInstance =  new Planholder(params)
+                flow.agentInstance =  new Client(params)
+                flow.planholderInstance =  new Client(params)
+                flow.beneficiaryInstance =  new Client(params)
             }
             on('success').to('createPlan')
         }
@@ -70,45 +59,51 @@ class PlanController {
         //State 1
         createPlan {
             on('createPlanHolder'){ Plan plan ->
-                plan.origIssueDate =n
-                n
-                params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+                def beneficiaries = flow.planInstance.beneficiaries
                 flow.planInstance = plan
-
-                flow.planholderInstance = new Planholder()
+                if(beneficiaries!=null) {
+                    flow.planInstance.beneficiaries = beneficiaries
+                }
+                flow.planholderInstance = new Client()
             }.to('createPlanHolder')
 
             on('createAgent'){ Plan plan ->
                 plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+                def beneficiaries = flow.planInstance.beneficiaries
                 flow.planInstance = plan
-
-                flow.agentInstance = new Agent()
+                if(beneficiaries!=null) {
+                    flow.planInstance.beneficiaries = beneficiaries
+                }
+                flow.agentInstance = new Client()
             }.to('createAgent')
 
-            on('createBeneficiary'){ Plan plan ->
+            on('beneficiaries'){ Plan plan ->
                 plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+                def beneficiaries = flow.planInstance.beneficiaries
                 flow.planInstance = plan
-
-                flow.beneficiaryInstance = new Beneficiary()
-            }.to('createBeneficiary')
-
-            on('savePlan') { Plan plan ->
-                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
-                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
-                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
-                flow.planInstance = plan
-
-                if (!plan.save(flush: true)) {
-                    return error()
+                if(beneficiaries!=null) {
+                    flow.planInstance.beneficiaries = beneficiaries
                 }
-                flow.myMessage = "Plan ${plan?.id} created."
-            }.to('last')
+            }.to('beneficiaries')
+
+//            on('savePlan') { Plan plan ->
+//                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+//                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
+//                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+//                flow.planInstance = plan
+//
+//                if (!plan.save(flush: true)) {
+//                    return error()
+//                }
+//                flow.myMessage = "Plan ${plan?.id} created."
+//            }.to('last')
 
         }
 
@@ -120,8 +115,8 @@ class PlanController {
             on('saveAgent'){
                 params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
                 params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
-                def agentInstance = new Agent(params)
-                agentInstance.clientType = 'Agent'
+                def agentInstance = new Client(params)
+//                agentInstance.clientType = 'Agent'
                 flow.agentInstance = agentInstance
                 if(agentInstance.validate()) {
                     if(!agentInstance.validateClientUniqueness()) {
@@ -145,8 +140,8 @@ class PlanController {
 
             on('savePlanHolder'){
                 params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
-                def planHolderInstance = new Planholder(params)
-                planHolderInstance.clientType = 'Plan Holder'
+                def planHolderInstance = new Client(params)
+//                planHolderInstance.clientType = 'Plan Holder'
                 flow.planholderInstance = planHolderInstance
                 if(planHolderInstance.validate()) {
                     if(!planHolderInstance.validateClientUniqueness()) {
@@ -163,15 +158,51 @@ class PlanController {
             }.to('createPlan')
         }
 
-        //State  2.c
+        // State 3
+        beneficiaries {
+            on("return"){
+                flow.beneficiaryInstance = new Client()
+                flow.planInstance.beneficiaries = new ArrayList<Client>()
+
+                params.list("benId")?.each {
+                    flow.planInstance.beneficiaries.add(Client.get(it))
+                }
+            }.to("createPlan")
+
+            on("createBeneficiary") {
+            }.to("createBeneficiary")
+
+            on('savePlan') {
+                flow.beneficiaryInstance = new Client()
+                flow.planInstance.beneficiaries = new ArrayList<Client>()
+
+                params.list("benId")?.each {
+                    flow.planInstance.beneficiaries.add(Client.get(it))
+                }
+                def plan = new Plan(flow.planInstance.properties)
+                def beneficiaries = flow.planInstance.beneficiaries
+                if(beneficiaries) {
+                    plan.beneficiaries = beneficiaries
+                } else {
+                    plan.beneficiaries = null
+                }
+
+                if (!plan.save(flush: true)) {
+                    return error()
+                }
+                flow.myMessage = "Plan ${plan?.id} created."
+            }.to('last')
+
+        }
+
+        //State 3a
         createBeneficiary {
             on("return"){
-            }.to("createPlan")
+            }.to("beneficiaries")
 
             on('saveBeneficiary'){
                 params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
-                def beneficiaryInstance = new Beneficiary(params)
-                beneficiaryInstance.clientType = 'Beneficiary'
+                def beneficiaryInstance = new Client(params)
                 flow.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.validate()) {
                     if(!beneficiaryInstance.validateClientUniqueness()) {
@@ -181,32 +212,20 @@ class PlanController {
                     if (!beneficiaryInstance.save(flush: true)) {
                         return error()
                     }
-                    flow.planInstance.beneficiary = beneficiaryInstance
+                    flow.beneficiaryInstance = beneficiaryInstance
                 } else {
                     return error()
                 }
-            }.to('createPlan')
+            }.to('beneficiaries')
         }
 
         //End State
         last {
             redirect(action: "show", id: flow.planInstance?.id, params:[message: flow.myMessage])
         }
-
     }
 
-    def agentslist = {
-            params.clientType = "Agent"
-            render autoCompleteService.clientList(params) as JSON
-    }
-
-    def planholderslist = {
-        params.clientType = "Plan Holder"
-        render autoCompleteService.clientList(params) as JSON
-    }
-
-    def beneficiarieslist = {
-        params.clientType = "Beneficiary"
+    def clientsList = {
         render autoCompleteService.clientList(params) as JSON
     }
 

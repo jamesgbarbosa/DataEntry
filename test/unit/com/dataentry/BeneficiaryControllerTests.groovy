@@ -16,7 +16,6 @@ class BeneficiaryControllerTests {
         params.relationship = "test"
         params.firstName = "James"
         params.lastName = "Barbosa"
-        params.clientType = "Beneficiary"
         params.birthdate = new Date()
         params.gender = "Male"
     }

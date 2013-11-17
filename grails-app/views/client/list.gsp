@@ -13,9 +13,6 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li><g:link class="create" controller="client" action="create">Create Client</g:link>  </li>
-                <li><g:link class="create" controller="agent" action="create">Create Agent</g:link>  </li>
-                <li><g:link class="create" controller="planholder" action="create">Create Plan Holder</g:link>  </li>
-                <li><g:link class="create" controller="beneficiary" action="create">Create Benficiary</g:link>  </li>
 				%{--<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>--}%
 			</ul>
 		</div>
@@ -49,8 +46,6 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="clientType" title="${message(code: 'client.clientType.label', default: 'Client Type')}" />
-					
 						<th>Name</th>
 					
 						<g:sortableColumn property="gender" title="${message(code: 'client.gender.label', default: 'Gender')}" />
@@ -62,8 +57,6 @@
 				<tbody>
 				<g:each in="${clientInstanceList}" status="i" var="clientInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td>${fieldValue(bean: clientInstance, field: "clientType")}</td>
 					
 						<td><g:link action="show" id="${clientInstance.id}">${clientInstance?.fullName()}</g:link></td>
 					

@@ -22,9 +22,7 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<g:sortableColumn property="clientType" title="${message(code: 'agent.clientType.label', default: 'Client Type')}" />
-					
+
 						<g:sortableColumn property="lastName" title="${message(code: 'agent.lastName.label', default: 'Last Name')}" />
 					
 						<g:sortableColumn property="firstName" title="${message(code: 'agent.firstName.label', default: 'First Name')}" />
@@ -40,8 +38,6 @@
 				<tbody>
 				<g:each in="${agentInstanceList}" status="i" var="agentInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${agentInstance.id}">${fieldValue(bean: agentInstance, field: "clientType")}</g:link></td>
 					
 						<td>${fieldValue(bean: agentInstance, field: "lastName")}</td>
 					

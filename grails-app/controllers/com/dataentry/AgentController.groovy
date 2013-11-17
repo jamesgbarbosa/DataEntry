@@ -23,7 +23,6 @@ class AgentController {
         params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
         params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
         def agentInstance = new Agent(params)
-        agentInstance.clientType = 'Agent'
         if(agentInstance.validate()) {
             if(!agentInstance.validateClientUniqueness()) {
                 flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")

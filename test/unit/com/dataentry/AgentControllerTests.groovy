@@ -19,7 +19,6 @@ class AgentControllerTests {
         params.groupName = "test"
         params.firstName = "James"
         params.lastName = "Barbosa"
-        params.clientType = "Agent"
         params.birthdate = "10/10/1992"
         params.gender = "Male"
         params.address1 = "test"
@@ -127,7 +126,6 @@ class AgentControllerTests {
         // test invalid parameters in update
 
         params.id = agent.id
-        params.clientType = "Does not exist"
         //TODO: add invalid values to params object
 
         controller.update()
