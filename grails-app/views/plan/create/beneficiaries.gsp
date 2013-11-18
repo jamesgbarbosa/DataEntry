@@ -15,7 +15,7 @@
         </ul>
     </div>
     <div id="create-beneficiary" class="content scaffold-create" role="main">
-        <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+        <h1>Add Beneficiaries</h1>
         <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
         </g:if>
@@ -34,8 +34,8 @@
                     %{--</g:each>--}%
 
                 </label>
-                <g:textField id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance.firstName!=null ? beneficiaryInstance?.fullName() : ""}" placeholder="Search a client..."/>
-                <g:hiddenField name="beneficiary.id" value="${beneficiaryInstance?.id}"/>
+                <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance.firstName!=null ? beneficiaryInstance?.fullName() : ""}" placeholder="Search a client..."/>
+                <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.id}"/>
                 <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
 
                 <div class="fieldcontain">
@@ -94,7 +94,7 @@
             </div>
             <fieldset class="buttons">
                 <input type="button" value="Delete" id="deleteBeneficiaryButton"/>
-                <g:submitButton formaction="create" name="savePlan" event="savePlan" value="Create"/>
+                <g:submitButton formaction="create" name="savePlan" event="savePlan" value="Save"/>
             </fieldset>
         </g:form>
 

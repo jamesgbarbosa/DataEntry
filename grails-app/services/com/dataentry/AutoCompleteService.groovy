@@ -1,5 +1,8 @@
 package com.dataentry
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 class AutoCompleteService {
 
     def clientList(params) {
@@ -11,6 +14,8 @@ class AutoCompleteService {
                 property("id")
 //                property("nasdaqSymbol")
                 property("fullName")
+                property("birthdate")
+                property("gender")
             }
         }
         def clientList
@@ -25,10 +30,12 @@ class AutoCompleteService {
 //        }
         clientList = Client.createCriteria().list(query)
         def clientsSelectionList = []
+        String sdf = new SimpleDateFormat("MM/dd/yyyy")
         clientList.each {
             def clientMap = [:]
-            clientMap.put("id", it[0])
-            clientMap.put("value", it[1])
+            clientMap.put("id", it[0] )
+
+            clientMap.put("value", it[1] + " : " + String.format("%1\$TD", it[2]) + " : " + it[3])
             clientsSelectionList.add(clientMap)
         }
         return clientsSelectionList

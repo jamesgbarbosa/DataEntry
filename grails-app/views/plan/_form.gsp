@@ -23,7 +23,7 @@
 
     </label>
     %{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-    <g:textField name="planholder-autocomplete" value="${planInstance?.planHolder?.fullName()}" placeholder="Search a client..."/>
+    <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planInstance?.planHolder?.fullName()}" placeholder="Search a client..."/>
     <g:hiddenField name="planHolder.id" value="${planInstance?.planHolder?.id}"/>
 
     <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create"/>
@@ -127,7 +127,7 @@
 		
 	</label>
 	%{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-	<g:textField name="agent-autocomplete" value="${planInstance?.agent?.fullName()}" placeholder="Search a client..."/>
+	<g:textField class='autocomplete-field' name="agent-autocomplete" value="${planInstance?.agent?.fullName()}" placeholder="Search a client..."/>
 	<g:hiddenField name="agent.id" value="${planInstance?.agent?.id}"/>
     %{--<g:link controller="agent" action="create" params="['plan.id': planInstance?.id]">Create an agent</g:link>--}%
         <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create"/>
