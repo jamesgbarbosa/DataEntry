@@ -35,7 +35,8 @@ class AutoCompleteService {
             def clientMap = [:]
             clientMap.put("id", it[0] )
 
-            clientMap.put("value", it[1] + " : " + String.format("%1\$TD", it[2]) + " : " + it[3])
+//            clientMap.put("value", it[1] + " : " + String.format("%1\$TD", it[2]) + " : " + it[3])
+            clientMap.put("value", it[1])
             clientsSelectionList.add(clientMap)
         }
         return clientsSelectionList

@@ -121,18 +121,18 @@
 	<g:select name="withInsurance" value="${planInstance?.withInsurance}" optionKey= "value" optionValue="key" from="${['Y':true, 'N':false]}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'agent', 'error')} ">
-	<label for="agent">
-		<g:message code="plan.agent.label" default="Agent" />
-		
-	</label>
+%{--<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'agent', 'error')} ">--}%
+	%{--<label for="agent">--}%
+		%{--<g:message code="plan.agent.label" default="Agent" />--}%
+		%{----}%
+	%{--</label>--}%
 	%{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-	<g:textField class='autocomplete-field' name="agent-autocomplete" value="${planInstance?.agent?.fullName()}" placeholder="Search a client..."/>
-	<g:hiddenField name="agent.id" value="${planInstance?.agent?.id}"/>
+	%{--<g:textField class='autocomplete-field' name="agent-autocomplete" value="${planInstance?.agent?.fullName()}" placeholder="Search a client..."/>--}%
+	%{--<g:hiddenField name="agent.id" value="${planInstance?.agent?.id}"/>--}%
     %{--<g:link controller="agent" action="create" params="['plan.id': planInstance?.id]">Create an agent</g:link>--}%
-        <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create"/>
+     %{--<g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create"/>--}%
 
-</div>
+%{--</div>--}%
 
 
 

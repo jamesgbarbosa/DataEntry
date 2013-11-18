@@ -63,31 +63,23 @@ class PlanController {
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
                 def beneficiaries = flow.planInstance.beneficiaries
+                def agent = flow.planInstance.agent
                 flow.planInstance = plan
+                flow.planInstance.agent = agent
                 if(beneficiaries!=null) {
                     flow.planInstance.beneficiaries = beneficiaries
                 }
                 flow.planholderInstance = new Client()
             }.to('createPlanHolder')
 
-            on('createAgent'){ Plan plan ->
-                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
-                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
-                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
-                def beneficiaries = flow.planInstance.beneficiaries
-                flow.planInstance = plan
-                if(beneficiaries!=null) {
-                    flow.planInstance.beneficiaries = beneficiaries
-                }
-                flow.agentInstance = new Client()
-            }.to('createAgent')
-
             on('beneficiaries'){ Plan plan ->
                 plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
                 def beneficiaries = flow.planInstance.beneficiaries
+                def agent = flow.agentInstance
                 flow.planInstance = plan
+                flow.planInstance.agent = agent
                 if(beneficiaries!=null) {
                     flow.planInstance.beneficiaries = beneficiaries
                 }
@@ -107,33 +99,7 @@ class PlanController {
 
         }
 
-        //State  2.a
-        createAgent {
-            on("return"){
-            }.to("createPlan")
-
-            on('saveAgent'){
-                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
-                params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
-                def agentInstance = new Client(params)
-//                agentInstance.clientType = 'Agent'
-                flow.agentInstance = agentInstance
-                if(agentInstance.validate()) {
-                    if(!agentInstance.validateClientUniqueness()) {
-                        flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
-                        return error()
-                    }
-                    if (!agentInstance.save(flush: true)) {
-                        return error()
-                    }
-                    flow.planInstance.agent = agentInstance
-                } else {
-                    return error()
-                }
-            }.to('createPlan')
-        }
-
-        //State  2.b
+        //State  1.a
         createPlanHolder {
             on("return"){
             }.to("createPlan")
@@ -158,7 +124,7 @@ class PlanController {
             }.to('createPlan')
         }
 
-        // State 3
+        // State 2
         beneficiaries {
             on("return"){
                 flow.beneficiaryInstance = new Client()
@@ -172,30 +138,20 @@ class PlanController {
             on("createBeneficiary") {
             }.to("createBeneficiary")
 
-            on('savePlan') {
+            on("next") {
                 flow.beneficiaryInstance = new Client()
                 flow.planInstance.beneficiaries = new ArrayList<Client>()
 
                 params.list("benId")?.each {
                     flow.planInstance.beneficiaries.add(Client.get(it))
                 }
-                def plan = new Plan(flow.planInstance.properties)
-                def beneficiaries = flow.planInstance.beneficiaries
-                if(beneficiaries) {
-                    plan.beneficiaries = beneficiaries
-                } else {
-                    plan.beneficiaries = null
-                }
+            }.to("agent")
 
-                if (!plan.save(flush: true)) {
-                    return error()
-                }
-                flow.myMessage = "Plan ${plan?.id} created."
-            }.to('last')
+
 
         }
 
-        //State 3a
+        //State 2a
         createBeneficiary {
             on("return"){
             }.to("beneficiaries")
@@ -217,6 +173,67 @@ class PlanController {
                     return error()
                 }
             }.to('beneficiaries')
+        }
+
+        //State 3
+        agent {
+            on("return"){
+                if(params.agent.id) {
+                    flow.agentInstance = Client.get(params.agent.id)
+                }
+                flow.planInstance.agent = flow.agentInstance
+            }.to("beneficiaries")
+
+            on("createAgent") {
+            }.to("createAgent")
+
+            on('savePlan') {
+//                flow.beneficiaryInstance = new Client()
+//                flow.planInstance.beneficiaries = new ArrayList<Client>()
+//
+//                params.list("benId")?.each {
+//                    flow.planInstance.beneficiaries.add(Client.get(it))
+//                }
+
+                def plan = new Plan(flow.planInstance.properties)
+                def beneficiaries = flow.planInstance.beneficiaries
+                def agent = flow.agentInstance
+                if(beneficiaries) {
+                    plan.beneficiaries = beneficiaries
+                } else {
+                    plan.beneficiaries = null
+                }
+
+                if (!plan.save(flush: true)) {
+                    return error()
+                }
+                flow.myMessage = "Plan ${plan?.id} created."
+            }.to('last')
+        }
+
+        createAgent {
+            on("return"){
+            }.to("agent")
+
+            on('saveAgent'){
+                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+                params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
+                def agentInstance = new Client(params)
+//                agentInstance.clientType = 'Agent'
+                flow.agentInstance = agentInstance
+                if(agentInstance.validate()) {
+                    if(!agentInstance.validateClientUniqueness()) {
+                        flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+                        return error()
+                    }
+                    if (!agentInstance.save(flush: true)) {
+                        return error()
+                    }
+                    flow.planInstance.agent = agentInstance
+                } else {
+                    return error()
+                }
+            }.to('agent')
         }
 
         //End State
