@@ -22,7 +22,6 @@ class AgentTests {
         agent.groupName = "test"
         agent.firstName = "James"
         agent.lastName = "Barbosa"
-        agent.clientType = "Agent"
         agent.birthdate = new Date()
         agent.gender = "Male"
         agent.address1 = "test"

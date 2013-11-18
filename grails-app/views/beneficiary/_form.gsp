@@ -122,20 +122,3 @@
 	</label>
 	<g:textField name="officenumber" value="${beneficiaryInstance?.officenumber}"/>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'designation', 'error')} ">
-	<label for="designation">
-		<g:message code="beneficiary.designation.label" default="Designation" />
-		
-	</label>
-	<g:textField name="designation" value="${beneficiaryInstance?.designation}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'relationship', 'error')} ">
-	<label for="relationship">
-		<g:message code="beneficiary.relationship.label" default="Relationship" />
-		
-	</label>
-	<g:textField name="relationship" value="${beneficiaryInstance?.relationship}"/>
-</div>
-

@@ -7,7 +7,7 @@
 		<g:message code="amendment.amendmentType.label" default="Amendment Type" />
 		
 	</label>
-	<g:textField name="amendmentType" value="${amendmentInstance?.amendmentType}"/>
+    <select:amendmentTypes  name="amendmentType" value="${amendmentInstance?.amendmentType}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'approvedBy', 'error')} ">

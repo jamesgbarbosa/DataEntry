@@ -24,8 +24,6 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="clientType" title="${message(code: 'planholder.clientType.label', default: 'Client Type')}" />
-					
 						<g:sortableColumn property="lastName" title="${message(code: 'planholder.lastName.label', default: 'Last Name')}" />
 					
 						<g:sortableColumn property="firstName" title="${message(code: 'planholder.firstName.label', default: 'First Name')}" />
@@ -41,8 +39,6 @@
 				<tbody>
 				<g:each in="${planholderInstanceList}" status="i" var="planholderInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${planholderInstance.id}">${fieldValue(bean: planholderInstance, field: "clientType")}</g:link></td>
 					
 						<td>${fieldValue(bean: planholderInstance, field: "lastName")}</td>
 					

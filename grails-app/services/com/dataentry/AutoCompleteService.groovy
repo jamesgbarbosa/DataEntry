@@ -14,15 +14,16 @@ class AutoCompleteService {
             }
         }
         def clientList
-        if(params.clientType == 'Agent') {
-            clientList = Agent.createCriteria().list(query)
-        }
-        if(params.clientType == 'Plan Holder') {
-            clientList = Planholder.createCriteria().list(query)
-        }
-        if(params.clientType == 'Beneficiary') {
-            clientList = Beneficiary.createCriteria().list(query)
-        }
+//        if(params.clientType == 'Agent') {
+//            clientList = Agent.createCriteria().list(query)
+//        }
+//        if(params.clientType == 'Plan Holder') {
+//            clientList = Planholder.createCriteria().list(query)
+//        }
+//        if(params.clientType == 'Beneficiary') {
+//            clientList = Beneficiary.createCriteria().list(query)
+//        }
+        clientList = Client.createCriteria().list(query)
         def clientsSelectionList = []
         clientList.each {
             def clientMap = [:]

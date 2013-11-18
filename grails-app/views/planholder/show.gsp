@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list planholder">
 			
-				<g:if test="${planholderInstance?.clientType}">
-				<li class="fieldcontain">
-					<span id="clientType-label" class="property-label"><g:message code="planholder.clientType.label" default="Client Type" /></span>
-					
-						<span class="property-value" aria-labelledby="clientType-label"><g:fieldValue bean="${planholderInstance}" field="clientType"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${planholderInstance?.lastName}">
 				<li class="fieldcontain">
 					<span id="lastName-label" class="property-label"><g:message code="planholder.lastName.label" default="Last Name" /></span>

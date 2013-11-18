@@ -24,7 +24,6 @@ class BeneficiaryController {
 
         def beneficiaryInstance = new Beneficiary(params)
         //validate uniqeness
-        beneficiaryInstance.clientType = 'Beneficiary'
 
         if(beneficiaryInstance.validate()) {
             if(!beneficiaryInstance.validateClientUniqueness()) {
