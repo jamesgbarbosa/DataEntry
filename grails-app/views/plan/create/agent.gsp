@@ -14,7 +14,7 @@
     </ul>
 </div>
 <div id="create-beneficiary" class="content scaffold-create" role="main">
-    <h1>Add Beneficiaries</h1>
+    <h1>Add Agent</h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -52,7 +52,7 @@
         </div>
         <fieldset class="buttons">
             <g:submitButton name="return" event="return" value="Back" />
-            <g:submitButton formaction="create" name="savePlan" event="savePlan" value="Next"/>
+            <g:submitButton formaction="create" name="next" event="next" value="Next"/>
         </fieldset>
     </g:form>
     <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>

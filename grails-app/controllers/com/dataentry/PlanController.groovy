@@ -52,6 +52,7 @@ class PlanController {
                 flow.agentInstance =  new Client(params)
                 flow.planholderInstance =  new Client(params)
                 flow.beneficiaryInstance =  new Client(params)
+                flow.amendments = new ArrayList<Amendment>()
             }
             on('success').to('createPlan')
         }
@@ -63,9 +64,8 @@ class PlanController {
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
                 def beneficiaries = flow.planInstance.beneficiaries
-                def agent = flow.planInstance.agent
                 flow.planInstance = plan
-                flow.planInstance.agent = agent
+                flow.planInstance.agent = flow.agentInstance ? flow.agentInstance : null
                 if(beneficiaries!=null) {
                     flow.planInstance.beneficiaries = beneficiaries
                 }
@@ -77,9 +77,8 @@ class PlanController {
                 plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
                 plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
                 def beneficiaries = flow.planInstance.beneficiaries
-                def agent = flow.agentInstance
                 flow.planInstance = plan
-                flow.planInstance.agent = agent
+                flow.planInstance.agent = flow.agentInstance ? flow.agentInstance : null
                 if(beneficiaries!=null) {
                     flow.planInstance.beneficiaries = beneficiaries
                 }
@@ -146,9 +145,6 @@ class PlanController {
                     flow.planInstance.beneficiaries.add(Client.get(it))
                 }
             }.to("agent")
-
-
-
         }
 
         //State 2a
@@ -180,37 +176,30 @@ class PlanController {
             on("return"){
                 if(params.agent.id) {
                     flow.agentInstance = Client.get(params.agent.id)
+                    flow.planInstance.agent = flow.agentInstance
+                } else {
+                    flow.planInstance.agent = null
                 }
-                flow.planInstance.agent = flow.agentInstance
+
             }.to("beneficiaries")
 
             on("createAgent") {
             }.to("createAgent")
 
-            on('savePlan') {
-//                flow.beneficiaryInstance = new Client()
-//                flow.planInstance.beneficiaries = new ArrayList<Client>()
-//
-//                params.list("benId")?.each {
-//                    flow.planInstance.beneficiaries.add(Client.get(it))
-//                }
-
-                def plan = new Plan(flow.planInstance.properties)
-                def beneficiaries = flow.planInstance.beneficiaries
-                def agent = flow.agentInstance
-                if(beneficiaries) {
-                    plan.beneficiaries = beneficiaries
-                } else {
-                    plan.beneficiaries = null
+            on("next") {
+                if(params.agent.id) {
+                    flow.agentInstance = Client.get(params.agent.id)
+                    flow.planInstance.agent = flow.agentInstance
+                }  else {
+                    flow.planInstance.agent = null
                 }
 
-                if (!plan.save(flush: true)) {
-                    return error()
-                }
-                flow.myMessage = "Plan ${plan?.id} created."
-            }.to('last')
+            }.to("amendments")
+
+
         }
 
+        //State 3a
         createAgent {
             on("return"){
             }.to("agent")
@@ -234,6 +223,41 @@ class PlanController {
                     return error()
                 }
             }.to('agent')
+        }
+
+        //State 4
+        amendments {
+            on("return"){
+//                def amendment = new Amendment(params)
+//                if(!amendment.validate()) {
+//                    return error()
+//                }
+//                def x = params
+//                println x
+            }.to("agent")
+
+
+            on('savePlan') {
+//                flow.beneficiaryInstance = new Client()
+//                flow.planInstance.beneficiaries = new ArrayList<Client>()
+//
+//                params.list("benId")?.each {
+//                    flow.planInstance.beneficiaries.add(Client.get(it))
+//                }
+
+                def plan = new Plan(flow.planInstance.properties)
+                def beneficiaries = flow.planInstance.beneficiaries
+                if(beneficiaries) {
+                    plan.beneficiaries = beneficiaries
+                } else {
+                    plan.beneficiaries = null
+                }
+
+                if (!plan.save(flush: true)) {
+                    return error()
+                }
+                flow.myMessage = "Plan ${plan?.id} created."
+            }.to('last')
         }
 
         //End State

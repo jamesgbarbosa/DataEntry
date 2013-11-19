@@ -1,6 +1,6 @@
 package com.dateentry.reftables
 
-class AmendmentTypes {
+class AmendmentTypes implements Serializable {
     String name
     static constraints = {
     }

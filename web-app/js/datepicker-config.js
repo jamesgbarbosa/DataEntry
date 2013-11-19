@@ -31,6 +31,16 @@ jQuery(document).ready(function($){
         changeYear: true,
         yearRange: "1920:2100"
     });
+     $('#effectiveDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1920:2100"
+        });
+     $('#filingDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1920:2100"
+        });
 
     $("#agent-autocomplete").autocomplete({
         source: function(request, response){
