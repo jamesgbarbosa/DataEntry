@@ -47,25 +47,6 @@ jQuery(document).ready(function($){
         });
     });
 
-
-    $('#addAmendmentButton').click(function(){
-        var amendmentType = $('#amendmentType').val()
-        var approvedBy =  $('#approvedBy').val()
-        var filingDate =  $('#filingDate').val()
-        var effectiveDate =  $('#effectiveDate').val()
-
-        var rowCount = $('#amendments tbody tr').length - 1;
-
-                $('#amendments tr:last').after('<tr>' +
-                    '<td>' + (rowCount + 1) +'</td>' +
-                    '<td>' + "<input type='hidden' class='benId' name='benId' value='amendmentType" + (rowCount + 1) +"' /> " + amendmentType +'</td>' +
-                    '<td>' + "<input type='hidden' class='benId' name='benId' value='approvedBy" + (rowCount + 1) +"' /> "+ approvedBy +'</td>' +
-                    '<td>' + "<input type='hidden' class='benId' name='benId' value='filingDate" + (rowCount + 1) +"' /> "+ filingDate +'</td>' +
-                    '<td>' + "<input type='hidden' class='benId' name='benId' value='approvedBy" + (rowCount + 1) +"' /> "+ approvedBy +'</td>' +
-                    '<td>' + "<input class='deleteAmendmentCB' type='checkbox' name='deleteAmendment'/> " +'</td>' +
-                    '</tr>');
-    });
-
     $('#deleteAmendmentButton').click(function(){
         $("#amendments tbody tr").each(function() {
             var value = $(this).find(".deleteAmendmentCB").prop('checked');

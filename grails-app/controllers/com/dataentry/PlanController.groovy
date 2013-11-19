@@ -228,25 +228,29 @@ class PlanController {
         //State 4
         amendments {
             on("return"){
-//                def amendment = new Amendment(params)
-//                if(!amendment.validate()) {
-//                    return error()
-//                }
-//                def x = params
-//                println x
             }.to("agent")
 
-
+            on("add") {
+                params.filingDate = params.filingDate ? Date.parse( 'MM/dd/yyyy', params.filingDate ) : null
+                params.effectiveDate = params.effectiveDate ? Date.parse( 'MM/dd/yyyy', params.effectiveDate ) : null
+                def amendmentInstance = new Amendment(params)
+                flow.amendmentInstance = amendmentInstance
+                if(amendmentInstance.validate()) {
+                    flow.amendments.add(amendmentInstance)
+                } else {
+                    return error()
+                }
+            }.to("validateAmendment")
             on('savePlan') {
-//                flow.beneficiaryInstance = new Client()
-//                flow.planInstance.beneficiaries = new ArrayList<Client>()
-//
-//                params.list("benId")?.each {
-//                    flow.planInstance.beneficiaries.add(Client.get(it))
-//                }
-
                 def plan = new Plan(flow.planInstance.properties)
                 def beneficiaries = flow.planInstance.beneficiaries
+                def amendments = flow.amendments
+
+                amendments.each {
+                    it.save(flush: true)
+                    plan.addToAmendments(it)
+                }
+
                 if(beneficiaries) {
                     plan.beneficiaries = beneficiaries
                 } else {
@@ -259,6 +263,17 @@ class PlanController {
                 flow.myMessage = "Plan ${plan?.id} created."
             }.to('last')
         }
+        //Action
+        validateAmendment {
+            action {
+                []
+            }
+            on("success").to "amendments"
+            on("error").to "amendments"
+            on(Exception).to "agent"
+        }
+
+
 
         //End State
         last {
