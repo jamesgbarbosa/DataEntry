@@ -165,7 +165,7 @@
                         <span id="agent-label" class="property-label"><g:message code="plan.beneficiary.label" default="Beneficiaries" /></span>
 
                         <g:each in="${planInstance.beneficiaries}" var="a">
-                            <span class="property-value" aria-labelledby="amendments-label"><g:link controller="amendment" action="show" id="${a.id}">${a?.fullName()}</g:link></span>
+                            <span class="property-value" aria-labelledby="amendments-label"><g:link controller="client" action="show" id="${a.id}">${a?.fullName()}</g:link></span>
                         </g:each>
 
                     </li>
@@ -178,7 +178,7 @@
 						<g:each in="${planInstance.amendments}" var="a">
 						<span class="property-value" aria-labelledby="amendments-label"><g:link controller="amendment" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
 						</g:each>
-					
+
 				</li>
 				</g:if>
 			

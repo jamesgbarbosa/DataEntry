@@ -64,7 +64,7 @@ jQuery(document).ready(function($){
         },
         minLength: 1,
         select: function(event, ui) {
-            $("#beneficiary\\.id").val(ui.item.id);
+            $("#beneficiary-autocomplete-id").val(ui.item.id);
         }
     }).focus(function() {
             $(this).autocomplete('search', $(this).val())

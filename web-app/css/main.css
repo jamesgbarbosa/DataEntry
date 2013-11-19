@@ -618,3 +618,7 @@ a.skip {
 * html .ui-autocomplete {
     height: 100px;
 }
+
+.autocomplete-field {
+    width: 300px;
+}

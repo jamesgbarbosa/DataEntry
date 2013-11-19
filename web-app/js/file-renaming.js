@@ -68,31 +68,37 @@ function preview() {
                 "</tr>"
             for (var i = 0; i < fileInput.files.length; i++) {
                 var file = fileInput.files[i];
-                message += "<tr>" +
-                            "<td>"
+
+                var fileName
+
                 if ('name' in file) {
-                    message += file.name + "<br />";
+                    fileName = file.name
                 }
                 else {
-                    message += file.fileName + "<br />";
+                    fileName = file.fileName
                 }
-                message += "</td>"  +
-                            "<td>" +
-                    "<select class = 'docType' id='fileDoctype_"+ (i+1) +"'> "
-                    +"<option value='docx'>docx</option>"
-                    +"<option value='xls'>xls</option>"
-                    +"<option value='odt'>odt</option>"
-                message += "</select>"
-                message += "</td>"
+                if(fileName != ".") {
+                    message += "<tr>" +
+                        "<td>"
+                    message += fileName + "<br />";
+                    message += "</td>"  +
+                        "<td>" +
+                        "<select class = 'docType' id='fileDoctype_"+ (i+1) +"'> "
+                        +"<option value='docx'>docx</option>"
+                        +"<option value='xls'>xls</option>"
+                        +"<option value='odt'>odt</option>"
+                    message += "</select>"
+                    message += "</td>"
 
-                var newFileName = policyNumber + "_docx_" + (i+1)  + "_" + docDate + "." + file.name.split('.').pop()
+                    var newFileName = policyNumber + "_docx_" + (i+1)  + "_" + docDate + "." + file.name.split('.').pop()
 
-                message += "<td>" +
-                           "<div id ='newFilename_" + (i+1) + "'>"  +newFileName  +
-                           "</div>" +
-                           "<input type='hidden' name='hnewFilename_" + (i+1) + "' value='"+ newFileName +"'/>" +
-                           "</td>"
-                message += "</tr>"
+                    message += "<td>" +
+                        "<div id ='newFilename_" + (i+1) + "'>"  +newFileName  +
+                        "</div>" +
+                        "<input type='hidden' name='hnewFilename_" + (i+1) + "' value='"+ newFileName +"'/>" +
+                        "</td>"
+                    message += "</tr>"
+                }
             }
             message+= "<tr><td colspan='3'><input type='submit' name='_action_rename' value='Submit' id='submit-rename'></td></tr>"
             message+= "</table>"
