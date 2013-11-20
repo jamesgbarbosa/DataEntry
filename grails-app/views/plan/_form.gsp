@@ -44,7 +44,7 @@
 		<g:message code="plan.payingPeriod.label" default="Paying Period" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="payingPeriod" type="number" value="${planInstance.payingPeriod}" required=""/>
+	<g:field name="payingPeriod" type="number" value="${planInstance.payingPeriod}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'maturityPeriod', 'error')} required">
@@ -52,7 +52,7 @@
 		<g:message code="plan.maturityPeriod.label" default="Maturity Period" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="maturityPeriod" type="number" value="${planInstance.maturityPeriod}" required=""/>
+	<g:field name="maturityPeriod" type="number" value="${planInstance.maturityPeriod}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'pnpPrice', 'error')} ">
@@ -84,7 +84,7 @@
 		<g:message code="plan.numberOfUnits.label" default="Number Of Units" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="numberOfUnits" type="number" value="${planInstance.numberOfUnits}" required=""/>
+	<g:field name="numberOfUnits" type="number" value="${planInstance.numberOfUnits}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'planStatus', 'error')} ">

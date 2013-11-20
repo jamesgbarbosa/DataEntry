@@ -1,6 +1,6 @@
 
 <%@ page import="com.dataentry.Client" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
@@ -22,7 +22,7 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list client">
-
+			
 				<g:if test="${clientInstance?.lastName}">
 				<li class="fieldcontain">
 					<span id="lastName-label" class="property-label"><g:message code="client.lastName.label" default="Last Name" /></span>
@@ -63,7 +63,7 @@
 				<li class="fieldcontain">
 					<span id="birthdate-label" class="property-label"><g:message code="client.birthdate.label" default="Birthdate" /></span>
 					
-						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${clientInstance?.birthdate}" format="MM/dd/yyyy"  /></span>
+						<span class="property-value" aria-labelledby="birthdate-label"><g:formatDate date="${clientInstance?.birthdate}" /></span>
 					
 				</li>
 				</g:if>
@@ -104,29 +104,29 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${clientInstance?.address4}">
+				<g:if test="${clientInstance?.city}">
 				<li class="fieldcontain">
-					<span id="address4-label" class="property-label"><g:message code="client.address4.label" default="Address4" /></span>
+					<span id="city-label" class="property-label"><g:message code="client.city.label" default="City" /></span>
 					
-						<span class="property-value" aria-labelledby="address4-label"><g:fieldValue bean="${clientInstance}" field="address4"/></span>
+						<span class="property-value" aria-labelledby="city-label"><g:fieldValue bean="${clientInstance}" field="city"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${clientInstance?.address5}">
+				<g:if test="${clientInstance?.province}">
 				<li class="fieldcontain">
-					<span id="address5-label" class="property-label"><g:message code="client.address5.label" default="Address5" /></span>
+					<span id="province-label" class="property-label"><g:message code="client.province.label" default="Province" /></span>
 					
-						<span class="property-value" aria-labelledby="address5-label"><g:fieldValue bean="${clientInstance}" field="address5"/></span>
+						<span class="property-value" aria-labelledby="province-label"><g:fieldValue bean="${clientInstance}" field="province"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${clientInstance?.address6}">
+				<g:if test="${clientInstance?.zipcode}">
 				<li class="fieldcontain">
-					<span id="address6-label" class="property-label"><g:message code="client.address6.label" default="Address6" /></span>
+					<span id="zipcode-label" class="property-label"><g:message code="client.zipcode.label" default="Zipcode" /></span>
 					
-						<span class="property-value" aria-labelledby="address6-label"><g:fieldValue bean="${clientInstance}" field="address6"/></span>
+						<span class="property-value" aria-labelledby="zipcode-label"><g:fieldValue bean="${clientInstance}" field="zipcode"/></span>
 					
 				</li>
 				</g:if>
@@ -161,7 +161,8 @@
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
-                        <g:link class="edit" controller="client" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:hiddenField name="id" value="${clientInstance?.id}" />
+					<g:link class="edit" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

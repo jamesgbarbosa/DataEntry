@@ -8,7 +8,6 @@
     <g:javascript library="jquery"/>
 </head>
     <body>
-        -> ${params}
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -61,7 +60,7 @@
                             <g:message code="amendment.filingDate.label" default="Filing Date" />
                             <span class="required-indicator">*</span>
                         </label>
-                        <g:textField id="filingDate" name="filingDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.filingDate)}" />
+                        <g:textField id="filingDate" name="filingDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.filingDate)}"/>
                     </div>
 
                     </div>

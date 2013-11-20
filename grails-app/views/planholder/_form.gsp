@@ -20,7 +20,7 @@
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="planholder.middleName.label" default="Middle Name" />
-		
+        <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${planholderInstance?.middleName}"/>
 </div>
@@ -74,28 +74,28 @@
 	<g:textField name="address3" value="${planholderInstance?.address3}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'address4', 'error')} ">
-	<label for="address4">
-		<g:message code="planholder.address4.label" default="Address4" />
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'city', 'error')} ">
+	<label for="city">
+		<g:message code="planholder.city.label" default="City" />
 		
 	</label>
-	<g:textField name="address4" value="${planholderInstance?.address4}"/>
+	<g:textField name="city" value="${planholderInstance?.city}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'address5', 'error')} ">
-	<label for="address5">
-		<g:message code="planholder.address5.label" default="Address5" />
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'province', 'error')} ">
+	<label for="province">
+		<g:message code="planholder.province.label" default="Province" />
 		
 	</label>
-	<g:textField name="address5" value="${planholderInstance?.address5}"/>
+	<g:textField name="province" value="${planholderInstance?.province}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'address6', 'error')} ">
-	<label for="address6">
-		<g:message code="planholder.address6.label" default="Address6" />
+<div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'zipcode', 'error')} ">
+	<label for="zipcode">
+		<g:message code="planholder.zipcode.label" default="Zipcode" />
 		
 	</label>
-	<g:textField name="address6" value="${planholderInstance?.address6}"/>
+	<g:textField name="zipcode" value="${planholderInstance?.zipcode}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planholderInstance, field: 'landline', 'error')} ">

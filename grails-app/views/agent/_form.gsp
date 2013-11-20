@@ -1,5 +1,7 @@
 <%@ page import="com.dataentry.Agent" %>
 
+
+
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="agent.lastName.label" default="Last Name" />
@@ -19,7 +21,7 @@
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="agent.middleName.label" default="Middle Name" />
-
+        <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${agentInstance?.middleName}"/>
 </div>
@@ -73,34 +75,34 @@
 	<g:textField name="address3" value="${agentInstance?.address3}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'address4', 'error')} ">
-	<label for="address4">
-		<g:message code="agent.address4.label" default="Address4" />
-
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'city', 'error')} ">
+	<label for="city">
+		<g:message code="agent.city.label" default="City" />
+		
 	</label>
-	<g:textField name="address4" value="${agentInstance?.address4}"/>
+	<g:textField name="city" value="${agentInstance?.city}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'address5', 'error')} ">
-	<label for="address5">
-		<g:message code="agent.address5.label" default="Address5" />
-
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'province', 'error')} ">
+	<label for="province">
+		<g:message code="agent.province.label" default="Province" />
+		
 	</label>
-	<g:textField name="address5" value="${agentInstance?.address5}"/>
+	<g:textField name="province" value="${agentInstance?.province}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'address6', 'error')} ">
-	<label for="address6">
-		<g:message code="agent.address6.label" default="Address6" />
-
+<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'zipcode', 'error')} ">
+	<label for="zipcode">
+		<g:message code="agent.zipcode.label" default="Zipcode" />
+		
 	</label>
-	<g:textField name="address6" value="${agentInstance?.address6}"/>
+	<g:textField name="zipcode" value="${agentInstance?.zipcode}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'landline', 'error')} ">
 	<label for="landline">
 		<g:message code="agent.landline.label" default="Landline" />
-
+		
 	</label>
 	<g:textField name="landline" value="${agentInstance?.landline}"/>
 </div>
@@ -108,7 +110,7 @@
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'mobile', 'error')} ">
 	<label for="mobile">
 		<g:message code="agent.mobile.label" default="Mobile" />
-
+		
 	</label>
 	<g:textField name="mobile" value="${agentInstance?.mobile}"/>
 </div>
@@ -116,7 +118,7 @@
 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'officenumber', 'error')} ">
 	<label for="officenumber">
 		<g:message code="agent.officenumber.label" default="Officenumber" />
-
+		
 	</label>
 	<g:textField name="officenumber" value="${agentInstance?.officenumber}"/>
 </div>
@@ -124,7 +126,7 @@
 %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agentCode', 'error')} ">--}%
 	%{--<label for="agentCode">--}%
 		%{--<g:message code="agent.agentCode.label" default="Agent Code" />--}%
-
+		%{----}%
 	%{--</label>--}%
 	%{--<g:textField name="agentCode" value="${agentInstance?.agentCode}"/>--}%
 %{--</div>--}%
@@ -132,7 +134,7 @@
 %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'position', 'error')} ">--}%
 	%{--<label for="position">--}%
 		%{--<g:message code="agent.position.label" default="Position" />--}%
-
+		%{----}%
 	%{--</label>--}%
 	%{--<g:textField name="position" value="${agentInstance?.position}"/>--}%
 %{--</div>--}%
@@ -140,16 +142,15 @@
 %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'appointmentDate', 'error')} ">--}%
 	%{--<label for="appointmentDate">--}%
 		%{--<g:message code="agent.appointmentDate.label" default="Appointment Date" />--}%
-
+		%{----}%
 	%{--</label>--}%
 	%{--<g:datePicker name="appointmentDate" precision="day"  value="${agentInstance?.appointmentDate}" default="none" noSelection="['': '']" />--}%
-	%{--<g:textField id="appointmentDate" name="appointmentDate" value="${formatDate(format:'MM/dd/yyyy',date:agentInstance?.appointmentDate)}" />--}%
 %{--</div>--}%
 
 %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agency', 'error')} ">--}%
 	%{--<label for="agency">--}%
 		%{--<g:message code="agent.agency.label" default="Agency" />--}%
-
+		%{----}%
 	%{--</label>--}%
 	%{--<g:textField name="agency" value="${agentInstance?.agency}"/>--}%
 %{--</div>--}%
@@ -157,7 +158,7 @@
 %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'groupName', 'error')} ">--}%
 	%{--<label for="groupName">--}%
 		%{--<g:message code="agent.groupName.label" default="Group Name" />--}%
-
+		%{----}%
 	%{--</label>--}%
 	%{--<g:textField name="groupName" value="${agentInstance?.groupName}"/>--}%
 %{--</div>--}%
@@ -165,7 +166,7 @@
 %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'unit', 'error')} ">--}%
 	%{--<label for="unit">--}%
 		%{--<g:message code="agent.unit.label" default="Unit" />--}%
-
+		%{----}%
 	%{--</label>--}%
 	%{--<g:textField name="unit" value="${agentInstance?.unit}"/>--}%
 %{--</div>--}%

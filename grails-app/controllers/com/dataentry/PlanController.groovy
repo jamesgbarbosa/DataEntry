@@ -48,10 +48,10 @@ class PlanController {
 
         init {
             action {
-                flow.planInstance =  new Plan(params)
-                flow.agentInstance =  new Client(params)
-                flow.planholderInstance =  new Client(params)
-                flow.beneficiaryInstance =  new Client(params)
+                flow.planInstance =  new Plan()
+                flow.agentInstance =  new Client()
+                flow.planholderInstance =  new Client()
+                flow.beneficiaryInstance =  new Client()
                 flow.amendments = new ArrayList<Amendment>()
             }
             on('success').to('createPlan')
@@ -59,43 +59,37 @@ class PlanController {
 
         //State 1
         createPlan {
-            on('createPlanHolder'){ Plan plan ->
-                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
-                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
-                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+            on('createPlanHolder'){
+                Plan plan = new Plan()
+                plan.bindParams(params)
                 def beneficiaries = flow.planInstance.beneficiaries
+
+                //Clear errors, cause its not a validation state yet
+                plan.errors = null
                 flow.planInstance = plan
                 flow.planInstance.agent = flow.agentInstance ? flow.agentInstance : null
                 if(beneficiaries!=null) {
                     flow.planInstance.beneficiaries = beneficiaries
                 }
+
                 flow.planholderInstance = new Client()
             }.to('createPlanHolder')
 
-            on('beneficiaries'){ Plan plan ->
-                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
-                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
-                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
-                def beneficiaries = flow.planInstance.beneficiaries
+            on('beneficiaries'){
+
+                Plan plan = new Plan()
+                plan.bindParams(params)
                 flow.planInstance = plan
+                if(!plan.validate()) {
+                    return error()
+                }
+
+                def beneficiaries = flow.planInstance.beneficiaries
                 flow.planInstance.agent = flow.agentInstance ? flow.agentInstance : null
                 if(beneficiaries!=null) {
                     flow.planInstance.beneficiaries = beneficiaries
                 }
             }.to('beneficiaries')
-
-//            on('savePlan') { Plan plan ->
-//                plan.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
-//                plan.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
-//                plan.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
-//                flow.planInstance = plan
-//
-//                if (!plan.save(flush: true)) {
-//                    return error()
-//                }
-//                flow.myMessage = "Plan ${plan?.id} created."
-//            }.to('last')
-
         }
 
         //State  1.a
@@ -104,9 +98,8 @@ class PlanController {
             }.to("createPlan")
 
             on('savePlanHolder'){
-                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
-                def planHolderInstance = new Client(params)
-//                planHolderInstance.clientType = 'Plan Holder'
+                def planHolderInstance = new Client()
+                planHolderInstance.bindParams(params)
                 flow.planholderInstance = planHolderInstance
                 if(planHolderInstance.validate()) {
                     if(!planHolderInstance.validateClientUniqueness()) {
@@ -153,8 +146,8 @@ class PlanController {
             }.to("beneficiaries")
 
             on('saveBeneficiary'){
-                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
-                def beneficiaryInstance = new Client(params)
+                def beneficiaryInstance = new Client()
+                beneficiaryInstance.bindParams(params)
                 flow.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.validate()) {
                     if(!beneficiaryInstance.validateClientUniqueness()) {
@@ -193,10 +186,7 @@ class PlanController {
                 }  else {
                     flow.planInstance.agent = null
                 }
-
             }.to("amendments")
-
-
         }
 
         //State 3a
@@ -205,10 +195,8 @@ class PlanController {
             }.to("agent")
 
             on('saveAgent'){
-                params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
-                params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
-                def agentInstance = new Client(params)
-//                agentInstance.clientType = 'Agent'
+                def agentInstance = new Client()
+                agentInstance.bindParams(params)
                 flow.agentInstance = agentInstance
                 if(agentInstance.validate()) {
                     if(!agentInstance.validateClientUniqueness()) {
@@ -231,9 +219,8 @@ class PlanController {
             }.to("agent")
 
             on("add") {
-                params.filingDate = params.filingDate ? Date.parse( 'MM/dd/yyyy', params.filingDate ) : null
-                params.effectiveDate = params.effectiveDate ? Date.parse( 'MM/dd/yyyy', params.effectiveDate ) : null
-                def amendmentInstance = new Amendment(params)
+                def amendmentInstance = new Amendment()
+                amendmentInstance.bindParams(params)
                 flow.amendmentInstance = amendmentInstance
                 if(amendmentInstance.validate()) {
                     flow.amendments.add(amendmentInstance)
@@ -247,7 +234,7 @@ class PlanController {
                 def amendments = flow.amendments
 
                 amendments.each {
-                    it.save(flush: true)
+                    it.save()
                     plan.addToAmendments(it)
                 }
 
