@@ -23,9 +23,9 @@
             <g:if test="${flash.error}">
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
-			<g:hasErrors bean="${beneficiaryInstance}">
+			<g:hasErrors bean="${beneficiaryInstance?.clientProfile}">
 			<ul class="errors" role="alert">
-				<g:eachError bean="${beneficiaryInstance}" var="error">
+				<g:eachError bean="${beneficiaryInstance.clientProfile}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>

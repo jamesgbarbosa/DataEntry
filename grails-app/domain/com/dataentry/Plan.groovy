@@ -16,10 +16,10 @@ class Plan implements Serializable {
     Date applicableDate
     boolean withInsurance
 
-    Client planHolder
-    Client agent
+    Planholder planHolder
+    Agent agent
 
-    static hasMany = [beneficiaries: Client,amendments: Amendment]
+    static hasMany = [beneficiaries: Beneficiary,amendments: Amendment]
 
     def bindParams(Map params) {
         params.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null

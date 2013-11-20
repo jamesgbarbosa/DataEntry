@@ -146,7 +146,7 @@
 				<li class="fieldcontain">
 					<span id="planHolder-label" class="property-label"><g:message code="plan.planHolder.label" default="Plan Holder" /></span>
 					
-						<span class="property-value" aria-labelledby="planHolder-label"><g:link controller="planholder" action="show" id="${planInstance?.planHolder?.id}">${planInstance?.planHolder?.getFullName()}</g:link></span>
+						<span class="property-value" aria-labelledby="planHolder-label"><g:link controller="planholder" action="show" id="${planInstance?.planHolder?.id}">${planInstance?.planHolder?.clientProfile?.getFullName()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -155,7 +155,7 @@
 				<li class="fieldcontain">
 					<span id="agent-label" class="property-label"><g:message code="plan.agent.label" default="Agent" /></span>
 					
-						<span class="property-value" aria-labelledby="agent-label"><g:link controller="agent" action="show" id="${planInstance?.agent?.id}">${planInstance?.agent?.getFullName()}</g:link></span>
+						<span class="property-value" aria-labelledby="agent-label"><g:link controller="agent" action="show" id="${planInstance?.agent?.id}">${planInstance?.agent?.clientProfile?.getFullName()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -165,7 +165,7 @@
                         <span id="agent-label" class="property-label"><g:message code="plan.beneficiary.label" default="Beneficiaries" /></span>
 
                         <g:each in="${planInstance.beneficiaries}" var="a">
-                            <span class="property-value" aria-labelledby="amendments-label"><g:link controller="client" action="show" id="${a.id}">${a?.fullName()}</g:link></span>
+                            <span class="property-value" aria-labelledby="beneficiaries-label"><g:link controller="client" action="show" id="${a.id}">${a?.clientProfile?.fullName()}</g:link></span>
                         </g:each>
 
                     </li>

@@ -1,13 +1,18 @@
 package com.dataentry
 
-class Agent extends Client {
+class Agent implements Serializable {
 
+    Client clientProfile
     String agentCode
     String position
     Date appointmentDate
     String agency
     String groupName
     String unit
+
+    Agent() {
+        clientProfile = new Client()
+    }
 
     static constraints = {
         agentCode blank:  true, nullable:  true
@@ -16,9 +21,7 @@ class Agent extends Client {
         agency blank:  true, nullable:  true
         groupName blank:  true, nullable:  true
         unit blank:  true, nullable:  true
+        clientProfile: nullable: false
     }
 
-    String toString() {
-        "${firstName} ${lastName}"
-    }
 }

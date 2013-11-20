@@ -26,6 +26,11 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
+            <g:if test="${duplicateClientError!=""}">
+                <ul class="errors" role="alert">
+                    <li>${duplicateClientError} </li>
+                </ul>
+            </g:if>
 			<g:form action="create" >
 				<fieldset class="form">
 					<g:render template="form"/>
