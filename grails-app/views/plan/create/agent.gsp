@@ -23,15 +23,23 @@
     </g:if>
     <g:form action="create" >
         <div class="fieldcontain">
-            <label for="agent">
-                Agent
-            </label>
+
+
+                    <g:eachError bean="${agentInstance}" var="error">
+                       <ul class="errors" role="alert">
+                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                       </ul>
+                    </g:eachError>
+
+                <label for="agent">
+                    Agent
+                </label>
+
                 %{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${agentInstance?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
                 <g:textField class='autocomplete-field' name="agent-autocomplete" value="${agentInstance?.clientProfile?.firstName!=null ? agentInstance?.clientProfile?.fullName() : ''}" placeholder="Search a client..."/>
                 <g:hiddenField name="agent.id" value="${agentInstance?.clientProfile?.id}"/>
                 %{--<g:link controller="agent" action="create" params="['plan.id': planInstance?.id]">Create an agent</g:link>--}%
                 <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create"/>
-
 
                 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agentCode', 'error')} ">
                     <label for="agentCode">
