@@ -2,123 +2,140 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'lastName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'lastName', 'error')} ">
 	<label for="lastName">
 		<g:message code="beneficiary.lastName.label" default="Last Name" />
-		
-	</label>
-	<g:textField name="lastName" value="${beneficiaryInstance?.lastName}"/>
+        <span class="required-indicator">*</span>
+    </label>
+	<g:textField name="lastName" value="${beneficiaryInstance?.clientProfile?.lastName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'firstName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'firstName', 'error')} ">
 	<label for="firstName">
 		<g:message code="beneficiary.firstName.label" default="First Name" />
-		
-	</label>
-	<g:textField name="firstName" value="${beneficiaryInstance?.firstName}"/>
+        <span class="required-indicator">*</span>
+    </label>
+	<g:textField name="firstName" value="${beneficiaryInstance?.clientProfile?.firstName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'middleName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="beneficiary.middleName.label" default="Middle Name" />
-		
+        <span class="required-indicator">*</span>
 	</label>
-	<g:textField name="middleName" value="${beneficiaryInstance?.middleName}"/>
+	<g:textField name="middleName" value="${beneficiaryInstance?.clientProfile?.middleName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'gender', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'gender', 'error')} required">
 	<label for="gender">
 		<g:message code="beneficiary.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="gender" from="${beneficiaryInstance.constraints.gender.inList}" required="" value="${beneficiaryInstance?.gender}" valueMessagePrefix="beneficiary.gender"/>
+	<g:select name="gender" from="${beneficiaryInstance?.clientProfile.constraints.gender.inList}" required="" value="${beneficiaryInstance?.clientProfile?.gender}" valueMessagePrefix="beneficiary.gender"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'birthdate', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'birthdate', 'error')} required">
 	<label for="birthdate">
 		<g:message code="beneficiary.birthdate.label" default="Birthdate" />
 		<span class="required-indicator">*</span>
 	</label>
-    <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:beneficiaryInstance?.birthdate)}" />
+    <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:beneficiaryInstance?.clientProfile?.birthdate)}" />
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'email', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'email', 'error')} ">
 	<label for="email">
 		<g:message code="beneficiary.email.label" default="Email" />
 		
 	</label>
-	<g:textField name="email" value="${beneficiaryInstance?.email}"/>
+	<g:textField name="email" value="${beneficiaryInstance?.clientProfile?.email}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'address1', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'address1', 'error')} ">
 	<label for="address1">
 		<g:message code="beneficiary.address1.label" default="Address1" />
 		
 	</label>
-	<g:textField name="address1" value="${beneficiaryInstance?.address1}"/>
+	<g:textField name="address1" value="${beneficiaryInstance?.clientProfile?.address1}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'address2', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'address2', 'error')} ">
 	<label for="address2">
 		<g:message code="beneficiary.address2.label" default="Address2" />
 		
 	</label>
-	<g:textField name="address2" value="${beneficiaryInstance?.address2}"/>
+	<g:textField name="address2" value="${beneficiaryInstance?.clientProfile?.address2}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'address3', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'address3', 'error')} ">
 	<label for="address3">
 		<g:message code="beneficiary.address3.label" default="Address3" />
 		
 	</label>
-	<g:textField name="address3" value="${beneficiaryInstance?.address3}"/>
+	<g:textField name="address3" value="${beneficiaryInstance?.clientProfile?.address3}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'address4', 'error')} ">
-	<label for="address4">
-		<g:message code="beneficiary.address4.label" default="Address4" />
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'city', 'error')} ">
+	<label for="city">
+		<g:message code="beneficiary.city.label" default="City" />
 		
 	</label>
-	<g:textField name="address4" value="${beneficiaryInstance?.address4}"/>
+	<g:textField name="city" value="${beneficiaryInstance?.clientProfile?.city}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'address5', 'error')} ">
-	<label for="address5">
-		<g:message code="beneficiary.address5.label" default="Address5" />
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'province', 'error')} ">
+	<label for="province">
+		<g:message code="beneficiary.province.label" default="Province" />
 		
 	</label>
-	<g:textField name="address5" value="${beneficiaryInstance?.address5}"/>
+	<g:textField name="province" value="${beneficiaryInstance?.clientProfile?.province}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'address6', 'error')} ">
-	<label for="address6">
-		<g:message code="beneficiary.address6.label" default="Address6" />
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'zipcode', 'error')} ">
+	<label for="zipcode">
+		<g:message code="beneficiary.zipcode.label" default="Zipcode" />
 		
 	</label>
-	<g:textField name="address6" value="${beneficiaryInstance?.address6}"/>
+	<g:textField name="zipcode" value="${beneficiaryInstance?.clientProfile?.zipcode}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'landline', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'landline', 'error')} ">
 	<label for="landline">
 		<g:message code="beneficiary.landline.label" default="Landline" />
 		
 	</label>
-	<g:textField name="landline" value="${beneficiaryInstance?.landline}"/>
+	<g:textField name="landline" value="${beneficiaryInstance?.clientProfile?.landline}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'mobile', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'mobile', 'error')} ">
 	<label for="mobile">
 		<g:message code="beneficiary.mobile.label" default="Mobile" />
 		
 	</label>
-	<g:textField name="mobile" value="${beneficiaryInstance?.mobile}"/>
+	<g:textField name="mobile" value="${beneficiaryInstance?.clientProfile?.mobile}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'officenumber', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'officenumber', 'error')} ">
 	<label for="officenumber">
 		<g:message code="beneficiary.officenumber.label" default="Officenumber" />
 		
 	</label>
-	<g:textField name="officenumber" value="${beneficiaryInstance?.officenumber}"/>
+	<g:textField name="officenumber" value="${beneficiaryInstance?.clientProfile?.officenumber}"/>
 </div>
+
+%{--<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'designation', 'error')} ">--}%
+	%{--<label for="designation">--}%
+		%{--<g:message code="beneficiary.designation.label" default="Designation" />--}%
+		%{----}%
+	%{--</label>--}%
+	%{--<g:textField name="designation" value="${beneficiaryInstance?.clientProfile?.designation}"/>--}%
+%{--</div>--}%
+
+%{--<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'relationship', 'error')} ">--}%
+	%{--<label for="relationship">--}%
+		%{--<g:message code="beneficiary.relationship.label" default="Relationship" />--}%
+		%{----}%
+	%{--</label>--}%
+	%{--<g:textField name="relationship" value="${beneficiaryInstance?.clientProfile?.relationship}"/>--}%
+%{--</div>--}%
+

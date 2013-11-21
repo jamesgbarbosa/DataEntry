@@ -26,26 +26,61 @@
             <label for="agent">
                 Agent
             </label>
-                %{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${planInstance?.agent?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-                <g:textField class='autocomplete-field' name="agent-autocomplete" value="${planInstance?.agent?.firstName!=null ? planInstance?.agent?.fullName() : ''}" placeholder="Search a client..."/>
-                <g:hiddenField name="agent.id" value="${planInstance?.agent?.id}"/>
+                %{--<g:select id="agent" name="agent.id" from="${com.dataentry.Agent.list()}" optionKey="id" value="${agentInstance?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
+                <g:textField class='autocomplete-field' name="agent-autocomplete" value="${agentInstance?.clientProfile?.firstName!=null ? agentInstance?.clientProfile?.fullName() : ''}" placeholder="Search a client..."/>
+                <g:hiddenField name="agent.id" value="${agentInstance?.clientProfile?.id}"/>
                 %{--<g:link controller="agent" action="create" params="['plan.id': planInstance?.id]">Create an agent</g:link>--}%
                 <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create"/>
 
 
-            %{--<div class="fieldcontain">--}%
-                %{--<label for="designation">--}%
-                    %{--<g:message code="beneficiary.designation.label" default="Designation" />--}%
-                %{--</label>--}%
-                %{--<g:textField id="designation" name="designation"/>--}%
-            %{--</div>--}%
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agentCode', 'error')} ">
+                    <label for="agentCode">
+                        <g:message code="agent.agentCode.label" default="Agent Code" />
 
-            %{--<div class="fieldcontain">--}%
-                %{--<label for="relationship">--}%
-                    %{--<g:message code="beneficiary.relationship.label" default="Relationship" />--}%
-                %{--</label>--}%
-                %{--<g:textField id="relationship" name="relationship"/>--}%
-            %{--</div>--}%
+                    </label>
+                    <g:textField name="agentCode" value="${agentInstance?.agentCode}"/>
+                </div>
+
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'position', 'error')} ">
+                    <label for="position">
+                        <g:message code="agent.position.label" default="Position" />
+
+                    </label>
+                    <g:textField name="position" value="${agentInstance?.position}"/>
+                </div>
+
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'appointmentDate', 'error')} ">
+                    <label for="appointmentDate">
+                        <g:message code="agent.appointmentDate.label" default="Appointment Date" />
+
+                    </label>
+                    <g:datePicker name="appointmentDate" precision="day"  value="${agentInstance?.appointmentDate}" default="none" noSelection="['': '']" />
+                </div>
+
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agency', 'error')} ">
+                    <label for="agency">
+                        <g:message code="agent.agency.label" default="Agency" />
+
+                    </label>
+                    <g:textField name="agency" value="${agentInstance?.agency}"/>
+                </div>
+
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'groupName', 'error')} ">
+                    <label for="groupName">
+                        <g:message code="agent.groupName.label" default="Group Name" />
+
+                    </label>
+                    <g:textField name="groupName" value="${agentInstance?.groupName}"/>
+                </div>
+
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'unit', 'error')} ">
+                    <label for="unit">
+                        <g:message code="agent.unit.label" default="Unit" />
+
+                    </label>
+                    <g:textField name="unit" value="${agentInstance?.unit}"/>
+                </div>
+
             <br>
             <hr>
 

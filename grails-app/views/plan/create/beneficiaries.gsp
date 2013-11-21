@@ -7,6 +7,7 @@
     <title><g:message code="default.create.label" args="[entityName]" /></title>
     <g:javascript library="jquery"/>
 </head>
+
     <body>
         <div class="nav" role="navigation">
             <ul>
@@ -22,12 +23,18 @@
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
             <g:form action="create" >
+                <g:if test="${duplicateClientError!=""}">
+                    <ul class="errors" role="alert">
+                        <li>${duplicateClientError} </li>
+                    </ul>
+                </g:if>
                 <div class="fieldcontain">
                     <label for="beneficiary">
                         Beneficiary
                     </label>
-                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance.firstName!=null ? beneficiaryInstance?.fullName() : ""}" placeholder="Search a client..."/>
-                    <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.id}"/>
+
+                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName!=null ? beneficiaryInstance?.clientProfile?.fullName() : ""}" placeholder="Search a client..."/>
+                    <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.clientProfile?.id}"/>
                     <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
 
                     <div class="fieldcontain">
@@ -65,12 +72,12 @@
                         <tbody>
                             <tr>
                             </tr>
-                            <g:each in="${planInstance?.beneficiaries}" status="i" var="beneficiary">
+                            <g:each in="${beneficiaries}" status="i" var="beneficiary">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                                    <td>${i+1} <input type='hidden' class='benId' name='benId' value='${beneficiary?.id}' /> </td>
+                                    <td>${i+1} <input type='hidden' class='benId' name='benId' value='${beneficiary?.clientProfile?.id}' /> </td>
 
-                                    <td>${beneficiary?.fullName()}</td>
+                                    <td>${beneficiary?.clientProfile?.fullName()}</td>
 
                                     <td></td>
 
@@ -83,7 +90,7 @@
                     </table>
                 </div>
                 <fieldset class="buttons">
-                    <input type="button" value="Add" id="addBeneficiaryButton"/>
+                    <g:submitButton name="add" event="add" value="Add" />
                     <input type="button" value="Delete" id="deleteBeneficiaryButton"/>
                 </fieldset>
             </g:form>

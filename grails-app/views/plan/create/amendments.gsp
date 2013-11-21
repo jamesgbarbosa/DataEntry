@@ -21,10 +21,17 @@
             <g:if test="${flash.error}">
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
+            <g:hasErrors bean="${amendmentInstance}">
+                <ul class="errors" role="alert">
+                    <g:eachError bean="${amendmentInstance}" var="error">
+                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                    </g:eachError>
+                </ul>
+            </g:hasErrors>
             <g:form name="amendmentForm" action="create">
                 <div class="fieldcontain">
 
-                    <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'amendmentType', 'error')} ">
+                    <div id="amendmentField" class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'amendmentType', 'error')} ">
                         <label for="amendmentType">
                             <g:message code="amendment.amendmentType.label" default="Amendment Type" />
 
@@ -32,7 +39,7 @@
                         <select:amendmentTypes  name="amendmentType" value="${amendmentInstance?.amendmentType}"/>
                     </div>
 
-                    <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'approvedBy', 'error')} ">
+                    <div id="approvedByField"class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'approvedBy', 'error')} ">
                         <label for="approvedBy">
                             <g:message code="amendment.approvedBy.label" default="Approved By" />
 
@@ -53,7 +60,7 @@
                             <g:message code="amendment.filingDate.label" default="Filing Date" />
                             <span class="required-indicator">*</span>
                         </label>
-                        <g:textField id="filingDate" name="filingDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.filingDate)}" />
+                        <g:textField id="filingDate" name="filingDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.filingDate)}"/>
                     </div>
 
                     </div>
@@ -100,8 +107,10 @@
                     </table>
                 </div>
                 <fieldset class="buttons">
-                    <input type="button" value="Add" id="addAmendmentButton"/>
+                    %{--<input type="button" value="Add" id="addAmendmentButton"/>--}%
+                    <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
                     <input type="button" value="Delete" id="deleteAmendmentButton"/>
+
                 </fieldset>
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>

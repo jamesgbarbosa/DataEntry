@@ -26,6 +26,11 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
+            <g:if test="${duplicateClientError!=""}">
+                <ul class="errors" role="alert">
+                    <li>${duplicateClientError} </li>
+                </ul>
+            </g:if>
 			<g:form action="create" >
 				<fieldset class="form">
 					<g:render template="form"/>
@@ -33,8 +38,7 @@
 				<fieldset class="buttons">
                     %{--TODO fixed this. make this work!--}%
 					%{--<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />--}%
-                    <g:submitButton formaction="create" name="savePlan" event="savePlan" value="Create"/>
-                    <g:submitButton name="beneficiaries" event="beneficiaries" value="Next Page" />
+                    <g:submitButton name="beneficiaries" event="beneficiaries" value="Next" />
 
                 </fieldset>
 			</g:form>

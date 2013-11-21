@@ -1,11 +1,15 @@
 package com.dataentry
 
-class Planholder extends Client {
+class Planholder implements Serializable {
+
+    Client clientProfile
+
+    Planholder() {
+        clientProfile = new Client()
+    }
 
     static constraints = {
+        clientProfile: nullable: false
     }
 
-    String toString() {
-        "${firstName} ${lastName}"
-    }
 }

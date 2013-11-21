@@ -30,26 +30,26 @@ class BootStrap {
 
 
 
-        new Client(firstName: 'Agent1', lastName: 'test' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Agent2', lastName: 'apple' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Agent3', lastName: 'hello' , birthdate: new Date(), gender: 'Male' ).save(flush: true, failOnError: true)
-        new Client(firstName: 'Agent4', lastName: 'orange' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Agent5', lastName: 'red' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Agent6', lastName: 'blue' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent1', lastName: 'test' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent2', lastName: 'apple' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent3', lastName: 'hello' ,middleName: 'X' , birthdate: new Date(), gender: 'Male' ).save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent4', lastName: 'orange' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent5', lastName: 'red' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Agent6', lastName: 'blue' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
 
-        new Client(firstName: 'John', lastName: 'test' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'James', lastName: 'apple' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Edward', lastName: 'hello' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Richard', lastName: 'orange' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Ben', lastName: 'red' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-        new Client(firstName: 'Michael', lastName: 'blue' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'John', lastName: 'test' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'James', lastName: 'apple' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Edward', lastName: 'hello' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Richard', lastName: 'orange' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Ben', lastName: 'red' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+        new Client(firstName: 'Michael', lastName: 'blue' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
 
-        new Client(firstName: 'Diana', lastName: 'test' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
-        new Client(firstName: 'Rona', lastName: 'apple' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
-        new Client(firstName: 'Angelica', lastName: 'hello' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
-        new Client(firstName: 'Elena', lastName: 'orange' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
-        new Client(firstName: 'Zafina', lastName: 'red' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
-        new Client(firstName: 'Anne', lastName: 'blue' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Diana', lastName: 'test' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Rona', lastName: 'apple' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Angelica', lastName: 'hello' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Elena', lastName: 'orange' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Zafina', lastName: 'red' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+        new Client(firstName: 'Anne', lastName: 'blue' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
 
     }
     def destroy = {

@@ -9,15 +9,21 @@ class Client implements Serializable {
     String address1
     String address2
     String address3
-    String address4
-    String address5
-    String address6
+    String city
+    String province
+    String zipcode
     String landline
     String mobile
     String officenumber
     String email
     String gender
     String fullName
+
+    def bindParams(Map params) {
+        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
+//        params.appointmentDate = params.appointmentDate ? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : null
+        this.properties = params
+    }
 
     def beforeInsert = {
         firstName = firstName?.toUpperCase()
@@ -37,16 +43,16 @@ class Client implements Serializable {
     static constraints = {
         lastName blank:  false, nullable:  false
         firstName blank:  false, nullable:  false
-        middleName blank:  true, nullable:  true
+        middleName blank:  false, nullable:  false
         gender blank:  false, nullable:  false, inList: ['Male','Female']
         birthdate blank:  false, nullable:  false
         email blank:  true, nullable:  true
         address1 blank:  true, nullable:  true
         address2 blank:  true, nullable:  true
         address3 blank:  true, nullable:  true
-        address4 blank:  true, nullable:  true
-        address5 blank:  true, nullable:  true
-        address6 blank:  true, nullable:  true
+        city blank:  true, nullable:  true
+        province blank:  true, nullable:  true
+        zipcode blank:  true, nullable:  true
         landline blank:  true, nullable:  true
         mobile blank:  true, nullable:  true
         officenumber blank:  true, nullable:  true

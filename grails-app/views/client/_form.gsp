@@ -1,5 +1,7 @@
 <%@ page import="com.dataentry.Client" %>
 
+
+
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="client.lastName.label" default="Last Name" />
@@ -19,7 +21,7 @@
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="client.middleName.label" default="Middle Name" />
-		
+        <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${clientInstance?.middleName}"/>
 </div>
@@ -72,28 +74,28 @@
 	<g:textField name="address3" value="${clientInstance?.address3}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'address4', 'error')} ">
-	<label for="address4">
-		<g:message code="client.address4.label" default="Address4" />
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'city', 'error')} ">
+	<label for="city">
+		<g:message code="client.city.label" default="City" />
 		
 	</label>
-	<g:textField name="address4" value="${clientInstance?.address4}"/>
+	<g:textField name="city" value="${clientInstance?.city}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'address5', 'error')} ">
-	<label for="address5">
-		<g:message code="client.address5.label" default="Address5" />
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'province', 'error')} ">
+	<label for="province">
+		<g:message code="client.province.label" default="Province" />
 		
 	</label>
-	<g:textField name="address5" value="${clientInstance?.address5}"/>
+	<g:textField name="province" value="${clientInstance?.province}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'address6', 'error')} ">
-	<label for="address6">
-		<g:message code="client.address6.label" default="Address6" />
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'zipcode', 'error')} ">
+	<label for="zipcode">
+		<g:message code="client.zipcode.label" default="Zipcode" />
 		
 	</label>
-	<g:textField name="address6" value="${clientInstance?.address6}"/>
+	<g:textField name="zipcode" value="${clientInstance?.zipcode}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'landline', 'error')} ">

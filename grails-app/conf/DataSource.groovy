@@ -1,3 +1,5 @@
+import org.hibernate.dialect.Dialect
+
 dataSource {
     pooled = true
     driverClassName = "org.h2.Driver"
@@ -18,7 +20,11 @@ environments {
             dbCreate = "create-drop" // one of 'create', 'create-drop','update'
             url = "jdbc:mysql://localhost/dataentry"
             username = "root"
-            password = "root"
+            password = ""
+//            url = "jdbc:postgresql://localhost:5432/dataentry"
+//            username = "postgres"
+//            password = "postgres"
+//            dialect = com.dataentry.TableNamePostgresDialect
         }
     }
     test {

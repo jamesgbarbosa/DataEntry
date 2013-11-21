@@ -12,19 +12,19 @@
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'product', 'error')} ">
 	<label for="product">
 		<g:message code="plan.product.label" default="Product" />
-		
+
 	</label>
 	<select:product value="${planInstance?.product}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'planHolder', 'error')} ">
+<div class="fieldcontain ${duplicateClientError!='' ? 'error' : ''} ">
     <label for="planHolder">
         <g:message code="plan.planHolder.label" default="Plan Holder" />
 
     </label>
     %{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-    <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planInstance?.planHolder?.fullName()}" placeholder="Search a client..."/>
-    <g:hiddenField name="planHolder.id" value="${planInstance?.planHolder?.id}"/>
+    <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planholderInstance?.clientProfile?.firstName? planholderInstance?.clientProfile?.fullName() : ""}" placeholder="Search a client..."/>
+    <g:hiddenField name="planHolder.id" value="${planholderInstance?.clientProfile?.id}"/>
 
     <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create"/>
 </div>
@@ -44,7 +44,7 @@
 		<g:message code="plan.payingPeriod.label" default="Paying Period" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="payingPeriod" type="number" value="${planInstance.payingPeriod}" required=""/>
+	<g:field name="payingPeriod" type="number" value="${planInstance.payingPeriod}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'maturityPeriod', 'error')} required">
@@ -52,13 +52,13 @@
 		<g:message code="plan.maturityPeriod.label" default="Maturity Period" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="maturityPeriod" type="number" value="${planInstance.maturityPeriod}" required=""/>
+	<g:field name="maturityPeriod" type="number" value="${planInstance.maturityPeriod}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'pnpPrice', 'error')} ">
 	<label for="pnpPrice">
 		<g:message code="plan.pnpPrice.label" default="Pnp Price" />
-		
+
 	</label>
 	<g:field name="pnpPrice" value="${fieldValue(bean: planInstance, field: 'pnpPrice')}"/>
 </div>
@@ -74,7 +74,7 @@
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'modalInstallment', 'error')} ">
 	<label for="modalInstallment">
 		<g:message code="plan.modalInstallment.label" default="Modal Installment" />
-		
+
 	</label>
 	<g:field name="modalInstallment" value="${fieldValue(bean: planInstance, field: 'modalInstallment')}"/>
 </div>
@@ -84,7 +84,7 @@
 		<g:message code="plan.numberOfUnits.label" default="Number Of Units" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="numberOfUnits" type="number" value="${planInstance.numberOfUnits}" required=""/>
+	<g:field name="numberOfUnits" type="number" value="${planInstance.numberOfUnits}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'planStatus', 'error')} ">
@@ -115,7 +115,7 @@
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'withInsurance', 'error')} ">
 	<label for="withInsurance">
 		Make Insurance
-		
+
 	</label>
 	%{--<g:checkBox name="withInsurance" value="${planInstance?.withInsurance}" />--}%
 	<g:select name="withInsurance" value="${planInstance?.withInsurance}" optionKey= "value" optionValue="key" from="${['Y':true, 'N':false]}" />

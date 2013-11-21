@@ -4,11 +4,11 @@ class Plan implements Serializable {
 
     String planNumber
     String product
-    int payingPeriod
-    int maturityPeriod
+    String payingPeriod
+    String maturityPeriod
     BigDecimal pnpPrice
     BigDecimal modalInstallment
-    int numberOfUnits
+    String numberOfUnits
     Date origIssueDate
     Date currentIssueDate
     String paymentMode
@@ -16,19 +16,26 @@ class Plan implements Serializable {
     Date applicableDate
     boolean withInsurance
 
-    Client planHolder
-    Client agent
+    Planholder planHolder
+    Agent agent
 
-    static hasMany = [beneficiaries: Client,amendments: Amendment]
+    static hasMany = [beneficiaries: Beneficiary,amendments: Amendment]
+
+    def bindParams(Map params) {
+        params.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
+        params.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
+        params.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+        this.properties = params
+    }
 
     static constraints = {
         planNumber blank:  true, nullable:  true
         product blank:  true, nullable:  true
-        payingPeriod blank:  true, nullable:  true
-        maturityPeriod blank:  true, nullable:  true
+        payingPeriod blank:  true, nullable:  true, matches: numeric()
+        maturityPeriod blank:  true, nullable:  true, matches: numeric()
         pnpPrice blank:  true, nullable:  true
         modalInstallment blank:  true, nullable:  true
-        numberOfUnits blank:  true, nullable:  true
+        numberOfUnits blank:  true, nullable:  true, matches: numeric()
         origIssueDate blank:  true, nullable:  true
         currentIssueDate blank:  true, nullable:  true
         paymentMode blank:  true, nullable:  true
@@ -39,6 +46,10 @@ class Plan implements Serializable {
         agent nullable:  true
         beneficiaries nullable: true
         amendments nullable: true
+    }
+
+    public static String numeric() {
+        return "^[0-9]+\$"
     }
 
     String toString() {
