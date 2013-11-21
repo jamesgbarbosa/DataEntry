@@ -18,9 +18,9 @@ class Agent implements Serializable {
         agentCode blank:  false, nullable:  false
         position blank:  true, nullable:  true
         appointmentDate blank:  true, nullable:  true
-        agency blank:  true, nullable:  true
-        groupName blank:  true, nullable:  true
-        unit blank:  true, nullable:  true
+        agency blank:  false, nullable:  false
+        groupName blank:  false, nullable:  false
+        unit blank:  false, nullable:  false
         clientProfile: nullable: false
     }
 
