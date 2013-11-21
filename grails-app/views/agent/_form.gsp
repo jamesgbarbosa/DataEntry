@@ -2,123 +2,123 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'lastName', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="agent.lastName.label" default="Last Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="lastName" value="${agentInstance?.clientProfile?.lastName}"/>
+	<g:textField name="lastName" value="${createAgentDto?.clientProfile?.lastName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'firstName', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'firstName', 'error')} required">
 	<label for="firstName">
 		<g:message code="agent.firstName.label" default="First Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" value="${agentInstance?.clientProfile?.firstName}"/>
+	<g:textField name="firstName" value="${createAgentDto?.clientProfile?.firstName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'middleName', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="agent.middleName.label" default="Middle Name" />
         <span class="required-indicator">*</span>
 	</label>
-	<g:textField name="middleName" value="${agentInstance?.clientProfile?.middleName}"/>
+	<g:textField name="middleName" value="${createAgentDto?.clientProfile?.middleName}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'gender', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'gender', 'error')} required">
 	<label for="gender">
 		<g:message code="agent.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="gender" from="${agentInstance?.clientProfile?.constraints?.gender?.inList}" required="" value="${agentInstance?.clientProfile?.gender}" valueMessagePrefix="agent.gender"/>
+	<g:select name="gender" from="${createAgentDto?.clientProfile?.constraints?.gender?.inList}" required="" value="${createAgentDto?.clientProfile?.gender}" valueMessagePrefix="agent.gender"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'birthdate', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'birthdate', 'error')} required">
 	<label for="birthdate">
 		<g:message code="agent.birthdate.label" default="Birthdate" />
 		<span class="required-indicator">*</span>
 	</label>
-	%{--<g:datePicker name="birthdate" precision="day"  value="${agentInstance?.clientProfile?.birthdate}"  />--}%
-	<g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:agentInstance?.clientProfile?.birthdate)}" />
+	%{--<g:datePicker name="birthdate" precision="day"  value="${createAgentDto?.clientProfile?.birthdate}"  />--}%
+	<g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:createAgentDto?.clientProfile?.birthdate)}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'email', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'email', 'error')} ">
 	<label for="email">
 		<g:message code="agent.email.label" default="Email" />
 
 	</label>
-	<g:textField name="email" value="${agentInstance?.clientProfile?.email}"/>
+	<g:textField name="email" value="${createAgentDto?.clientProfile?.email}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'address1', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'address1', 'error')} ">
 	<label for="address1">
 		<g:message code="agent.address1.label" default="Address1" />
 
 	</label>
-	<g:textField name="address1" value="${agentInstance?.clientProfile?.address1}"/>
+	<g:textField name="address1" value="${createAgentDto?.clientProfile?.address1}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'address2', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'address2', 'error')} ">
 	<label for="address2">
 		<g:message code="agent.address2.label" default="Address2" />
 
 	</label>
-	<g:textField name="address2" value="${agentInstance?.clientProfile?.address2}"/>
+	<g:textField name="address2" value="${createAgentDto?.clientProfile?.address2}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'address3', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'address3', 'error')} ">
 	<label for="address3">
 		<g:message code="agent.address3.label" default="Address3" />
 
 	</label>
-	<g:textField name="address3" value="${agentInstance?.clientProfile?.address3}"/>
+	<g:textField name="address3" value="${createAgentDto?.clientProfile?.address3}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'city', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'city', 'error')} ">
 	<label for="city">
 		<g:message code="agent.city.label" default="City" />
 		
 	</label>
-	<g:textField name="city" value="${agentInstance?.clientProfile?.city}"/>
+	<g:textField name="city" value="${createAgentDto?.clientProfile?.city}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'province', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'province', 'error')} ">
 	<label for="province">
 		<g:message code="agent.province.label" default="Province" />
 		
 	</label>
-	<g:textField name="province" value="${agentInstance?.clientProfile?.province}"/>
+	<g:textField name="province" value="${createAgentDto?.clientProfile?.province}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'zipcode', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'zipcode', 'error')} ">
 	<label for="zipcode">
 		<g:message code="agent.zipcode.label" default="Zipcode" />
 		
 	</label>
-	<g:textField name="zipcode" value="${agentInstance?.clientProfile?.zipcode}"/>
+	<g:textField name="zipcode" value="${createAgentDto?.clientProfile?.zipcode}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'landline', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'landline', 'error')} ">
 	<label for="landline">
 		<g:message code="agent.landline.label" default="Landline" />
 		
 	</label>
-	<g:textField name="landline" value="${agentInstance?.clientProfile?.landline}"/>
+	<g:textField name="landline" value="${createAgentDto?.clientProfile?.landline}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'mobile', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'mobile', 'error')} ">
 	<label for="mobile">
 		<g:message code="agent.mobile.label" default="Mobile" />
 		
 	</label>
-	<g:textField name="mobile" value="${agentInstance?.clientProfile?.mobile}"/>
+	<g:textField name="mobile" value="${createAgentDto?.clientProfile?.mobile}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: agentInstance?.clientProfile, field: 'officenumber', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'officenumber', 'error')} ">
 	<label for="officenumber">
 		<g:message code="agent.officenumber.label" default="Officenumber" />
 		
 	</label>
-	<g:textField name="officenumber" value="${agentInstance?.clientProfile?.officenumber}"/>
+	<g:textField name="officenumber" value="${createAgentDto?.clientProfile?.officenumber}"/>
 </div>

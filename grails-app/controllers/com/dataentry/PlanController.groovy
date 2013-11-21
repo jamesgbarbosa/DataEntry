@@ -63,6 +63,10 @@ class PlanController {
                 flow.planInstance =  new Plan()
                 flow.agentInstance =  new Agent()
                 flow.planholderInstance =  new Planholder()
+
+                flow.createPlanHolderDto = new Planholder()
+                flow.createAgentDto = new Agent()
+
                 flow.beneficiaries =  new ArrayList<Beneficiary>()
                 flow.amendments = new ArrayList<Amendment>()
                 flow.duplicateClientError = ""
@@ -76,6 +80,8 @@ class PlanController {
         createPlan {
             on('createPlanHolder'){
                 flow.duplicateClientError = ""
+                flow.createPlanHolderDto = new Planholder()
+
                 Planholder planHolder = new Planholder()
                 if(params.planHolder.id) {
                     planHolder.clientProfile = Client.get(params.planHolder.id)
@@ -135,6 +141,7 @@ class PlanController {
             on('savePlanHolder'){
                 def planHolderInstance = new Planholder()
                 planHolderInstance.clientProfile.bindParams(params)
+                flow.createPlanHolderDto = planHolderInstance
                 if(planHolderInstance.clientProfile.validate()) {
                     if(!planHolderInstance.clientProfile.validateClientUniqueness()) {
                         flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
@@ -142,6 +149,8 @@ class PlanController {
                     }
                     if (!planHolderInstance.clientProfile.save()) {
                         return error()
+                    } else {
+                        flow.planholderInstance = planHolderInstance
                     }
                 } else {
                     return error()
@@ -251,6 +260,7 @@ class PlanController {
 
             on("createAgent") {
                 def agent = new Agent()
+                flow.createAgentDto = new Agent()
                 if(params.agent.id) {
                     //TODO agent fields
                     agent.clientProfile = Client.get(params.agent.id)
@@ -261,15 +271,37 @@ class PlanController {
             }.to("createAgent")
 
             on("next") {
-                def agent = new Agent()
+                def agent = new Agent(params)
+
                 if(params.agent.id) {
                     //TODO agent fields
                     agent.clientProfile = Client.get(params.agent.id)
+                    flow.agentInstance = agent
+                    if(agent.validate()) {
+                        def error = planClientValidation("agent",agent.clientProfile, flow.agentInstance, flow.planholderInstance, flow.beneficiaries)
+                        if(error == "") {
+                        } else {
+                            flow.duplicateClientError = error
+                            return error()
+                        }
+                    } else {
+                        return error()
+                    }
                 } else {
                     agent = null
                 }
+
                 flow.agentInstance = agent
-            }.to("amendments")
+            }.to("validateAgent")
+        }
+
+        validateAgent() {
+            action {
+                []
+            }
+            on("success").to "amendments"
+            on("error").to "amendments"
+            on(Exception).to "last"
         }
 
         //State 3a
@@ -280,6 +312,7 @@ class PlanController {
             on('saveAgent'){
                 def agentInstance = new Agent()
                 agentInstance.clientProfile.bindParams(params)
+                flow.createAgentDto = agentInstance
                 if(agentInstance.clientProfile.validate()) {
                     if(!agentInstance.clientProfile.validateClientUniqueness()) {
                         flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
@@ -287,6 +320,8 @@ class PlanController {
                     }
                     if (!agentInstance?.clientProfile.save()) {
                         return error()
+                    } else {
+                        flow.agentInstance = agentInstance
                     }
                 } else {
                     return error()
