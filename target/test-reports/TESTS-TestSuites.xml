@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="0" failures="0" hostname="james" id="0" name="ClientControllerTests" package="com.dataentry" tests="1" time="3.044" timestamp="2013-10-30T08:36:46">
+      <properties />
+
+      <testcase classname="com.dataentry.ClientControllerTests" name="testSearchClients" time="3.015" />
+
+      <system-out><![CDATA[]]></system-out>
+
+      <system-err><![CDATA[--Output from testSearchClients--
+]]></system-err>
+
+  </testsuite>
+</testsuites>
