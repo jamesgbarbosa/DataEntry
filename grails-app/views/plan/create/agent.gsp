@@ -25,11 +25,16 @@
         <div class="fieldcontain">
 
 
-                    <g:eachError bean="${agentInstance}" var="error">
-                       <ul class="errors" role="alert">
-                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                       </ul>
-                    </g:eachError>
+            <g:eachError bean="${agentInstance}" var="error">
+               <ul class="errors" role="alert">
+                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+               </ul>
+            </g:eachError>
+            <g:if test="${duplicateClientError!=""}">
+                <ul class="errors" role="alert">
+                    <li>${duplicateClientError} </li>
+                </ul>
+            </g:if>
 
                 <label for="agent">
                     Agent

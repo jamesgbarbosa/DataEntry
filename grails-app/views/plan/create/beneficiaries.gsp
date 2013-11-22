@@ -23,6 +23,11 @@
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
             <g:form action="create" >
+                <g:eachError bean="${beneficiaryInstance}" var="error">
+                    <ul class="errors" role="alert">
+                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                    </ul>
+                </g:eachError>
                 <g:if test="${duplicateClientError!=""}">
                     <ul class="errors" role="alert">
                         <li>${duplicateClientError} </li>
@@ -41,14 +46,14 @@
                         <label for="designation">
                             <g:message code="beneficiary.designation.label" default="Designation" />
                         </label>
-                         <g:textField id="designation" name="designation"/>
+                         <g:textField id="designation" name="designation" value="${beneficiaryInstance?.designation}"/>
                     </div>
 
                     <div class="fieldcontain">
                         <label for="relationship">
-                        <g:message code="beneficiary.relationship.label" default="Relationship" />
+                        <g:message code="beneficiary.relationship.label" default="Relationship"/>
                         </label>
-                        <g:textField id="relationship" name="relationship"/>
+                        <g:textField id="relationship" name="relationship" value="${beneficiaryInstance?.relationship}"/>
                     </div>
                     <br>
                     <hr>

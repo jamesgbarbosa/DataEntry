@@ -29,7 +29,7 @@ class Plan implements Serializable {
     }
 
     static constraints = {
-        planNumber blank:  true, nullable:  true
+        planNumber blank:  false, nullable:  false
         product blank:  true, nullable:  true
         payingPeriod blank:  true, nullable:  true, matches: numeric()
         maturityPeriod blank:  true, nullable:  true, matches: numeric()
@@ -42,7 +42,7 @@ class Plan implements Serializable {
         planStatus blank:  true, nullable:  true
         applicableDate blank:  true, nullable:  true
         withInsurance blank:  true, nullable:  true
-        planHolder nullable:  true
+        planHolder nullable:  false
         agent nullable:  true
         beneficiaries nullable: true
         amendments nullable: true

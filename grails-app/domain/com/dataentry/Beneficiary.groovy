@@ -11,8 +11,8 @@ class Beneficiary implements Serializable {
     }
 //    static belongsTo = [plan: Plan]
     static constraints = {
-        designation blank:  true, nullable:  true
-        relationship blank:  true, nullable:  true
+        designation blank:  false, nullable:  false
+        relationship blank:  false, nullable:  false
         clientProfile: nullable: false
     }
 }
