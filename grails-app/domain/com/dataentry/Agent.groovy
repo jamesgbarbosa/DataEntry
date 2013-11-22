@@ -15,7 +15,7 @@ class Agent implements Serializable {
     }
 
     static constraints = {
-        agentCode blank:  false, nullable:  false
+        agentCode blank:  true, nullable:  true
         position blank:  true, nullable:  true
         appointmentDate blank:  true, nullable:  true
         agency blank:  false, nullable:  false

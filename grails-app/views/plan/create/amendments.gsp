@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'beneficiary.label', default: 'Beneficiary')}" />
+    <g:set var="entityName" value="${message(code: 'amendment.label', default: 'Amendment')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
     <g:javascript library="jquery"/>
 </head>
@@ -21,17 +21,17 @@
             <g:if test="${flash.error}">
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
-            <g:hasErrors bean="${amendmentInstance}">
-                <ul class="errors" role="alert">
-                    <g:eachError bean="${amendmentInstance}" var="error">
-                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                    </g:eachError>
-                </ul>
-            </g:hasErrors>
+            %{--<g:hasErrors bean="${amendmentInstance}">--}%
+                %{--<ul class="errors" role="alert">--}%
+                    %{--<g:eachError bean="${amendmentInstance}" var="error">--}%
+                        %{--<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>--}%
+                    %{--</g:eachError>--}%
+                %{--</ul>--}%
+            %{--</g:hasErrors>--}%
             <g:form name="amendmentForm" action="create">
                 <div class="fieldcontain">
 
-                    <div id="amendmentField" class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'amendmentType', 'error')} ">
+                    <div id="amendmentField" class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'amendmentType', 'error')} required">
                         <label for="amendmentType">
                             <g:message code="amendment.amendmentType.label" default="Amendment Type" />
 
@@ -53,6 +53,14 @@
                             <span class="required-indicator">*</span>
                         </label>
                         <g:textField id="effectiveDate" name="effectiveDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.effectiveDate)}" />
+                        <g:hasErrors bean="${amendmentInstance}"
+                                     field="effectiveDate">
+                            <g:eachError bean="${amendmentInstance}" field="effectiveDate">
+                                <span class="inlineErrors">
+                                    <g:message  error="${it}" />
+                                </span>
+                            </g:eachError>
+                        </g:hasErrors>
                     </div>
 
                     <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'filingDate', 'error')} required">
@@ -61,6 +69,14 @@
                             <span class="required-indicator">*</span>
                         </label>
                         <g:textField id="filingDate" name="filingDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.filingDate)}"/>
+                        <g:hasErrors bean="${amendmentInstance}"
+                                     field="filingDate">
+                            <g:eachError bean="${amendmentInstance}" field="filingDate">
+                                <span class="inlineErrors">
+                                    <g:message  error="${it}" />
+                                </span>
+                            </g:eachError>
+                        </g:hasErrors>
                     </div>
 
                     </div>
@@ -90,7 +106,7 @@
                             <g:each in="${amendments}" status="i" var="amendment">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                                    <td>${i+1} <input type='hidden' class='amendmentId' name='amendmentId' value='${amendment?.id}' /> </td>
+                                    <td>${i+1} <input type='hidden' class='amendmentId' name='tempId' value='${i+1}' /> </td>
 
                                     <td>${amendment?.amendmentType}</td>
 
@@ -100,7 +116,7 @@
 
                                     <td>${amendment?.approvedBy}</td>
 
-                                    <td><input class='deleteAmendmentCB' type='checkbox' name='deleteAmendment${i+1}'/></td>
+                                    <td><input class='deleteAmendmentCB' type='checkbox' name='deleteAmendment_${amendment.tempId}'/></td>
                                 </tr>
                             </g:each>
                         </tbody>
@@ -109,7 +125,7 @@
                 <fieldset class="buttons">
                     %{--<input type="button" value="Add" id="addAmendmentButton"/>--}%
                     <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
-                    <input type="button" value="Delete" id="deleteAmendmentButton"/>
+                    <g:submitButton id="addAmendmentButton" formaction="create" name="delete" event="delete" value="Delete"/>
 
                 </fieldset>
             </g:form>

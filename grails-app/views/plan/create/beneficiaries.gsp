@@ -23,11 +23,11 @@
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
             <g:form action="create" >
-                <g:eachError bean="${beneficiaryInstance}" var="error">
-                    <ul class="errors" role="alert">
-                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                    </ul>
-                </g:eachError>
+                %{--<g:eachError bean="${beneficiaryInstance}" var="error">--}%
+                    %{--<ul class="errors" role="alert">--}%
+                        %{--<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>--}%
+                    %{--</ul>--}%
+                %{--</g:eachError>--}%
                 <g:if test="${duplicateClientError!=""}">
                     <ul class="errors" role="alert">
                         <li>${duplicateClientError} </li>
@@ -37,23 +37,48 @@
                     <label for="beneficiary">
                         Beneficiary
                     </label>
-
+                    <span class="required-indicator">*</span>
                     <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName!=null ? beneficiaryInstance?.clientProfile?.fullName() : ""}" placeholder="Search a client..."/>
                     <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.clientProfile?.id}"/>
                     <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
-
-                    <div class="fieldcontain">
+                    <g:hasErrors bean="${beneficiaryInstance}"
+                                 field="clientProfile">
+                        <g:eachError bean="${beneficiaryInstance}" field="clientProfile">
+                            <span class="inlineErrors">
+                                <g:message  error="${it}" />
+                            </span>
+                        </g:eachError>
+                    </g:hasErrors>
+                    <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'designation', 'error')} required">
                         <label for="designation">
                             <g:message code="beneficiary.designation.label" default="Designation" />
                         </label>
-                         <g:textField id="designation" name="designation" value="${beneficiaryInstance?.designation}"/>
+                        <span class="required-indicator">*</span>
+                        <g:textField id="designation" name="designation" value="${beneficiaryInstance?.designation}"/>
+                        <g:hasErrors bean="${beneficiaryInstance}"
+                                     field="designation">
+                            <g:eachError bean="${beneficiaryInstance}" field="designation">
+                                <span class="inlineErrors">
+                                    <g:message  error="${it}" />
+                                </span>
+                            </g:eachError>
+                        </g:hasErrors>
                     </div>
 
-                    <div class="fieldcontain">
+                    <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'relationship', 'error')} required">
                         <label for="relationship">
                         <g:message code="beneficiary.relationship.label" default="Relationship"/>
                         </label>
+                        <span class="required-indicator">*</span>
                         <g:textField id="relationship" name="relationship" value="${beneficiaryInstance?.relationship}"/>
+                        <g:hasErrors bean="${beneficiaryInstance}"
+                                     field="relationship">
+                            <g:eachError bean="${beneficiaryInstance}" field="relationship">
+                                <span class="inlineErrors">
+                                    <g:message  error="${it}" />
+                                </span>
+                            </g:eachError>
+                        </g:hasErrors>
                     </div>
                     <br>
                     <hr>
@@ -88,7 +113,7 @@
 
                                     <td></td>
 
-                                    <td><input class='deleteBeneficiaryCB' type='checkbox' name='deleteBeneficiary${i+1}'/></td>
+                                    <td><input class='deleteBeneficiaryCB' type='checkbox' name='deleteBeneficiary_${beneficiary?.clientProfile?.id}'/></td>
                                 </tr>
                             </g:each>
                         </tbody>
@@ -96,7 +121,7 @@
                 </div>
                 <fieldset class="buttons">
                     <g:submitButton name="add" event="add" value="Add" />
-                    <input type="button" value="Delete" id="deleteBeneficiaryButton"/>
+                    <g:submitButton name="delete" event="delete" value="Delete" />
                 </fieldset>
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>
