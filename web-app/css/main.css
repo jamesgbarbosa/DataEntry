@@ -325,7 +325,11 @@ fieldset.embedded legend {
 }
 
 /* MESSAGES AND ERRORS */
-
+.inlineErrors {
+    color: #CC0000;
+    font-style: italic;
+    width: 150px;
+}
 .errors,
 .message {
 	font-size: 0.8em;

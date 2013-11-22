@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'beneficiary.label', default: 'Beneficiary')}" />
+    <g:set var="entityName" value="${message(code: 'agent.label', default: 'Agent')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
     <g:javascript library="jquery"/>
 </head>
@@ -25,11 +25,11 @@
         <div class="fieldcontain">
 
 
-            <g:eachError bean="${agentInstance}" var="error">
-               <ul class="errors" role="alert">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-               </ul>
-            </g:eachError>
+            %{--<g:eachError bean="${agentInstance}" var="error">--}%
+               %{--<ul class="errors" role="alert">--}%
+                %{--<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>--}%
+               %{--</ul>--}%
+            %{--</g:eachError>--}%
             <g:if test="${duplicateClientError!=""}">
                 <ul class="errors" role="alert">
                     <li>${duplicateClientError} </li>
@@ -54,7 +54,7 @@
                     <g:textField name="agentCode" value="${agentInstance?.agentCode}"/>
                 </div>
 
-                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'position', 'error')} ">
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'position', 'error')}">
                     <label for="position">
                         <g:message code="agent.position.label" default="Position" />
 
@@ -67,31 +67,56 @@
                         <g:message code="agent.appointmentDate.label" default="Appointment Date" />
 
                     </label>
-                    <g:datePicker name="appointmentDate" precision="day"  value="${agentInstance?.appointmentDate}" default="none" noSelection="['': '']" />
+                    <g:textField id="appointmentDate" name="appointmentDate" value="${formatDate(format:'MM/dd/yyyy',date:agentInstance?.appointmentDate)}" />
+
                 </div>
 
-                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agency', 'error')} ">
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agency', 'error')} required">
                     <label for="agency">
                         <g:message code="agent.agency.label" default="Agency" />
 
                     </label>
                     <g:textField name="agency" value="${agentInstance?.agency}"/>
+                    <g:hasErrors bean="${agentInstance}"
+                                 field="agency">
+                        <g:eachError bean="${agentInstance}" field="agency">
+                            <span class="inlineErrors">
+                                <g:message  error="${it}" />
+                            </span>
+                        </g:eachError>
+                    </g:hasErrors>
                 </div>
 
-                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'groupName', 'error')} ">
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'groupName', 'error')} required">
                     <label for="groupName">
                         <g:message code="agent.groupName.label" default="Group Name" />
 
                     </label>
                     <g:textField name="groupName" value="${agentInstance?.groupName}"/>
+                    <g:hasErrors bean="${agentInstance}"
+                                 field="groupName">
+                        <g:eachError bean="${agentInstance}" field="groupName">
+                            <span class="inlineErrors">
+                                <g:message  error="${it}" />
+                            </span>
+                        </g:eachError>
+                    </g:hasErrors>
                 </div>
 
-                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'unit', 'error')} ">
+                <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'unit', 'error')} required">
                     <label for="unit">
                         <g:message code="agent.unit.label" default="Unit" />
 
                     </label>
                     <g:textField name="unit" value="${agentInstance?.unit}"/>
+                    <g:hasErrors bean="${agentInstance}"
+                                 field="unit">
+                        <g:eachError bean="${agentInstance}" field="unit">
+                            <span class="inlineErrors">
+                                <g:message  error="${it}" />
+                            </span>
+                        </g:eachError>
+                    </g:hasErrors>
                 </div>
 
             <br>

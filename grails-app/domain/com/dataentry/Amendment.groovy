@@ -1,13 +1,16 @@
 package com.dataentry
 
 class Amendment implements Serializable {
-
+    static transients = ['tempId']
     String amendmentType
     Date filingDate
     Date effectiveDate
     String approvedBy
+    Long tempId
 
     static belongsTo = [plan: Plan]
+
+
 
     def bindParams(Map params) {
         params.filingDate = params.filingDate ? Date.parse( 'MM/dd/yyyy', params.filingDate ) : null

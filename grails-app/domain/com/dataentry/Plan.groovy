@@ -30,18 +30,18 @@ class Plan implements Serializable {
 
     static constraints = {
         planNumber blank:  false, nullable:  false
-        product blank:  true, nullable:  true
-        payingPeriod blank:  true, nullable:  true, matches: numeric()
-        maturityPeriod blank:  true, nullable:  true, matches: numeric()
-        pnpPrice blank:  true, nullable:  true
-        modalInstallment blank:  true, nullable:  true
-        numberOfUnits blank:  true, nullable:  true, matches: numeric()
+        product blank:  false, nullable:  false
+        payingPeriod blank:  false, nullable:  false, matches: numeric()
+        maturityPeriod blank:  false, nullable:  false, matches: numeric()
+        pnpPrice blank:  false, nullable:  false
+        modalInstallment blank:  false, nullable:  false
+        numberOfUnits blank:  false, nullable:  false, matches: numeric()
         origIssueDate blank:  true, nullable:  true
-        currentIssueDate blank:  true, nullable:  true
+        currentIssueDate blank:  false, nullable:  false
         paymentMode blank:  true, nullable:  true
-        planStatus blank:  true, nullable:  true
+        planStatus blank:  false, nullable:  false
         applicableDate blank:  true, nullable:  true
-        withInsurance blank:  true, nullable:  true
+        withInsurance blank:  false, nullable:  false
         planHolder nullable:  false
         agent nullable:  true
         beneficiaries nullable: true
