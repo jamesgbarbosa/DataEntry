@@ -13,8 +13,8 @@ import com.dateentry.reftables.Relationship
 class BootStrap {
 
     def init = { servletContext ->
-        Environment.executeForCurrentEnvironment {
-            development {
+//        Environment.executeForCurrentEnvironment {
+//            development {
                 def product = new Product(name: 'Sample1').save(flush: true, failOnError: true)
                 def product1 = new Product(name: 'Sample2').save(flush: true, failOnError: true)
                 def product2 = new Product(name: 'Sample3').save(flush: true, failOnError: true)
@@ -85,8 +85,8 @@ class BootStrap {
                 new Client(firstName: 'Elena', lastName: 'orange' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: 'Zafina', lastName: 'red' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: 'Anne', lastName: 'blue' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
-            }
-        }
+//            }
+//        }
 
 
     }
