@@ -1,5 +1,8 @@
 package com.dataentry
 
+import java.text.SimpleDateFormat
+import java.text.ParseException
+
 class Plan implements Serializable {
 
     String planNumber
@@ -9,7 +12,7 @@ class Plan implements Serializable {
     BigDecimal pnpPrice
     BigDecimal modalInstallment
     String numberOfUnits
-    Date origIssueDate
+//    Date origIssueDate
     Date currentIssueDate
     String paymentMode
     String planStatus
@@ -22,23 +25,44 @@ class Plan implements Serializable {
     static hasMany = [beneficiaries: Beneficiary,amendments: Amendment]
 
     def bindParams(Map params) {
-        params.origIssueDate = params.origIssueDate ? Date.parse( 'MM/dd/yyyy', params.origIssueDate ) : null
-        params.currentIssueDate = params.currentIssueDate? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : null
-        params.applicableDate  = params.applicableDate ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : null
+        params.currentIssueDate = isValidDate(params.currentIssueDate)? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : params.currentIssueDate
+        params.applicableDate  = isValidDate(params.applicableDate) ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : params.applicableDate
         this.properties = params
     }
 
+    boolean isValidDate(String date) {
+        if(date == null) {
+            return false
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date testDate = null;
+        try {
+            testDate = sdf.parse(date);
+        } // if the format of the string provided doesn't match the format we
+        // declared in SimpleDateFormat() we will get an exception
+        catch (ParseException e) {
+            return false;
+        }
+
+        if (!sdf.format(testDate).equals(date)) {
+            return false;
+        }
+
+        return true;
+
+    }
+
     static constraints = {
-        planNumber blank:  false, nullable:  false
+        planNumber blank:  false, nullable:  false, unique: true
         product blank:  false, nullable:  false
         payingPeriod blank:  false, nullable:  false, matches: numeric()
         maturityPeriod blank:  false, nullable:  false, matches: numeric()
         pnpPrice blank:  false, nullable:  false
         modalInstallment blank:  false, nullable:  false
-        numberOfUnits blank:  false, nullable:  false, matches: numeric()
-        origIssueDate blank:  true, nullable:  true
+        numberOfUnits blank:  false, nullable:  false, matches: numeric(), minSize: 0
+//        origIssueDate blank:  true, nullable:  true
         currentIssueDate blank:  false, nullable:  false
-        paymentMode blank:  true, nullable:  true
+        paymentMode blank:  false, nullable:  false
         planStatus blank:  false, nullable:  false
         applicableDate blank:  true, nullable:  true
         withInsurance blank:  false, nullable:  false

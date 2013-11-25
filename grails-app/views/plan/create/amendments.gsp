@@ -14,7 +14,12 @@
             </ul>
         </div>
         <div id="create-beneficiary" class="content scaffold-create" role="main">
-            <h1>Add Amendments</h1>
+            <h1>
+                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
+                <g:if test="${page2link!=''}"> <a href="${page2link}&red=true"> Create Beneficiaries </a> > </g:if>
+                <g:if test="${page3link!=''}"> <a href="${page3link}&red=true"> Create Agent </a> > </g:if>
+                Create Amendments
+            </h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -39,34 +44,10 @@
                         <select:amendmentTypes  name="amendmentType" value="${amendmentInstance?.amendmentType}"/>
                     </div>
 
-                    <div id="approvedByField"class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'approvedBy', 'error')} ">
-                        <label for="approvedBy">
-                            <g:message code="amendment.approvedBy.label" default="Approved By" />
-
-                        </label>
-                        <g:textField name="approvedBy" value="${amendmentInstance?.approvedBy}"/>
-                    </div>
-
-                    <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'effectiveDate', 'error')} required">
-                        <label for="effectiveDate">
-                            <g:message code="amendment.effectiveDate.label" default="Effective Date" />
-                            <span class="required-indicator">*</span>
-                        </label>
-                        <g:textField id="effectiveDate" name="effectiveDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.effectiveDate)}" />
-                        <g:hasErrors bean="${amendmentInstance}"
-                                     field="effectiveDate">
-                            <g:eachError bean="${amendmentInstance}" field="effectiveDate">
-                                <span class="inlineErrors">
-                                    <g:message  error="${it}" />
-                                </span>
-                            </g:eachError>
-                        </g:hasErrors>
-                    </div>
-
                     <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'filingDate', 'error')} required">
                         <label for="filingDate">
+                            <sup><span class="required-indicator">*</span></sup>
                             <g:message code="amendment.filingDate.label" default="Filing Date" />
-                            <span class="required-indicator">*</span>
                         </label>
                         <g:textField id="filingDate" name="filingDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.filingDate)}"/>
                         <g:hasErrors bean="${amendmentInstance}"
@@ -79,14 +60,39 @@
                         </g:hasErrors>
                     </div>
 
+                    <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'effectiveDate', 'error')} required">
+                        <label for="effectiveDate">
+                            <sup><span class="required-indicator">*</span></sup>
+                            <g:message code="amendment.effectiveDate.label" default="Effective Date" />
+                        </label>
+                        <g:textField id="effectiveDate" name="effectiveDate" value="${formatDate(format:'MM/dd/yyyy',date:amendmentInstance?.effectiveDate)}" />
+                        <g:hasErrors bean="${amendmentInstance}"
+                                     field="effectiveDate">
+                            <g:eachError bean="${amendmentInstance}" field="effectiveDate">
+                                <span class="inlineErrors">
+                                    <g:message  error="${it}" />
+                                </span>
+                            </g:eachError>
+                        </g:hasErrors>
                     </div>
+
+                    <div id="approvedByField"class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'approvedBy', 'error')} ">
+                        <label for="approvedBy">
+                            <g:message code="amendment.approvedBy.label" default="Approved By" />
+
+                        </label>
+                        <g:textField name="approvedBy" value="${amendmentInstance?.approvedBy}"/>
+                    </div>
+
+                </div>
                     <br>
                     <hr>
 
                 </div>
                 <fieldset class="buttons">
                     <g:submitButton name="return" event="return" value="Back" />
-                    <g:submitButton formaction="create" name="savePlan" event="savePlan" value="Next"/>
+                    <input type="button" name="open-save-plan-dialog" id="open-save-plan-dialog" value="Save Plan"/>
+
                 </fieldset>
                 <div id="updateMe">
                     <table id="amendments">
@@ -110,9 +116,9 @@
 
                                     <td>${amendment?.amendmentType}</td>
 
-                                    <td>${amendment?.filingDate}</td>
+                                    <td>${formatDate(format:'MM/dd/yyyy',date:amendment?.filingDate)}</td>
 
-                                    <td>${amendment?.effectiveDate}</td>
+                                    <td>${formatDate(format:'MM/dd/yyyy',date:amendment?.effectiveDate)}</td>
 
                                     <td>${amendment?.approvedBy}</td>
 
@@ -130,6 +136,19 @@
                 </fieldset>
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>
+        </div>
+        <div id="dialog-confirm" title="Save Plan">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 10px 0;"></span>
+                Are you sure you want to proceed?
+            </p>
+            <br>
+            <div class="buttons">
+                <g:form name="amendmentForm" action="create">
+                    <g:submitButton id="savePlan" formaction="create" name="savePlan" event="savePlan" value="Okay"/>
+                    <input type="button" id="confirm-cancel-form" value="Cancel" />
+                </g:form>
+            </div>
         </div>
     </body>
 </html>

@@ -3,7 +3,7 @@ package com.dataentry
 class Agent implements Serializable {
 
     Client clientProfile
-    String agentCode
+//    String agentCode
     String position
     Date appointmentDate
     String agency
@@ -15,7 +15,7 @@ class Agent implements Serializable {
     }
 
     static constraints = {
-        agentCode blank:  true, nullable:  true
+//        agentCode blank:  true, nullable:  true
         position blank:  true, nullable:  true
         appointmentDate blank:  true, nullable:  true
         agency blank:  false, nullable:  false

@@ -88,14 +88,14 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${planInstance?.origIssueDate}">
-				<li class="fieldcontain">
-					<span id="origIssueDate-label" class="property-label"><g:message code="plan.origIssueDate.label" default="Orig Issue Date" /></span>
-					
-						<span class="property-value" aria-labelledby="origIssueDate-label"><g:formatDate date="${planInstance?.origIssueDate}" format="MM/dd/yyyy" /></span>
-					
-				</li>
-				</g:if>
+				%{--<g:if test="${planInstance?.origIssueDate}">--}%
+				%{--<li class="fieldcontain">--}%
+					%{--<span id="origIssueDate-label" class="property-label"><g:message code="plan.origIssueDate.label" default="Orig Issue Date" /></span>--}%
+					%{----}%
+						%{--<span class="property-value" aria-labelledby="origIssueDate-label"><g:formatDate date="${planInstance?.origIssueDate}" format="MM/dd/yyyy" /></span>--}%
+					%{----}%
+				%{--</li>--}%
+				%{--</g:if>--}%
 			
 				<g:if test="${planInstance?.currentIssueDate}">
 				<li class="fieldcontain">

@@ -7,7 +7,6 @@
     <title><g:message code="default.create.label" args="[entityName]" /></title>
     <g:javascript library="jquery"/>
 </head>
-
     <body>
         <div class="nav" role="navigation">
             <ul>
@@ -15,7 +14,12 @@
             </ul>
         </div>
         <div id="create-beneficiary" class="content scaffold-create" role="main">
-            <h1>Add Beneficiaries</h1>
+                <h1>
+                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
+                Add Beneficiaries
+                <g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>
+                <g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>
+                </h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -33,14 +37,16 @@
                         <li>${duplicateClientError} </li>
                     </ul>
                 </g:if>
-                <div class="fieldcontain">
+                <div class="fieldcontain ${duplicateClientError!='' ? 'error' : ''} ${hasErrors(bean: beneficiaryInstance, field: 'clientProfile', 'error')}">
                     <label for="beneficiary">
+                        <sup><span class="required-indicator">*</span></sup>
                         Beneficiary
                     </label>
-                    <span class="required-indicator">*</span>
-                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName!=null ? beneficiaryInstance?.clientProfile?.fullName() : ""}" placeholder="Search a client..."/>
+                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName!=null ? beneficiaryInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
                     <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.clientProfile?.id}"/>
-                    <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
+                    <span class="buttons">
+                        <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
+                    </span>
                     <g:hasErrors bean="${beneficiaryInstance}"
                                  field="clientProfile">
                         <g:eachError bean="${beneficiaryInstance}" field="clientProfile">
@@ -49,12 +55,14 @@
                             </span>
                         </g:eachError>
                     </g:hasErrors>
-                    <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'designation', 'error')} required">
+                </div>
+
+                <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'designation', 'error')} required">
                         <label for="designation">
+                            <sup><span class="required-indicator">*</span></sup>
                             <g:message code="beneficiary.designation.label" default="Designation" />
                         </label>
-                        <span class="required-indicator">*</span>
-                        <g:textField id="designation" name="designation" value="${beneficiaryInstance?.designation}"/>
+                        <select:designation value="${beneficiaryInstance?.designation}"/>
                         <g:hasErrors bean="${beneficiaryInstance}"
                                      field="designation">
                             <g:eachError bean="${beneficiaryInstance}" field="designation">
@@ -67,10 +75,10 @@
 
                     <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance, field: 'relationship', 'error')} required">
                         <label for="relationship">
-                        <g:message code="beneficiary.relationship.label" default="Relationship"/>
+                            <sup><span class="required-indicator">*</span></sup>
+                            <g:message code="beneficiary.relationship.label" default="Relationship"/>
                         </label>
-                        <span class="required-indicator">*</span>
-                        <g:textField id="relationship" name="relationship" value="${beneficiaryInstance?.relationship}"/>
+                        <select:relationship value="${beneficiaryInstance?.relationship}"/>
                         <g:hasErrors bean="${beneficiaryInstance}"
                                      field="relationship">
                             <g:eachError bean="${beneficiaryInstance}" field="relationship">
@@ -83,7 +91,6 @@
                     <br>
                     <hr>
 
-                </div>
                 <fieldset class="buttons">
                     <g:submitButton name="return" event="return" value="Back" />
                     <g:submitButton formaction="create" name="next" event="next" value="Next"/>
@@ -109,9 +116,9 @@
 
                                     <td>${beneficiary?.clientProfile?.fullName()}</td>
 
-                                    <td></td>
+                                    <td>${beneficiary?.designation}</td>
 
-                                    <td></td>
+                                    <td>${beneficiary?.relationship}</td>
 
                                     <td><input class='deleteBeneficiaryCB' type='checkbox' name='deleteBeneficiary_${beneficiary?.clientProfile?.id}'/></td>
                                 </tr>
@@ -126,5 +133,6 @@
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>
         </div>
+        <g:hiddenField name="red" value="${params.red}"/>
     </body>
 </html>
