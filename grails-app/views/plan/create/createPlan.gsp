@@ -36,7 +36,7 @@
                     <li>${duplicateClientError} </li>
                 </ul>
             </g:if>
-			<g:form action="create" >
+			<g:form action="create">
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

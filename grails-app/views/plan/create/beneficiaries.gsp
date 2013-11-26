@@ -133,6 +133,7 @@
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>
         </div>
-        <g:hiddenField name="red" value="${params.red}"/>
+        <g:hiddenField name="red" value="${params.red ? params.red : request.red}"/>
+    -> ${request.red}  <
     </body>
 </html>

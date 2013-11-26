@@ -123,6 +123,8 @@ class PlanController {
                     conversation.planInstance = plan
                     flow.returnCode = "no"
                 }
+                flash.red = "true"
+
             }.to {
               if(flow.returnCode == "yes") {
                   conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution[0]])
@@ -163,7 +165,7 @@ class PlanController {
         beneficiaries {
             on("add") {
                 flow.duplicateClientError = ""
-                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+//                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
                 def beneficiaryInstance = new Beneficiary(params)
                 beneficiaryInstance.clientProfile = Client.get(params.beneficiary.id)
                 conversation.beneficiaryInstance = beneficiaryInstance
@@ -208,13 +210,13 @@ class PlanController {
             on("return"){
                 flow.duplicateClientError = ""
                 conversation.beneficiaryInstance = new Beneficiary()
-                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+//                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createPlan")
 
             on("createBeneficiary") {
                 flow.duplicateClientError = ""
                 flow.beneficiaryInstance = new Beneficiary(params)
-                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+//                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createBeneficiary")
 
             on("next") {
@@ -267,18 +269,19 @@ class PlanController {
                     agent = null
                 }
                 conversation.agentInstance = agent
-                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+//                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("beneficiaries")
 
             on("createAgent") {
                 conversation.agentInstance = new Agent(params)
-                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+//                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createAgent")
 
             on("next") {
                 flow.duplicateClientError = ""
                 conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
-                def agentInstance = new Agent(params)
+                def agentInstance = new Agent()
+                agentInstance.bindParams(params)
                 agentInstance.clientProfile = Client.get(params.agent.id)
                 conversation.agentInstance = agentInstance
                 if(agentInstance.validate()) {
@@ -338,7 +341,7 @@ class PlanController {
         amendments {
             on("return"){
               conversation.amendmentInstance = new Amendment(params)
-              conversation.page4link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+//              conversation.page4link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("agent")
 
             on("add") {
@@ -351,7 +354,7 @@ class PlanController {
                 } else {
                     return error()
                 }
-                conversation.page4link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+//                conversation.page4link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("amendments")
 
             on("delete") {

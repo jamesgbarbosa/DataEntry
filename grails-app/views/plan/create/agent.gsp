@@ -43,6 +43,14 @@
                     <span class="buttons">
                         <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create"/>
                     </span>
+                    <g:hasErrors bean="${agentInstance}"
+                                 field="clientProfile">
+                        <g:eachError bean="${agentInstance}" field="clientProfile">
+                            <span class="inlineErrors">
+                                <g:message  error="${it}" />
+                            </span>
+                        </g:eachError>
+                    </g:hasErrors>
                 </div>
 
                 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agency', 'error')} required">
