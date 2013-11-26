@@ -62,17 +62,19 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="planNumber" title="${message(code: 'plan.planNumber.label', default: 'Plan Number')}" />
+
 						<g:sortableColumn property="product" title="${message(code: 'plan.product.label', default: 'Product')}" />
+
+						<g:sortableColumn property="planholder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
 					
-						<g:sortableColumn property="payingPeriod" title="${message(code: 'plan.payingPeriod.label', default: 'Paying Period')}" />
-					
-						<g:sortableColumn property="maturityPeriod" title="${message(code: 'plan.maturityPeriod.label', default: 'Maturity Period')}" />
-					
-						<g:sortableColumn property="pnpPrice" title="${message(code: 'plan.pnpPrice.label', default: 'Pnp Price')}" />
-					
-						<g:sortableColumn property="modalInstallment" title="${message(code: 'plan.modalInstallment.label', default: 'Modal Installment')}" />
-					
-						<g:sortableColumn property="numberOfUnits" title="${message(code: 'plan.numberOfUnits.label', default: 'Number Of Units')}" />
+						%{--<g:sortableColumn property="maturityPeriod" title="${message(code: 'plan.maturityPeriod.label', default: 'Maturity Period')}" />--}%
+					%{----}%
+						%{--<g:sortableColumn property="pnpPrice" title="${message(code: 'plan.pnpPrice.label', default: 'Pnp Price')}" />--}%
+					%{----}%
+						%{--<g:sortableColumn property="modalInstallment" title="${message(code: 'plan.modalInstallment.label', default: 'Modal Installment')}" />--}%
+					%{----}%
+						%{--<g:sortableColumn property="numberOfUnits" title="${message(code: 'plan.numberOfUnits.label', default: 'Number Of Units')}" />--}%
 					
 					</tr>
 				</thead>
@@ -80,17 +82,19 @@
 				<g:each in="${planInstanceList}" status="i" var="planInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${planInstance.id}">${fieldValue(bean: planInstance, field: "product")}</g:link></td>
+						<td><g:link action="show" id="${planInstance.id}">${fieldValue(bean: planInstance, field: "planNumber")}</g:link></td>
 					
-						<td>${fieldValue(bean: planInstance, field: "payingPeriod")}</td>
-					
-						<td>${fieldValue(bean: planInstance, field: "maturityPeriod")}</td>
-					
-						<td>${fieldValue(bean: planInstance, field: "pnpPrice")}</td>
-					
-						<td>${fieldValue(bean: planInstance, field: "modalInstallment")}</td>
-					
-						<td>${fieldValue(bean: planInstance, field: "numberOfUnits")}</td>
+						<td>${fieldValue(bean: planInstance, field: "product")}</td>
+
+						<td>${planInstance?.planHolder?.clientProfile?.fullName()}</td>
+
+						%{--<td>${fieldValue(bean: planInstance, field: "maturityPeriod")}</td>--}%
+					%{----}%
+						%{--<td>${fieldValue(bean: planInstance, field: "pnpPrice")}</td>--}%
+					%{----}%
+						%{--<td>${fieldValue(bean: planInstance, field: "modalInstallment")}</td>--}%
+					%{----}%
+						%{--<td>${fieldValue(bean: planInstance, field: "numberOfUnits")}</td>--}%
 					
 					</tr>
 				</g:each>

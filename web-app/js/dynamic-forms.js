@@ -3,57 +3,32 @@ jQuery(document).ready(function($){
     $("#updateMe").bind('DOMSubtreeModified', function() {
     });
 
-    $('#addBeneficiaryButton').click(function(){
-
-//        var beneficiaryName = $('#beneficiary-autocomplete').val()
-//        var designation =  $('#designation').val()
-//        var relationship =  $('#relationship').val()
-//        var rowCount = $('#beneficiaries tbody tr').length - 1;
-//        var benId = $("input[name='beneficiary.id']").val()
-//        var canAdd = true
-//        if(benId == "") {
-//           alert("Please select a client.")
-//        } else {
-//            $("#beneficiaries tbody tr").each(function() {
-//                var value = $(this).find(".benId").val();
-//                if(value == benId) {
-//                    canAdd = false
-//                }
-//            });
-//
-//            if(canAdd == false) {
-//                alert("The client is already added on the list.")
-//            } else {
-//                $('#beneficiaries tr:last').after('<tr>' +
-//                    '<td>' + "<input type='hidden' class='benId' name='benId' value='" + benId +"' /> "+ (rowCount + 1) +'</td>' +
-//                    '<td>' + beneficiaryName +'</td>' +
-//                    '<td>' + designation +'</td>' +
-//                    '<td>' + relationship +'</td>' +
-//                    '<td>' + "<input class='deleteBeneficiaryCB' type='checkbox' name='deleteBeneficiary" + +(rowCount+1) +"'/> " +'</td>' +
-//                    '</tr>');
-//            }
-//            $('#beneficiary-autocomplete').val("")
-//            $('#beneficiary-autocomplete-id').val("")
-//        }
-         alert("asd")
+    $("#dialog-confirm").dialog({
+        autoOpen : false,
+        height : 'auto',
+        width : 'auto',
+        modal : true,
+        bgiframe : true,
+        cache: false,
+        resizable : false,
+        open : function() {
+            $('.ok').blur();
+        }
     });
 
-    $('#deleteBeneficiaryButton').click(function(){
-        $("#beneficiaries tbody tr").each(function() {
-            var value = $(this).find(".deleteBeneficiaryCB").prop('checked');
-            if(value==true) {
-                this.remove()
-            }
-        });
+    $('#open-save-plan-dialog').click(function() {
+        $("#dialog-confirm").dialog("open");
     });
 
-    $('#deleteAmendmentButton').click(function(){
-        $("#amendments tbody tr").each(function() {
-            var value = $(this).find(".deleteAmendmentCB").prop('checked');
-            if(value==true) {
-                this.remove()
-            }
-        });
-
+    $('#confirm-cancel-form').click(function() {
+        $("#dialog-confirm").dialog("close");
     });
+
+    if($("input[name='red']").val() == "true") {
+        $('.fieldcontain').removeClass('error')
+        $('.errors').hide()
+        $('.inlineErrors').hide()
+    }
+
+
 });

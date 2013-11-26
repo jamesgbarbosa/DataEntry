@@ -9,6 +9,8 @@ class AutoCompleteService {
         def query = {
             or {
                 ilike("fullName", "${params.term}%")
+                ilike("firstName", "${params.term}%")
+                ilike("lastName", "${params.term}%")
             }
             projections {
                 property("id")
@@ -35,8 +37,8 @@ class AutoCompleteService {
             def clientMap = [:]
             clientMap.put("id", it[0] )
 
-//            clientMap.put("value", it[1] + " : " + String.format("%1\$TD", it[2]) + " : " + it[3])
-            clientMap.put("value", it[1])
+            clientMap.put("value", it[1] + " : " + String.format("%1\$TD", it[2]) + " : " + it[3])
+//            clientMap.put("value", it[1])
             clientsSelectionList.add(clientMap)
         }
         return clientsSelectionList

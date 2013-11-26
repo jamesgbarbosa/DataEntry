@@ -79,6 +79,11 @@ class Client implements Serializable {
     }
 
     String fullName() {
-        return "${firstName}${middleName? " ${middleName}": ''} ${lastName}" .toUpperCase()
+//        return "${firstName}${middleName? " ${middleName}": ''} ${lastName}" .toUpperCase()
+        return "${lastName}, ${firstName} ${middleName ? "${middleName}":''}".toUpperCase()
+    }
+
+    String fullNameBirthdateAndGender() {
+        return "${lastName}, ${firstName} ${middleName ? "${middleName}":''}".toUpperCase() + " : " +  String.format("%1\$TD", birthdate) + " : " + gender
     }
 }

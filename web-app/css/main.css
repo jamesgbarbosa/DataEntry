@@ -65,15 +65,17 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+    color: blue;
+    text-decoration: none;
 }
 
 a:hover, a:active {
 	outline: none; /* prevents outline in webkit on active links but retains it for tab focus */
+    font-weight: bold;
 }
 
 h1 {
-	color: #48802c;
+	color: #000000;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -283,7 +285,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: red;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
