@@ -65,6 +65,7 @@ class Client implements Serializable {
         if(this.firstName && this.lastName && this.birthdate && this.gender ){
             def clients = Client.withCriteria {
                 eq("firstName",this.firstName)
+                eq("middleName",this.middleName)
                 eq("lastName", this.lastName)
                 eq("birthdate", this.birthdate)
                 eq("gender", this.gender)

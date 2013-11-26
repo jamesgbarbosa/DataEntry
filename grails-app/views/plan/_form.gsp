@@ -25,6 +25,10 @@
 %{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
     <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planholderInstance?.clientProfile?.firstName? planholderInstance?.clientProfile?.fullName() : ""}" placeholder="Search a client..."/>
     <g:hiddenField name="planHolder.id" value="${planholderInstance?.clientProfile?.id}"/>
+
+    <g:hiddenField name="agentId" value="${agentInstance?.clientProfile?.id}"/>
+    <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>
+
     <span class="buttons">
         <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create Planholder"/>
     </span>
@@ -187,7 +191,7 @@
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'withInsurance', 'error')} required">
 	<label for="withInsurance">
         <sup><span class="required-indicator">*</span></sup>
-        Make Insurance
+        With Insurance
 	</label>
 	%{--<g:checkBox name="withInsurance" value="${planInstance?.withInsurance}" />--}%
 	<g:select name="withInsurance" value="${planInstance?.withInsurance}" optionKey= "value" optionValue="key" from="${['Y':true, 'N':false]}" />

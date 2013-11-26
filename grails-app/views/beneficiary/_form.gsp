@@ -8,6 +8,14 @@
         <span class="required-indicator">*</span>
     </label>
 	<g:textField name="lastName" value="${beneficiaryInstance?.clientProfile?.lastName}"/>
+    <g:hasErrors bean="${beneficiaryInstance?.clientProfile}"
+                 field="lastName">
+        <g:eachError bean="${beneficiaryInstance?.clientProfile}" field="lastName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'firstName', 'error')} ">
@@ -16,6 +24,14 @@
         <span class="required-indicator">*</span>
     </label>
 	<g:textField name="firstName" value="${beneficiaryInstance?.clientProfile?.firstName}"/>
+    <g:hasErrors bean="${beneficiaryInstance?.clientProfile}"
+                 field="firstName">
+        <g:eachError bean="${beneficiaryInstance?.clientProfile}" field="firstName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'middleName', 'error')} ">
@@ -24,6 +40,14 @@
         <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${beneficiaryInstance?.clientProfile?.middleName}"/>
+    <g:hasErrors bean="${beneficiaryInstance?.clientProfile}"
+                 field="middleName">
+        <g:eachError bean="${beneficiaryInstance?.clientProfile}" field="middleName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'gender', 'error')} required">
@@ -32,6 +56,14 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select name="gender" from="${beneficiaryInstance?.clientProfile.constraints.gender.inList}" required="" value="${beneficiaryInstance?.clientProfile?.gender}" valueMessagePrefix="beneficiary.gender"/>
+    <g:hasErrors bean="${beneficiaryInstance?.clientProfile}"
+                 field="gender">
+        <g:eachError bean="${beneficiaryInstance?.clientProfile}" field="gender">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'birthdate', 'error')} required">
@@ -40,7 +72,14 @@
 		<span class="required-indicator">*</span>
 	</label>
     <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:beneficiaryInstance?.clientProfile?.birthdate)}" />
-
+    <g:hasErrors bean="${beneficiaryInstance?.clientProfile}"
+                 field="birthdate">
+        <g:eachError bean="${beneficiaryInstance?.clientProfile}" field="birthdate">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'email', 'error')} ">
@@ -93,8 +132,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'zipcode', 'error')} ">
 	<label for="zipcode">
-		<g:message code="beneficiary.zipcode.label" default="Zipcode" />
-		
+         ZIP Code
 	</label>
 	<g:textField name="zipcode" value="${beneficiaryInstance?.clientProfile?.zipcode}"/>
 </div>
@@ -117,8 +155,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'officenumber', 'error')} ">
 	<label for="officenumber">
-		<g:message code="beneficiary.officenumber.label" default="Officenumber" />
-		
+		   Office Number
 	</label>
 	<g:textField name="officenumber" value="${beneficiaryInstance?.clientProfile?.officenumber}"/>
 </div>

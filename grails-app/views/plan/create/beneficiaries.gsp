@@ -14,12 +14,14 @@
             </ul>
         </div>
         <div id="create-beneficiary" class="content scaffold-create" role="main">
-                <h1>
+            <div id="breadcrumbs">
+                <h4>
                 <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
                 Add Beneficiaries
-                <g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>
-                <g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>
-                </h1>
+                %{--<g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>--}%
+                %{--<g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%
+                </h4>
+            </div>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -44,6 +46,10 @@
                     </label>
                     <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName!=null ? beneficiaryInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
                     <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.clientProfile?.id}"/>
+                    <g:hiddenField name="agentId" value="${agentInstance?.clientProfile?.id}"/>
+                    <g:hiddenField name="planholderId" value="${planholderInstance?.clientProfile?.id}"/>
+                    <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>
+
                     <span class="buttons">
                         <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
                     </span>
@@ -128,12 +134,25 @@
                 </div>
                 <fieldset class="buttons">
                     <g:submitButton name="add" event="add" value="Add" />
-                    <g:submitButton name="delete" event="delete" value="Delete" />
+                    <g:submitButton id="delete-beneficiary" name="delete"  formaction="create" event="delete" value="Delete" />
+                    <input type="button" name="open-delete-beneficiary-dialog" id="open-delete-beneficiary-dialog" value="Delete"/>
                 </fieldset>
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>
         </div>
+        <div id="delete-beneficiary-dialog-confirm" title="Delete Beneficiary">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 10px 0;"></span>
+                Are you sure you want to proceed?
+            </p>
+            <br>
+            <div class="buttons">
+                <g:form action="create">
+                    <input type="button" name="confirm-delete-beneficiary" id="confirm-delete-beneficiary" value="Delete"/>
+                    <input type="button" id="confirm-cancel-delete-beneficiary-form" value="Cancel" />
+                </g:form>
+            </div>
+        </div>
         <g:hiddenField name="red" value="${params.red ? params.red : request.red}"/>
-    -> ${request.red}  <
     </body>
 </html>

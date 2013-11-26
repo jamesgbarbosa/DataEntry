@@ -6,12 +6,28 @@ import java.text.SimpleDateFormat
 class AutoCompleteService {
 
     def clientList(params) {
+
         def query = {
             or {
                 ilike("fullName", "${params.term}%")
                 ilike("firstName", "${params.term}%")
                 ilike("lastName", "${params.term}%")
             }
+
+            and {
+                if(params.agentId) {
+                    ne("id", Long.parseLong(params.agentId))
+                }
+                if(params.beneficiaryIds) {
+                        Arrays.asList(params.beneficiaryIds.split(",")).each {
+                        ne("id", Long.parseLong(it))
+                    }
+                }
+                if(params.planholderId) {
+                    ne("id", Long.parseLong(params.planholderId))
+                }
+            }
+
             projections {
                 property("id")
 //                property("nasdaqSymbol")

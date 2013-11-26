@@ -14,12 +14,14 @@
     </ul>
 </div>
 <div id="create-beneficiary" class="content scaffold-create" role="main">
-    <h1>
-        <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
-        <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Create Beneficiaries</a> > </g:if>
-        Create Agent
-        <g:if test="${page4link!=''}"> > <a href="${page4link}&red=true"> Create Amendments </a> </g:if>
-    </h1>
+    <div id="breadcrumbs">
+        <h4>
+            <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
+            <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Create Beneficiaries</a> > </g:if>
+            Create Agent
+            %{--<g:if test="${page4link!=''}"> > <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%
+        </h4>
+    </div>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -39,9 +41,11 @@
                         Agent
                     </label>
                     <g:textField class='autocomplete-field' name="agent-autocomplete" value="${agentInstance?.clientProfile?.firstName!=null ? agentInstance?.clientProfile?.fullName() : ''}" placeholder="Search a client..."/>
-                <g:hiddenField name="agent.id" value="${agentInstance?.clientProfile?.id}"/>
+                    <g:hiddenField name="agent.id" value="${agentInstance?.clientProfile?.id}"/>
+                    <g:hiddenField name="planholderId" value="${planholderInstance?.clientProfile?.id}"/>
+                    <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>
                     <span class="buttons">
-                        <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create"/>
+                        <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create Agent"/>
                     </span>
                     <g:hasErrors bean="${agentInstance}"
                                  field="clientProfile">

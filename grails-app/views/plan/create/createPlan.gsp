@@ -14,12 +14,14 @@
 			</ul>
 		</div>
 		<div id="create-plan" class="content scaffold-create" role="main">
-            <h1>
-            Create Plan
-            <g:if test="${page2link!=''}"> >  <a href="${page2link}&red=true"> Create Beneficiaries </a> </g:if>
-            <g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>
-            <g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>
-            </h1>
+            <div id="breadcrumbs">
+                <h4>
+                Create Plan
+                %{--<g:if test="${page2link!=''}"> >  <a href="${page2link}&red=true"> Create Beneficiaries </a> </g:if>--}%
+                %{--<g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>--}%
+                %{--<g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%
+                </h4>
+            </div>
 			%{--<g:message code="default.create.label" args="[entityName]" />--}%
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>

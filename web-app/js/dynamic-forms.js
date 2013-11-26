@@ -24,6 +24,66 @@ jQuery(document).ready(function($){
         $("#dialog-confirm").dialog("close");
     });
 
+    $("#delete-beneficiary-dialog-confirm").dialog({
+        autoOpen : false,
+        height : 'auto',
+        width : 'auto',
+        modal : true,
+        bgiframe : true,
+        cache: false,
+        resizable : false,
+        open : function() {
+            $('.ok').blur();
+        }
+    });
+
+    //Hide delete beneficiary button
+    $('#delete-beneficiary').hide()
+
+    $('#open-delete-beneficiary-dialog').click(function() {
+        $('.deleteBeneficiaryCB:checked').each(function() {
+            $("#delete-beneficiary-dialog-confirm").dialog("open");
+        });
+    });
+
+    $('#confirm-delete-beneficiary').click(function(){
+        $('#delete-beneficiary').trigger('click')
+    });
+
+    $('#confirm-cancel-delete-beneficiary-form').click(function() {
+        $("#delete-beneficiary-dialog-confirm").dialog("close");
+    });
+
+    $("#delete-amendment-dialog-confirm").dialog({
+        autoOpen : false,
+        height : 'auto',
+        width : 'auto',
+        modal : true,
+        bgiframe : true,
+        cache: false,
+        resizable : false,
+        open : function() {
+            $('.ok').blur();
+        }
+    });
+
+    $('#delete-amendment').hide()
+
+    $('#open-delete-amendment-dialog').click(function() {
+        $('.deleteAmendmentCB:checked').each(function() {
+            $("#delete-amendment-dialog-confirm").dialog("open");
+        });
+    });
+
+    $('#confirm-delete-amendment').click(function(){
+        $('#delete-amendment').trigger('click')
+    });
+
+    $('#confirm-cancel-delete-amendment-form').click(function() {
+        $("#delete-amendment-dialog-confirm").dialog("close");
+    });
+
+
     if($("input[name='red']").val() == "true") {
         $('.fieldcontain').removeClass('error')
         $('.errors').hide()

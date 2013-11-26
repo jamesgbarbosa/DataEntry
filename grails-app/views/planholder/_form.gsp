@@ -7,6 +7,14 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="lastName" value="${createPlanHolderDto?.clientProfile?.lastName}"/>
+    <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
+                 field="lastName">
+        <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="lastName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'firstName', 'error')} required">
@@ -15,6 +23,14 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="firstName" value="${createPlanHolderDto?.clientProfile?.firstName}"/>
+    <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
+                 field="firstName">
+        <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="firstName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'middleName', 'error')} ">
@@ -23,6 +39,14 @@
         <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${createPlanHolderDto?.clientProfile?.middleName}"/>
+    <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
+                 field="middleName">
+        <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="middleName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'gender', 'error')} required">
@@ -31,6 +55,14 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select name="gender" from="${createPlanHolderDto?.clientProfile?.constraints?.gender?.inList}" required="" value="${createPlanHolderDto?.clientProfile?.gender}" valueMessagePrefix="planholder.gender"/>
+    <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
+                 field="gender">
+        <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="gender">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'birthdate', 'error')} required">
@@ -39,7 +71,14 @@
 		<span class="required-indicator">*</span>
 	</label>
     <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:createPlanHolderDto?.clientProfile?.birthdate)}" />
-
+    <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
+                 field="birthdate">
+        <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="birthdate">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'email', 'error')} ">
@@ -92,8 +131,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'zipcode', 'error')} ">
 	<label for="zipcode">
-		<g:message code="planholder.zipcode.label" default="Zipcode" />
-		
+		ZIP Code
 	</label>
 	<g:textField name="zipcode" value="${createPlanHolderDto?.clientProfile?.zipcode}"/>
 </div>
@@ -116,8 +154,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'officenumber', 'error')} ">
 	<label for="officenumber">
-		<g:message code="planholder.officenumber.label" default="Officenumber" />
-		
+        Office Number
 	</label>
 	<g:textField name="officenumber" value="${createPlanHolderDto?.clientProfile?.officenumber}"/>
 </div>

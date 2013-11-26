@@ -22,22 +22,15 @@
             <g:if test="${flash.error}">
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
-			<g:hasErrors bean="${createAgentDto?.clientProfile}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${createAgentDto?.clientProfile}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
-			</g:hasErrors>
 			<g:form action="create" >
 				<fieldset class="form">
 					<g:render template="/agent/form"/>
 				</fieldset>
 				<fieldset class="buttons">
 					%{--<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />--}%
-                    <g:submitButton class="save" name="saveAgent" event="saveAgent" value="Create" />
                     <g:submitButton name="return" event="return" value="Back" />
-				</fieldset>
+                    <g:submitButton class="save" name="saveAgent" event="saveAgent" value="Create" />
+                </fieldset>
 			</g:form>
 
 		</div>

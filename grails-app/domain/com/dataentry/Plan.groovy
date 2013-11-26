@@ -55,9 +55,9 @@ class Plan implements Serializable {
     static constraints = {
         planNumber blank:  false, nullable:  false, unique: true
         product blank:  false, nullable:  false
-        payingPeriod blank:  false, nullable:  false, matches: numeric()
-        maturityPeriod blank:  false, nullable:  false, matches: numeric()
-        pnpPrice blank:  false, nullable:  false
+        payingPeriod blank:  false, nullable:  false, matches: numeric(),  minSize: 0
+        maturityPeriod blank:  false, nullable:  false, matches: numeric(), minSize: 0
+        pnpPrice blank:  false, nullable:  false,  min: 0.0, max: 99999999.99, scale: 2
         modalInstallment blank:  false, nullable:  false
         numberOfUnits blank:  false, nullable:  false, matches: numeric(), minSize: 0
 //        origIssueDate blank:  true, nullable:  true

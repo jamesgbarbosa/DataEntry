@@ -269,6 +269,7 @@ class PlanController {
                     agent = null
                 }
                 conversation.agentInstance = agent
+                flash.red = "true"
 //                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("beneficiaries")
 
@@ -303,6 +304,7 @@ class PlanController {
                     conversation.agentInstance = agentInstance
                     return error()
                 }
+                flash.red = "true"
             }.to{
                 if(flow.duplicateClientError != "") {
                     return "agent"
@@ -351,6 +353,7 @@ class PlanController {
                 conversation.amendmentInstance = amendmentInstance
                 if(amendmentInstance.validate()) {
                     conversation.amendments.add(amendmentInstance)
+                    conversation.amendmentInstance = null
                 } else {
                     return error()
                 }

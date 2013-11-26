@@ -14,12 +14,14 @@
             </ul>
         </div>
         <div id="create-beneficiary" class="content scaffold-create" role="main">
-            <h1>
+        <div id="breadcrumbs">
+            <h4>
                 <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
                 <g:if test="${page2link!=''}"> <a href="${page2link}&red=true"> Create Beneficiaries </a> > </g:if>
                 <g:if test="${page3link!=''}"> <a href="${page3link}&red=true"> Create Agent </a> > </g:if>
                 Create Amendments
-            </h1>
+            </h4>
+        </div>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -131,7 +133,8 @@
                 <fieldset class="buttons">
                     %{--<input type="button" value="Add" id="addAmendmentButton"/>--}%
                     <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
-                    <g:submitButton id="addAmendmentButton" formaction="create" name="delete" event="delete" value="Delete"/>
+                    <g:submitButton id="delete-amendment" formaction="create" name="delete" event="delete" value="Delete"/>
+                    <input type="button" name="open-delete-amendment-dialog" id="open-delete-amendment-dialog" value="Delete"/>
 
                 </fieldset>
             </g:form>
@@ -150,5 +153,19 @@
                 </g:form>
             </div>
         </div>
+        <div id="delete-amendment-dialog-confirm" title="Delete Amendment">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 10px 0;"></span>
+                Are you sure you want to proceed?
+            </p>
+            <br>
+            <div class="buttons">
+                <g:form action="create">
+                    <input type="button" name="confirm-delete-amendment" id="confirm-delete-amendment" value="Delete"/>
+                    <input type="button" id="confirm-cancel-delete-amendment-form" value="Cancel" />
+                </g:form>
+            </div>
+        </div>
+        <g:hiddenField name="red" value="${params.red ? params.red : request.red}"/>
     </body>
 </html>
