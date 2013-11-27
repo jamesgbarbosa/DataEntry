@@ -50,9 +50,12 @@
                     <g:hiddenField name="planholderId" value="${planholderInstance?.clientProfile?.id}"/>
                     <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>
 
-                    <span class="buttons">
-                        <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
-                    </span>
+                    <g:if test="${!readOnly}">
+                        <span class="buttons">
+                            <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
+                        </span>
+                    </g:if>
+
                     <g:hasErrors bean="${beneficiaryInstance}"
                                  field="clientProfile">
                         <g:eachError bean="${beneficiaryInstance}" field="clientProfile">
@@ -133,9 +136,11 @@
                     </table>
                 </div>
                 <fieldset class="buttons">
+                <g:if test="${!readOnly}">
                     <g:submitButton name="add" event="add" value="Add" />
                     <g:submitButton id="delete-beneficiary" name="delete"  formaction="create" event="delete" value="Delete" />
                     <input type="button" name="open-delete-beneficiary-dialog" id="open-delete-beneficiary-dialog" value="Delete"/>
+                </g:if>
                 </fieldset>
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>

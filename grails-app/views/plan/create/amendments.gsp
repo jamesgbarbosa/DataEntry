@@ -93,8 +93,12 @@
                 </div>
                 <fieldset class="buttons">
                     <g:submitButton name="return" event="return" value="Back" />
-                    <input type="button" name="open-save-plan-dialog" id="open-save-plan-dialog" value="Save Plan"/>
-
+                     <g:if test="${!readOnly}">
+                        <input type="button" name="open-save-plan-dialog" id="open-save-plan-dialog" value="Save Plan"/>
+                     </g:if>
+                    <g:else>
+                        <g:submitButton name="next" event="next" value="Next" />
+                    </g:else>
                 </fieldset>
                 <div id="updateMe">
                     <table id="amendments">
@@ -131,11 +135,11 @@
                     </table>
                 </div>
                 <fieldset class="buttons">
-                    %{--<input type="button" value="Add" id="addAmendmentButton"/>--}%
-                    <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
-                    <g:submitButton id="delete-amendment" formaction="create" name="delete" event="delete" value="Delete"/>
-                    <input type="button" name="open-delete-amendment-dialog" id="open-delete-amendment-dialog" value="Delete"/>
-
+                    <g:if test="${!readOnly}">
+                        <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
+                        <g:submitButton id="delete-amendment" formaction="create" name="delete" event="delete" value="Delete"/>
+                        <input type="button" name="open-delete-amendment-dialog" id="open-delete-amendment-dialog" value="Delete"/>
+                    </g:if>
                 </fieldset>
             </g:form>
             <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>

@@ -44,9 +44,13 @@
                     <g:hiddenField name="agent.id" value="${agentInstance?.clientProfile?.id}"/>
                     <g:hiddenField name="planholderId" value="${planholderInstance?.clientProfile?.id}"/>
                     <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>
-                    <span class="buttons">
-                        <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create Agent"/>
-                    </span>
+
+                    <g:if test="${!readOnly}">
+                        <span class="buttons">
+                            <g:submitButton formaction="create" name="createAgent" event="createAgent" value="Create Agent"/>
+                        </span>
+                    </g:if>
+
                     <g:hasErrors bean="${agentInstance}"
                                  field="clientProfile">
                         <g:eachError bean="${agentInstance}" field="clientProfile">

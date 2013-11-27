@@ -48,6 +48,7 @@ class PlanController {
 
         init {
             action {
+                conversation.readOnly = false
                 conversation.planInstance =  new Plan()
                 conversation.agentInstance =  new Agent()
                 conversation.planholderInstance =  new Planholder()
@@ -90,39 +91,46 @@ class PlanController {
                 flow.duplicateClientError = ""
 
                 Plan plan = new Plan()
+                Planholder planHolder = new Planholder()
                 plan.bindParams(params)
                 Client client
+
                 flow.returnCode = ""
+
                 if(params.planHolder.id) {
                     client = Client.get(params.planHolder.id)
-                    plan.planHolder.clientProfile = client
+                    planHolder.clientProfile = client
                 } else {
-                    plan.planHolder = null
+                    planHolder = null
                 }
-                conversation.planholderInstance = plan.planHolder
-                if(plan.validate()) {
-                    def errorCode
-                    def page = "planholder"
-                    if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) && page!="agent" ) {
-                        errorCode = "Client already added as agent."
-                    }  else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
-                        errorCode = "Client already added as beneficiary."
-                    } else {
-                        errorCode = ""
-                    }
-                    if(errorCode == "") {
-                        conversation.planInstance = plan
-                        flow.returnCode = "yes"
-                    } else {
-                        flow.duplicateClientError = errorCode
-                        conversation.planInstance = plan
-                        flow.returnCode= "no"
-                    }
+                conversation.planholderInstance = planHolder
+                if(!conversation.readOnly) {
+                    if(plan.validate()) {
+                        def errorCode
+                        if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
+                            errorCode = "Client already added as agent."
+                        }  else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
+                            errorCode = "Client already added as beneficiary."
+                        } else {
+                            errorCode = ""
+                        }
+                        if(errorCode == "") {
+                            conversation.planInstance = plan
+                            flow.returnCode = "yes"
+                        } else {
+                            flow.duplicateClientError = errorCode
+                            conversation.planInstance = plan
+                            flow.returnCode= "no"
+                        }
 
+                    } else {
+                        conversation.planInstance = plan
+                        flow.returnCode = "no"
+                    }
                 } else {
-                    conversation.planInstance = plan
-                    flow.returnCode = "no"
+                    flow.returnCode = "yes"
                 }
+
                 flash.red = "true"
 
             }.to {
@@ -346,6 +354,9 @@ class PlanController {
 //              conversation.page4link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("agent")
 
+            on("next") {
+            }.to("show")
+
             on("add") {
                 def amendmentInstance = new Amendment()
                 amendmentInstance.bindParams(params)
@@ -406,12 +417,24 @@ class PlanController {
                 }
                 flow.myMessage = "Plan ${plan?.planNumber} successfully created."
                 conversation.planInstance = plan
-            }.to('last')
+            }.to('show')
+        }
+
+        show {
+            on("return"){
+                conversation.readOnly = true
+//              conversation.page4link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+            }.to("amendments")
+
+            on("finish") {
+
+            }.to("last")
         }
 
         //End State
         last {
-            redirect(action: "show", id: conversation.planInstance?.id, params:[message: flow.myMessage])
+//            redirect(action: "show", id: conversation.planInstance?.id, params:[message: flow.myMessage])
+              redirect(action: "list")
         }
     }
 
