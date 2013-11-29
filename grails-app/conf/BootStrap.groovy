@@ -1,5 +1,6 @@
 import com.dataentry.Agent
 import com.dataentry.Beneficiary
+import com.dataentry.Plan
 import com.dataentry.Planholder
 import com.dateentry.reftables.Product
 import com.dateentry.reftables.AmendmentTypes
@@ -65,9 +66,9 @@ class BootStrap {
 
 
 
-                new Client(firstName: 'Agent1', lastName: 'test' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-                new Client(firstName: 'Agent2', lastName: 'apple' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-                new Client(firstName: 'Agent3', lastName: 'hello' ,middleName: 'X' , birthdate: new Date(), gender: 'Male' ).save(flush: true, failOnError: true)
+                def client1 = new Client(firstName: 'Agent1', lastName: 'test' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+                def client2 = new Client(firstName: 'Agent2', lastName: 'apple' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+                def client3 = new Client(firstName: 'Agent3', lastName: 'hello' ,middleName: 'X' , birthdate: new Date(), gender: 'Male' ).save(flush: true, failOnError: true)
                 new Client(firstName: 'Agent4', lastName: 'orange' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
                 new Client(firstName: 'Agent5', lastName: 'red' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
                 new Client(firstName: 'Agent6', lastName: 'blue' ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
@@ -85,6 +86,17 @@ class BootStrap {
                 new Client(firstName: 'Elena', lastName: 'orange' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: 'Zafina', lastName: 'red' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: 'Anne', lastName: 'blue' ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
+
+                def p = new Planholder(clientProfile: client1).save(flush: true, failOnError: true)
+                def b = new Beneficiary(clientProfile: client2, designation: 'Sample1', relationship: 'tae').save(flush: true, failOnError: true)
+                def a = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test' ).save(flush: true, failOnError: true)
+                def beneficiaries = new ArrayList<Beneficiary>()
+                beneficiaries.add(b)
+                new Plan(planNumber: 'p100', beneficiaries: b, agent: a, planHolder: p, product: 'Sample1', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+                ,paymentMode: 'Sample1', modalInstallment: 1, numberOfUnits: 1, planStatus: 'Sample1', withInsurance: false).save(flush:true, failOnError: true)
+
+
+
 //            }
 //        }
 

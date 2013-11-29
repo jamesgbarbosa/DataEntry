@@ -27,7 +27,7 @@
             <g:if test="${flash.error}">
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
-			<g:form action="create" >
+			<g:form action="edit" >
 				<fieldset class="form">
 					<g:render template="/beneficiary/form"/>
 				</fieldset>

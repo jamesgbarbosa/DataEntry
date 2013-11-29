@@ -21,7 +21,6 @@
                 %{--<g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>--}%
                 %{--<g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%
                 </h4>
-
             </div>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
@@ -29,7 +28,7 @@
             <g:if test="${flash.error}">
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
-            <g:form action="create" >
+            <g:form action="edit" >
                 %{--<g:eachError bean="${beneficiaryInstance}" var="error">--}%
                     %{--<ul class="errors" role="alert">--}%
                         %{--<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>--}%
@@ -53,7 +52,7 @@
 
                     <g:if test="${!readOnly}">
                         <span class="buttons">
-                            <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
+                            <g:submitButton formaction="edit" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
                         </span>
                     </g:if>
 
@@ -103,7 +102,7 @@
 
                 <fieldset class="buttons">
                     <g:submitButton name="return" event="return" value="Back" />
-                    <g:submitButton formaction="create" name="next" event="next" value="Next"/>
+                    <g:submitButton formaction="edit" name="next" event="next" value="Next"/>
                 </fieldset>
                 <div id="updateMe">
                     <table id="beneficiaries">
@@ -139,7 +138,7 @@
                 <fieldset class="buttons">
                 <g:if test="${!readOnly}">
                     <g:submitButton name="add" event="add" value="Add" />
-                    <g:submitButton id="delete-beneficiary" name="delete"  formaction="create" event="delete" value="Delete" />
+                    <g:submitButton id="delete-beneficiary" name="delete"  formaction="edit" event="delete" value="Delete" />
                     <input type="button" name="open-delete-beneficiary-dialog" id="open-delete-beneficiary-dialog" value="Delete"/>
                 </g:if>
                 </fieldset>
@@ -153,7 +152,7 @@
             </p>
             <br>
             <div class="buttons">
-                <g:form action="create">
+                <g:form action="edit">
                     <input type="button" name="confirm-delete-beneficiary" id="confirm-delete-beneficiary" value="Delete"/>
                     <input type="button" id="confirm-cancel-delete-beneficiary-form" value="Cancel" />
                 </g:form>
