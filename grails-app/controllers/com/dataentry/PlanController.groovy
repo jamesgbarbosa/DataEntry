@@ -85,7 +85,7 @@ class PlanController {
                 plan.bindParams(params)
                 conversation.planInstance = plan
                 conversation.planholderInstance = planHolder
-                conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution[0]])
+                conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to('createPlanHolder')
 
             on('beneficiaries'){
