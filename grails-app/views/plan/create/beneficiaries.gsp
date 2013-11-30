@@ -45,7 +45,7 @@
                         <sup><span class="required-indicator">*</span></sup>
                         Beneficiary
                     </label>
-                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName!=null ? beneficiaryInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
+                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName ? beneficiaryInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
                     <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.clientProfile?.id}"/>
                     <g:hiddenField name="agentId" value="${agentInstance?.clientProfile?.id}"/>
                     <g:hiddenField name="planholderId" value="${planholderInstance?.clientProfile?.id}"/>
@@ -98,6 +98,15 @@
                             </g:eachError>
                         </g:hasErrors>
                     </div>
+                    <div class="fieldcontain" >
+                        <label for="Add">
+
+                        </label>
+                        <g:if test="${!readOnly}">
+                            <g:submitButton name="add" event="add" value="Add" />
+                        </g:if>
+                    </div>
+
                     <br>
                     <hr>
 
@@ -138,7 +147,6 @@
                 </div>
                 <fieldset class="buttons">
                 <g:if test="${!readOnly}">
-                    <g:submitButton name="add" event="add" value="Add" />
                     <g:submitButton id="delete-beneficiary" name="delete"  formaction="create" event="delete" value="Delete" />
                     <input type="button" name="open-delete-beneficiary-dialog" id="open-delete-beneficiary-dialog" value="Delete"/>
                 </g:if>

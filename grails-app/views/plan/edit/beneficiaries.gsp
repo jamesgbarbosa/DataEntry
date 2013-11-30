@@ -97,6 +97,14 @@
                             </g:eachError>
                         </g:hasErrors>
                     </div>
+                    <div class="fieldcontain" >
+                        <label for="Add">
+
+                        </label>
+                        <g:if test="${!readOnly}">
+                            <g:submitButton name="add" event="add" value="Add" />
+                        </g:if>
+                    </div>
                     <br>
                     <hr>
 
@@ -137,7 +145,6 @@
                 </div>
                 <fieldset class="buttons">
                 <g:if test="${!readOnly}">
-                    <g:submitButton name="add" event="add" value="Add" />
                     <g:submitButton id="delete-beneficiary" name="delete"  formaction="edit" event="delete" value="Delete" />
                     <input type="button" name="open-delete-beneficiary-dialog" id="open-delete-beneficiary-dialog" value="Delete"/>
                 </g:if>

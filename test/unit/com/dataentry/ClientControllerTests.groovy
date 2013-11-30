@@ -8,7 +8,8 @@ import grails.test.mixin.*
 @TestFor(ClientController)
 @Mock([Client, Agent, Planholder, Beneficiary])
 class ClientControllerTests {
-
+    def beneficiaries = []
+    def b
     @Before
     void setUp() {
         new Agent(firstName: 'Agent1', lastName: 'test' , birthdate: new Date(), gender: 'Male', clientType: 'Agent').save(flush: true)
@@ -25,39 +26,55 @@ class ClientControllerTests {
         new Planholder(firstName: 'Ben', lastName: 'red' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true)
         new Planholder(firstName: 'Michael', lastName: 'blue' , birthdate: new Date(), gender: 'Male', clientType: 'Plan Holder').save(flush: true)
 
-        new Beneficiary(firstName: 'Diana', lastName: 'test' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
-        new Beneficiary(firstName: 'Rona', lastName: 'apple' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
-        new Beneficiary(firstName: 'Angelica', lastName: 'hello' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
-        new Beneficiary(firstName: 'Elena', lastName: 'orange' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
+        def b = new Beneficiary(firstName: 'Diana', lastName: 'test' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
+        def b1= new Beneficiary(firstName: 'Rona', lastName: 'apple' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
+        def b2 = new Beneficiary(firstName: 'Angelica', lastName: 'hello' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
+        def b3 = new Beneficiary(firstName: 'Elena', lastName: 'orange' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
         new Beneficiary(firstName: 'Zafina', lastName: 'red' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
         new Beneficiary(firstName: 'Anne', lastName: 'blue' , birthdate: new Date(), gender: 'Female', clientType: 'Beneficiary').save(flush: true)
+
+        beneficiaries.add(b1)
+        beneficiaries.add(b2)
+        beneficiaries.add(b3)
+        beneficiaries.add(b)
+
+
     }
 
-    def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-    }
+//    def populateValidParams(params) {
+//        assert params != null
+//        // TODO: Populate valid properties like...
+//        //params["name"] = 'someValidName'
+//    }
+//
+//    void testIndex() {
+//        controller.index()
+//        assert "/client/list" == response.redirectedUrl
+//    }
+//
+//    void testList() {
+//
+//        def model = controller.list()
+//
+//        assert model.clientInstanceList.size() == 10
+//        assert model.clientInstanceTotal == 18
+//    }
+//
+//    void testSearchClients() {
+//        params.firstName = 'A'
+//        params.lastName = ''
+//        def model = controller.list()
+//
+//        assert model.clientInstanceList.size() == 8
+//        assert model.clientInstanceList!=null
+//    }
 
-    void testIndex() {
-        controller.index()
-        assert "/client/list" == response.redirectedUrl
-    }
+    void testSomething() {
+        def x = false
+            if(beneficiaries.contains(b)) {
+                  x = true
+            }
 
-    void testList() {
-
-        def model = controller.list()
-
-        assert model.clientInstanceList.size() == 10
-        assert model.clientInstanceTotal == 18
-    }
-
-    void testSearchClients() {
-        params.firstName = 'A'
-        params.lastName = ''
-        def model = controller.list()
-
-        assert model.clientInstanceList.size() == 8
-        assert model.clientInstanceList!=null
+        assertTrue x
     }
 }

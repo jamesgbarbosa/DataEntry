@@ -25,7 +25,9 @@ class PlanController {
                     }
                     if(params.planholderName!=''){
                         planHolder {
-                            ilike("firstName","${params.planholderName}%")
+                            clientProfile {
+                                ilike("firstName","%${params.planholderName}%")
+                            }
                         }
                     }
                 }
@@ -90,7 +92,6 @@ class PlanController {
 
             on('beneficiaries'){
                 flow.duplicateClientError = ""
-
                 Plan plan = new Plan()
                 Planholder planHolder = new Planholder()
                 plan.bindParams(params)
@@ -219,6 +220,7 @@ class PlanController {
             on("return"){
                 flow.duplicateClientError = ""
                 conversation.beneficiaryInstance = new Beneficiary()
+                flash.red = "true"
 //                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createPlan")
 
@@ -264,6 +266,7 @@ class PlanController {
                 } else {
                     return error()
                 }
+                flash.red = "true"
             }.to('beneficiaries')
         }
 
@@ -452,8 +455,8 @@ class PlanController {
                 conversation.planId = params.id
                 conversation.readOnly = false
                 conversation.planInstance =  planInstance
-                conversation.agentInstance =  planInstance.agent
-                conversation.planholderInstance =  planInstance.planHolder
+                conversation.agentInstance =  planInstance?.agent
+                conversation.planholderInstance =  planInstance?.planHolder
                 conversation.amendmentInstance = new Amendment()
                 conversation.beneficiaryInstance = new Beneficiary()
 
@@ -497,10 +500,10 @@ class PlanController {
 
             on('beneficiaries'){
                 flow.duplicateClientError = ""
-
-                Plan plan = new Plan()
+                Plan plan = conversation.planInstance
                 Planholder planHolder = new Planholder()
                 plan.bindParams(params)
+                flow.planDetails = plan
                 Client client
 
                 flow.returnCode = ""
@@ -599,7 +602,7 @@ class PlanController {
                     }
                     if(errorCode == "") {
                         conversation.beneficiaries.add(beneficiaryInstance)
-                        conversation.planInstance.beneficiaries = conversation.beneficiaries
+//                        conversation.planInstance.beneficiaries = conversation.beneficiaries
                         flow.beneficiaryInstance = null
                     } else {
                         flow.beneficiaryInstance = beneficiaryInstance
@@ -626,6 +629,7 @@ class PlanController {
             on("return"){
                 flow.duplicateClientError = ""
                 conversation.beneficiaryInstance = new Beneficiary()
+                flash.red = "true"
 //                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createPlan")
 
@@ -671,6 +675,7 @@ class PlanController {
                 } else {
                     return error()
                 }
+                flash.red = "true"
             }.to('beneficiaries')
         }
 
@@ -712,7 +717,7 @@ class PlanController {
                         errorCode = ""
                     }
                     if(errorCode == "") {
-                        conversation.planInstance.agent = agentInstance
+//                        conversation.planInstance.agent = agentInstance
                     } else {
                         flow.duplicateClientError = errorCode
                     }
@@ -791,48 +796,72 @@ class PlanController {
 
             on('savePlan') {
                 def plan = Plan.get(conversation.planId)
-                plan.properties = conversation.planInstance.properties
+                plan.currentIssueDate = flow.planDetails.currentIssueDate
+                plan.applicableDate = flow.planDetails.applicableDate
+                plan.planNumber = flow.planDetails.planNumber
+                plan.product = flow.planDetails.product
+                plan.payingPeriod = flow.planDetails.payingPeriod
+                plan.maturityPeriod = flow.planDetails.maturityPeriod
+                plan.pnpPrice =flow.planDetails.pnpPrice
+                plan.modalInstallment = flow.planDetails.modalInstallment
+                plan.numberOfUnits = flow.planDetails.numberOfUnits
+                plan.paymentMode = flow.planDetails.paymentMode
+                plan.planStatus = flow.planDetails.planStatus
+                plan.withInsurance = flow.planDetails.withInsurance
+
                 def beneficiaries = conversation.beneficiaries
                 def planholder = conversation.planholderInstance
                 def agent = conversation.agentInstance
                 def amendments = conversation.amendments
                 def oldAmendments = plan.amendments ? plan.amendments : new ArrayList<Amendment>()
+                def oldBeneficiaries = plan.beneficiaries ? plan.beneficiaries : new ArrayList<Beneficiary>()
 
-                if(planholder) {
-                    planholder.save()
-                    plan.planHolder = planholder
-                } else {
-                    plan.planHolder = null
-                }
-
-                if(agent) {
-                    agent.save()
-                    plan.agent = agent
-                } else {
-                    plan.agent = null
-                }
-
-                beneficiaries.each {
-                    it.save()
-                    plan.addToBeneficiaries(it)
-                }
-
-                oldAmendments.each {
-                    if(!amendments.contains(it)) {
-                        plan.removeFromAmendments(it)
+                Plan.withTransaction { status ->
+                    if(planholder) {
+                        planholder.save()
+                        plan.planHolder = planholder
+                    } else {
+                        plan.planHolder = null
                     }
-                }
 
-                amendments.each {
-                    if(!oldAmendments.contains(it)) {
-                        it.save()
-                        plan.addToAmendments(it)
+                    if(agent) {
+                        agent.save()
+                        plan.agent = agent
+                    } else {
+                        plan.agent = null
                     }
-                }
 
+//                  TODO: FIX THIS! NOT WORKING
+                    oldBeneficiaries.each {
+                        if(!beneficiaries.id.contains(it.id)) {
+                            plan.removeFromBeneficiaries(it)
+                        }
+                    }
 
-                if (!plan.save()) {
-                    return error()
+                    beneficiaries.each {
+                        if(!oldBeneficiaries.id.contains(it.id)) {
+                            it.save()
+                            plan.addToBeneficiaries(it)
+                        }
+                    }
+
+                    oldAmendments.each {
+                        if(!amendments.contains(it)) {
+                            plan.removeFromAmendments(it)
+                        }
+                    }
+
+                    amendments.each {
+                        if(!oldAmendments.contains(it)) {
+                            it.save()
+                            plan.addToAmendments(it)
+                        }
+                    }
+
+                    if (!plan.save(flush: true)) {
+                        return error()
+                    }
+
                 }
                 flow.myMessage = "Plan ${plan?.planNumber} successfully created."
                 conversation.planInstance = plan

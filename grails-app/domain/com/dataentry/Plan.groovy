@@ -7,11 +7,11 @@ class Plan implements Serializable {
 
     String planNumber
     String product
-    String payingPeriod
-    String maturityPeriod
+    int payingPeriod
+    int maturityPeriod
     BigDecimal pnpPrice
     BigDecimal modalInstallment
-    String numberOfUnits
+    int numberOfUnits
 //    Date origIssueDate
     Date currentIssueDate
     String paymentMode
@@ -29,6 +29,7 @@ class Plan implements Serializable {
         params.applicableDate  = isValidDate(params.applicableDate) ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : params.applicableDate
         this.properties = params
     }
+
 
     boolean isValidDate(String date) {
         if(date == null) {
@@ -53,13 +54,19 @@ class Plan implements Serializable {
     }
 
     static constraints = {
-        planNumber blank:  false, nullable:  false, unique: true
+        planNumber blank:  false, nullable:  false, validator: { val, obj ->
+            if(!Plan.get(obj?.id)) {
+                if(Plan.findByPlanNumber(val)) {
+                    return false
+                }
+            }
+        }
         product blank:  false, nullable:  false
-        payingPeriod blank:  false, nullable:  false, matches: numeric(),  minSize: 0
-        maturityPeriod blank:  false, nullable:  false, matches: numeric(), minSize: 0
+        payingPeriod blank:  false, nullable:  false, matches: numeric(),  min: 0
+        maturityPeriod blank:  false, nullable:  false, matches: numeric(), min: 0
         pnpPrice blank:  false, nullable:  false,  min: 0.0, max: 99999999.99, scale: 2
-        modalInstallment blank:  false, nullable:  false
-        numberOfUnits blank:  false, nullable:  false, matches: numeric(), minSize: 0
+        modalInstallment blank:  false, nullable:  false, min: 0.0, max: 99999999.99, scale: 2
+        numberOfUnits blank:  false, nullable:  false, matches: numeric(), min: 0
 //        origIssueDate blank:  true, nullable:  true
         currentIssueDate blank:  false, nullable:  false
         paymentMode blank:  false, nullable:  false

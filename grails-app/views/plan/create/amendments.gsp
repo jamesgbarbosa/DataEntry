@@ -85,7 +85,14 @@
                         </label>
                         <g:textField name="approvedBy" value="${amendmentInstance?.approvedBy}"/>
                     </div>
+                    <div class="fieldcontain" >
+                        <label for="Add">
 
+                        </label>
+                        <g:if test="${!readOnly}">
+                            <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
+                        </g:if>
+                    </div>
                 </div>
                     <br>
                     <hr>
@@ -136,8 +143,6 @@
                 </div>
                 <fieldset class="buttons">
                     <g:if test="${!readOnly}">
-                        <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
-                        <g:submitButton id="delete-amendment" formaction="create" name="delete" event="delete" value="Delete"/>
                         <input type="button" name="open-delete-amendment-dialog" id="open-delete-amendment-dialog" value="Delete"/>
                     </g:if>
                 </fieldset>
