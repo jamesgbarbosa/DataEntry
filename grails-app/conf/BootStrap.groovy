@@ -94,14 +94,10 @@ class BootStrap {
                 def beneficiaries = new ArrayList<Beneficiary>()
                 beneficiaries.add(b)
 
-                def amendments =  new ArrayList<Amendment>()
-                amendments.add(new Amendment(amendmentType: 'Transfer', effectiveDate: new Date(), filingDate: new Date()))
-                amendments.add(new Amendment(amendmentType: 'Transfer', effectiveDate: new Date(), filingDate: new Date()))
-                amendments.add(new Amendment(amendmentType: 'Transfer', effectiveDate: new Date(), filingDate: new Date()))
-                amendments.add(new Amendment(amendmentType: 'Transfer', effectiveDate: new Date(), filingDate: new Date()))
 
-                new Plan(planNumber: 'p100', beneficiaries: b, agent: a, planHolder: p, product: 'Sample1', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
-                ,paymentMode: 'Sample1', modalInstallment: 1, numberOfUnits: 1, planStatus: 'Sample1', withInsurance: false, amendments: amendments).save(flush:true, failOnError: true)
+
+        new Plan(planNumber: 'p100', beneficiaries: b, agent: a, planHolder: p, product: 'Sample1', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+                ,paymentMode: 'Sample1', modalInstallment: 1, numberOfUnits: 1, planStatus: 'Sample1', withInsurance: false).save(flush:true, failOnError: true)
 
 
 

@@ -833,10 +833,13 @@ class PlanController {
                         plan.agent = null
                     }
 
-//                  TODO: FIX THIS! NOT WORKING
-                    oldBeneficiaries.each {
+                    def tempb = []
+                    tempb.addAll(oldBeneficiaries)
+
+                    tempb.each {
                         if(!beneficiaries.id.contains(it.id)) {
                             plan.removeFromBeneficiaries(it)
+                            it.delete()
                         }
                     }
 
@@ -847,11 +850,22 @@ class PlanController {
                         }
                     }
 
-                    plan.amendments?.clear()
+
+                    def temp = []
+                    temp.addAll(oldAmendments)
+
+                    temp.each {
+                        if(!amendments.tempId.contains(it.tempId)) {
+                            plan.removeFromAmendments(it)
+                            it.delete()
+                        }
+                    }
 
                     amendments.each {
+                        if(!oldAmendments.tempId.contains(it.tempId)) {
                             it.save()
                             plan.addToAmendments(it)
+                        }
                     }
 
                     if (!plan.save(flush: true)) {
