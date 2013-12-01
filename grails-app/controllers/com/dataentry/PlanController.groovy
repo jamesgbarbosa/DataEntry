@@ -847,17 +847,11 @@ class PlanController {
                         }
                     }
 
-                    oldAmendments.each {
-                        if(!amendments.tempId.contains(it.tempId)) {
-                            plan.removeFromAmendments(it)
-                        }
-                    }
+                    plan.amendments?.clear()
 
                     amendments.each {
-                        if(!oldAmendments.tempId.contains(it.tempId)) {
                             it.save()
                             plan.addToAmendments(it)
-                        }
                     }
 
                     if (!plan.save(flush: true)) {

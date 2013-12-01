@@ -54,13 +54,7 @@ class Plan implements Serializable {
     }
 
     static constraints = {
-        planNumber blank:  false, nullable:  false, validator: { val, obj ->
-            if(!Plan.get(obj?.id)) {
-                if(Plan.findByPlanNumber(val)) {
-                    return false
-                }
-            }
-        }
+        planNumber blank:  false, nullable:  false, unique: true
         product blank:  false, nullable:  false
         payingPeriod blank:  false, nullable:  false, matches: numeric(),  min: 0
         maturityPeriod blank:  false, nullable:  false, matches: numeric(), min: 0
