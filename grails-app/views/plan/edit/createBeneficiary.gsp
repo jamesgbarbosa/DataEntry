@@ -17,8 +17,8 @@
 		</div>
 		<div id="create-beneficiary" class="content scaffold-create" role="main">
             <h4>
-                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
-                <g:if test="${page2link!=''}"> <a href="${page2link}&red=true"> Add Beneficiaries </a> > </g:if>
+                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Edit Plan</a> > </g:if>
+                <g:if test="${page2link!=''}"> <a href="${page2link}&red=true"> Edit Beneficiaries </a> > </g:if>
                 Create Beneficiary
             </h4>
 			<g:if test="${flash.message}">

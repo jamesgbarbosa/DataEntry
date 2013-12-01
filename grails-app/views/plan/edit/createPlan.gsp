@@ -16,7 +16,7 @@
 		<div id="create-plan" class="content scaffold-create" role="main">
             <div id="breadcrumbs">
                 <h4>
-                Create Plan
+                Edit Plan
                 %{--<g:if test="${page2link!=''}"> >  <a href="${page2link}&red=true"> Create Beneficiaries </a> </g:if>--}%
                 %{--<g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>--}%
                 %{--<g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%

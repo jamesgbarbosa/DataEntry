@@ -119,23 +119,20 @@
                 <g:textField name="position" value="${agentInstance?.position}"/>
             </div>
 
-            %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agentCode', 'error')} ">--}%
-                %{--<label for="agentCode">--}%
-                    %{--<sup><span class="required-indicator">*</span></sup>--}%
-                    %{--<g:message code="agent.agentCode.label" default="Agent Code" />--}%
-
-                %{--</label>--}%
-                %{--<g:textField name="agentCode" value="${agentInstance?.agentCode}"/>--}%
-            %{--</div>--}%
-
-
             <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'appointmentDate', 'error')} ">
                 <label for="appointmentDate">
                     <g:message code="agent.appointmentDate.label" default="Appointment Date" />
 
                 </label>
                 <g:textField id="appointmentDate" name="appointmentDate" value="${formatDate(format:'MM/dd/yyyy',date:agentInstance?.appointmentDate)}" />
-
+                <g:hasErrors bean="${agentInstance}"
+                             field="appointmentDate">
+                    <g:eachError bean="${agentInstance}" field="appointmentDate">
+                        <span class="inlineErrors">
+                            <g:message  error="${it}" />
+                        </span>
+                    </g:eachError>
+                </g:hasErrors>
             </div>
             <br>
             <hr>
@@ -145,6 +142,7 @@
         </fieldset>
     </g:form>
     <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>
+    <g:hiddenField name="red" value="${params.red ? params.red : request.red}"/>
 </div>
 </body>
 </html>

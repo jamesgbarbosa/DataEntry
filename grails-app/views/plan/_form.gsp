@@ -74,7 +74,7 @@
         <sup><span class="required-indicator">*</span></sup>
 		<g:message code="plan.payingPeriod.label" default="Paying Period" />
 	</label>
-	<g:field name="payingPeriod" type="number" value="${planInstance.payingPeriod}"/>
+	<g:field name="payingPeriod" value="${planInstance.payingPeriod}"/>
     <g:hasErrors bean="${planInstance}"
                  field="payingPeriod">
         <g:eachError bean="${planInstance}" field="payingPeriod">
@@ -90,7 +90,7 @@
         <sup><span class="required-indicator">*</span></sup>
         <g:message code="plan.maturityPeriod.label" default="Maturity Period" />
 	</label>
-	<g:field name="maturityPeriod" type="number" value="${planInstance.maturityPeriod}" />
+	<g:field name="maturityPeriod" value="${planInstance.maturityPeriod}" />
     <g:hasErrors bean="${planInstance}"
                  field="maturityPeriod">
         <g:eachError bean="${planInstance}" field="maturityPeriod">
@@ -146,7 +146,7 @@
         <sup><span class="required-indicator">*</span></sup>
         <g:message code="plan.numberOfUnits.label" default="Number Of Units" />
 	</label>
-	<g:field name="numberOfUnits" type="number" value="${planInstance.numberOfUnits}"/>
+	<g:field name="numberOfUnits" value="${planInstance.numberOfUnits}"/>
     <g:hasErrors bean="${planInstance}"
                  field="numberOfUnits">
         <g:eachError bean="${planInstance}" field="numberOfUnits">
@@ -196,7 +196,7 @@
         With Insurance
 	</label>
 	%{--<g:checkBox name="withInsurance" value="${planInstance?.withInsurance}" />--}%
-	<g:select name="withInsurance" value="${planInstance?.withInsurance}" optionKey= "value" optionValue="key" from="${['Y':true, 'N':false]}" />
+	<g:select name="withInsurance" value="${planInstance?.withInsurance}" optionKey= "value" optionValue="key" from="${['Yes':true, 'No':false]}" />
 </div>
 
 %{--<div class="fieldcontain ${hasErrors(bean: planInstance, field: 'agent', 'error')} ">--}%

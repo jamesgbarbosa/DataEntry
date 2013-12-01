@@ -16,8 +16,8 @@
         <div id="create-beneficiary" class="content scaffold-create" role="main">
             <div id="breadcrumbs">
                 <h4>
-                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
-                Add Beneficiaries
+                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Edit Plan </a> > </g:if>
+                Edit Beneficiaries
                 %{--<g:if test="${page3link!=''}"> >  <a href="${page3link}&red=true"> Create Agent </a> </g:if>--}%
                 %{--<g:if test="${page4link!=''}"> >  <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%
                 </h4>

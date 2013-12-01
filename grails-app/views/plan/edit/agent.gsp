@@ -16,9 +16,9 @@
 <div id="create-beneficiary" class="content scaffold-create" role="main">
     <div id="breadcrumbs">
         <h4>
-            <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
-            <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Create Beneficiaries</a> > </g:if>
-            Create Agent
+            <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Edit Plan </a> > </g:if>
+            <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Edit Beneficiaries</a> > </g:if>
+            Edit Agent
             %{--<g:if test="${page4link!=''}"> > <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%
         </h4>
     </div>
@@ -119,23 +119,20 @@
                 <g:textField name="position" value="${agentInstance?.position}"/>
             </div>
 
-            %{--<div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agentCode', 'error')} ">--}%
-                %{--<label for="agentCode">--}%
-                    %{--<sup><span class="required-indicator">*</span></sup>--}%
-                    %{--<g:message code="agent.agentCode.label" default="Agent Code" />--}%
-
-                %{--</label>--}%
-                %{--<g:textField name="agentCode" value="${agentInstance?.agentCode}"/>--}%
-            %{--</div>--}%
-
-
             <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'appointmentDate', 'error')} ">
                 <label for="appointmentDate">
                     <g:message code="agent.appointmentDate.label" default="Appointment Date" />
 
                 </label>
                 <g:textField id="appointmentDate" name="appointmentDate" value="${formatDate(format:'MM/dd/yyyy',date:agentInstance?.appointmentDate)}" />
-
+                <g:hasErrors bean="${agentInstance}"
+                             field="appointmentDate">
+                    <g:eachError bean="${agentInstance}" field="appointmentDate">
+                        <span class="inlineErrors">
+                            <g:message  error="${it}" />
+                        </span>
+                    </g:eachError>
+                </g:hasErrors>
             </div>
             <br>
             <hr>
@@ -145,6 +142,7 @@
         </fieldset>
     </g:form>
     <g:hiddenField name="clientsListLink" value="${createLink(controller: 'plan', action: 'clientsList')}"/>
+    <g:hiddenField name="red" value="${params.red ? params.red : request.red}"/>
 </div>
 </body>
 </html>

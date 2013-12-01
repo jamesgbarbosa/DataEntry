@@ -16,7 +16,7 @@
 		</div>
 		<div id="create-planholder" class="content scaffold-create" role="main">
             <h4>
-                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
+                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Edit Plan </a> > </g:if>
                 Create Planholder
             </h4>
 			<g:if test="${flash.message}">

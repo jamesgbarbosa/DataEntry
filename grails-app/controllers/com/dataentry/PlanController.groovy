@@ -238,6 +238,7 @@ class PlanController {
                     flow.duplicateClientError = "Please add atleast one beneficiary."
                     return "beneficiaries"
                 } else {
+                    flash.red = "true"
                     return "agent"
                 }
             }
@@ -491,11 +492,11 @@ class PlanController {
                 if(params.planHolder.id) {
                     planHolder.clientProfile = Client.get(params.planHolder.id)
                 }
-                Plan plan = new Plan()
+                Plan plan = conversation.planInstance
                 plan.bindParams(params)
                 conversation.planInstance = plan
                 conversation.planholderInstance = planHolder
-                conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution[0]])
+                conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to('createPlanHolder')
 
             on('beneficiaries'){
@@ -647,6 +648,7 @@ class PlanController {
                     flow.duplicateClientError = "Please add atleast one beneficiary."
                     return "beneficiaries"
                 } else {
+                    flash.red = "true"
                     return "agent"
                 }
             }
