@@ -23,7 +23,7 @@
         <g:message code="plan.planHolder.label" default="Plan Holder" />
     </label>
 %{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-    <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planholderInstance?.clientProfile?.firstName? planholderInstance?.clientProfile?.fullName() : ""}" placeholder="Search a client..."/>
+    <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planholderInstance?.clientProfile?.firstName? planholderInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
     <g:hiddenField name="planHolder.id" value="${planholderInstance?.clientProfile?.id}"/>
 
     <g:hiddenField name="agentId" value="${agentInstance?.clientProfile?.id}"/>

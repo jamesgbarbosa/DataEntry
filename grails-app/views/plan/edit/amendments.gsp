@@ -85,14 +85,6 @@
                         </label>
                         <g:textField name="approvedBy" value="${amendmentInstance?.approvedBy}"/>
                     </div>
-                    <div class="fieldcontain" >
-                        <label for="Add">
-
-                        </label>
-                        <g:if test="${!readOnly}">
-                            <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
-                        </g:if>
-                    </div>
                 </div>
                     <br>
                     <hr>
@@ -106,6 +98,9 @@
                     <g:else>
                         <g:submitButton name="next" event="next" value="Next" />
                     </g:else>
+                    <g:if test="${!readOnly}">
+                        <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
+                    </g:if>
                 </fieldset>
                 <div id="updateMe">
                     <table id="amendments">

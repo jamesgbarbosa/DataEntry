@@ -97,20 +97,15 @@
                             </g:eachError>
                         </g:hasErrors>
                     </div>
-                    <div class="fieldcontain" >
-                        <label for="Add">
-
-                        </label>
-                        <g:if test="${!readOnly}">
-                            <g:submitButton name="add" event="add" value="Add" />
-                        </g:if>
-                    </div>
                     <br>
                     <hr>
 
                 <fieldset class="buttons">
                     <g:submitButton name="return" event="return" value="Back" />
                     <g:submitButton formaction="edit" name="next" event="next" value="Next"/>
+                    <g:if test="${!readOnly}">
+                        <g:submitButton name="add" event="add" value="Add" />
+                    </g:if>
                 </fieldset>
                 <div id="updateMe">
                     <table id="beneficiaries">

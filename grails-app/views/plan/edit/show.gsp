@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><a class="list" href="${createLink(uri: '/plan/list')}"><g:message code="default.list.label" args="[entityName]" /></a></li>
+				<li><g:link class="list" controller="plan" action="list">Search Plans</g:link></li>
 				<li><a class="create" href="${createLink(uri: '/plan/create')}"><g:message code="default.new.label" args="[entityName]" /></a></li>
 			</ul>
 		</div>
@@ -185,13 +185,29 @@
 			</ol>
 			<g:form action="create">
 				<fieldset class="buttons">
-                    <g:submitButton name="return" event="return" value="Back" />
+                    %{--<g:submitButton name="return" event="return" value="Back" />--}%
                     <g:submitButton name="finish" event="finish" value="Finish" />
                     <g:hiddenField name="id" value="${planInstance?.id}" />
                     <a class="create" href="${createLink(uri: '/plan/edit/')}${planInstance?.id}">Edit</a>
-                    <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    <g:actionSubmit id="delete-plan" class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>
+                    <input id="open-delete-plan-dialog" value="Delete" class="delete" type="button"/>
 				</fieldset>
 			</g:form>
 		</div>
+
+        <div id="delete-plan-dialog-confirm" title="Delete Plan">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 10px 0;"></span>
+                Are you sure you want to proceed?
+            </p>
+            <br>
+            <div class="buttons">
+                <g:form action="edit">
+                    <input type="button" name="confirm-delete-plan" id="confirm-delete-plan" value="Delete"/>
+                    <input type="button" id="confirm-cancel-delete-plan-form" value="Cancel" />
+                </g:form>
+            </div>
+        </div>
+
 	</body>
 </html>

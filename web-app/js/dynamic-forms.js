@@ -84,6 +84,34 @@ jQuery(document).ready(function($){
     });
 
 
+    $("#delete-plan-dialog-confirm").dialog({
+        autoOpen : false,
+        height : 'auto',
+        width : 'auto',
+        modal : true,
+        bgiframe : true,
+        cache: false,
+        resizable : false,
+        open : function() {
+            $('.ok').blur();
+        }
+    });
+
+    $('#delete-plan').hide()
+
+    $('#open-delete-plan-dialog').click(function() {
+            $("#delete-plan-dialog-confirm").dialog("open");
+    });
+
+    $('#confirm-delete-plan').click(function(){
+        $('#delete-plan').trigger('click')
+    });
+
+    $('#confirm-cancel-delete-plan-form').click(function() {
+        $("#delete-plan-dialog-confirm").dialog("close");
+    });
+
+
     if($("input[name='red']").val() == "true") {
         $('.fieldcontain').removeClass('error')
         $('.errors').hide()

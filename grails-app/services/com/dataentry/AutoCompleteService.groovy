@@ -59,4 +59,36 @@ class AutoCompleteService {
         }
         return clientsSelectionList
     }
+
+    def planholdersList(Map params) {
+        def query = {
+            clientProfile {
+                or {
+                    ilike("fullName", "${params.term}%")
+                    ilike("firstName", "${params.term}%")
+                    ilike("lastName", "${params.term}%")
+                }
+
+                projections {
+                    property("id")
+//                property("nasdaqSymbol")
+                    property("fullName")
+                    property("birthdate")
+                    property("gender")
+                }
+            }
+        }
+        def clientList = Planholder.createCriteria().list(query)
+        def clientsSelectionList = []
+        String sdf = new SimpleDateFormat("MM/dd/yyyy")
+        clientList.each {
+            def clientMap = [:]
+            clientMap.put("id", it[0] )
+
+            clientMap.put("value", it[1] + " : " + String.format("%1\$TD", it[2]) + " : " + it[3])
+//            clientMap.put("value", it[1])
+            clientsSelectionList.add(clientMap)
+        }
+        return clientsSelectionList as Set
+    }
 }
