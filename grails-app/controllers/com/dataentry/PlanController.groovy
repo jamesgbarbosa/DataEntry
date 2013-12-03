@@ -13,7 +13,7 @@ class PlanController {
     }
 
     def list(Integer max) {
-        if(params.planID || params.productID || params.planholderName) {
+        if(params.planID || params.productID || params.planHolder?.id) {
             def plans = Plan.withCriteria {
                 and {
                     if(params.productID!='') {
@@ -23,17 +23,25 @@ class PlanController {
                         eq("planNumber","${params.planID}")
 
                     }
-                    if(params.planholderName!=''){
+                    if(params.planHolder?.id!=''){
                         planHolder {
                             clientProfile {
-                                ilike("firstName","%${params.planholderName}%")
+                                if(params.planHolder?.id) {
+                                    eq("id",Long.parseLong(params.planHolder.id))
+
+                                }
                             }
                         }
                     }
                 }
             }
+
+            def planHolder
+            if(params.planHolder?.id) {
+                planHolder = Planholder.get(params.planHolder?.id)
+            }
             params.max = Math.min(max ?: 10, 100)
-            [planInstanceList: plans, planInstanceTotal: plans.size()]
+            [planInstanceList: plans, planInstanceTotal: plans.size(), planHolder:planHolder]
         } else {
             params.max = Math.min(max ?: 10, 100)
             [planInstanceList: Plan.list(params), planInstanceTotal: Plan.count()]
@@ -813,7 +821,9 @@ class PlanController {
 
                 def beneficiaries = conversation.beneficiaries
                 def planholder = conversation.planholderInstance
+                def oldPlanholder = plan.planHolder
                 def agent = conversation.agentInstance
+                def oldAgent =  plan.agent
                 def amendments = conversation.amendments
                 def oldAmendments = plan.amendments ? plan.amendments : new ArrayList<Amendment>()
                 def oldBeneficiaries = plan.beneficiaries ? plan.beneficiaries : new ArrayList<Beneficiary>()
@@ -826,11 +836,19 @@ class PlanController {
                         plan.planHolder = null
                     }
 
+                    if(oldPlanholder.clientProfile.id!=planholder.clientProfile.id) {
+                        oldPlanholder.delete()
+                    }
+
                     if(agent) {
                         agent.save()
                         plan.agent = agent
                     } else {
                         plan.agent = null
+                    }
+
+                    if(oldAgent.clientProfile.id!=agent.clientProfile.id) {
+                        oldAgent.delete()
                     }
 
                     def tempb = []
@@ -898,6 +916,10 @@ class PlanController {
 
     def clientsList = {
         render autoCompleteService.clientList(params) as JSON
+    }
+
+    def planholdersList = {
+        render autoCompleteService.planholdersList(params) as JSON
     }
 
 //    def create() {

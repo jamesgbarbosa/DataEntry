@@ -187,9 +187,25 @@
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${planInstance?.id}" />
 					<g:link class="edit" action="edit" id="${planInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+                    <g:actionSubmit id="delete-plan" class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>
+                    <input id="open-delete-plan-dialog" value="Delete" class="delete" type="button"/>
+                </fieldset>
 			</g:form>
 		</div>
-	</body>
+
+        <div id="delete-plan-dialog-confirm" title="Delete Plan">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 10px 0;"></span>
+                Are you sure you want to proceed?
+            </p>
+            <br>
+            <div class="buttons">
+                <g:form action="edit">
+                    <input type="button" name="confirm-delete-plan" id="confirm-delete-plan" value="Delete"/>
+                    <input type="button" id="confirm-cancel-delete-plan-form" value="Cancel" />
+                </g:form>
+            </div>
+        </div>
+
+    </body>
 </html>

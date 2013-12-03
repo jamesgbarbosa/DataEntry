@@ -85,14 +85,6 @@
                         </label>
                         <g:textField name="approvedBy" value="${amendmentInstance?.approvedBy}"/>
                     </div>
-                    <div class="fieldcontain" >
-                        <label for="Add">
-
-                        </label>
-                        <g:if test="${!readOnly}">
-                            <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
-                        </g:if>
-                    </div>
                 </div>
                     <br>
                     <hr>
@@ -106,6 +98,9 @@
                     <g:else>
                         <g:submitButton name="next" event="next" value="Next" />
                     </g:else>
+                    <g:if test="${!readOnly}">
+                        <g:submitButton id="addAmendmentButton" formaction="create" name="add" event="add" value="Add"/>
+                    </g:if>
                 </fieldset>
                 <div id="updateMe">
                     <table id="amendments">
@@ -143,6 +138,7 @@
                 </div>
                 <fieldset class="buttons">
                     <g:if test="${!readOnly}">
+                        <g:submitButton id="delete-amendment" formaction="edit" name="delete" event="delete" value="Delete"/>
                         <input type="button" name="open-delete-amendment-dialog" id="open-delete-amendment-dialog" value="Delete"/>
                     </g:if>
                 </fieldset>
@@ -157,7 +153,7 @@
             <br>
             <div class="buttons">
                 <g:form name="amendmentForm" action="create">
-                    <g:submitButton id="savePlan" formaction="create" name="savePlan" event="savePlan" value="Okay"/>
+                    <g:submitButton id="savePlan" formaction="create" name="savePlan" event="savePlan" value="Save"/>
                     <input type="button" id="confirm-cancel-form" value="Cancel" />
                 </g:form>
             </div>
