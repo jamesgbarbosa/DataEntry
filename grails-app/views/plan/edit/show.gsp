@@ -185,8 +185,8 @@
 			</ol>
 			<g:form action="create">
 				<fieldset class="buttons">
-                    <g:submitButton name="return" event="return" value="Back" />
-                    <g:submitButton name="finish" event="finish" value="Finish" />
+                    %{--<g:submitButton name="return" event="return" value="Back" />--}%
+                    %{--<g:submitButton name="finish" event="finish" value="Finish" />--}%
                     <g:hiddenField name="id" value="${planInstance?.id}" />
                     <a class="create" href="${createLink(uri: '/plan/edit/')}${planInstance?.id}">Edit</a>
                     <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />

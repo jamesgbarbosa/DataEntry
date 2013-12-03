@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label>Product ID</label>
+                        <label>Product Code</label>
                     </td>
                     <td>
                         <g:textField name="productID" value="${params.productID}"></g:textField>
@@ -45,7 +45,9 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <g:submitButton name="Submit" value="Submit"/>
+                        <fieldset class="buttons">
+                            <g:submitButton name="Submit" value="Submit"/>
+                         </fieldset>
                     </td>
                 </tr>
             </table>
@@ -63,7 +65,7 @@
 					
 						<g:sortableColumn property="planNumber" title="${message(code: 'plan.planNumber.label', default: 'Plan Number')}" />
 
-						<g:sortableColumn property="product" title="${message(code: 'plan.product.label', default: 'Product')}" />
+						<g:sortableColumn property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
 
 						<g:sortableColumn property="planholder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
 					

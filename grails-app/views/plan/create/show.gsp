@@ -225,8 +225,6 @@
     </ol>
     <g:form action="create">
         <fieldset class="buttons">
-            <g:submitButton name="return" event="return" value="Back"/>
-            <g:submitButton name="finish" event="finish" value="Finish"/>
             <g:hiddenField name="id" value="${planInstance?.id}"/>
             <a class="create" href="${createLink(uri: '/plan/edit/')}${planInstance?.id}">Edit</a>
 

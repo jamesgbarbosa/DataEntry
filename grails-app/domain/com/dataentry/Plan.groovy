@@ -80,4 +80,5 @@ class Plan implements Serializable {
     String toString() {
         product
     }
+
 }
