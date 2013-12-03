@@ -47,7 +47,7 @@
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'product', 'error')} required">
 	<label for="product">
         <sup><span class="required-indicator">*</span></sup>
-        <g:message code="plan.product.label" default="Product" />
+        <g:message code="plan.product.label" default="Product Code" />
 	</label>
 	<select:product value="${planInstance?.product}"/>
 </div>

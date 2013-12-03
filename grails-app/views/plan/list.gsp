@@ -45,15 +45,11 @@
                         <g:textField name="productID" value="${params.productID}"></g:textField>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <fieldset class="buttons">
-                            <g:submitButton name="Submit" value="Submit"/>
-                         </fieldset>
-                    </td>
-                </tr>
             </table>
-
+            <fieldset class="buttons">
+                <g:submitButton name="Submit" value="Submit"/>
+            </fieldset>
+            <br>
 
         </g:form>
     </div>
