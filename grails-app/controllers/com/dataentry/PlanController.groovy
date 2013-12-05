@@ -15,12 +15,12 @@ class PlanController {
     }
 
     def list(Integer max) {
-        if(params.planID || params.productID || params.planHolder?.id || params.dateCreated) {
+        if(params.planID || params.product || params.planHolder?.id || params.dateCreated) {
             params.dateCreated = DateUtil.isValidDate(params.dateCreated)? Date.parse( 'MM/dd/yyyy', params.dateCreated ) : params.dateCreated
             def plans = Plan.withCriteria {
                 and {
-                    if(params.productID!='') {
-                        eq("product","${params.productID}")
+                    if(params.product!='') {
+                        eq("product","${params.product}")
                     }
                     if(params.planID!=''){
                         eq("planNumber","${params.planID}")

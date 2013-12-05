@@ -50,6 +50,14 @@
         <g:message code="plan.product.label" default="Product Code" />
 	</label>
 	<select:product value="${planInstance?.product}"/>
+    <g:hasErrors bean="${planInstance}"
+                 field="product">
+        <g:eachError bean="${planInstance}" field="product">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'currentIssueDate', 'error')} required">
@@ -123,6 +131,14 @@
         <g:message code="plan.paymentMode.label" default="Payment Mode" />
     </label>
     <select:paymentMode value="${planInstance?.paymentMode}"/>
+    <g:hasErrors bean="${planInstance}"
+                 field="paymentMode">
+        <g:eachError bean="${planInstance}" field="paymentMode">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: planInstance, field: 'modalInstallment', 'error')} required">

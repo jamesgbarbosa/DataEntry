@@ -44,6 +44,14 @@
 
                         </label>
                         <select:amendmentTypes  name="amendmentType" value="${amendmentInstance?.amendmentType}"/>
+                        <g:hasErrors bean="${amendmentInstance}"
+                                     field="amendmentType">
+                            <g:eachError bean="${amendmentInstance}" field="amendmentType">
+                                <span class="inlineErrors">
+                                    <g:message  error="${it}" />
+                                </span>
+                            </g:eachError>
+                        </g:hasErrors>
                     </div>
 
                     <div class="fieldcontain ${hasErrors(bean: amendmentInstance, field: 'filingDate', 'error')} required">

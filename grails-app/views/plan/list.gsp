@@ -42,7 +42,8 @@
                         <label>Product Code</label>
                     </td>
                     <td>
-                        <g:textField name="productID" value="${params.productID}"></g:textField>
+                        <select:product value="${params.product}"/>
+
                     </td>
                 </tr>
                 <tr>
