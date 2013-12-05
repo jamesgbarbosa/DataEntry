@@ -918,6 +918,10 @@ class PlanController {
         render autoCompleteService.planholdersList(params) as JSON
     }
 
+    def zipcodesList = {
+        render autoCompleteService.zipcodesList(params) as JSON
+    }
+
 //    def create() {
 //        [planInstance: new Plan(params)]
 //    }

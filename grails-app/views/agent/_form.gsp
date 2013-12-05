@@ -115,6 +115,14 @@
 	<g:textField name="address3" value="${createAgentDto?.clientProfile?.address3}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'zipcode', 'error')} ">
+    <label for="zipcode">
+        ZIP Code
+    </label>
+    <g:textField class='autocomplete-field' name="zipcodes-autocomplete" value="${createAgentDto?.clientProfile?.zipcode}" placeholder="Search zipcode..."/>
+    <g:hiddenField name="zipcode" id="zipcode.id" value="${createAgentDto?.clientProfile?.zipcode}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'city', 'error')} ">
 	<label for="city">
 		<g:message code="agent.city.label" default="City" />
@@ -129,13 +137,6 @@
 		
 	</label>
 	<g:textField name="province" value="${createAgentDto?.clientProfile?.province}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'zipcode', 'error')} ">
-	<label for="zipcode">
-        ZIP Code
-    </label>
-	<g:textField name="zipcode" value="${createAgentDto?.clientProfile?.zipcode}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'landline', 'error')} ">
@@ -160,3 +161,5 @@
 	</label>
 	<g:textField name="officenumber" value="${createAgentDto?.clientProfile?.officenumber}"/>
 </div>
+
+<g:hiddenField name="zipcodesListLink" value="${createLink(controller: 'plan', action: 'zipcodesList')}"/>

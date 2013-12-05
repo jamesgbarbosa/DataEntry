@@ -74,6 +74,14 @@
 	<g:textField name="address3" value="${clientInstance?.address3}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'zipcode', 'error')} ">
+    <label for="zipcode">
+        ZIP Code
+    </label>
+    <g:textField class='autocomplete-field' name="zipcodes-autocomplete" value="${clientInstance?.zipcode}" placeholder="Search zipcode..."/>
+    <g:hiddenField name="zipcode" id="zipcode.id" value="${clientInstance?.zipcode}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'city', 'error')} ">
 	<label for="city">
 		<g:message code="client.city.label" default="City" />
@@ -88,14 +96,6 @@
 		
 	</label>
 	<g:textField name="province" value="${clientInstance?.province}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'zipcode', 'error')} ">
-	<label for="zipcode">
-		<g:message code="client.zipcode.label" default="Zipcode" />
-		
-	</label>
-	<g:textField name="zipcode" value="${clientInstance?.zipcode}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'landline', 'error')} ">
@@ -122,3 +122,4 @@
 	<g:textField name="officenumber" value="${clientInstance?.officenumber}"/>
 </div>
 
+<g:hiddenField name="zipcodesListLink" value="${createLink(controller: 'plan', action: 'zipcodesList')}"/>

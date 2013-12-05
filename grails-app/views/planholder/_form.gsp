@@ -113,6 +113,14 @@
 	<g:textField name="address3" value="${createPlanHolderDto?.clientProfile?.address3}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'zipcode', 'error')} ">
+    <label for="zipcode">
+        ZIP Code
+    </label>
+    <g:textField class='autocomplete-field' name="zipcodes-autocomplete" value="${createPlanHolderDto?.clientProfile?.zipcode}" placeholder="Search zipcode..."/>
+    <g:hiddenField name="zipcode" id="zipcode.id" value="${createPlanHolderDto?.clientProfile?.zipcode}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'city', 'error')} ">
 	<label for="city">
 		<g:message code="planholder.city.label" default="City" />
@@ -127,13 +135,6 @@
 		
 	</label>
 	<g:textField name="province" value="${createPlanHolderDto?.clientProfile?.province}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'zipcode', 'error')} ">
-	<label for="zipcode">
-		ZIP Code
-	</label>
-	<g:textField name="zipcode" value="${createPlanHolderDto?.clientProfile?.zipcode}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'landline', 'error')} ">
@@ -158,4 +159,6 @@
 	</label>
 	<g:textField name="officenumber" value="${createPlanHolderDto?.clientProfile?.officenumber}"/>
 </div>
+
+<g:hiddenField name="zipcodesListLink" value="${createLink(controller: 'plan', action: 'zipcodesList')}"/>
 

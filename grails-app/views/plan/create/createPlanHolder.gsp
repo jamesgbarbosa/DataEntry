@@ -36,5 +36,5 @@
                 </fieldset>
 			</g:form>
 		</div>
-	</body>
+    </body>
 </html>

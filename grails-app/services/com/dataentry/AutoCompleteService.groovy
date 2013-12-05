@@ -2,6 +2,7 @@ package com.dataentry
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import com.dateentry.reftables.ZipCodes
 
 class AutoCompleteService {
 
@@ -90,5 +91,32 @@ class AutoCompleteService {
             clientsSelectionList.add(clientMap)
         }
         return clientsSelectionList as Set
+    }
+    def zipcodesList(Map params) {
+        def query = {
+                or {
+                    ilike("code", "${params.term}%")
+                }
+
+                projections {
+                    property("id")
+//                property("nasdaqSymbol")
+                    property("code")
+                    property("province")
+                    property("city")
+                }
+        }
+        def zipcodesList = ZipCodes.createCriteria().list(query)
+        def zipCodeSelectionList = []
+        zipcodesList.each {
+            def clientMap = [:]
+            clientMap.put("id", it[0] )
+            clientMap.put("code", it[1] )
+            clientMap.put("value", it[1] + " : " +  it[2] + " : " + it[3])
+            clientMap.put("province", it[2])
+            clientMap.put("city", it[3])
+            zipCodeSelectionList.add(clientMap)
+        }
+        return zipCodeSelectionList as Set
     }
 }

@@ -2,6 +2,7 @@ jQuery.noConflict();
 jQuery(document).ready(function($){
     var clientListLink = $("input[name='clientsListLink']").val()
     var planholderListLink = $("input[name='planholderListLink']").val()
+    var zipcodesListLink = $("input[name='zipcodesListLink']").val()
     $('#agent-autocomplete').click(function() {
         $('#agent-autocomplete').trigger("focus"); //or "click", at least one should work
     });
@@ -121,6 +122,40 @@ jQuery(document).ready(function($){
         }
     }).focus(function() {
             $(this).autocomplete('search', $(this).val())
+    });
+
+    $("#zipcodes-autocomplete").autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: zipcodesListLink,
+                data: {
+                    term: request.term
+                },
+                success: function(data){
+                    response(data);
+                },
+                error: function(){
+                    alert("Unable to retrieve plan holders.")
+                }
+            });
+        },
+        minLength: 1,
+        select: function(event, ui) {
+            $("#zipcode\\.id").val(ui.item.code);
+            $("#city").val(ui.item.city);
+            $("#province").val(ui.item.province);
+        }
+    }).focus(function() {
+            $(this).autocomplete('search', $(this).val())
+    });
+
+    $("#zipcodes-autocomplete").change(function() {
+        alert("asd")
+        var textValue = $('#zipcodes-autocomplete').val()
+        if(textValue == "") {
+            $("#city").val("");
+            $("#province").val("");
+        }
     });
 
     $("#beneficiary-autocomplete").change(function() {

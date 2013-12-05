@@ -114,6 +114,14 @@
 	<g:textField name="address3" value="${beneficiaryInstance?.clientProfile?.address3}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'zipcode', 'error')} ">
+    <label for="zipcode">
+        ZIP Code
+    </label>
+    <g:textField class='autocomplete-field' name="zipcodes-autocomplete" value="${beneficiaryInstance?.clientProfile?.zipcode}" placeholder="Search zipcode..."/>
+    <g:hiddenField name="zipcode" id="zipcode.id" value="${beneficiaryInstance?.clientProfile?.zipcode}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'city', 'error')} ">
 	<label for="city">
 		<g:message code="beneficiary.city.label" default="City" />
@@ -128,13 +136,6 @@
 		
 	</label>
 	<g:textField name="province" value="${beneficiaryInstance?.clientProfile?.province}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'zipcode', 'error')} ">
-	<label for="zipcode">
-         ZIP Code
-	</label>
-	<g:textField name="zipcode" value="${beneficiaryInstance?.clientProfile?.zipcode}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'landline', 'error')} ">
@@ -160,19 +161,4 @@
 	<g:textField name="officenumber" value="${beneficiaryInstance?.clientProfile?.officenumber}"/>
 </div>
 
-%{--<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'designation', 'error')} ">--}%
-	%{--<label for="designation">--}%
-		%{--<g:message code="beneficiary.designation.label" default="Designation" />--}%
-		%{----}%
-	%{--</label>--}%
-	%{--<g:textField name="designation" value="${beneficiaryInstance?.clientProfile?.designation}"/>--}%
-%{--</div>--}%
-
-%{--<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'relationship', 'error')} ">--}%
-	%{--<label for="relationship">--}%
-		%{--<g:message code="beneficiary.relationship.label" default="Relationship" />--}%
-		%{----}%
-	%{--</label>--}%
-	%{--<g:textField name="relationship" value="${beneficiaryInstance?.clientProfile?.relationship}"/>--}%
-%{--</div>--}%
-
+<g:hiddenField name="zipcodesListLink" value="${createLink(controller: 'plan', action: 'zipcodesList')}"/>
