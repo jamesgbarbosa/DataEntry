@@ -530,7 +530,7 @@ class PlanController {
                         def errorCode
                         if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
                             errorCode = "Client already added as agent."
-                        } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planInstance.clientProfile?.id) )  {
+                        } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
                             errorCode = "Client already added as beneficiary."
                         }  else {
                             errorCode = ""
