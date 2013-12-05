@@ -153,7 +153,7 @@
             <br>
             <div class="buttons">
                 <g:form name="amendmentForm" action="edit">
-                    <g:submitButton id="savePlan" formaction="edit" name="savePlan" event="savePlan" value="Okay"/>
+                    <g:submitButton id="savePlan" formaction="edit" name="savePlan" event="savePlan" value="Save"/>
                     <input type="button" id="confirm-cancel-form" value="Cancel" />
                 </g:form>
             </div>

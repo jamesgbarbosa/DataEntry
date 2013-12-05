@@ -20,7 +20,7 @@ environments {
             dbCreate = "create-drop" // one of 'create', 'create-drop','update'
             url = "jdbc:mysql://localhost/dataentry"
             username = "root"
-            password = ""
+            password = "root"
 //            url = "jdbc:postgresql://localhost:5432/dataentry"
 //            username = "postgres"
 //            password = "postgres"
