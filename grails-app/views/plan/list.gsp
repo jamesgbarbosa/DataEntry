@@ -54,12 +54,10 @@
 
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <g:submitButton name="Submit" value="Submit"/>
-                    </td>
-                </tr>
             </table>
+            <fieldset class="buttons">
+                <g:submitButton name="Submit" value="Submit"/>
+            </fieldset>
 
 
         </g:form>
@@ -74,7 +72,7 @@
 					
 						<g:sortableColumn property="planNumber" title="${message(code: 'plan.planNumber.label', default: 'Plan Number')}" />
 
-						<g:sortableColumn property="product" title="${message(code: 'plan.product.label', default: 'Product')}" />
+						<g:sortableColumn property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
 
 						<g:sortableColumn property="planholder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
 					
