@@ -56,6 +56,7 @@ class BootStrap {
                 new Designation(name: 'INSURANCE - SECONDARY').save(flush: true, failOnError: true)
                 new Designation(name: 'PENSION BENEFICIARY').save(flush: true, failOnError: true)
                 new Designation(name: 'INSURANCE / PENSION BENEFICIARY').save(flush: true, failOnError: true)
+                new Designation(name: 'SCHOLAR').save(flush: true, failOnError: true)
                 new Designation(name: 'OTHERS').save(flush: true, failOnError: true)
 
                 new Relationship(name: 'SPOUSE').save(flush: true, failOnError: true)
