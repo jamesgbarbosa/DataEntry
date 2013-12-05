@@ -40,6 +40,11 @@ jQuery(document).ready(function($){
             changeMonth: true,
             changeYear: true,
             yearRange: "1920:2100"
+    });
+     $('#dateCreated').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1920:2100"
         });
 
     $("#agent-autocomplete").autocomplete({

@@ -46,6 +46,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <label>Date Created</label>
+                    </td>
+                    <td>
+                        <g:textField id="dateCreated" name="dateCreated" value="${ params?.dateCreated != '' ? formatDate(format:'MM/dd/yyyy',date: params.dateCreated) : ''}" />
+
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2">
                         <g:submitButton name="Submit" value="Submit"/>
                     </td>
@@ -104,6 +113,13 @@
 			<div class="pagination">
 				<g:paginate total="${planInstanceTotal}" />
 			</div>
+            <div id="totalSearchResults">
+                <g:if test="${planInstanceList.size()!=0}">
+                    <span class="totalSearchResultsText">
+                    Total Records Found: ${planInstanceList.size()}
+                    </span>
+                </g:if>
+            </div>
 		</div>
          <g:hiddenField name="planholderListLink" value="${createLink(controller: 'plan', action: 'planholdersList')}"/>
     </body>

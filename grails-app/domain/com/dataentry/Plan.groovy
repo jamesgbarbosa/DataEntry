@@ -2,6 +2,7 @@ package com.dataentry
 
 import java.text.SimpleDateFormat
 import java.text.ParseException
+import org.codehaus.groovy.runtime.DateGroovyMethods
 
 class Plan implements Serializable {
 
@@ -21,36 +22,18 @@ class Plan implements Serializable {
 
     Planholder planHolder
     Agent agent
+    Date dateCreated
 
     static hasMany = [beneficiaries: Beneficiary,amendments: Amendment]
 
     def bindParams(Map params) {
-        params.currentIssueDate = isValidDate(params.currentIssueDate)? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : params.currentIssueDate
-        params.applicableDate  = isValidDate(params.applicableDate) ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : params.applicableDate
+        params.currentIssueDate = DateUtil.isValidDate(params.currentIssueDate)? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : params.currentIssueDate
+        params.applicableDate  = DateUtil.isValidDate(params.applicableDate) ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : params.applicableDate
         this.properties = params
     }
 
-
-    boolean isValidDate(String date) {
-        if(date == null) {
-            return false
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        Date testDate = null;
-        try {
-            testDate = sdf.parse(date);
-        } // if the format of the string provided doesn't match the format we
-        // declared in SimpleDateFormat() we will get an exception
-        catch (ParseException e) {
-            return false;
-        }
-
-        if (!sdf.format(testDate).equals(date)) {
-            return false;
-        }
-
-        return true;
-
+    def beforeInsert = {
+        dateCreated = DateGroovyMethods.clearTime(new Date())
     }
 
     static constraints = {
@@ -71,7 +54,13 @@ class Plan implements Serializable {
         agent nullable:  true
         beneficiaries nullable: true
         amendments nullable: true
+        dateCreated nullable: true
     }
+
+    static mapping = {
+        autoTimestamp false
+    }
+
 
     public static String numeric() {
         return "^[0-9]+\$"

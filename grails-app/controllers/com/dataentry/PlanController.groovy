@@ -3,6 +3,8 @@ package com.dataentry
 import org.springframework.dao.DataIntegrityViolationException
 import grails.converters.JSON
 import org.springframework.web.context.request.RequestContextHolder
+import org.apache.commons.lang.time.DateUtils
+import org.codehaus.groovy.runtime.DateGroovyMethods
 
 class PlanController {
     def autoCompleteService
@@ -13,7 +15,8 @@ class PlanController {
     }
 
     def list(Integer max) {
-        if(params.planID || params.productID || params.planHolder?.id) {
+        if(params.planID || params.productID || params.planHolder?.id || params.dateCreated) {
+            params.dateCreated = DateUtil.isValidDate(params.dateCreated)? Date.parse( 'MM/dd/yyyy', params.dateCreated ) : params.dateCreated
             def plans = Plan.withCriteria {
                 and {
                     if(params.productID!='') {
@@ -22,6 +25,9 @@ class PlanController {
                     if(params.planID!=''){
                         eq("planNumber","${params.planID}")
 
+                    }
+                    if(params.dateCreated!=''){
+                        eq("dateCreated",DateGroovyMethods.clearTime(params.dateCreated) )
                     }
                     if(params.planHolder?.id!=''){
                         planHolder {
@@ -119,9 +125,7 @@ class PlanController {
                         def errorCode
                         if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
                             errorCode = "Client already added as agent."
-                        }  else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
-                            errorCode = "Client already added as beneficiary."
-                        } else {
+                        }  else {
                             errorCode = ""
                         }
                         if(errorCode == "") {
@@ -189,12 +193,8 @@ class PlanController {
                 conversation.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.validate()) {
                     def errorCode
-                    def page = "beneficiary"
-                    if((beneficiaryInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) && page!="agent" ) {
-                        errorCode = "Client already added as agent."
-                    } else if ((beneficiaryInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
-                        errorCode = "Client already added as plan holder."
-                    } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(beneficiaryInstance.clientProfile?.id) )  {
+                    if ( conversation.beneficiaries?.clientProfile?.id?.contains(beneficiaryInstance.clientProfile?.id) &&
+                            (conversation.beneficiaries?.designation.contains(beneficiaryInstance.designation)) )  {
                         errorCode = "Client already added as beneficiary."
                     } else {
                         errorCode = ""
@@ -308,11 +308,8 @@ class PlanController {
                 conversation.agentInstance = agentInstance
                 if(agentInstance.validate()) {
                     def errorCode
-                    def page = "agent"
                     if ((agentInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
                         errorCode = "Client already added as plan holder."
-                    } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(agentInstance.clientProfile?.id) )  {
-                        errorCode = "Client already added as beneficiary."
                     } else {
                         errorCode = ""
                     }
@@ -428,7 +425,7 @@ class PlanController {
                 if (!plan.save(flush: true)) {
                     return error()
                 }
-                flow.myMessage = "Plan ${plan?.planNumber} successfully created."
+                flash.myMessage = "Plan ${plan?.planNumber} successfully created."
                 conversation.planInstance = plan
             }.to('show')
         }
@@ -529,9 +526,7 @@ class PlanController {
                         def errorCode
                         if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
                             errorCode = "Client already added as agent."
-                        }  else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
-                            errorCode = "Client already added as beneficiary."
-                        } else {
+                        }   else {
                             errorCode = ""
                         }
                         if(errorCode == "") {
@@ -599,12 +594,8 @@ class PlanController {
                 conversation.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.validate()) {
                     def errorCode
-                    def page = "beneficiary"
-                    if((beneficiaryInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) && page!="agent" ) {
-                        errorCode = "Client already added as agent."
-                    } else if ((beneficiaryInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
-                        errorCode = "Client already added as plan holder."
-                    } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(beneficiaryInstance.clientProfile?.id) )  {
+                    if ( conversation.beneficiaries?.clientProfile?.id?.contains(beneficiaryInstance.clientProfile?.id) &&
+                            (conversation.beneficiaries?.designation.contains(beneficiaryInstance.designation)) )  {
                         errorCode = "Client already added as beneficiary."
                     } else {
                         errorCode = ""
@@ -718,11 +709,8 @@ class PlanController {
                 conversation.agentInstance = agentInstance
                 if(agentInstance.validate()) {
                     def errorCode
-                    def page = "agent"
                     if ((agentInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
                         errorCode = "Client already added as plan holder."
-                    } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(agentInstance.clientProfile?.id) )  {
-                        errorCode = "Client already added as beneficiary."
                     } else {
                         errorCode = ""
                     }
@@ -891,7 +879,7 @@ class PlanController {
                     }
 
                 }
-                flow.myMessage = "Plan ${plan?.planNumber} successfully created."
+                flash.myMessage = "Plan ${plan?.planNumber} successfully updated."
                 conversation.planInstance = plan
             }.to('show')
         }
@@ -1013,8 +1001,7 @@ class PlanController {
     }
 
     def test = {
-        def x = Plan.get(1)
-        def p = x.save()
-        render p
+        render DateGroovyMethods.clearTime(new Date())
+
     }
 }

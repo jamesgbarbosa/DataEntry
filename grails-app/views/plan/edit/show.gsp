@@ -18,9 +18,9 @@
 		</div>
 		<div id="show-plan" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
+            <g:if test="${request.myMessage}">
+                <div class="message" role="status">${request.myMessage}</div>
+            </g:if>
             <g:if test="${params.message}">
                 <div class="message" role="status">${params.message}</div>
             </g:if>
@@ -36,7 +36,7 @@
 				</g:if>
 	    		<g:if test="${planInstance?.product}">
 				<li class="fieldcontain">
-					<span id="product-label" class="property-label"><g:message code="plan.product.label" default="Product" /></span>
+					<span id="product-label" class="property-label"><g:message code="plan.product.label" default="Product Code" /></span>
 
 						<span class="property-value" aria-labelledby="product-label"><g:fieldValue bean="${planInstance}" field="product"/></span>
 
@@ -63,8 +63,8 @@
 			
 				<g:if test="${planInstance?.pnpPrice}">
 				<li class="fieldcontain">
-					<span id="pnpPrice-label" class="property-label"><g:message code="plan.pnpPrice.label" default="Pnp Price" /></span>
-					
+					<span id="pnpPrice-label" class="property-label"><g:message code="plan.pnpPrice.label" default="PNP Price" /></span>
+
 						<span class="property-value" aria-labelledby="pnpPrice-label"><g:fieldValue bean="${planInstance}" field="pnpPrice"/></span>
 					
 				</li>
@@ -186,7 +186,7 @@
 			<g:form action="create">
 				<fieldset class="buttons">
                     %{--<g:submitButton name="return" event="return" value="Back" />--}%
-                    <g:submitButton name="finish" event="finish" value="Finish" />
+                    %{--<g:submitButton name="finish" event="finish" value="Finish" />--}%
                     <g:hiddenField name="id" value="${planInstance?.id}" />
                     <a class="create" href="${createLink(uri: '/plan/edit/')}${planInstance?.id}">Edit</a>
                     <g:actionSubmit id="delete-plan" class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>

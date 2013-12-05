@@ -628,3 +628,15 @@ a.skip {
 .autocomplete-field {
     width: 300px;
 }
+
+
+#totalSearchResults {
+    margin-top: 10px;
+    width: 200px;
+    margin-left: auto ;
+    margin-right: auto ;
+}
+
+.totalSearchResultsText {
+    font-weight: bold;
+}

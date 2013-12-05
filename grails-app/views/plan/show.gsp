@@ -36,7 +36,7 @@
 				</g:if>
 	    		<g:if test="${planInstance?.product}">
 				<li class="fieldcontain">
-					<span id="product-label" class="property-label"><g:message code="plan.product.label" default="Product" /></span>
+					<span id="product-label" class="property-label"><g:message code="plan.product.label" default="Product Code" /></span>
 
 						<span class="property-value" aria-labelledby="product-label"><g:fieldValue bean="${planInstance}" field="product"/></span>
 
@@ -63,7 +63,7 @@
 			
 				<g:if test="${planInstance?.pnpPrice}">
 				<li class="fieldcontain">
-					<span id="pnpPrice-label" class="property-label"><g:message code="plan.pnpPrice.label" default="Pnp Price" /></span>
+					<span id="pnpPrice-label" class="property-label"><g:message code="plan.pnpPrice.label" default="PNP Price" /></span>
 					
 						<span class="property-value" aria-labelledby="pnpPrice-label"><g:fieldValue bean="${planInstance}" field="pnpPrice"/></span>
 					

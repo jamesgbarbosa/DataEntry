@@ -23,30 +23,8 @@ class Client implements Serializable {
     String fullName
 
     def bindParams(Map params) {
-        params.birthdate = isValidDate(params.birthdate)? Date.parse( 'MM/dd/yyyy', params.birthdate ) : params.birthdate
+        params.birthdate = DateUtil.isValidDate(params.birthdate)? Date.parse( 'MM/dd/yyyy', params.birthdate ) : params.birthdate
         this.properties = params
-    }
-
-    boolean isValidDate(String date) {
-        if(date == null) {
-            return false
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        Date testDate = null;
-        try {
-            testDate = sdf.parse(date);
-        } // if the format of the string provided doesn't match the format we
-        // declared in SimpleDateFormat() we will get an exception
-        catch (ParseException e) {
-            return false;
-        }
-
-        if (!sdf.format(testDate).equals(date)) {
-            return false;
-        }
-
-        return true;
-
     }
 
     def beforeInsert = {
