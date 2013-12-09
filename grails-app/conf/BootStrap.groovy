@@ -125,8 +125,8 @@ class BootStrap {
 //                def beneficiaries = new ArrayList<Beneficiary>()
 //                beneficiaries.add(b)
 //
-//
-//
+////
+////
 //        new Plan(planNumber: 'p100', beneficiaries: b, agent: a, planHolder: p, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
 //                ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
 
