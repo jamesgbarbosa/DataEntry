@@ -1,13 +1,18 @@
 <%@ page import="com.dataentry.Client" %>
-
-
-
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
 		<g:message code="client.lastName.label" default="Last Name" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="lastName" value="${clientInstance?.lastName}"/>
+    <g:hasErrors bean="${clientInstance}"
+                 field="lastName">
+        <g:eachError bean="${clientInstance}" field="lastName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'firstName', 'error')} required">
@@ -16,6 +21,14 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="firstName" value="${clientInstance?.firstName}"/>
+    <g:hasErrors bean="${clientInstance}"
+                 field="firstName">
+        <g:eachError bean="${clientInstance}" field="firstName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'middleName', 'error')} ">
@@ -24,6 +37,14 @@
         <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${clientInstance?.middleName}"/>
+    <g:hasErrors bean="${clientInstance}"
+                 field="middleName">
+        <g:eachError bean="${clientInstance}" field="middleName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'gender', 'error')} required">
@@ -32,6 +53,14 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select name="gender" from="${clientInstance.constraints.gender.inList}" required="" value="${clientInstance?.gender}" valueMessagePrefix="client.gender"/>
+    <g:hasErrors bean="${clientInstance}"
+                 field="gender">
+        <g:eachError bean="${clientInstance}" field="gender">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'birthdate', 'error')} required">
@@ -40,6 +69,14 @@
 		<span class="required-indicator">*</span>
 	</label>
     <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:clientInstance?.birthdate)}" />
+    <g:hasErrors bean="${clientInstance}"
+                 field="birthdate">
+        <g:eachError bean="${clientInstance}" field="birthdate">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'email', 'error')} ">

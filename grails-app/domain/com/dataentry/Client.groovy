@@ -66,9 +66,9 @@ class Client implements Serializable {
     boolean validateClientUniqueness() {
         if(this.firstName && this.lastName && this.birthdate && this.gender ){
             def clients = Client.withCriteria {
-                eq("firstName",this.firstName)
-                eq("middleName",this.middleName)
-                eq("lastName", this.lastName)
+                eq("firstName",this.firstName.toUpperCase())
+                eq("middleName",this.middleName.toUpperCase())
+                eq("lastName", this.lastName.toUpperCase())
                 eq("birthdate", this.birthdate)
                 eq("gender", this.gender)
             }

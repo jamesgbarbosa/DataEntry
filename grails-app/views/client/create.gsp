@@ -15,17 +15,12 @@
 			</ul>
 		</div>
 		<div id="create-client" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h4>
+                Create Client
+            </h4>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<g:hasErrors bean="${clientInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${clientInstance}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
-			</g:hasErrors>
 			<g:form action="save" >
 				<fieldset class="form">
 					<g:render template="form"/>

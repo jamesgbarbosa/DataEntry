@@ -173,8 +173,8 @@ class PlanController {
                     if(!planHolderInstance.clientProfile.validateClientUniqueness()) {
                         flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
                         return error()
-                    }
-                    if (!planHolderInstance.clientProfile.save()) {
+                    } else {}
+                    if (!planHolderInstance.clientProfile.save(flush: true)) {
                         return error()
                     } else {
                         conversation.planholderInstance = planHolderInstance
@@ -268,7 +268,7 @@ class PlanController {
                         flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
                         return error()
                     }
-                    if (!beneficiaryInstance.clientProfile.save()) {
+                    if (!beneficiaryInstance.clientProfile.save(flush: true)) {
                         return error()
                     } else {
                         flow.beneficiaryInstance = beneficiaryInstance
@@ -350,7 +350,7 @@ class PlanController {
                         flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
                         return error()
                     }
-                    if (!agentInstance?.clientProfile.save()) {
+                    if (!agentInstance?.clientProfile.save(flush: true)) {
                         return error()
                     } else {
                         conversation.agentInstance = agentInstance
