@@ -12,6 +12,7 @@ class Agent implements Serializable {
     String agency
     String groupName
     String unit
+    String counselorCode
 
     Agent() {
         clientProfile = new Client()
@@ -26,9 +27,10 @@ class Agent implements Serializable {
 //        agentCode blank:  true, nullable:  true
         position blank:  true, nullable:  true
         appointmentDate blank:  true, nullable:  true
-        agency blank:  false, nullable:  false
+        agency blank:  true, nullable:  true
         groupName blank:  false, nullable:  false
         unit blank:  false, nullable:  false
+        counselorCode blank:  false, nullable:  false
         clientProfile: nullable: false
     }
 

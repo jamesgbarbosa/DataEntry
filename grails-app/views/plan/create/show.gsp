@@ -159,16 +159,13 @@
             </li>
         </g:if>
 
-        <g:if test="${planInstance?.withInsurance}">
             <li class="fieldcontain">
                 <span id="withInsurance-label" class="property-label"><g:message code="plan.withInsurance.label"
                                                                                  default="With Insurance"/></span>
 
-                <span class="property-value" aria-labelledby="withInsurance-label"><g:formatBoolean
-                        boolean="${planInstance?.withInsurance}"/></span>
+                <span class="property-value" aria-labelledby="withInsurance-label">${planInstance?.withInsurance ? 'Yes' : 'No'}</span>
 
             </li>
-        </g:if>
 
         <g:if test="${planInstance?.planHolder}">
             <li class="fieldcontain">

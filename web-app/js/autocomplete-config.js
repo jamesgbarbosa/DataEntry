@@ -12,8 +12,8 @@ jQuery(document).ready(function($){
                 url: clientListLink,
                 data: {
                     term: request.term,
-                    agentId: $("#agentId").val(),
-                    beneficiaryIds: $("#beneficiaryIds").val()
+                    agentId: $("#agentId").val()
+//                    beneficiaryIds: $("#beneficiaryIds").val()
 //                    planholderId: $("#planholderId").val()
                 },
                 success: function(data){
@@ -150,7 +150,6 @@ jQuery(document).ready(function($){
     });
 
     $("#zipcodes-autocomplete").change(function() {
-        alert("asd")
         var textValue = $('#zipcodes-autocomplete').val()
         if(textValue == "") {
             $("#city").val("");
