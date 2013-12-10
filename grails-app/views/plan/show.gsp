@@ -165,7 +165,7 @@
                         <span id="agent-label" class="property-label"><g:message code="plan.beneficiary.label" default="Beneficiaries" /></span>
 
                         <g:each in="${planInstance.beneficiaries}" var="a">
-                            <span class="property-value" aria-labelledby="beneficiaries-label"><g:link controller="client" action="show" id="${a?.clientProfile.id}">${a?.clientProfile?.fullName()}</g:link></span>
+                            <span class="property-value" aria-labelledby="beneficiaries-label"><g:link controller="client" action="show" id="${a?.clientProfile.id}">${a?.clientProfile?.fullName()}</g:link> (${a?.designation})</span>
                         </g:each>
 
                     </li>

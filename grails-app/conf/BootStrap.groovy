@@ -2,6 +2,7 @@ import com.dataentry.Agent
 import com.dataentry.Beneficiary
 import com.dataentry.Plan
 import com.dataentry.Planholder
+import com.dateentry.reftables.Gender
 import com.dateentry.reftables.Product
 import com.dateentry.reftables.AmendmentTypes
 import com.dataentry.Client
@@ -93,6 +94,14 @@ class BootStrap {
                     new ZipCodes(code: '1776', city: 'My City', province: 'G Province8').save(flush: true, failOnError: true)
                     new ZipCodes(code: '6421', city: 'Caloocan City', province: 'H Province').save(flush: true, failOnError: true)
                 }
+
+                if(Gender.list().size() == 0) {
+                    new Gender(name: 'Male').save(flush: true, failOnError: true)
+                    new Gender(name: 'Female').save(flush: true, failOnError: true)
+                    new Gender(name: 'TBD').save(flush: true, failOnError: true)
+                }
+
+
 
 //                def firstNames = ['George', 'Jin','Ben','John','Katie','Joey','James','Armand','Joel','Jimmy','Donna','Anne','Ricky']
 //                def lastNames = ['Smith', 'Kelly','Verdine','Lowrance','Curhan','Alfred','Marvulli','Borris','Estrella','Diaz','Gonzales','Isenstein','Isenheim']

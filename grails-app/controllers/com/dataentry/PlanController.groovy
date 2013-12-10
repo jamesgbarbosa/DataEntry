@@ -123,9 +123,10 @@ class PlanController {
                 if(!conversation.readOnly) {
                     if(plan.validate()) {
                         def errorCode
-                        if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
-                            errorCode = "Client already added as agent."
-                        } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
+//                        if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
+//                            errorCode = "Client already added as agent."
+//                        } else
+                        if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
                             errorCode = "Client already added as beneficiary."
                         }  else {
                             errorCode = ""
@@ -310,9 +311,10 @@ class PlanController {
                 conversation.agentInstance = agentInstance
                 if(agentInstance.validate()) {
                     def errorCode
-                    if ((agentInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
-                        errorCode = "Client already added as plan holder."
-                    } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.agentInstance.clientProfile?.id) )  {
+//                    if ((agentInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
+//                        errorCode = "Client already added as plan holder."
+//                    } else
+                    if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.agentInstance.clientProfile?.id) )  {
                         errorCode = "Client already added as beneficiary."
                     } else {
                         errorCode = ""

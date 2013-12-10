@@ -40,7 +40,7 @@
                         <sup><span class="required-indicator">*</span></sup>
                         Agent
                     </label>
-                    <g:textField class='autocomplete-field' name="agent-autocomplete" value="${agentInstance?.clientProfile?.firstName!=null ? agentInstance?.clientProfile?.fullName() : ''}" placeholder="Search a client..."/>
+                    <g:textField class='autocomplete-field' name="agent-autocomplete" value="${agentInstance?.clientProfile?.firstName!=null ? agentInstance?.clientProfile?.fullNameBirthdateAndGender() : ''}" placeholder="Search a client..."/>
                     <g:hiddenField name="agent.id" value="${agentInstance?.clientProfile?.id}"/>
                     <g:hiddenField name="planholderId" value="${planholderInstance?.clientProfile?.id}"/>
                     <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>

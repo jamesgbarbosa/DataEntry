@@ -13,8 +13,8 @@ jQuery(document).ready(function($){
                 data: {
                     term: request.term,
                     agentId: $("#agentId").val(),
-                    beneficiaryIds: $("#beneficiaryIds").val(),
-                    planholderId: $("#planholderId").val()
+                    beneficiaryIds: $("#beneficiaryIds").val()
+//                    planholderId: $("#planholderId").val()
                 },
                 success: function(data){
                     response(data);
@@ -43,7 +43,7 @@ jQuery(document).ready(function($){
                 url: clientListLink,
                 data: {
                     term: request.term,
-                    agentId: $("#agentId").val(),
+//                    agentId: $("#agentId").val(),
                     beneficiaryIds: $("#beneficiaryIds").val(),
                     planholderId: $("#planholderId").val()
                 },
@@ -69,7 +69,7 @@ jQuery(document).ready(function($){
                 url: clientListLink,
                 data: {
                     term: request.term,
-                    agentId: $("#agentId").val(),
+//                    agentId: $("#agentId").val(),
 //                    beneficiaryIds: $("#beneficiaryIds").val(),
                     planholderId: $("#planholderId").val()
                 },
