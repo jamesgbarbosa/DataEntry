@@ -54,7 +54,7 @@
 		<g:message code="planholder.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="gender" from="${createPlanHolderDto?.clientProfile?.constraints?.gender?.inList}" required="" value="${createPlanHolderDto?.clientProfile?.gender}" valueMessagePrefix="planholder.gender"/>
+    <select:gender name="gender" value="${createPlanHolderDto?.clientProfile?.gender}"/>
     <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
                  field="gender">
         <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="gender">

@@ -52,7 +52,7 @@
 		<g:message code="client.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="gender" from="${clientInstance.constraints.gender.inList}" required="" value="${clientInstance?.gender}" valueMessagePrefix="client.gender"/>
+    <select:gender  name="gender" value="${clientInstance?.gender}" required=""/>
     <g:hasErrors bean="${clientInstance}"
                  field="gender">
         <g:eachError bean="${clientInstance}" field="gender">

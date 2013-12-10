@@ -1,5 +1,6 @@
 package com.dateentry
 
+import com.dateentry.reftables.Gender
 import com.dateentry.reftables.Product
 import com.dateentry.reftables.AmendmentTypes
 import com.dateentry.reftables.PaymentMode
@@ -44,6 +45,12 @@ class SelectTagLib {
     void amendmentTypes = { attrs ->
 
         out << g.select(name: 'amendmentType', id: 'amendmentType' , from: AmendmentTypes.list(), optionKey: 'name', optionValue: 'name', value: attrs.value, noSelection: ['': 'Please select...'])
+
+    }
+
+    void gender = { attrs ->
+
+        out << g.select(name: 'gender', id: 'gender' , from: Gender.list(), optionKey: 'name', optionValue: 'name', value: attrs.value, noSelection: ['': 'Please select...'])
 
     }
 

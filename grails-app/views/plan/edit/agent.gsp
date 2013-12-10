@@ -63,7 +63,6 @@
 
                 <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'agency', 'error')} required">
                     <label for="agency">
-                        <sup><span class="required-indicator">*</span></sup>
                         <g:message code="agent.agency.label" default="Agency" />
 
                     </label>
@@ -128,6 +127,22 @@
                 <g:hasErrors bean="${agentInstance}"
                              field="appointmentDate">
                     <g:eachError bean="${agentInstance}" field="appointmentDate">
+                        <span class="inlineErrors">
+                            <g:message  error="${it}" />
+                        </span>
+                    </g:eachError>
+                </g:hasErrors>
+            </div>
+
+            <div class="fieldcontain ${hasErrors(bean: agentInstance, field: 'counselorCode', 'error')} ">
+                <label for="appointmentDate">
+                    <sup><span class="required-indicator">*</span></sup>
+                    <g:message code="agent.counselorCode.label" default="Counselor Code" />
+                </label>
+                <g:textField id="counselorCode" name="counselorCode" value="${agentInstance?.counselorCode}" />
+                <g:hasErrors bean="${agentInstance}"
+                             field="counselorCode">
+                    <g:eachError bean="${agentInstance}" field="counselorCode">
                         <span class="inlineErrors">
                             <g:message  error="${it}" />
                         </span>

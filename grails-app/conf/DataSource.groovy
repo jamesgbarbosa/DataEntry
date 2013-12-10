@@ -2,6 +2,10 @@ import org.hibernate.dialect.Dialect
 
 dataSource {
     pooled = true
+    driverClassName = "org.postgresql.Driver"
+    username = "postgres"
+    password = "postgres"
+    dialect = com.dataentry.TableNamePostgresDialect
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -16,9 +20,6 @@ environments {
 //            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             dbCreate = "create-drop" // one of 'create', 'create-drop','update'
             url = "jdbc:postgresql://localhost:5432/dataentry"
-            username = "postgres"
-            password = "postgres"
-            dialect = com.dataentry.TableNamePostgresDialect
 //            url = "jdbc:postgresql://localhost:5432/dataentry"
 //            username = "postgres"
 //            password = "postgres"
@@ -34,13 +35,8 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            pooled = true
             url = "jdbc:postgresql://localhost:5432/dataentry"
-            username = "postgres"
-            password = "postgres"
-            dialect = com.dataentry.TableNamePostgresDialect
 
-//            dbCreate = "update"
 //            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 //            pooled = true
 //            properties {

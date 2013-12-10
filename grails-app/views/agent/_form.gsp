@@ -55,7 +55,8 @@
 		<g:message code="agent.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="gender" from="${createAgentDto?.clientProfile?.constraints?.gender?.inList}" required="" value="${createAgentDto?.clientProfile?.gender}" valueMessagePrefix="agent.gender"/>
+
+    <select:gender  name="gender" value="${createAgentDto?.clientProfile?.gender}" required=""/>
     <g:hasErrors bean="${createAgentDto?.clientProfile}"
                  field="gender">
         <g:eachError bean="${createAgentDto?.clientProfile}" field="gender">
