@@ -6,13 +6,12 @@ class Planholder implements Serializable {
     Company company
 
     Planholder() {
-        clientProfile = new Client()
-        company = new Company()
+
     }
 
     static constraints = {
-        clientProfile: nullable: true
-        company: nullable: true
+        clientProfile nullable: true
+        company nullable: true
     }
 
 }

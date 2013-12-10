@@ -1,6 +1,6 @@
 package com.dataentry
 
-class Company {
+class Company implements Serializable {
 
     String name
     String address

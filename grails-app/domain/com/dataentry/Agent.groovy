@@ -31,7 +31,7 @@ class Agent implements Serializable {
         groupName blank:  false, nullable:  false
         unit blank:  false, nullable:  false
         counselorCode blank:  false, nullable:  false
-        clientProfile: nullable: false
+        clientProfile nullable: false
     }
 
 }

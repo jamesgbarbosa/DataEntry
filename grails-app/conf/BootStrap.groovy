@@ -52,6 +52,12 @@ class BootStrap {
                         new PaymentMode(name: 'ANNUAL').save(flush: true, failOnError: true)
                 }
 
+                if(Gender.list().size() == 0) {
+                    new Gender(name: 'TBD').save(flush: true, failOnError: true)
+                    new Gender(name: 'Male').save(flush: true, failOnError: true)
+                    new Gender(name: 'Female').save(flush: true, failOnError: true)
+                }
+
                 if(PlanStatus.list().size() == 0) {
                         new PlanStatus(name: 'ACTIVE').save(flush: true, failOnError: true)
                         new PlanStatus(name: 'LAPSED').save(flush: true, failOnError: true)
@@ -126,7 +132,7 @@ class BootStrap {
 
                 def p = new Planholder(clientProfile: client1).save(flush: true, failOnError: true)
                 def b = new Beneficiary(clientProfile: client2, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD').save(flush: true, failOnError: true)
-                def a = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test' ).save(flush: true, failOnError: true)
+                def a = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test', counselorCode: 'Testr' ).save(flush: true, failOnError: true)
                 def beneficiaries = new ArrayList<Beneficiary>()
                 beneficiaries.add(b)
 
