@@ -47,7 +47,7 @@
 				<li class="fieldcontain">
 					<span id="payingPeriod-label" class="property-label"><g:message code="plan.payingPeriod.label" default="Paying Period" /></span>
 					
-						<span class="property-value" aria-labelledby="payingPeriod-label"><g:fieldValue bean="${planInstance}" field="payingPeriod"/></span>
+						<span class="property-value" aria-labelledby="payingPeriod-label"><g:fieldValue bean="${planInstance}" field="payingPeriod" /></span>
 					
 				</li>
 				</g:if>
@@ -65,7 +65,8 @@
 				<li class="fieldcontain">
 					<span id="pnpPrice-label" class="property-label"><g:message code="plan.pnpPrice.label" default="PNP Price" /></span>
 					
-						<span class="property-value" aria-labelledby="pnpPrice-label"><g:fieldValue bean="${planInstance}" field="pnpPrice"/></span>
+						<span class="property-value" aria-labelledby="pnpPrice-label"><g:formatNumber number="${planInstance?.pnpPrice}" format='###,##0.00'/></span>
+
 					
 				</li>
 				</g:if>
@@ -74,7 +75,7 @@
 				<li class="fieldcontain">
 					<span id="modalInstallment-label" class="property-label"><g:message code="plan.modalInstallment.label" default="Modal Installment" /></span>
 					
-						<span class="property-value" aria-labelledby="modalInstallment-label"><g:fieldValue bean="${planInstance}" field="modalInstallment"/></span>
+						<span class="property-value" aria-labelledby="modalInstallment-label"><g:formatNumber number="${planInstance?.modalInstallment}" format='###,##0.00' /></span>
 					
 				</li>
 				</g:if>
