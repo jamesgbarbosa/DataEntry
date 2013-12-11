@@ -19,11 +19,11 @@ import com.dataentry.Amendment
 import com.dateentry.reftables.ZipCodes
 
 class BootStrap {
+    def springSecurityService
 
     def init = { servletContext ->
 //        Environment.executeForCurrentEnvironment {
 //            development {
-
                 def adminRole = Role.findByAuthority("ROLE_ADMIN")
                 if (!adminRole) {
                     adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
@@ -36,17 +36,17 @@ class BootStrap {
 
                 if (!UserAccount.findByUsername("admin")){
                     def superUserAccount = new UserAccount(username: 'admin', enabled: true
-                            , password: "admin"
+                            , password: "admin", confirmPassword: "admin"
                             )
-                    superUserAccount.save(flush: true)
+                    superUserAccount.save(flush: true, failOnError: true)
 
                     UserAccountRole.create(superUserAccount, adminRole, true)
                 }
 
                 if (!UserAccount.findByUsername("user")){
                     def user = new UserAccount(username: "user", enabled: true,
-                            password: "user")
-                    user.save(flush: true)
+                            password: "user", confirmPassword: "user")
+                    user.save(flush: true, failOnError: true)
 
                     UserAccountRole.create(user, userRole, true)
                 }

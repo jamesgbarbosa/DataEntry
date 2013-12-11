@@ -10,7 +10,9 @@
             <li><g:link class="list" controller="plan" action="list">Search Plans</g:link></li>
             <li><g:link class="list" controller="client" action="list">Search Clients</g:link></li>
             <li><g:link class="list" controller="company" action="list">Search Companies</g:link></li>
-            <li><g:link class="list" controller="plan" action="create">Create Plan</g:link></li>
+            <li><g:link class="create" controller="plan" action="create">Create Plan</g:link></li>
+            <sec:ifAnyGranted roles="ROLE_ADMIN"><li><g:link controller="userAccount" action="list"><i class="list"></i> Search Users</g:link></li></sec:ifAnyGranted>
+
         </ul>
     </div>
     <p>
