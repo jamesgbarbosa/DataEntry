@@ -32,14 +32,32 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${companyInstance?.address}">
+				<g:if test="${companyInstance?.address1}">
 				<li class="fieldcontain">
-					<span id="address-label" class="property-label"><g:message code="company.address.label" default="Address" /></span>
+					<span id="address1-label" class="property-label"><g:message code="company.address1.label" default="Address1" /></span>
 					
-						<span class="property-value" aria-labelledby="address-label"><g:fieldValue bean="${companyInstance}" field="address"/></span>
+						<span class="property-value" aria-labelledby="address1-label"><g:fieldValue bean="${companyInstance}" field="address1"/></span>
 					
 				</li>
 				</g:if>
+
+                <g:if test="${companyInstance?.address2}">
+                    <li class="fieldcontain">
+                        <span id="address2-label" class="property-label"><g:message code="company.address2.label" default="Address2" /></span>
+
+                        <span class="property-value" aria-labelledby="address2-label"><g:fieldValue bean="${companyInstance}" field="address2"/></span>
+
+                    </li>
+                </g:if>
+
+                <g:if test="${companyInstance?.address3}">
+                    <li class="fieldcontain">
+                        <span id="address3-label" class="property-label"><g:message code="company.address3.label" default="Address3" /></span>
+
+                        <span class="property-value" aria-labelledby="address3-label"><g:fieldValue bean="${companyInstance}" field="address3"/></span>
+
+                    </li>
+                </g:if>
 			
 			</ol>
 			<g:form>

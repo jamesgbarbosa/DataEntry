@@ -60,7 +60,6 @@ class AutoCompleteService {
                 projections {
                     property("id")
                     property("name")
-                    property("address")
                 }
             }
 

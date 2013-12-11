@@ -33,7 +33,6 @@
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'middleName', 'error')} ">
 	<label for="middleName">
-        <sup><span class="required-indicator">*</span></sup>
 		<g:message code="client.middleName.label" default="Middle Name" />
 	</label>
 	<g:textField name="middleName" value="${clientInstance?.middleName}"/>

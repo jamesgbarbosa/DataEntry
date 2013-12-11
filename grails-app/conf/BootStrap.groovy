@@ -173,10 +173,10 @@ class BootStrap {
         new Plan(planNumber: 'p100', beneficiaries: b, agent: a, planHolder: p, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
                 ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
 
-               new Company(name: 'TEST1', address: 'ASDASD').save(flush: true)
-               new Company(name: 'TEST2', address: 'AasdaSD').save(flush: true)
-               new Company(name: 'TEST3', address: '24123').save(flush: true)
-               new Company(name: 'TEST4', address: 'j5675d').save(flush: true)
+               new Company(name: 'TEST1', address1: 'ASDASD').save(flush: true)
+               new Company(name: 'TEST2', address1: 'AasdaSD').save(flush: true)
+               new Company(name: 'TEST3', address1: '24123').save(flush: true)
+               new Company(name: 'TEST4', address1: 'j5675d').save(flush: true)
 
 
 //            }

@@ -45,7 +45,7 @@ class Client implements Serializable {
     static constraints = {
         lastName blank:  false, nullable:  false
         firstName blank:  false, nullable:  false
-        middleName blank:  false, nullable:  false
+        middleName blank:  true, nullable:  true
         gender blank:  false, nullable:  false
         birthdate blank:  false, nullable:  false
         email blank:  true, nullable:  true
@@ -67,7 +67,7 @@ class Client implements Serializable {
         if(this.firstName && this.lastName && this.birthdate && this.gender ){
             def clients = Client.withCriteria {
                 eq("firstName",this.firstName.toUpperCase())
-                eq("middleName",this.middleName.toUpperCase())
+                eq("middleName",this.middleName?.toUpperCase())
                 eq("lastName", this.lastName.toUpperCase())
                 eq("birthdate", this.birthdate)
                 eq("gender", this.gender)

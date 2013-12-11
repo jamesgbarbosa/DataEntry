@@ -46,12 +46,28 @@
                         </g:hasErrors>
                     </div>
 
-                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address', 'error')} ">
-                        <label for="address">
-                            <g:message code="company.address.label" default="Address" />
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address1', 'error')} ">
+                        <label for="address1">
+                            <g:message code="company.address1.label" default="Address1" />
 
                         </label>
-                        <g:textField name="address" value="${createPlanHolderDto?.company?.address}"/>
+                        <g:textField name="address1" value="${createPlanHolderDto?.company?.address1}"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address2', 'error')} ">
+                        <label for="address2">
+                            <g:message code="company.address2.label" default="Address2" />
+
+                        </label>
+                        <g:textField name="address2" value="${createPlanHolderDto?.company?.address2}"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address3', 'error')} ">
+                        <label for="address3">
+                            <g:message code="company.address3.label" default="Address3" />
+
+                        </label>
+                        <g:textField name="address3" value="${createPlanHolderDto?.company?.address3}"/>
                     </div>
 				</fieldset>
 				<fieldset class="buttons">
