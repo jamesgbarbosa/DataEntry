@@ -46,7 +46,7 @@ class Client implements Serializable {
         lastName blank:  false, nullable:  false
         firstName blank:  false, nullable:  false
         middleName blank:  false, nullable:  false
-        gender blank:  false, nullable:  false, inList: ['Male','Female']
+        gender blank:  false, nullable:  false
         birthdate blank:  false, nullable:  false
         email blank:  true, nullable:  true
         address1 blank:  true, nullable:  true

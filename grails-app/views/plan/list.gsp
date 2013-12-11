@@ -95,7 +95,7 @@
 					
 						<td>${fieldValue(bean: planInstance, field: "product")}</td>
 
-						<td>${planInstance?.planHolder?.clientProfile?.fullName()}</td>
+						<td>${planInstance?.planHolder?.name()}</td>
 
 						%{--<td>${fieldValue(bean: planInstance, field: "maturityPeriod")}</td>--}%
 					%{----}%

@@ -1,5 +1,6 @@
 import com.dataentry.Agent
 import com.dataentry.Beneficiary
+import com.dataentry.Company
 import com.dataentry.Plan
 import com.dataentry.Planholder
 import com.dateentry.reftables.Gender
@@ -130,7 +131,7 @@ class BootStrap {
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
 
-                def p = new Planholder(clientProfile: client1).save(flush: true, failOnError: true)
+                def p = new Planholder(clientProfile: client1, company: null).save(flush: true, failOnError: true)
                 def b = new Beneficiary(clientProfile: client2, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD').save(flush: true, failOnError: true)
                 def a = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test', counselorCode: 'Testr' ).save(flush: true, failOnError: true)
                 def beneficiaries = new ArrayList<Beneficiary>()
@@ -141,7 +142,10 @@ class BootStrap {
         new Plan(planNumber: 'p100', beneficiaries: b, agent: a, planHolder: p, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
                 ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
 
-
+               new Company(name: 'TEST1', address: 'ASDASD').save(flush: true)
+               new Company(name: 'TEST2', address: 'AasdaSD').save(flush: true)
+               new Company(name: 'TEST3', address: '24123').save(flush: true)
+               new Company(name: 'TEST4', address: 'j5675d').save(flush: true)
 
 
 //            }

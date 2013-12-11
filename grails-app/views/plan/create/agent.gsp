@@ -30,7 +30,7 @@
     </g:if>
     <g:form action="create" >
         <div class="fieldcontain">
-            <g:if test="${duplicateClientError!=""}">
+            <g:if test="${!duplicateClientError.equals('')}">
                 <ul class="errors" role="alert">
                     <li>${duplicateClientError} </li>
                 </ul>

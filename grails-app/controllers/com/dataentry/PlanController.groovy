@@ -96,6 +96,8 @@ class PlanController {
                 Planholder planHolder = new Planholder()
                 if(params.planHolder.id) {
                     planHolder.clientProfile = Client.get(params.planHolder.id)
+                } else if(params.planHolderCompany.id){
+                    planHolder.company = Company.get(params.planHolderCompany.id)
                 }
                 Plan plan = new Plan()
                 plan.bindParams(params)
@@ -103,6 +105,23 @@ class PlanController {
                 conversation.planholderInstance = planHolder
                 conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to('createPlanHolder')
+
+            on('createCompany'){
+                flow.duplicateClientError = ""
+                flow.createPlanHolderDto = new Planholder()
+
+                Planholder planHolder = new Planholder()
+                if(params.planHolder.id) {
+                    planHolder.clientProfile = Client.get(params.planHolder.id)
+                } else if(params.planHolderCompany.id){
+                    planHolder.company = Company.get(params.planHolderCompany.id)
+                }
+                Plan plan = new Plan()
+                plan.bindParams(params)
+                conversation.planInstance = plan
+                conversation.planholderInstance = planHolder
+                conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+            }.to('createCompany')
 
             on('beneficiaries'){
                 flow.duplicateClientError = ""
@@ -114,11 +133,15 @@ class PlanController {
                 flow.returnCode = ""
 
                 if(params.planHolder.id) {
-                    client = Client.get(params.planHolder.id)
-                    planHolder.clientProfile = client
+                    planHolder.clientProfile = Client.get(params.planHolder.id)
+                    planHolder.company = null
+                } else if(params.planHolderCompany.id){
+                    planHolder.company = Company.get(params.planHolderCompany.id)
+                    planHolder.clientProfile = null
                 } else {
                     planHolder = null
                 }
+                plan.planHolder = planHolder
                 conversation.planholderInstance = planHolder
                 if(!conversation.readOnly) {
                     if(plan.validate()) {
@@ -176,6 +199,27 @@ class PlanController {
                         return error()
                     } else {}
                     if (!planHolderInstance.clientProfile.save(flush: true)) {
+                        return error()
+                    } else {
+                        conversation.planholderInstance = planHolderInstance
+                    }
+                } else {
+                    return error()
+                }
+            }.to('createPlan')
+        }
+
+        // state 1.b
+        createCompany {
+            on("return"){
+            }.to("createPlan")
+
+            on('saveCompany'){
+                def planHolderInstance = new Planholder()
+                planHolderInstance.company.properties = params
+                flow.createPlanHolderDto = planHolderInstance
+                if(planHolderInstance.company.validate()) {
+                    if (!planHolderInstance.company.save(flush: true)) {
                         return error()
                     } else {
                         conversation.planholderInstance = planHolderInstance
@@ -310,20 +354,7 @@ class PlanController {
                 agentInstance.clientProfile = Client.get(params.agent.id)
                 conversation.agentInstance = agentInstance
                 if(agentInstance.validate()) {
-                    def errorCode
-//                    if ((agentInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
-//                        errorCode = "Client already added as plan holder."
-//                    } else
-                    if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.agentInstance.clientProfile?.id) )  {
-                        errorCode = "Client already added as beneficiary."
-                    } else {
-                        errorCode = ""
-                    }
-                    if(errorCode == "") {
-                        conversation.planInstance.agent = agentInstance
-                    } else {
-                        flow.duplicateClientError = errorCode
-                    }
+                    conversation.planInstance.agent = agentInstance
                 } else {
                     conversation.agentInstance = agentInstance
                     return error()
@@ -502,6 +533,8 @@ class PlanController {
                 Planholder planHolder = new Planholder()
                 if(params.planHolder.id) {
                     planHolder.clientProfile = Client.get(params.planHolder.id)
+                }  else if(params.planHolderCompany.id){
+                    planHolder.company = Company.get(params.planHolderCompany.id)
                 }
                 Plan plan = conversation.planInstance
                 plan.bindParams(params)
@@ -509,6 +542,23 @@ class PlanController {
                 conversation.planholderInstance = planHolder
                 conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to('createPlanHolder')
+
+            on('createCompany'){
+                flow.duplicateClientError = ""
+                flow.createPlanHolderDto = new Planholder()
+
+                Planholder planHolder = new Planholder()
+                if(params.planHolder.id) {
+                    planHolder.clientProfile = Client.get(params.planHolder.id)
+                } else if(params.planHolderCompany.id){
+                    planHolder.company = Company.get(params.planHolderCompany.id)
+                }
+                Plan plan = conversation.planInstance
+                plan.bindParams(params)
+                conversation.planInstance = plan
+                conversation.planholderInstance = planHolder
+                conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+            }.to('createCompany')
 
             on('beneficiaries'){
                 flow.duplicateClientError = ""
@@ -521,18 +571,23 @@ class PlanController {
                 flow.returnCode = ""
 
                 if(params.planHolder.id) {
-                    client = Client.get(params.planHolder.id)
-                    planHolder.clientProfile = client
+                    planHolder.clientProfile = Client.get(params.planHolder.id)
+                    planHolder.company = null
+                } else if(params.planHolderCompany.id){
+                    planHolder.company = Company.get(params.planHolderCompany.id)
+                    planHolder.clientProfile = null
                 } else {
                     planHolder = null
                 }
+                plan.planHolder = planHolder
                 conversation.planholderInstance = planHolder
                 if(!conversation.readOnly) {
                     if(plan.validate()) {
                         def errorCode
-                        if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
-                            errorCode = "Client already added as agent."
-                        } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
+//                        if((conversation.planholderInstance.clientProfile?.id == conversation.planInstance.agent?.clientProfile?.id) ) {
+//                            errorCode = "Client already added as agent."
+//                        } else
+                        if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
                             errorCode = "Client already added as beneficiary."
                         }  else {
                             errorCode = ""
@@ -582,6 +637,27 @@ class PlanController {
                         return error()
                     }
                     if (!planHolderInstance.clientProfile.save()) {
+                        return error()
+                    } else {
+                        conversation.planholderInstance = planHolderInstance
+                    }
+                } else {
+                    return error()
+                }
+            }.to('createPlan')
+        }
+
+        // state 1.b
+        createCompany {
+            on("return"){
+            }.to("createPlan")
+
+            on('saveCompany'){
+                def planHolderInstance = new Planholder()
+                planHolderInstance.company.properties = params
+                flow.createPlanHolderDto = planHolderInstance
+                if(planHolderInstance.company.validate()) {
+                    if (!planHolderInstance.company.save(flush: true)) {
                         return error()
                     } else {
                         conversation.planholderInstance = planHolderInstance
@@ -716,19 +792,7 @@ class PlanController {
                 agentInstance.clientProfile = Client.get(params.agent.id)
                 conversation.agentInstance = agentInstance
                 if(agentInstance.validate()) {
-                    def errorCode
-                    if ((agentInstance.clientProfile?.id == conversation.planInstance.planHolder?.clientProfile?.id)&& page!="planholder" ) {
-                        errorCode = "Client already added as plan holder."
-                    } else if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.agentInstance.clientProfile?.id) )  {
-                        errorCode = "Client already added as beneficiary."
-                    }else {
-                        errorCode = ""
-                    }
-                    if(errorCode == "") {
-//                        conversation.planInstance.agent = agentInstance
-                    } else {
-                        flow.duplicateClientError = errorCode
-                    }
+                    conversation.planInstance.agent = agentInstance
                 } else {
                     conversation.agentInstance = agentInstance
                     return error()
@@ -834,7 +898,8 @@ class PlanController {
                         plan.planHolder = null
                     }
 
-                    if(oldPlanholder.clientProfile.id!=planholder.clientProfile.id) {
+                    if(oldPlanholder?.clientProfile?.id!=planholder?.clientProfile?.id ||
+                            oldPlanholder?.company?.id!=planholder?.company?.id) {
                         oldPlanholder.delete()
                     }
 
@@ -913,6 +978,7 @@ class PlanController {
     }
 
     def clientsList = {
+        params.planholder = true
         render autoCompleteService.clientList(params) as JSON
     }
 

@@ -1,8 +1,8 @@
 <%@ page import="com.dataentry.Client" %>
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'lastName', 'error')} required">
 	<label for="lastName">
+        <sup><span class="required-indicator">*</span></sup>
 		<g:message code="client.lastName.label" default="Last Name" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="lastName" value="${clientInstance?.lastName}"/>
     <g:hasErrors bean="${clientInstance}"
@@ -17,8 +17,8 @@
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">
+        <sup><span class="required-indicator">*</span></sup>
 		<g:message code="client.firstName.label" default="First Name" />
-		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="firstName" value="${clientInstance?.firstName}"/>
     <g:hasErrors bean="${clientInstance}"
@@ -33,8 +33,8 @@
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'middleName', 'error')} ">
 	<label for="middleName">
+        <sup><span class="required-indicator">*</span></sup>
 		<g:message code="client.middleName.label" default="Middle Name" />
-        <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${clientInstance?.middleName}"/>
     <g:hasErrors bean="${clientInstance}"
@@ -49,8 +49,8 @@
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'gender', 'error')} required">
 	<label for="gender">
+        <sup><span class="required-indicator">*</span></sup>
 		<g:message code="client.gender.label" default="Gender" />
-		<span class="required-indicator">*</span>
 	</label>
     <select:gender  name="gender" value="${clientInstance?.gender}" required=""/>
     <g:hasErrors bean="${clientInstance}"
@@ -65,8 +65,8 @@
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'birthdate', 'error')} required">
 	<label for="birthdate">
+        <sup><span class="required-indicator">*</span></sup>
 		<g:message code="client.birthdate.label" default="Birthdate" />
-		<span class="required-indicator">*</span>
 	</label>
     <g:textField id="birthdate" name="birthdate" value="${formatDate(format:'MM/dd/yyyy',date:clientInstance?.birthdate)}" />
     <g:hasErrors bean="${clientInstance}"

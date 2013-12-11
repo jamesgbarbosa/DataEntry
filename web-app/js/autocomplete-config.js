@@ -58,6 +58,14 @@ jQuery(document).ready(function($){
         minLength: 1,
         select: function(event, ui) {
             $("#planHolder\\.id").val(ui.item.id);
+            $("#planHolderCompany\\.id").val(ui.item.companyId);
+
+            if(ui.item.id == undefined) {
+                $("#planHolder\\.id").val("");
+            }
+            if(ui.item.companyId == undefined) {
+                $("#planHolderCompany\\.id").val("");
+            }
         }
     }).focus(function() {
             $(this).autocomplete('search', $(this).val())
@@ -176,6 +184,8 @@ jQuery(document).ready(function($){
         var textValue = $('#planholder-autocomplete').val()
         if(textValue == "") {
             $("#planHolder\\.id").val("");
+            $("#planHolderCompany\\.id").val("");
+
         }
     });
 

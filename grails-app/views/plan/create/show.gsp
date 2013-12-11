@@ -172,9 +172,14 @@
                 <span id="planHolder-label" class="property-label"><g:message code="plan.planHolder.label"
                                                                               default="Plan Holder"/></span>
 
-                <span class="property-value" aria-labelledby="planHolder-label"><g:link controller="client"
-                                                                                        action="show"
-                                                                                        id="${planInstance?.planHolder?.clientProfile?.id}">${planInstance?.planHolder?.clientProfile?.getFullName()}</g:link></span>
+                <span class="property-value" aria-labelledby="planHolder-label">
+                    <g:if test="${planInstance?.planHolder?.clientProfile}">
+                        <g:link controller="client"  action="show" id="${planInstance?.planHolder?.clientProfile?.id}">${planInstance?.planHolder?.clientProfile?.getFullName()}</g:link>
+                    </g:if>
+                    <g:else>
+                        <g:link controller="company"  action="show" id="${planInstance?.planHolder?.company?.id}">${planInstance?.planHolder?.company?.name}</g:link>
+                    </g:else>
+                </span>
 
             </li>
         </g:if>

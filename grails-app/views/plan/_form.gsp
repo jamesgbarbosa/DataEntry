@@ -23,8 +23,9 @@
         <g:message code="plan.planHolder.label" default="Plan Holder" />
     </label>
 %{--<g:select id="planHolder" name="planHolder.id" from="${com.dataentry.Planholder.list()}" optionKey="id" value="${planInstance?.planHolder?.id}" class="many-to-one" noSelection="['null': '']"/>--}%
-    <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planholderInstance?.clientProfile?.firstName? planholderInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
+    <g:textField class='autocomplete-field' name="planholder-autocomplete" value="${planholderInstance?.name()}" placeholder="Search a client or company..."/>
     <g:hiddenField name="planHolder.id" value="${planholderInstance?.clientProfile?.id}"/>
+    <g:hiddenField name="planHolderCompany.id" value="${planholderInstance?.company?.id}"/>
 
     <g:hiddenField name="agentId" value="${agentInstance?.clientProfile?.id}"/>
     <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>
@@ -32,6 +33,7 @@
     <g:if test="${!readOnly}">
         <span class="buttons">
             <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create Planholder"/>
+            <g:submitButton formaction="create" name="createCompany" event="createCompany" value="Create Company"/>
         </span>
     </g:if>
     <g:hasErrors bean="${planInstance}"

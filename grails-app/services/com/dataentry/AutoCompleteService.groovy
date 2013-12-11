@@ -31,33 +31,50 @@ class AutoCompleteService {
 
             projections {
                 property("id")
-//                property("nasdaqSymbol")
                 property("fullName")
                 property("birthdate")
                 property("gender")
             }
         }
-        def clientList
-//        if(params.clientType == 'Agent') {
-//            clientList = Agent.createCriteria().list(query)
-//        }
-//        if(params.clientType == 'Plan Holder') {
-//            clientList = Planholder.createCriteria().list(query)
-//        }
-//        if(params.clientType == 'Beneficiary') {
-//            clientList = Beneficiary.createCriteria().list(query)
-//        }
-        clientList = Client.createCriteria().list(query)
+
+
+
+
+        def clientList = Client.createCriteria().list(query)
         def clientsSelectionList = []
-        String sdf = new SimpleDateFormat("MM/dd/yyyy")
         clientList.each {
             def clientMap = [:]
             clientMap.put("id", it[0] )
 
             clientMap.put("value", it[1] + " : " + String.format("%1\$TD", it[2]) + " : " + it[3])
-//            clientMap.put("value", it[1])
             clientsSelectionList.add(clientMap)
         }
+
+        def companyList
+        def companySelectionList = []
+        if(params.planholder) {
+            def companyQuery = {
+                or {
+                    ilike("name", "${params.term}%")
+                }
+                projections {
+                    property("id")
+                    property("name")
+                    property("address")
+                }
+            }
+
+            companyList = Company.createCriteria().list(companyQuery)
+
+            companyList.each {
+                def companyMap = [:]
+                companyMap.put("companyId", it[0] )
+                companyMap.put("value", it[1])
+                companySelectionList.add(companyMap)
+            }
+            clientsSelectionList.addAll(companySelectionList)
+        }
+
         return clientsSelectionList
     }
 
