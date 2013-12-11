@@ -121,3 +121,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll']
 ]
 
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.dataentry.UserAccount'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.dataentry.UserAccountRole'
+grails.plugins.springsecurity.authority.className = 'com.dataentry.Role'

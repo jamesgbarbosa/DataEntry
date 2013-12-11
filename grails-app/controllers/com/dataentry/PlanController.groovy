@@ -5,8 +5,8 @@ import grails.converters.JSON
 import org.springframework.web.context.request.RequestContextHolder
 import org.apache.commons.lang.time.DateUtils
 import org.codehaus.groovy.runtime.DateGroovyMethods
-import grails.plugin.springsecurity.annotation.Secured
-
+import grails.plugins.springsecurity.Secured
+//
 @Secured(['ROLE_ADMIN','ROLE_USER'])
 class PlanController {
     def autoCompleteService

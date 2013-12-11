@@ -1,7 +1,6 @@
 package com.dataentry
 
-import grails.plugin.springsecurity.annotation.Secured
-
+import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN','ROLE_USER'])
 class HomeController {
 
