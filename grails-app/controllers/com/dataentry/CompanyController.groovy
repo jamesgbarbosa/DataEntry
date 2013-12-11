@@ -1,7 +1,8 @@
 package com.dataentry
 
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
-
+@Secured(['ROLE_ADMIN','ROLE_USER'])
 class CompanyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

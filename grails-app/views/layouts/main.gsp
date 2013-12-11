@@ -31,7 +31,7 @@
 
 	</head>
 	<body>
-		<div id="appLogo">Data Entry</div>
+        <g:render template="/common/header"/>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

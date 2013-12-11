@@ -3,6 +3,9 @@ import com.dataentry.Beneficiary
 import com.dataentry.Company
 import com.dataentry.Plan
 import com.dataentry.Planholder
+import com.dataentry.Role
+import com.dataentry.UserAccount
+import com.dataentry.UserAccountRole
 import com.dateentry.reftables.Gender
 import com.dateentry.reftables.Product
 import com.dateentry.reftables.AmendmentTypes
@@ -20,6 +23,34 @@ class BootStrap {
     def init = { servletContext ->
 //        Environment.executeForCurrentEnvironment {
 //            development {
+
+                def adminRole = Role.findByAuthority("ROLE_ADMIN")
+                if (!adminRole) {
+                    adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+                }
+
+                def userRole = Role.findByAuthority("ROLE_USER")
+                if (!userRole) {
+                    userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+                }
+
+                if (!UserAccount.findByUsername("admin")){
+                    def superUserAccount = new UserAccount(username: 'admin', enabled: true
+                            , password: "admin"
+                            )
+                    superUserAccount.save(flush: true)
+
+                    UserAccountRole.create(superUserAccount, adminRole, true)
+                }
+
+                if (!UserAccount.findByUsername("user")){
+                    def user = new UserAccount(username: "user", enabled: true,
+                            password: "user")
+                    user.save(flush: true)
+
+                    UserAccountRole.create(user, userRole, true)
+                }
+
                 if(Product.list().size() == 0) {
                         def product = new Product(name: 'PENSION MEGA').save(flush: true, failOnError: true)
                         def product1 = new Product(name: 'PENSION VALUE').save(flush: true, failOnError: true)
