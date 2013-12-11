@@ -31,6 +31,7 @@
 
 	</head>
 	<body>
+
         <g:render template="/common/header"/>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
