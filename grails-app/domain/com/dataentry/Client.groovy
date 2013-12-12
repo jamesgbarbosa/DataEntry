@@ -8,6 +8,7 @@ class Client implements Serializable {
     String lastName
     String firstName
     String middleName
+    String alias
     Date birthdate
     String address1
     String address2
@@ -59,6 +60,7 @@ class Client implements Serializable {
         mobile blank:  true, nullable:  true
         officenumber blank:  true, nullable:  true
         fullName  blank: true, nullable:  true
+        alias  blank: true, nullable:  true
 
 
     }

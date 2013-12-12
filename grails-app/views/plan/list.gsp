@@ -75,7 +75,7 @@
 
 						<g:sortableColumn property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
 
-						<g:sortableColumn property="planholder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
+						<g:sortableColumn property="planHolder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
 					
 						%{--<g:sortableColumn property="maturityPeriod" title="${message(code: 'plan.maturityPeriod.label', default: 'Maturity Period')}" />--}%
 					%{----}%
@@ -115,7 +115,7 @@
             <div id="totalSearchResults">
                 <g:if test="${planInstanceList.size()!=0}">
                     <span class="totalSearchResultsText">
-                    Total Records Found: ${planInstanceList.size()}
+                    Total Records Found: ${planInstanceTotal}
                     </span>
                 </g:if>
             </div>

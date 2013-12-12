@@ -12,8 +12,10 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list">Search Users</g:link></li>
-				<li><g:link class="create" action="create">Create User</g:link></li>
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <li><g:link class="list" action="list">Search Users</g:link></li>
+                    <li><g:link class="create" action="create">Create User</g:link></li>
+            </sec:ifAnyGranted>
 			</ul>
 		</div>
 		<div id="show-userAccount" class="content scaffold-show" role="main">
@@ -32,13 +34,24 @@
 				</li>
 				</g:if>
 
+                <g:if test="${userAccountInstance?.name}">
+                    <li class="fieldcontain">
+                        <span id="name-label" class="property-label"><g:message code="userAccount.name.label" default="Name" /></span>
+
+                        <span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${userAccountInstance}" field="name"/></span>
+
+                    </li>
+                </g:if>
+
 			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${userAccountInstance?.id}" />
 					<g:link class="edit" action="edit" id="${userAccountInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+					    <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    </sec:ifAnyGranted>
 				</fieldset>
 			</g:form>
 		</div>

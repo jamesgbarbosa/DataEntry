@@ -168,10 +168,13 @@ class BootStrap {
                 def beneficiaries = new ArrayList<Beneficiary>()
                 beneficiaries.add(b)
 
+        int i = 3
+        20.times {
 
+            new Plan(planNumber: "P" + i++, beneficiaries: b, agent: a, planHolder: p, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+                    ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
+        }
 
-        new Plan(planNumber: 'p100', beneficiaries: b, agent: a, planHolder: p, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
-                ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
 
                new Company(name: 'TEST1', address1: 'ASDASD').save(flush: true)
                new Company(name: 'TEST2', address1: 'AasdaSD').save(flush: true)
