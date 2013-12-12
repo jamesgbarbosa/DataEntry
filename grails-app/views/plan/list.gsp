@@ -115,7 +115,7 @@
             <div id="totalSearchResults">
                 <g:if test="${planInstanceList.size()!=0}">
                     <span class="totalSearchResultsText">
-                    Total Records Found: ${planInstanceList.size()}
+                    Total Records Found: ${planInstanceTotal}
                     </span>
                 </g:if>
             </div>
