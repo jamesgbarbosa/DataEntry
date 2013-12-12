@@ -8,7 +8,7 @@ class Company implements Serializable {
     String address3
 
     static constraints = {
-        name blank: false, nulalble: false
+        name blank: false, nulalble: false, unique: true
         address1 blank: true, nullable: true
         address2 blank: true, nullable: true
         address3 blank: true, nullable: true

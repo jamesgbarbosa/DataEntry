@@ -38,7 +38,7 @@
 <div class="fieldcontain ${hasErrors(bean: command, field: 'password', 'error')} required">
 	<label for="password">
         <sup><span class="required-indicator">*</span></sup>
-        <g:message code="userAccount.password.label" default="Password" />
+        New Password
 	</label>
 	<g:passwordField name="password" value="${command?.password}" />
     <g:hasErrors bean="${command}"
@@ -54,7 +54,7 @@
 <div class="fieldcontain ${hasErrors(bean: command, field: 'password2', 'error')} required">
     <label for="password">
         <sup><span class="required-indicator">*</span></sup>
-        <g:message code="userAccount.password.label" default="Password" />
+        Re-type New Password
     </label>
     <g:passwordField name="password2" value="${command?.password2}" />
     <g:hasErrors bean="${command}"

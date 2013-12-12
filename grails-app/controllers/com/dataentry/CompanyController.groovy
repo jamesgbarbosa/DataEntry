@@ -12,12 +12,13 @@ class CompanyController {
     }
 
     def list(Integer max) {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
         if(params.name) {
-            def companyInstanceList = Company.withCriteria {
+            def companyInstanceList = Company.createCriteria().list(max: params.max, offset: params.offset, sort: params.sort, order: params.order) {
                 ilike("name","${params.name}%")
             }
-            params.max = Math.min(max ?: 10, 100)
-            [companyInstanceList: companyInstanceList, companyInstanceTotal: Company.count()]
+            [companyInstanceList: companyInstanceList, companyInstanceTotal: companyInstanceList.getTotalCount()]
         } else {
             params.max = Math.min(max ?: 10, 100)
             [companyInstanceList: Company.list(params), companyInstanceTotal: Company.count()]

@@ -5,7 +5,7 @@
 <div class="fieldcontain ${hasErrors(bean: companyInstance, field: 'name', 'error')} required">
 	<label for="name">
         <sup><span class="required-indicator">*</span></sup>
-        <g:message code="company.name.label" default="Name" />
+        Company Name
 	</label>
 	<g:textField name="name" value="${companyInstance?.name}"/>
     <g:hasErrors bean="${companyInstance}"

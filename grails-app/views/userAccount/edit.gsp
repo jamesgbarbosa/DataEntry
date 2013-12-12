@@ -93,8 +93,9 @@
                     %{--</div>--}%
 
                     <div class="fieldcontain">
-                        <label for="password">
-                            Old Password
+                    <label for="password">
+                        <sup><span class="required-indicator">*</span></sup>
+                        Old Password
                         </label>
                         <g:passwordField name="oldPassword" />
                         <g:hasErrors bean="${pcommand}"
@@ -109,8 +110,8 @@
 
                     <div class="fieldcontain ${hasErrors(bean: pcommand, field: 'password', 'error')} required">
                         <label for="password">
-                            <g:message code="userAccount.password.label" default="Password" />
-                            <span class="required-indicator">*</span>
+                            <sup><span class="required-indicator">*</span></sup>
+                            New Password
                         </label>
                         <g:passwordField name="password" />
                         <g:hasErrors bean="${pcommand}"
@@ -125,8 +126,8 @@
 
                     <div class="fieldcontain ${hasErrors(bean: pcommand, field: 'password2', 'error')} required">
                         <label for="password">
-                            <g:message code="userAccount.password.label" default="Password" />
-                            <span class="required-indicator">*</span>
+                            <sup><span class="required-indicator">*</span></sup>
+                            Re-type New Password
                         </label>
                         <g:passwordField name="password2" />
                         <g:hasErrors bean="${pcommand}"
