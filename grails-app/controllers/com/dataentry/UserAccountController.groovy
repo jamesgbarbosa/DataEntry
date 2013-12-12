@@ -287,7 +287,7 @@ class RegisterCommand {
             }
         }
 //        email blank: false, nullable: false, email: true
-        password blank: false, nullable: false, validator: UserAccountController.passwordValidator
+        password blank: false, nullable: false
         password2 validator: UserAccountController.password2Validator
         name blank: true, nullable: true
         userId blank: true, nullable: true
