@@ -46,6 +46,21 @@
     </g:hasErrors>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'alias', 'error')} ">
+    <label for="alias">
+        <g:message code="client.alias.label" default="Alias" />
+    </label>
+    <g:textField name="alias" value="${clientInstance?.alias}"/>
+    <g:hasErrors bean="${clientInstance}"
+                 field="alias">
+        <g:eachError bean="${clientInstance}" field="alias">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'gender', 'error')} required">
 	<label for="gender">
         <sup><span class="required-indicator">*</span></sup>

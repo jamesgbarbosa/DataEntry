@@ -49,7 +49,16 @@
 					
 				</li>
 				</g:if>
-			
+
+			    <g:if test="${clientInstance?.alias}">
+				<li class="fieldcontain">
+					<span id="alias-label" class="property-label"><g:message code="client.alias.label" default="Alias" /></span>
+
+						<span class="property-value" aria-labelledby="alias-label"><g:fieldValue bean="${clientInstance}" field="alias"/></span>
+
+				</li>
+				</g:if>
+
 				<g:if test="${clientInstance?.gender}">
 				<li class="fieldcontain">
 					<span id="gender-label" class="property-label"><g:message code="client.gender.label" default="Gender" /></span>

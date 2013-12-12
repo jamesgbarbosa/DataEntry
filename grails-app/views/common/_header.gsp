@@ -19,7 +19,7 @@
                     <div class="pull-right" style="line-height: 38px;">
                         <sec:ifLoggedIn>
                             <i class='icon-user'></i>
-                            Welcome, <g:link controller="user" action="show" id="${sec.loggedInUserInfo(field: 'id')}">
+                            Welcome, <g:link controller="userAccount" action="edit" id="${sec.loggedInUserInfo(field: 'id')}">
                             <sec:username/>
                         </g:link>
                             | <i class='icon-off'></i> <g:link controller="logout">Log out</g:link>
