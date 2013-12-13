@@ -6,8 +6,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-
-<h1>Data Entry</h1>
+            <div class="appLogo">
+                <g:img dir="images" file="apec_logo.png" alt="APEC" style="height: 150px"/>
+            </div>
+%{--<h1>Data Entry</h1>--}%
             <div class="nav-collapse collapse">
                 %{--<ul class="nav nav-pills">--}%
                     %{--<sec:ifAnyGranted roles="ROLE_ADMIN"><li><g:link controller="securityInfo" action="config"><i class="icon-wrench"></i> Administration</g:link></li></sec:ifAnyGranted>--}%
