@@ -18,8 +18,9 @@ class PlanController {
 
     def list(Integer max) {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        if(params.planID || params.product || params.planHolder?.id || params.dateCreated) {
-            params.dateCreated = DateUtil.isValidDate(params.dateCreated)? Date.parse( 'MM/dd/yyyy', params.dateCreated ) : params.dateCreated
+        if(params.planID || params.product || params.planHolder || params.fromDate || params.toDate || params.planHolderCompany) {
+            params.fromDate = DateUtil.isValidDate(params.fromDate)? Date.parse( 'MM/dd/yyyy', params.fromDate ) : params.fromDate
+            params.toDate = DateUtil.isValidDate(params.toDate)? Date.parse( 'MM/dd/yyyy', params.toDate ) : params.toDate
             def criteria = Plan.createCriteria()
             def plans = criteria.list(max: params.max, offset: params.offset, sort: params.sort, order: params.order) {
                 and {
@@ -30,25 +31,36 @@ class PlanController {
                         eq("planNumber","${params.planID}")
 
                     }
-                    if(params.dateCreated!=''){
-                        eq("dateCreated",DateGroovyMethods.clearTime(params.dateCreated) )
+                    if(params.fromDate && params.toDate){
+                        between("dateCreated",DateGroovyMethods.clearTime(params.fromDate),DateGroovyMethods.clearTime(params.toDate))
                     }
-                    if(params.planHolder?.id!=''){
-                        planHolder {
-                            clientProfile {
-                                if(params.planHolder?.id) {
-                                    eq("id",Long.parseLong(params.planHolder.id))
+                    planHolder {
+                        if(params.planHolder!=''){
+                                clientProfile {
+                                    if(params.planHolder) {
+                                        eq("id",Long.parseLong(params.planHolder))
+
+                                    }
+                             }
+                        }
+                        if(params.planHolderCompany!='') {
+                            company {
+                                if(params.planHolderCompany) {
+                                    eq("id",Long.parseLong(params.planHolderCompany))
 
                                 }
                             }
                         }
                     }
+
                 }
             }
 
             def planHolder
-            if(params.planHolder?.id) {
-                planHolder = Planholder.get(params.planHolder?.id)
+            if(params.planHolder) {
+                planHolder = Planholder.findByClientProfile(Client.get(params.planHolder))
+            } else if(params.planHolderCompany) {
+                planHolder = Planholder.findByCompany(Client.get(params.planHolderCompany))
             }
             [planInstanceList: plans, planInstanceTotal: plans.getTotalCount(), planHolder:planHolder]
         } else {

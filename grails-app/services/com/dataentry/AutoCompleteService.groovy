@@ -97,7 +97,7 @@ class AutoCompleteService {
         }
         def clientList = Planholder.createCriteria().list(query)
         def clientsSelectionList = []
-        String sdf = new SimpleDateFormat("MM/dd/yyyy")
+
         clientList.each {
             def clientMap = [:]
             clientMap.put("id", it[0] )
@@ -106,6 +106,29 @@ class AutoCompleteService {
 //            clientMap.put("value", it[1])
             clientsSelectionList.add(clientMap)
         }
+
+        def companyList
+        def companySelectionList = []
+            def companyQuery = {
+                or {
+                    ilike("name", "${params.term}%")
+                }
+                projections {
+                    property("id")
+                    property("name")
+                }
+            }
+
+            companyList = Company.createCriteria().list(companyQuery)
+
+            companyList.each {
+                def companyMap = [:]
+                companyMap.put("companyId", it[0] )
+                companyMap.put("value", it[1])
+                companySelectionList.add(companyMap)
+            }
+            clientsSelectionList.addAll(companySelectionList)
+
         return clientsSelectionList as Set
     }
     def zipcodesList(Map params) {

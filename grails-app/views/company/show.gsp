@@ -12,8 +12,8 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="list">Search Companies</g:link></li>
+				<li><g:link class="create" action="create">Create Company</g:link></li>
 			</ul>
 		</div>
 		<div id="show-company" class="content scaffold-show" role="main">
@@ -25,8 +25,7 @@
 			
 				<g:if test="${companyInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="company.name.label" default="Name" /></span>
-					
+                        <span id="address1-label" class="property-label">Company Name</span>
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${companyInstance}" field="name"/></span>
 					
 				</li>

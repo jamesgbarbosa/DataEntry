@@ -18,7 +18,7 @@
     <div id="search-plan" class="content scaffold-list">
         <h1>Search Plans:</h1>
         <g:form action="list">
-            <table style="width: 500px">
+            <table style="width: 700px">
                 <tr>
                     <td>
                         <label>Plan Number</label>
@@ -33,8 +33,9 @@
                     </td>
                     <td>
                         %{--<g:textField name="planholderName" value="${params.planholderName}"></g:textField>--}%
-                        <g:textField class='autocomplete-field' name="plan-planholder-search-autocomplete" value="${planHolder?.clientProfile?.firstName ? planHolder?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a plan holder..."/>
-                        <g:hiddenField name="planHolder.id" value="${planHolder?.clientProfile?.id}" />
+                        <g:textField class='autocomplete-field' name="plan-planholder-search-autocomplete" value="${planHolder?.name()}" placeholder="Search a plan holder..."/>
+                        <g:hiddenField name="planHolder" value="${planHolder?.clientProfile?.id}"/>
+                        <g:hiddenField name="planHolderCompany" value="${planHolder?.company?.id}"/>
                     </td>
                 </tr>
                 <tr>
@@ -48,18 +49,52 @@
                 </tr>
                 <tr>
                     <td>
-                        <label>Date Created</label>
+                        <label>Date Range</label>
                     </td>
                     <td>
-                        <g:textField id="dateCreated" name="dateCreated" value="${ params?.dateCreated != '' ? formatDate(format:'MM/dd/yyyy',date: params.dateCreated) : ''}" />
+                        <g:textField id="fromDate" name="fromDate" value="${ params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : ''}" />
+                        –
+                        <g:textField id="toDate" name="toDate" value="${ params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : ''}" />
 
                     </td>
+
                 </tr>
             </table>
             <fieldset class="buttons">
                 <g:submitButton name="Submit" value="Submit"/>
             </fieldset>
 
+            <table>
+                <thead>
+                <tr>
+
+                    <g:sortableColumn  params="[planID: params.planID, product: params.product, fromDate:formatDate(format:'MM/dd/yyyy',date:params?.fromDate) , toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate) , planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="planNumber" title="${message(code: 'plan.planNumber.label', default: 'Plan Number')}" />
+
+                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: formatDate(format:'MM/dd/yyyy',date:params?.fromDate) , toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate), planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
+
+                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: formatDate(format:'MM/dd/yyyy',date:params?.fromDate) , toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate), planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="planHolder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <g:each in="${planInstanceList}" status="i" var="planInstance">
+                    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+                        <td><g:link action="show" id="${planInstance.id}">${fieldValue(bean: planInstance, field: "planNumber")}</g:link></td>
+
+                        <td>${fieldValue(bean: planInstance, field: "product")}</td>
+
+                        <td>${planInstance?.planHolder?.name()}</td>
+
+
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <g:paginate total="${planInstanceTotal}" params="[planID: params.planID, product: params.product, fromDate: formatDate(format:'MM/dd/yyyy',date:params?.fromDate), toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate), planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" />
+            </div>
 
         </g:form>
     </div>
@@ -67,51 +102,7 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
-				<thead>
-					<tr>
-					
-						<g:sortableColumn property="planNumber" title="${message(code: 'plan.planNumber.label', default: 'Plan Number')}" />
 
-						<g:sortableColumn property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
-
-						<g:sortableColumn property="planHolder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
-					
-						%{--<g:sortableColumn property="maturityPeriod" title="${message(code: 'plan.maturityPeriod.label', default: 'Maturity Period')}" />--}%
-					%{----}%
-						%{--<g:sortableColumn property="pnpPrice" title="${message(code: 'plan.pnpPrice.label', default: 'Pnp Price')}" />--}%
-					%{----}%
-						%{--<g:sortableColumn property="modalInstallment" title="${message(code: 'plan.modalInstallment.label', default: 'Modal Installment')}" />--}%
-					%{----}%
-						%{--<g:sortableColumn property="numberOfUnits" title="${message(code: 'plan.numberOfUnits.label', default: 'Number Of Units')}" />--}%
-					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${planInstanceList}" status="i" var="planInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${planInstance.id}">${fieldValue(bean: planInstance, field: "planNumber")}</g:link></td>
-					
-						<td>${fieldValue(bean: planInstance, field: "product")}</td>
-
-						<td>${planInstance?.planHolder?.name()}</td>
-
-						%{--<td>${fieldValue(bean: planInstance, field: "maturityPeriod")}</td>--}%
-					%{----}%
-						%{--<td>${fieldValue(bean: planInstance, field: "pnpPrice")}</td>--}%
-					%{----}%
-						%{--<td>${fieldValue(bean: planInstance, field: "modalInstallment")}</td>--}%
-					%{----}%
-						%{--<td>${fieldValue(bean: planInstance, field: "numberOfUnits")}</td>--}%
-					
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
-			<div class="pagination">
-				<g:paginate total="${planInstanceTotal}" />
-			</div>
             <div id="totalSearchResults">
                 <g:if test="${planInstanceList.size()!=0}">
                     <span class="totalSearchResultsText">

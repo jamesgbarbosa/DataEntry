@@ -127,7 +127,15 @@ jQuery(document).ready(function($){
         },
         minLength: 1,
         select: function(event, ui) {
-            $("#planHolder\\.id").val(ui.item.id);
+            $("#planHolder").val(ui.item.id);
+            $("#planHolderCompany").val(ui.item.companyId);
+
+            if(ui.item.id == undefined) {
+                $("#planHolder").val("");
+            }
+            if(ui.item.companyId == undefined) {
+                $("#planHolderCompany").val("");
+            }
         }
     }).focus(function() {
             $(this).autocomplete('search', $(this).val())
@@ -193,7 +201,8 @@ jQuery(document).ready(function($){
     $("#plan-planholder-search-autocomplete").change(function() {
         var textValue = $('#plan-planholder-search-autocomplete').val()
         if(textValue == "") {
-            $("#agent\\.id").val("");
+            $("#planHolder").val("");
+            $("#planHolderCompany").val("");
         }
     });
 });

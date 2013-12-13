@@ -46,6 +46,16 @@ jQuery(document).ready(function($){
             changeYear: true,
             yearRange: "1920:2100"
         });
+    $('#fromDate').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1920:2100"
+    });
+    $('#toDate').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1920:2100"
+    });
 
     $("#agent-autocomplete").autocomplete({
         source: function(request, response){
