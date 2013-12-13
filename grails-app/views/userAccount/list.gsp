@@ -16,6 +16,36 @@
 			</ul>
 		</div>
 		<div id="list-userAccount" class="content scaffold-list" role="main">
+            <h1>Search Users:</h1>
+            <g:form action="list">
+                <table style="width: 500px">
+                    <tr>
+                        <td>
+                            <label>Username</label>
+                        </td>
+                        <td>
+                            <g:textField name="username" value="${params.username}"></g:textField>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Name</label>
+                        </td>
+                        <td>
+                            <g:textField name="name" value="${params.name}"></g:textField>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <span class="buttons">
+                                <g:submitButton name="Submit" value="Submit"/>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </g:form>
 			<h1>User List</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>

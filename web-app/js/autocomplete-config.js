@@ -44,6 +44,7 @@ jQuery(document).ready(function($){
                 data: {
                     term: request.term,
 //                    agentId: $("#agentId").val(),
+                    planholder: true,
                     beneficiaryIds: $("#beneficiaryIds").val(),
                     planholderId: $("#planholderId").val()
                 },

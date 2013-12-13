@@ -192,7 +192,7 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${planInstance?.id}" />
-					<g:link class="edit" action="edit" id="${planInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:link class="edit button-border" action="edit" id="${planInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                     <g:actionSubmit id="delete-plan" class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>
                     <input id="open-delete-plan-dialog" value="Delete" class="delete" type="button"/>
                 </fieldset>

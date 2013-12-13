@@ -17,9 +17,11 @@ class PlanController {
     }
 
     def list(Integer max) {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         if(params.planID || params.product || params.planHolder?.id || params.dateCreated) {
             params.dateCreated = DateUtil.isValidDate(params.dateCreated)? Date.parse( 'MM/dd/yyyy', params.dateCreated ) : params.dateCreated
-            def plans = Plan.withCriteria {
+            def criteria = Plan.createCriteria()
+            def plans = criteria.list(max: params.max, offset: params.offset, sort: params.sort, order: params.order) {
                 and {
                     if(params.product!='') {
                         eq("product","${params.product}")
@@ -48,8 +50,7 @@ class PlanController {
             if(params.planHolder?.id) {
                 planHolder = Planholder.get(params.planHolder?.id)
             }
-            params.max = Math.min(max ?: 10, 100)
-            [planInstanceList: plans, planInstanceTotal: plans.size(), planHolder:planHolder]
+            [planInstanceList: plans, planInstanceTotal: plans.getTotalCount(), planHolder:planHolder]
         } else {
             params.max = Math.min(max ?: 10, 100)
             [planInstanceList: Plan.list(params), planInstanceTotal: Plan.count()]
@@ -980,7 +981,6 @@ class PlanController {
     }
 
     def clientsList = {
-        params.planholder = true
         render autoCompleteService.clientList(params) as JSON
     }
 

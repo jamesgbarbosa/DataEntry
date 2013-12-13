@@ -19,8 +19,20 @@ class UserAccountController {
 
     @Secured(['ROLE_ADMIN'])
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [userAccountInstanceList: UserAccount.list(params), userAccountInstanceTotal: UserAccount.count()]
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        def x = params
+        if(params.username || params.name) {
+            def users = UserAccount.createCriteria().list(max: params.max, offset: params.offset, sort: params.sort, order: params.order) {
+                if(params.username) { ilike("username","${params.username}%") }
+                if(params.name) { ilike("name","${params.name}%")}
+            }
+            [userAccountInstanceList: users, userAccountInstanceTotal: users.getTotalCount()]
+        } else {
+            params.max = Math.min(max ?: 10, 100)
+            [userAccountInstanceList: UserAccount.list(params), userAccountInstanceTotal: UserAccount.count()]
+        }
+
+
     }
 
     @Secured(['ROLE_ADMIN'])
@@ -275,7 +287,7 @@ class RegisterCommand {
             }
         }
 //        email blank: false, nullable: false, email: true
-        password blank: false, nullable: false, validator: UserAccountController.passwordValidator
+        password blank: false, nullable: false
         password2 validator: UserAccountController.password2Validator
         name blank: true, nullable: true
         userId blank: true, nullable: true
