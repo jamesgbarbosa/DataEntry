@@ -4,7 +4,7 @@ class AuditTrail {
 
     String username
     String transaction
-    String timeStamp
+    Date timeStamp
     static constraints = {
         username nullable: true, blank: true
         transaction nullable: true, blank: true
