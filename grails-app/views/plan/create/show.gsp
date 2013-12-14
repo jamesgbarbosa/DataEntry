@@ -200,9 +200,12 @@
 
                 <g:each in="${planInstance.beneficiaries}" var="a">
                     <span class="property-value" aria-labelledby="beneficiaries-label">
-                        <g:link controller="client" action="show" id="${a?.clientProfile.id}">${a?.clientProfile?.fullName()}
-
-                        </g:link>
+                        <g:if test="${a?.clientProfile}">
+                            <g:link controller="client"  action="show" id="${a?.clientProfile?.id}">${a?.clientProfile?.getFullName()}</g:link>
+                        </g:if>
+                        <g:else>
+                            <g:link controller="company"  action="show" id="${a?.company?.id}">${a?.company?.name}</g:link>
+                        </g:else>
                         (${a?.designation})
                     </span>
                 </g:each>

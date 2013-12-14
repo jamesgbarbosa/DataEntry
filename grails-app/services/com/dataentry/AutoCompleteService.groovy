@@ -21,7 +21,9 @@ class AutoCompleteService {
                 }
                 if(params.beneficiaryIds) {
                         Arrays.asList(params.beneficiaryIds.split(",")).each {
-                        ne("id", Long.parseLong(it))
+                        if(Arrays.asList(it.split("-"))[0] == 'client') {
+                            ne("id", Long.parseLong((it.split("-"))[1]))
+                        }
                     }
                 }
                 if(params.planholderId) {
@@ -52,10 +54,22 @@ class AutoCompleteService {
 
         def companyList
         def companySelectionList = []
-        if(params.planholder) {
+        if(params.planholder || params.beneficiary) {
             def companyQuery = {
                 or {
                     ilike("name", "${params.term}%")
+                }
+                and {
+                    if(params.beneficiaryIds) {
+                        Arrays.asList(params.beneficiaryIds.split(",")).each {
+                            if(Arrays.asList(it.split("-"))[0] == 'company') {
+                                ne("id", Long.parseLong((it.split("-"))[1]))
+                            }
+                        }
+                    }
+                    if(params.planholderCompanyId) {
+                        ne("id", Long.parseLong(params.planholderCompanyId))
+                    }
                 }
                 projections {
                     property("id")
@@ -110,16 +124,18 @@ class AutoCompleteService {
         def companyList
         def companySelectionList = []
             def companyQuery = {
-                or {
-                    ilike("name", "${params.term}%")
-                }
-                projections {
-                    property("id")
-                    property("name")
+                company {
+                    or {
+                        ilike("name", "${params.term}%")
+                    }
+                    projections {
+                        property("id")
+                        property("name")
+                    }
                 }
             }
 
-            companyList = Company.createCriteria().list(companyQuery)
+            companyList = Planholder.createCriteria().list(companyQuery)
 
             companyList.each {
                 def companyMap = [:]

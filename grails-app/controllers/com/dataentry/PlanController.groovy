@@ -60,7 +60,7 @@ class PlanController {
             if(params.planHolder) {
                 planHolder = Planholder.findByClientProfile(Client.get(params.planHolder))
             } else if(params.planHolderCompany) {
-                planHolder = Planholder.findByCompany(Client.get(params.planHolderCompany))
+                planHolder = Planholder.findByCompany(Company.get(params.planHolderCompany))
             }
             [planInstanceList: plans, planInstanceTotal: plans.getTotalCount(), planHolder:planHolder]
         } else {
@@ -166,7 +166,9 @@ class PlanController {
 //                        } else
                         if ( conversation.beneficiaries?.clientProfile?.id?.contains(conversation.planholderInstance.clientProfile?.id) )  {
                             errorCode = "Client already added as beneficiary."
-                        }  else {
+                        } else if(conversation.beneficiaries?.company?.id?.contains(conversation.planholderInstance.company?.id)) {
+                            errorCode = "Client already added as beneficiary."
+                        }else {
                             errorCode = ""
                         }
                         if(errorCode == "") {
@@ -251,11 +253,26 @@ class PlanController {
                 flow.duplicateClientError = ""
 //                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
                 def beneficiaryInstance = new Beneficiary(params)
-                beneficiaryInstance.clientProfile = Client.get(params.beneficiary.id)
+
+
+                if(params.beneficiary.id) {
+                    beneficiaryInstance.clientProfile = Client.get(params.beneficiary.id)
+                    beneficiaryInstance.company = null
+                } else if(params.beneficiaryCompany.id){
+                    beneficiaryInstance.company = Company.get(params.beneficiaryCompany.id)
+                    beneficiaryInstance.clientProfile = null
+                } else {
+                    beneficiaryInstance.company = null
+                    beneficiaryInstance.clientProfile = null
+                }
+
                 conversation.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.validate()) {
                     def errorCode
                     if ( conversation.beneficiaries?.clientProfile?.id?.contains(beneficiaryInstance.clientProfile?.id) &&
+                            (conversation.beneficiaries?.designation.contains(beneficiaryInstance.designation)) )  {
+                        errorCode = "Client already added as beneficiary."
+                    } else if ( conversation.beneficiaries?.company?.id?.contains(beneficiaryInstance.company?.id) &&
                             (conversation.beneficiaries?.designation.contains(beneficiaryInstance.designation)) )  {
                         errorCode = "Client already added as beneficiary."
                     } else {
@@ -280,7 +297,10 @@ class PlanController {
                 def iterator =  conversation.beneficiaries.iterator()
                 while(iterator.hasNext()) {
                     def obj = iterator.next()
-                    if(params?."deleteBeneficiary_${obj.clientProfile?.id}") {
+                    if(params?."deleteBeneficiary_${obj.clientProfile?.id}client${obj.designation}") {
+                        iterator.remove()
+                    }
+                    if(params?."deleteBeneficiary_${obj.company?.id}company${obj.designation}") {
                         iterator.remove()
                     }
                 }
@@ -689,11 +709,26 @@ class PlanController {
                 flow.duplicateClientError = ""
 //                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
                 def beneficiaryInstance = new Beneficiary(params)
-                beneficiaryInstance.clientProfile = Client.get(params.beneficiary.id)
+
+
+                if(params.beneficiary.id) {
+                    beneficiaryInstance.clientProfile = Client.get(params.beneficiary.id)
+                    beneficiaryInstance.company = null
+                } else if(params.beneficiaryCompany.id){
+                    beneficiaryInstance.company = Company.get(params.beneficiaryCompany.id)
+                    beneficiaryInstance.clientProfile = null
+                } else {
+                    beneficiaryInstance.company = null
+                    beneficiaryInstance.clientProfile = null
+                }
+
                 conversation.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.validate()) {
                     def errorCode
                     if ( conversation.beneficiaries?.clientProfile?.id?.contains(beneficiaryInstance.clientProfile?.id) &&
+                            (conversation.beneficiaries?.designation.contains(beneficiaryInstance.designation)) )  {
+                        errorCode = "Client already added as beneficiary."
+                    } else if ( conversation.beneficiaries?.company?.id?.contains(beneficiaryInstance.company?.id) &&
                             (conversation.beneficiaries?.designation.contains(beneficiaryInstance.designation)) )  {
                         errorCode = "Client already added as beneficiary."
                     } else {
@@ -718,7 +753,10 @@ class PlanController {
                 def iterator =  conversation.beneficiaries.iterator()
                 while(iterator.hasNext()) {
                     def obj = iterator.next()
-                    if(params?."deleteBeneficiary_${obj.clientProfile?.id}") {
+                    if(params?."deleteBeneficiary_${obj.clientProfile?.id}client${obj.designation}") {
+                        iterator.remove()
+                    }
+                    if(params?."deleteBeneficiary_${obj.company?.id}company${obj.designation}") {
                         iterator.remove()
                     }
                 }
@@ -896,7 +934,7 @@ class PlanController {
                 plan.planStatus = flow.planDetails.planStatus
                 plan.withInsurance = flow.planDetails.withInsurance
 
-                def beneficiaries = conversation.beneficiaries
+                def beneficiaryList = conversation.beneficiaries
                 def planholder = conversation.planholderInstance
                 def oldPlanholder = plan.planHolder
                 def agent = conversation.agentInstance
@@ -915,7 +953,9 @@ class PlanController {
 
                     if(oldPlanholder?.clientProfile?.id!=planholder?.clientProfile?.id ||
                             oldPlanholder?.company?.id!=planholder?.company?.id) {
-                        oldPlanholder.delete()
+                        if(Plan.findAllByPlanHolder(oldPlanholder).size()== 0) {
+                            oldPlanholder.delete()
+                        }
                     }
 
                     if(agent) {
@@ -926,20 +966,31 @@ class PlanController {
                     }
 
                     if(oldAgent.clientProfile.id!=agent.clientProfile.id) {
-                        oldAgent.delete()
+                        if(Plan.findAllByAgent(oldAgent).size()== 0) {
+                            oldAgent.delete()
+                        }
                     }
 
                     def tempb = []
                     tempb.addAll(oldBeneficiaries)
 
                     tempb.each {
-                        if(!beneficiaries.id.contains(it.id)) {
-                            plan.removeFromBeneficiaries(it)
-                            it.delete()
+                        def ben = it
+                        if(!beneficiaryList.id.contains(ben.id)) {
+                            plan.removeFromBeneficiaries(ben)
+//
+                            def plans = Plan.createCriteria().list() {
+                                beneficiaries {
+                                    eq("id",ben.id)
+                                }
+                            }
+                            if(plans.size()== 0) {
+                                ben.delete()
+                            }
                         }
                     }
 
-                    beneficiaries.each {
+                    beneficiaryList.each {
                         if(!oldBeneficiaries.id.contains(it.id)) {
                             it.save()
                             plan.addToBeneficiaries(it)

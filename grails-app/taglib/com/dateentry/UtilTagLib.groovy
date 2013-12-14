@@ -9,7 +9,7 @@ class UtilTagLib {
     def beneficiaryIdsHiddenField = { attrs ->
         def temp = "0"
         attrs.beneficiaries.each {
-            temp += ",${it?.clientProfile?.id}"
+            temp += ",${it?.clientProfile?.id ? 'client-'+it?.clientProfile?.id : 'company-'+it?.company?.id}"
         }
         out << g.hiddenField(name: 'beneficiaryIds', value: temp)
     }

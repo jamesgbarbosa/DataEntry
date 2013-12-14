@@ -47,8 +47,10 @@
                     </label>
                     <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName ? beneficiaryInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
                     <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.clientProfile?.id}"/>
+                    <g:hiddenField name="beneficiaryCompany.id" value="${beneficiaryInstance?.company?.id}"/>
                     <g:hiddenField name="agentId" value="${agentInstance?.clientProfile?.id}"/>
                     <g:hiddenField name="planholderId" value="${planholderInstance?.clientProfile?.id}"/>
+                    <g:hiddenField name="planholderCompanyId" value="${planholderInstance?.company?.id}"/>
                     <util:beneficiaryIdsHiddenField beneficiaries="${beneficiaries}"/>
 
                     <g:if test="${!readOnly}">
@@ -128,13 +130,13 @@
 
                                     <td>${i+1} <input type='hidden' class='benId' name='benId' value='${beneficiary?.clientProfile?.id}' /> </td>
 
-                                    <td>${beneficiary?.clientProfile?.fullName()}</td>
+                                    <td>${beneficiary?.name()}</td>
 
                                     <td>${beneficiary?.designation}</td>
 
                                     <td>${beneficiary?.relationship}</td>
 
-                                    <td><input class='deleteBeneficiaryCB' type='checkbox' name='deleteBeneficiary_${beneficiary?.clientProfile?.id}'/></td>
+                                    <td><input class='deleteBeneficiaryCB' type='checkbox' name="deleteBeneficiary_${beneficiary?.clientProfile?.id ? beneficiary?.clientProfile?.id+'client'+beneficiary?.designation :beneficiary?.company?.id +'company'+beneficiary?.designation }"/></td>
                                 </tr>
                             </g:each>
                         </tbody>

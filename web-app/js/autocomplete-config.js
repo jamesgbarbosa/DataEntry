@@ -78,9 +78,11 @@ jQuery(document).ready(function($){
                 url: clientListLink,
                 data: {
                     term: request.term,
+                    beneficiary: true,
 //                    agentId: $("#agentId").val(),
 //                    beneficiaryIds: $("#beneficiaryIds").val(),
-                    planholderId: $("#planholderId").val()
+                    planholderId: $("#planholderId").val(),
+                    planholderCompanyId: $("#planholderCompanyId").val()
                 },
                 success: function(data){
                     response(data);
@@ -92,7 +94,16 @@ jQuery(document).ready(function($){
         },
         minLength: 1,
         select: function(event, ui) {
+
             $("#beneficiary-autocomplete-id").val(ui.item.id);
+            $("#beneficiaryCompany\\.id").val(ui.item.companyId);
+
+            if(ui.item.id == undefined) {
+                $("#beneficiary-autocomplete-id").val("");
+            }
+            if(ui.item.companyId == undefined) {
+                $("#beneficiaryCompany\\.id").val("");
+            }
         }
     }).focus(function() {
             $(this).autocomplete('search', $(this).val())
@@ -116,7 +127,7 @@ jQuery(document).ready(function($){
                     response(data);
                 },
                 error: function(){
-                    alert("Unable to retrieve agents.")
+                    alert("Unable to retrieve planholders.")
                 }
             });
         }, response: function(event, ui) {
@@ -178,6 +189,7 @@ jQuery(document).ready(function($){
         var textValue = $('#beneficiary-autocomplete').val()
         if(textValue == "") {
             $("#beneficiary-autocomplete-id").val("");
+            $("#beneficiaryCompany\\.id").val("");
         }
     });
 

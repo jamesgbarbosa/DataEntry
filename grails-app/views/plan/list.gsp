@@ -68,11 +68,11 @@
                 <thead>
                 <tr>
 
-                    <g:sortableColumn  params="[planID: params.planID, product: params.product, fromDate:formatDate(format:'MM/dd/yyyy',date:params?.fromDate) , toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate) , planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="planNumber" title="${message(code: 'plan.planNumber.label', default: 'Plan Number')}" />
+                    <g:sortableColumn  params="[planID: params.planID, product: params.product, fromDate:params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : '' , toDate:params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : '', planHolderCompany: params.planHolderCompany ]" property="planNumber" title="${message(code: 'plan.planNumber.label', default: 'Plan Number')}" />
 
-                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: formatDate(format:'MM/dd/yyyy',date:params?.fromDate) , toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate), planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
+                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : '' , toDate:params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : '', planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
 
-                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: formatDate(format:'MM/dd/yyyy',date:params?.fromDate) , toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate), planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="planHolder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
+                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : '' , toDate:params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : '', planHolderCompany: params.planHolderCompany ]" property="planHolder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
 
 
                 </tr>
@@ -93,7 +93,7 @@
                 </tbody>
             </table>
             <div class="pagination">
-                <g:paginate total="${planInstanceTotal}" params="[planID: params.planID, product: params.product, fromDate: formatDate(format:'MM/dd/yyyy',date:params?.fromDate), toDate:formatDate(format:'MM/dd/yyyy',date:params?.toDate), planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" />
+                <g:paginate total="${planInstanceTotal}" params="[planID: params.planID, product: params.product, fromDate: params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : '' , toDate:params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : '', planHolderCompany: params.planHolderCompany ]" />
             </div>
 
         </g:form>

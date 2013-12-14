@@ -3,6 +3,7 @@ package com.dataentry
 class Beneficiary implements Serializable {
 
     Client clientProfile
+    Company company
     String designation
     String relationship
 
@@ -13,6 +14,25 @@ class Beneficiary implements Serializable {
     static constraints = {
         designation blank:  false, nullable:  false
         relationship blank:  false, nullable:  false
-        clientProfile: nullable: false
+        clientProfile nullable: true, validator: { val,obj ->
+            if(obj.company == null && val == null) {
+                return false
+            }
+        }
+        company nullable: true,  validator: { val,obj ->
+            if(obj.clientProfile == null && val == null) {
+                return false
+            }
+        }
+    }
+
+    String name() {
+        if(clientProfile?.firstName) {
+            return clientProfile.fullNameBirthdateAndGender()
+        } else if(company) {
+            return company.name
+        } else {
+            return ""
+        }
     }
 }
