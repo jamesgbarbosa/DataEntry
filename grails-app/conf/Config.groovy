@@ -131,6 +131,7 @@ grails.plugins.springsecurity.authority.className = 'com.dataentry.Role'
 
 auditLog {
     tablename = "AUDIT_LOG"
+    disabled = true
 //    verbose = true
     actorClosure = { request, session ->
         if (request.applicationContext.springSecurityService.principal instanceof java.lang.String){
