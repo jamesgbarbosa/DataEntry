@@ -163,7 +163,7 @@ class BootStrap {
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
 
                 def p = new Planholder(clientProfile: client1, company: null).save(flush: true, failOnError: true)
-                def b = new Beneficiary(clientProfile: client2, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD').save(flush: true, failOnError: true)
+                def b = new Beneficiary(clientProfile: client2, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD', company: null).save(flush: true, failOnError: true)
                 def a = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test', counselorCode: 'Testr' ).save(flush: true, failOnError: true)
                 def beneficiaries = new ArrayList<Beneficiary>()
                 beneficiaries.add(b)

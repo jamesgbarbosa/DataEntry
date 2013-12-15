@@ -11,6 +11,7 @@ class UserAccountController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def springSecurityService
+    def auditTrailService
 
     @Secured(['ROLE_ADMIN'])
     def index() {
@@ -151,6 +152,7 @@ class UserAccountController {
         userAccountInstance.password = command.password
         userAccountInstance.save()
 
+        auditTrailService.addToLogs("Change Password: ${userAccountInstance.username}")
         flash.message = "Change password success."
         redirect(action: "show", id: userAccountInstance.id)
 
@@ -197,6 +199,7 @@ class UserAccountController {
             return
         }
 
+        auditTrailService.addToLogs("Update User: ${userAccountInstance.username}")
         flash.message = "User ${userAccountInstance.username} successfully updated."
         redirect(action: "show", id: userAccountInstance.id)
     }

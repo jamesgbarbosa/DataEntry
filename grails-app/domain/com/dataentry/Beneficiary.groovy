@@ -9,6 +9,7 @@ class Beneficiary implements Serializable {
 
     Beneficiary() {
         clientProfile = new Client()
+        company = new Company()
     }
 //    static belongsTo = [plan: Plan]
     static constraints = {

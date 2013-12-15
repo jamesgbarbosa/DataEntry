@@ -10,6 +10,8 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
@@ -126,3 +128,18 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.dataentry.UserAccount'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.dataentry.UserAccountRole'
 grails.plugins.springsecurity.authority.className = 'com.dataentry.Role'
+
+auditLog {
+    tablename = "AUDIT_LOG"
+//    verbose = true
+    actorClosure = { request, session ->
+        if (request.applicationContext.springSecurityService.principal instanceof java.lang.String){
+            return request.applicationContext.springSecurityService.principal
+        }
+        def username = request.applicationContext.springSecurityService.principal?.username
+        if (SpringSecurityUtils.isSwitched()){
+            username = SpringSecurityUtils.switchedUserOriginalUsername+" AS "+username
+        }
+        return username
+    }
+}

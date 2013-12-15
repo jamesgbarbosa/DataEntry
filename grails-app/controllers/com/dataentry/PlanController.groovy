@@ -6,10 +6,12 @@ import org.springframework.web.context.request.RequestContextHolder
 import org.apache.commons.lang.time.DateUtils
 import org.codehaus.groovy.runtime.DateGroovyMethods
 import grails.plugins.springsecurity.Secured
+import com.dataentry.logs.AuditLog
 //
 @Secured(['ROLE_ADMIN','ROLE_USER'])
 class PlanController {
     def autoCompleteService
+    def auditTrailService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -121,7 +123,7 @@ class PlanController {
                 conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to('createPlanHolder')
 
-            on('createCompany'){
+            on('createPlanholderCompany'){
                 flow.duplicateClientError = ""
                 flow.createPlanHolderDto = new Planholder()
 
@@ -136,7 +138,7 @@ class PlanController {
                 conversation.planInstance = plan
                 conversation.planholderInstance = planHolder
                 conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
-            }.to('createCompany')
+            }.to('createPlanholderCompany')
 
             on('beneficiaries'){
                 flow.duplicateClientError = ""
@@ -227,7 +229,7 @@ class PlanController {
         }
 
         // state 1.b
-        createCompany {
+        createPlanholderCompany {
             on("return"){
             }.to("createPlan")
 
@@ -320,6 +322,12 @@ class PlanController {
                 conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createBeneficiary")
 
+            on('createBeneficiaryCompany'){
+                flow.duplicateClientError = ""
+                flow.beneficiaryInstance = new Beneficiary(params)
+                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+            }.to('createBeneficiaryCompany')
+
             on("next") {
                 flow.duplicateClientError = ""
                 conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
@@ -358,6 +366,27 @@ class PlanController {
                     return error()
                 }
                 flash.red = "true"
+            }.to('beneficiaries')
+        }
+
+        // state 2.b
+        createBeneficiaryCompany {
+            on("return"){
+            }.to("beneficiaries")
+
+            on('saveCompany'){
+                def beneficiaryInstance = new Beneficiary()
+                beneficiaryInstance.company.properties = params
+                flow.beneficiaryInstance = beneficiaryInstance
+                if(beneficiaryInstance.company.validate()) {
+                    if (!beneficiaryInstance.company.save(flush: true)) {
+                        return error()
+                    } else {
+                        flow.beneficiaryInstance = beneficiaryInstance
+                    }
+                } else {
+                    return error()
+                }
             }.to('beneficiaries')
         }
 
@@ -578,7 +607,7 @@ class PlanController {
                 conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to('createPlanHolder')
 
-            on('createCompany'){
+            on('createPlanholderCompany'){
                 flow.duplicateClientError = ""
                 flow.createPlanHolderDto = new Planholder()
 
@@ -593,7 +622,7 @@ class PlanController {
                 conversation.planInstance = plan
                 conversation.planholderInstance = planHolder
                 conversation.page1link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
-            }.to('createCompany')
+            }.to('createPlanholderCompany')
 
             on('beneficiaries'){
                 flow.duplicateClientError = ""
@@ -683,7 +712,7 @@ class PlanController {
         }
 
         // state 1.b
-        createCompany {
+        createPlanholderCompany {
             on("return"){
             }.to("createPlan")
 
@@ -776,6 +805,12 @@ class PlanController {
                 conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createBeneficiary")
 
+            on('createBeneficiaryCompany'){
+                flow.duplicateClientError = ""
+                flow.beneficiaryInstance = new Beneficiary(params)
+                conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+            }.to('createBeneficiaryCompany')
+
             on("next") {
                 flow.duplicateClientError = ""
                 conversation.page2link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
@@ -814,6 +849,27 @@ class PlanController {
                     return error()
                 }
                 flash.red = "true"
+            }.to('beneficiaries')
+        }
+
+        // state 2.b
+        createBeneficiaryCompany {
+            on("return"){
+            }.to("beneficiaries")
+
+            on('saveCompany'){
+                def beneficiaryInstance = new Beneficiary()
+                beneficiaryInstance.company.properties = params
+                flow.beneficiaryInstance = beneficiaryInstance
+                if(beneficiaryInstance.company.validate()) {
+                    if (!beneficiaryInstance.company.save(flush: true)) {
+                        return error()
+                    } else {
+                        flow.beneficiaryInstance = beneficiaryInstance
+                    }
+                } else {
+                    return error()
+                }
             }.to('beneficiaries')
         }
 
@@ -1021,6 +1077,7 @@ class PlanController {
 
                 }
                 flash.myMessage = "Plan ${plan?.planNumber} successfully updated."
+                auditTrailService.addToLogs("Update Plan: ${plan.planNumber}")
                 conversation.planInstance = plan
             }.to('show')
         }
@@ -1146,7 +1203,7 @@ class PlanController {
     }
 
     def test = {
-        render DateGroovyMethods.clearTime(new Date())
-
+        def x = AuditLog.list()
+        render x
     }
 }

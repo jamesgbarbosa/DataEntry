@@ -33,7 +33,7 @@
     <g:if test="${!readOnly}">
         <span class="buttons">
             <g:submitButton formaction="create" name="createPlanHolder" event="createPlanHolder" value="Create Planholder"/>
-            <g:submitButton formaction="create" name="createCompany" event="createCompany" value="Create Company"/>
+            <g:submitButton formaction="create" name="createPlanholderCompany" event="createPlanholderCompany" value="Create Company"/>
         </span>
     </g:if>
     <g:hasErrors bean="${planInstance}"

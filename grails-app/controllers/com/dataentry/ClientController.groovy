@@ -6,7 +6,7 @@ import grails.plugins.springsecurity.Secured
 class ClientController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+    def auditTrailService
     def index() {
         redirect(action: "list", params: params)
     }
@@ -88,6 +88,7 @@ class ClientController {
             return
         }
 
+        auditTrailService.addToLogs("Update Client: ${clientInstance.fullNameBirthdateAndGender()}")
         flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
         redirect(action: "show", id: clientInstance.id)
     }

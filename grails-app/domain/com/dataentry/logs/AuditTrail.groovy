@@ -1,6 +1,6 @@
 package com.dataentry.logs
 
-class AuditTrail {
+class AuditTrail implements Serializable {
 
     String username
     String transaction

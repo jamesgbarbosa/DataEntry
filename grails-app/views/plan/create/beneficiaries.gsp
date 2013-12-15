@@ -45,7 +45,7 @@
                         <sup><span class="required-indicator">*</span></sup>
                         Beneficiary
                     </label>
-                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.clientProfile?.firstName ? beneficiaryInstance?.clientProfile?.fullNameBirthdateAndGender() : ""}" placeholder="Search a client..."/>
+                    <g:textField class='autocomplete-field' id="beneficiary-autocomplete" name="beneficiary-autocomplete" value="${beneficiaryInstance?.name()}" placeholder="Search a client..."/>
                     <g:hiddenField id="beneficiary-autocomplete-id" name="beneficiary.id" value="${beneficiaryInstance?.clientProfile?.id}"/>
                     <g:hiddenField name="beneficiaryCompany.id" value="${beneficiaryInstance?.company?.id}"/>
                     <g:hiddenField name="agentId" value="${agentInstance?.clientProfile?.id}"/>
@@ -56,6 +56,7 @@
                     <g:if test="${!readOnly}">
                         <span class="buttons">
                             <g:submitButton formaction="create" name="createBeneficiary" event="createBeneficiary" value="Create a beneficiary"/>
+                            <g:submitButton formaction="create" name="createBeneficiaryCompany" event="createBeneficiaryCompany" value="Create Company"/>
                         </span>
                     </g:if>
 

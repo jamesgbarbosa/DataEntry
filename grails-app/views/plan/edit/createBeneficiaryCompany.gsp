@@ -16,7 +16,8 @@
 		</div>
 		<div id="create-company" class="content scaffold-create" role="main">
             <h4>
-                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
+                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Edit Plan </a> > </g:if>
+                <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Edit Beneficiary </a> > </g:if>
                 Create Company
             </h4>
 			<g:if test="${flash.message}">
@@ -30,15 +31,15 @@
             </g:if>
 			<g:form action="create" >
 				<fieldset class="form">
-                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'name', 'error')} required">
+                    <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.company, field: 'name', 'error')} required">
                         <label for="name">
                             <sup><span class="required-indicator">*</span></sup>
-                            <g:message code="company.name.label" default="Name" />
+                            Company Name
                         </label>
-                        <g:textField name="name" value="${createPlanHolderDto?.company?.name}"/>
-                        <g:hasErrors bean="${createPlanHolderDto?.company}"
+                        <g:textField name="name" value="${beneficiaryInstance?.company?.name}"/>
+                        <g:hasErrors bean="${beneficiaryInstance?.company}"
                                      field="name">
-                            <g:eachError bean="${createPlanHolderDto?.company}" field="name">
+                            <g:eachError bean="${beneficiaryInstance?.company}" field="name">
                                 <span class="inlineErrors">
                                     <g:message  error="${it}" />
                                 </span>
@@ -46,28 +47,28 @@
                         </g:hasErrors>
                     </div>
 
-                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address1', 'error')} ">
+                    <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.company, field: 'address1', 'error')} ">
                         <label for="address1">
                             <g:message code="company.address1.label" default="Address1" />
 
                         </label>
-                        <g:textField name="address1" value="${createPlanHolderDto?.company?.address1}"/>
+                        <g:textField name="address1" value="${beneficiaryInstance?.company?.address1}"/>
                     </div>
 
-                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address2', 'error')} ">
+                    <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.company, field: 'address2', 'error')} ">
                         <label for="address2">
                             <g:message code="company.address2.label" default="Address2" />
 
                         </label>
-                        <g:textField name="address2" value="${createPlanHolderDto?.company?.address2}"/>
+                        <g:textField name="address2" value="${beneficiaryInstance?.company?.address2}"/>
                     </div>
 
-                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address3', 'error')} ">
+                    <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.company, field: 'address3', 'error')} ">
                         <label for="address3">
                             <g:message code="company.address3.label" default="Address3" />
 
                         </label>
-                        <g:textField name="address3" value="${createPlanHolderDto?.company?.address3}"/>
+                        <g:textField name="address3" value="${beneficiaryInstance?.company?.address3}"/>
                     </div>
 				</fieldset>
 				<fieldset class="buttons">

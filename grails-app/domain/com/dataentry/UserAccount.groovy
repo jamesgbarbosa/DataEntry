@@ -1,6 +1,6 @@
 package com.dataentry
 
-class UserAccount {
+class UserAccount implements Serializable {
 
 	transient springSecurityService
 
