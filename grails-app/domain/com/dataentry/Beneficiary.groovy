@@ -36,4 +36,8 @@ class Beneficiary implements Serializable {
             return ""
         }
     }
+
+    String toString() {
+        return name() + ":" + designation
+    }
 }

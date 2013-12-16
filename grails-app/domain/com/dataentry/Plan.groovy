@@ -6,6 +6,8 @@ import org.codehaus.groovy.runtime.DateGroovyMethods
 
 class Plan implements Serializable {
 
+    static auditable  = [ignore:['version']]
+
     String planNumber
     String product
     int payingPeriod

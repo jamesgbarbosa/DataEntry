@@ -60,6 +60,8 @@ class UserAccountController {
             return
         }
 
+        def userRole = Role.findByAuthority('ROLE_USER')
+        UserAccountRole.create(userAccountInstance, userRole, true)
         flash.message = "User ${userAccountInstance.username} successfully created."
         redirect(action: "show", id: userAccountInstance.id)
     }
@@ -152,7 +154,7 @@ class UserAccountController {
         userAccountInstance.password = command.password
         userAccountInstance.save()
 
-        auditTrailService.addToLogs("Change Password: ${userAccountInstance.username}")
+//        auditTrailService.addToLogs("Change Password: ${userAccountInstance.username}")
         flash.message = "Change password success."
         redirect(action: "show", id: userAccountInstance.id)
 
@@ -199,7 +201,7 @@ class UserAccountController {
             return
         }
 
-        auditTrailService.addToLogs("Update User: ${userAccountInstance.username}")
+//        auditTrailService.addToLogs("Update User: ${userAccountInstance.username}")
         flash.message = "User ${userAccountInstance.username} successfully updated."
         redirect(action: "show", id: userAccountInstance.id)
     }

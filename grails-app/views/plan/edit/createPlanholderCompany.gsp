@@ -47,6 +47,14 @@
                         </g:hasErrors>
                     </div>
 
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'email', 'error')} ">
+                        <label for="email">
+                            <g:message code="company.email.label" default="Email" />
+
+                        </label>
+                        <g:textField name="email" value="${createPlanHolderDto?.company?.email}"/>
+                    </div>
+
                     <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'address1', 'error')} ">
                         <label for="address1">
                             <g:message code="company.address1.label" default="Address1" />
@@ -69,6 +77,46 @@
 
                         </label>
                         <g:textField name="address3" value="${createPlanHolderDto?.company?.address3}"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'zipcode', 'error')} ">
+                        <label for="zipcode">
+                            <g:message code="company.zipcode.label" default="Zip Code" />
+
+                        </label>
+                        <g:textField name="zipcode" value="${createPlanHolderDto?.company?.zipcode}"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'city', 'error')} ">
+                        <label for="city">
+                            <g:message code="company.city.label" default="City" />
+
+                        </label>
+                        <g:textField name="city" value="${createPlanHolderDto?.company?.city}"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'province', 'error')} ">
+                        <label for="province">
+                            <g:message code="company.province.label" default="Province" />
+
+                        </label>
+                        <g:textField name="province" value="${createPlanHolderDto?.company?.province}"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'landline', 'error')} ">
+                        <label for="landline">
+                            <g:message code="company.landline.label" default="Landline" />
+
+                        </label>
+                        <g:textField name="landline" value="${createPlanHolderDto?.company?.landline}"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'mobile', 'error')} ">
+                        <label for="mobile">
+                            <g:message code="company.mobile.label" default="Mobile" />
+
+                        </label>
+                        <g:textField name="mobile" value="${createPlanHolderDto?.company?.mobile}"/>
                     </div>
 				</fieldset>
 				<fieldset class="buttons">

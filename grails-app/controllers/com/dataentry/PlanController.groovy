@@ -494,6 +494,7 @@ class PlanController {
 
             on('savePlan') {
                 def plan = new Plan(conversation.planInstance.properties)
+                plan.amendments = new ArrayList<Amendment>()
                 def beneficiaries = conversation.beneficiaries
                 def planholder = conversation.planholderInstance
                 def agent = conversation.agentInstance
@@ -1000,11 +1001,9 @@ class PlanController {
                 def oldBeneficiaries = plan.beneficiaries ? plan.beneficiaries : new ArrayList<Beneficiary>()
 
                 Plan.withTransaction { status ->
-                    if(planholder) {
+                    if(planholder!=oldPlanholder) {
                         planholder.save()
                         plan.planHolder = planholder
-                    } else {
-                        plan.planHolder = null
                     }
 
                     if(oldPlanholder?.clientProfile?.id!=planholder?.clientProfile?.id ||
@@ -1014,11 +1013,9 @@ class PlanController {
                         }
                     }
 
-                    if(agent) {
+                    if(agent!=oldAgent) {
                         agent.save()
                         plan.agent = agent
-                    } else {
-                        plan.agent = null
                     }
 
                     if(oldAgent.clientProfile.id!=agent.clientProfile.id) {
@@ -1063,13 +1060,17 @@ class PlanController {
                             it.delete()
                         }
                     }
-
-                    amendments.each {
-                        if(!oldAmendments.tempId.contains(it.tempId)) {
-                            it.save()
-                            plan.addToAmendments(it)
+                    if(amendments.size() > 0) {
+                        amendments.each {
+                            if(!oldAmendments.tempId.contains(it.tempId)) {
+                                it.save()
+                                plan.addToAmendments(it)
+                            }
                         }
+                    } else {
+                        amendments = null
                     }
+
 
                     if (!plan.save(flush: true)) {
                         return error()
@@ -1077,7 +1078,7 @@ class PlanController {
 
                 }
                 flash.myMessage = "Plan ${plan?.planNumber} successfully updated."
-                auditTrailService.addToLogs("Update Plan: ${plan.planNumber}")
+//                auditTrailService.addToLogs("Update Plan: ${plan.planNumber}")
                 conversation.planInstance = plan
             }.to('show')
         }

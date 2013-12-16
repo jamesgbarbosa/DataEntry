@@ -12,7 +12,7 @@
             <li><g:link class="list" controller="company" action="list">Search Companies</g:link></li>
             <li><g:link class="create" controller="plan" action="create">Create Plan</g:link></li>
             <sec:ifAnyGranted roles="ROLE_ADMIN"><li><g:link controller="userAccount" action="list"><i class="list"></i> Search Users</g:link></li></sec:ifAnyGranted>
-            <sec:ifAnyGranted roles="ROLE_ADMIN"><li><g:link controller="logs" action="list"><i class="list"></i> Logs</g:link></li></sec:ifAnyGranted>
+            %{--<sec:ifAnyGranted roles="ROLE_ADMIN"><li><g:link controller="logs" action="list"><i class="list"></i> Logs</g:link></li></sec:ifAnyGranted>--}%
 
         </ul>
     </div>

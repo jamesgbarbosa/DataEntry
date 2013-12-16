@@ -88,7 +88,7 @@ class ClientController {
             return
         }
 
-        auditTrailService.addToLogs("Update Client: ${clientInstance.fullNameBirthdateAndGender()}")
+//        auditTrailService.addToLogs("Update Client: ${clientInstance.fullNameBirthdateAndGender()}")
         flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
         redirect(action: "show", id: clientInstance.id)
     }

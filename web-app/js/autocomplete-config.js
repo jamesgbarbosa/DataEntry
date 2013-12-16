@@ -163,7 +163,7 @@ jQuery(document).ready(function($){
                     response(data);
                 },
                 error: function(){
-                    alert("Unable to retrieve plan holders.")
+                    alert("Unable to retrieve zip codes.")
                 }
             });
         },

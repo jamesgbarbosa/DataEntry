@@ -169,7 +169,7 @@ class BootStrap {
                 beneficiaries.add(b)
 
         int i = 3
-        51.times {
+        2.times {
 
             new Plan(planNumber: "P" + i++, beneficiaries: b, agent: a, planHolder: p, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
                     ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)

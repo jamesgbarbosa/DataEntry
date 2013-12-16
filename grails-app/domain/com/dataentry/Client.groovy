@@ -91,4 +91,63 @@ class Client implements Serializable {
     String fullNameBirthdateAndGender() {
         return "${lastName}, ${firstName} ${middleName ? "${middleName}":''}".toUpperCase() + " : " +  String.format("%1\$TD", birthdate) + " : " + gender
     }
+
+    String toString() {
+        return fullNameBirthdateAndGender()
+    }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (getClass() != o.class) return false
+
+        Client client = (Client) o
+
+        if (address1 != client.address1) return false
+        if (address2 != client.address2) return false
+        if (address3 != client.address3) return false
+        if (alias != client.alias) return false
+        if (beforeInsert != client.beforeInsert) return false
+        if (birthdate != client.birthdate) return false
+        if (city != client.city) return false
+        if (email != client.email) return false
+        if (firstName != client.firstName) return false
+        if (fullName != client.fullName) return false
+        if (gender != client.gender) return false
+        if (id != client.id) return false
+        if (landline != client.landline) return false
+        if (lastName != client.lastName) return false
+        if (middleName != client.middleName) return false
+        if (mobile != client.mobile) return false
+        if (officenumber != client.officenumber) return false
+        if (province != client.province) return false
+        if (version != client.version) return false
+        if (zipcode != client.zipcode) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = lastName.hashCode()
+        result = 31 * result + firstName.hashCode()
+        result = 31 * result + (middleName != null ? middleName.hashCode() : 0)
+        result = 31 * result + (alias != null ? alias.hashCode() : 0)
+        result = 31 * result + birthdate.hashCode()
+        result = 31 * result + (address1 != null ? address1.hashCode() : 0)
+        result = 31 * result + (address2 != null ? address2.hashCode() : 0)
+        result = 31 * result + (address3 != null ? address3.hashCode() : 0)
+        result = 31 * result + (city != null ? city.hashCode() : 0)
+        result = 31 * result + (province != null ? province.hashCode() : 0)
+        result = 31 * result + (zipcode != null ? zipcode.hashCode() : 0)
+        result = 31 * result + (landline != null ? landline.hashCode() : 0)
+        result = 31 * result + (mobile != null ? mobile.hashCode() : 0)
+        result = 31 * result + (officenumber != null ? officenumber.hashCode() : 0)
+        result = 31 * result + (email != null ? email.hashCode() : 0)
+        result = 31 * result + gender.hashCode()
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0)
+        result = 31 * result + (beforeInsert != null ? beforeInsert.hashCode() : 0)
+        result = 31 * result + (id != null ? id.hashCode() : 0)
+        result = 31 * result + (version != null ? version.hashCode() : 0)
+        return result
+    }
 }
