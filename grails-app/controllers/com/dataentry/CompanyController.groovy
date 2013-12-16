@@ -34,6 +34,7 @@ class CompanyController {
     }
 
     def save() {
+        params.name = params.name.toUpperCase()
         def companyInstance = new Company(params)
         if (!companyInstance.save(flush: true)) {
             render(view: "create", model: [companyInstance: companyInstance])
@@ -83,7 +84,7 @@ class CompanyController {
                 return
             }
         }
-
+        params.name = params.name.toUpperCase()
         companyInstance.properties = params
 
         if (!companyInstance.save(flush: true)) {

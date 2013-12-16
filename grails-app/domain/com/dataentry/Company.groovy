@@ -28,6 +28,14 @@ class Company implements Serializable {
         province blank: true, nullable: true
     }
 
+    def beforeInsert = {
+        name = name.toUpperCase()
+    }
+
+    def beforeUpdate() {
+        name = name.toUpperCase()
+    }
+
 //    def onChange = { oldMap,newMap ->
 //        def action
 //        action += "Company Update\n"

@@ -235,6 +235,7 @@ class PlanController {
 
             on('saveCompany'){
                 def planHolderInstance = new Planholder()
+                params.name = params.name.toUpperCase()
                 planHolderInstance.company.properties = params
                 flow.createPlanHolderDto = planHolderInstance
                 if(planHolderInstance.company.validate()) {
@@ -376,6 +377,7 @@ class PlanController {
 
             on('saveCompany'){
                 def beneficiaryInstance = new Beneficiary()
+                params.name = params.name.toUpperCase()
                 beneficiaryInstance.company.properties = params
                 flow.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.company.validate()) {
@@ -719,6 +721,7 @@ class PlanController {
 
             on('saveCompany'){
                 def planHolderInstance = new Planholder()
+                params.name = params.name.toUpperCase()
                 planHolderInstance.company.properties = params
                 flow.createPlanHolderDto = planHolderInstance
                 if(planHolderInstance.company.validate()) {
@@ -860,6 +863,7 @@ class PlanController {
 
             on('saveCompany'){
                 def beneficiaryInstance = new Beneficiary()
+                params.name = params.name.toUpperCase()
                 beneficiaryInstance.company.properties = params
                 flow.beneficiaryInstance = beneficiaryInstance
                 if(beneficiaryInstance.company.validate()) {
