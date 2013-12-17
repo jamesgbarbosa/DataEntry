@@ -81,8 +81,7 @@
 
                     <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.company, field: 'zipcode', 'error')} ">
                         <label for="zipcode">
-                            <g:message code="company.zipcode.label" default="Zip Code" />
-
+                            ZIP Code
                         </label>
                         <g:textField class='autocomplete-field' name="zipcodes-autocomplete" value="${beneficiaryInstance?.company?.zipcode}" placeholder="Search zipcode..."/>
                         <g:hiddenField name="zipcode" id="zipcode.id" value="${beneficiaryInstance?.company?.zipcode}"/>

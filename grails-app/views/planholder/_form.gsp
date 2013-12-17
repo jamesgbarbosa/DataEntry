@@ -36,12 +36,26 @@
 <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="planholder.middleName.label" default="Middle Name" />
-        <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${createPlanHolderDto?.clientProfile?.middleName}"/>
     <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
                  field="middleName">
         <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="middleName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.clientProfile, field: 'alias', 'error')} ">
+    <label for="alias">
+        <g:message code="client.alias.label" default="Alias" />
+    </label>
+    <g:textField name="alias" value="${createPlanHolderDto?.clientProfile?.alias}"/>
+    <g:hasErrors bean="${createPlanHolderDto?.clientProfile}"
+                 field="alias">
+        <g:eachError bean="${createPlanHolderDto?.clientProfile}" field="alias">
             <span class="inlineErrors">
                 <g:message  error="${it}" />
             </span>

@@ -37,7 +37,6 @@
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="beneficiary.middleName.label" default="Middle Name" />
-        <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${beneficiaryInstance?.clientProfile?.middleName}"/>
     <g:hasErrors bean="${beneficiaryInstance?.clientProfile}"
@@ -49,6 +48,22 @@
         </g:eachError>
     </g:hasErrors>
 </div>
+
+<div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'alias', 'error')} ">
+    <label for="alias">
+        <g:message code="client.alias.label" default="Alias" />
+    </label>
+    <g:textField name="alias" value="${beneficiaryInstance?.clientProfile?.alias}"/>
+    <g:hasErrors bean="${beneficiaryInstance?.clientProfile}"
+                 field="alias">
+        <g:eachError bean="${beneficiaryInstance?.clientProfile}" field="alias">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
+</div>
+
 
 <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.clientProfile, field: 'gender', 'error')} required">
 	<label for="gender">

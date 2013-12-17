@@ -37,12 +37,26 @@
 <div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'middleName', 'error')} ">
 	<label for="middleName">
 		<g:message code="agent.middleName.label" default="Middle Name" />
-        <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="middleName" value="${createAgentDto?.clientProfile?.middleName}"/>
     <g:hasErrors bean="${createAgentDto?.clientProfile}"
                  field="middleName">
         <g:eachError bean="${createAgentDto?.clientProfile}" field="middleName">
+            <span class="inlineErrors">
+                <g:message  error="${it}" />
+            </span>
+        </g:eachError>
+    </g:hasErrors>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: createAgentDto?.clientProfile, field: 'alias', 'error')} ">
+    <label for="alias">
+        <g:message code="client.alias.label" default="Alias" />
+    </label>
+    <g:textField name="alias" value="${createAgentDto?.clientProfile?.alias}"/>
+    <g:hasErrors bean="${createAgentDto?.clientProfile}"
+                 field="alias">
+        <g:eachError bean="${createAgentDto?.clientProfile}" field="alias">
             <span class="inlineErrors">
                 <g:message  error="${it}" />
             </span>

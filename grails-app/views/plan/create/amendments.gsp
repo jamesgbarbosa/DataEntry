@@ -17,9 +17,9 @@
         <div id="breadcrumbs">
             <h4>
                 <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
-                <g:if test="${page2link!=''}"> <a href="${page2link}&red=true"> Create Beneficiaries </a> > </g:if>
-                <g:if test="${page3link!=''}"> <a href="${page3link}&red=true"> Create Agent </a> > </g:if>
-                Create Amendments
+                <g:if test="${page2link!=''}"> <a href="${page2link}&red=true"> Add Beneficiaries </a> > </g:if>
+                <g:if test="${page3link!=''}"> <a href="${page3link}&red=true"> Add Agent </a> > </g:if>
+                Add Amendments
             </h4>
         </div>
             <g:if test="${flash.message}">

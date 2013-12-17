@@ -408,8 +408,12 @@ class PlanController {
             }.to("beneficiaries")
 
             on("createAgent") {
-                conversation.agentInstance = new Agent(params)
-//                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+                def agentInstance = new Agent(params)
+                if(params.agent?.id) {
+                    agentInstance.clientProfile = Client.get(params.agent?.id)
+                }
+                conversation.agentInstance = agentInstance
+                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createAgent")
 
             on("next") {
@@ -894,8 +898,12 @@ class PlanController {
             }.to("beneficiaries")
 
             on("createAgent") {
-                conversation.agentInstance = new Agent(params)
-//                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
+                def agentInstance = new Agent(params)
+                if(params.agent?.id) {
+                    agentInstance.clientProfile = Client.get(params.agent?.id)
+                }
+                conversation.agentInstance = agentInstance
+                conversation.page3link = g.createLink(action: 'create', controller:  'plan', params: [execution: params.execution])
             }.to("createAgent")
 
             on("next") {

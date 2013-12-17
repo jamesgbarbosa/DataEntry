@@ -15,7 +15,13 @@
 			</ul>
 		</div>
 		<div id="create-agent" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h4>
+                <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Edit Plan </a> > </g:if>
+                <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Edit Beneficiaries</a> > </g:if>
+                <g:if test="${page3link!=''}"><a href="${page3link}&red=true"> Edit Agent</a> > </g:if>
+                Create Agent
+            %{--<g:if test="${page4link!=''}"> > <a href="${page4link}&red=true"> Create Amendments </a> </g:if>--}%
+            </h4>
 			<g:if test="${flash.message}">
 			    <div class="message" role="status">${flash.message}</div>
 			</g:if>

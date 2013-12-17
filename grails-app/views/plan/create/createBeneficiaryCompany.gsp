@@ -17,7 +17,7 @@
 		<div id="create-company" class="content scaffold-create" role="main">
             <h4>
                 <g:if test="${page1link!=''}"><a href="${page1link}&red=true"> Create Plan </a> > </g:if>
-                <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Create Beneficiary </a> > </g:if>
+                <g:if test="${page2link!=''}"><a href="${page2link}&red=true"> Add Beneficiary </a> > </g:if>
                 Create Company
             </h4>
 			<g:if test="${flash.message}">
@@ -81,8 +81,7 @@
 
                     <div class="fieldcontain ${hasErrors(bean: beneficiaryInstance?.company, field: 'zipcode', 'error')} ">
                         <label for="zipcode">
-                            <g:message code="company.zipcode.label" default="Zip Code" />
-
+                            ZIP Code
                         </label>
                         <g:textField class='autocomplete-field' name="zipcodes-autocomplete" value="${beneficiaryInstance?.company?.zipcode}" placeholder="Search zipcode..."/>
                         <g:hiddenField name="zipcode" id="zipcode.id" value="${beneficiaryInstance?.company?.zipcode}"/>
