@@ -3,6 +3,10 @@ package com.dataentry
 import org.hibernate.Criteria
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugins.springsecurity.Secured
+
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 @Secured(['ROLE_ADMIN','ROLE_USER'])
 class ClientController {
 
@@ -13,17 +17,64 @@ class ClientController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+            if(!params.term) params.term = ''
+            DateFormat sdf= new SimpleDateFormat("MM/dd/yyyy")
+            def query = {
+                or {
+                    ilike("fullName", "${params.term}%")
+                    ilike("firstName", "${params.term}%")
+                    ilike("lastName", "${params.term}%")
+                }
 
-        if(params.fullName) {
-            def clients = Client.createCriteria().list(max: params.max, offset: params.offset, sort: params.sort, order: params.order) {
-                ilike("fullName","${params.fullName}%")
+                projections {
+                    property("id")
+                    property("fullName")
+                    property("birthdate")
+                    property("gender")
+                }
             }
-            [clientInstanceList: clients, clientInstanceTotal: clients.getTotalCount()]
-        } else {
-            params.max = Math.min(max ?: 10, 100)
-            [clientInstanceList: Client.list(params), clientInstanceTotal: Client.count()]
-        }
+
+            def clientList = Client.createCriteria().list(query)
+            def clientsSelectionList = []
+            clientList.each {
+                def clientMap = [:]
+                clientMap.put("id", it[0] )
+                clientMap.put("name", it[1] )
+                clientMap.put("gender", it[3] )
+                clientMap.put("birthdate", sdf.format(it[2]) )
+
+                clientsSelectionList.add(clientMap)
+            }
+
+            def companyList
+            def companySelectionList = []
+            def companyQuery = {
+                or {
+                    ilike("name", "${params.term}%")
+                }
+                projections {
+                    property("id")
+                    property("name")
+                }
+            }
+
+            companyList = Company.createCriteria().list(companyQuery)
+
+            companyList.each {
+                def companyMap = [:]
+                companyMap.put("id", it[0] )
+                companyMap.put("name", it[1])
+                companyMap.put("gender", "")
+                companyMap.put("birthdate", "")
+                companySelectionList.add(companyMap)
+            }
+        clientsSelectionList.addAll(companySelectionList)
+
+        def total =  clientsSelectionList.size()
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.offset = params.offset ? Integer.parseInt(params.offset) : 0
+        clientsSelectionList = clientsSelectionList.subList(params.offset, Math.min(params.offset + params.max, clientsSelectionList.size()))
+                    [clientInstanceList: clientsSelectionList, clientInstanceTotal: total]
     }
 
     def create() {

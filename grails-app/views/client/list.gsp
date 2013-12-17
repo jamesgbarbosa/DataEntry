@@ -25,7 +25,7 @@
                             <label>Name</label>
                         </td>
                         <td>
-                            <g:textField name="fullName" value="${params.fullName}"></g:textField>
+                            <g:textField name="term" value="${params.term}"></g:textField>
 
                         </td>
                     </tr>
@@ -45,30 +45,32 @@
 			<table>
 				<thead>
 					<tr>
-					
+
 						<th>Name</th>
+						<th>Gender</th>
+						<th>Birthdate</th>
+
+						%{--<g:sortableColumn property="gender" title="${message(code: 'client.gender.label', default: 'Gender')}" params="[term: params.term]"  />--}%
 					
-						<g:sortableColumn property="gender" title="${message(code: 'client.gender.label', default: 'Gender')}" />
-					
-						<g:sortableColumn property="birthdate" title="${message(code: 'client.birthdate.label', default: 'Birthdate')}" />
+						%{--<g:sortableColumn property="birthdate" title="${message(code: 'client.birthdate.label', default: 'Birthdate')}" params="[term: params.term]"  />--}%
 					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${clientInstanceList}" status="i" var="clientInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${clientInstance.id}">${clientInstance?.fullName()}</g:link></td>
-					
-						<td>${fieldValue(bean: clientInstance, field: "gender")}</td>
-					
-						<td><g:formatDate  format="MM/dd/yyyy" date="${clientInstance.birthdate}" /></td>
+
+						<td><g:link action="show" id="${clientInstance.id}">${clientInstance?.name}</g:link></td>
+
+						<td>${clientInstance.gender}</td>
+
+						<td>${clientInstance.birthdate}</td>
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${clientInstanceTotal}" />
+				<g:paginate total="${clientInstanceTotal}" params="[term: params.term]" />
 			</div>
 		</div>
 	</body>
