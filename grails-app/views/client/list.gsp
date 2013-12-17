@@ -60,7 +60,7 @@
 				<g:each in="${clientInstanceList}" status="i" var="clientInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show" id="${clientInstance.id}">${clientInstance?.name}</g:link></td>
+						<td><g:link action="show" controller="${clientInstance.gender ? 'client' :'company'}" id="${clientInstance.id}">${clientInstance?.name}</g:link></td>
 
 						<td>${clientInstance.gender}</td>
 
