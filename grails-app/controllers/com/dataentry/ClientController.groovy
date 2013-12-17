@@ -1,5 +1,6 @@
 package com.dataentry
 
+import org.hibernate.Criteria
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -49,7 +50,36 @@ class ClientController {
             return
         }
 
-        [clientInstance: clientInstance]
+        def plans = Plan.createCriteria().list() {
+//            projections {
+//                property("id")
+//                property("planNumber")
+////                property("planHolder")
+////                property("agent")
+////                property("beneficiaries")
+//            }
+            or{
+                planHolder {
+                    clientProfile {
+                        eq("id",id)
+                    }
+                }
+                agent {
+                    clientProfile {
+                        eq("id",id)
+                    }
+                }
+                beneficiaries {
+                    clientProfile {
+                        eq("id",id)
+                    }
+                }
+            }
+            resultTransformer Criteria.DISTINCT_ROOT_ENTITY
+            order("id","asc")
+
+        }
+        [clientInstance: clientInstance, plans:plans]
     }
 
     def edit(Long id) {

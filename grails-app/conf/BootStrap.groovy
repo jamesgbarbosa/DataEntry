@@ -144,17 +144,17 @@ class BootStrap {
                 def client1 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
                 def client2 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
                 def client3 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male' ).save(flush: true, failOnError: true)
+                def client4 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+                def client5 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+                def client6 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+
+                def client7 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12),middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+                def client8 = new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
+                new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
 
-                new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12),middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-                new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-                new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-                new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-                new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-                new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Male').save(flush: true, failOnError: true)
-
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
@@ -162,18 +162,26 @@ class BootStrap {
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
                 new Client(firstName: firstNames.get((int)Math.random()*12), lastName: lastNames.get((int)Math.random()*12) ,middleName: 'X' , birthdate: new Date(), gender: 'Female').save(flush: true, failOnError: true)
 
-                def p = new Planholder(clientProfile: client1, company: null).save(flush: true, failOnError: true)
-                def b = new Beneficiary(clientProfile: client2, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD', company: null).save(flush: true, failOnError: true)
-                def a = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test', counselorCode: 'Testr' ).save(flush: true, failOnError: true)
+                def planholder = new Planholder(clientProfile: client1, company: null).save(flush: true, failOnError: true)
+                def planholder1 = new Planholder(clientProfile: client2, company: null).save(flush: true, failOnError: true)
+                def planholder2 = new Planholder(clientProfile: client3, company: null).save(flush: true, failOnError: true)
+                def beneficiary = new Beneficiary(clientProfile: client2, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD', company: null).save(flush: true, failOnError: true)
+                def beneficiary1 = new Beneficiary(clientProfile: client5, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD', company: null).save(flush: true, failOnError: true)
+                def beneficiary2 = new Beneficiary(clientProfile: client2, designation: 'INSURANCE - PRIMARY', relationship: 'GRANDCHILD', company: null).save(flush: true, failOnError: true)
+                def agent = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test', counselorCode: 'Testr' ).save(flush: true, failOnError: true)
+                def agent1 = new Agent(clientProfile: client4, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test', counselorCode: 'Testr' ).save(flush: true, failOnError: true)
+                def agent2 = new Agent(clientProfile: client3, agency: 'test', appointmentDate: new Date(),groupName: 'test', unit: 'test', counselorCode: 'Testr' ).save(flush: true, failOnError: true)
                 def beneficiaries = new ArrayList<Beneficiary>()
-                beneficiaries.add(b)
+                beneficiaries.add(beneficiary)
 
-        int i = 3
-        2.times {
-
-            new Plan(planNumber: "P" + i++, beneficiaries: b, agent: a, planHolder: p, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
-                    ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
-        }
+        new Plan(planNumber: "P12", beneficiaries: beneficiary1, agent: agent1, planHolder: planholder, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+                ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
+        new Plan(planNumber: "P123", beneficiaries: beneficiary2, agent: agent, planHolder: planholder, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+                ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
+        new Plan(planNumber: "Psss", beneficiaries: beneficiary2, agent: agent2, planHolder: planholder1, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+                ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
+        new Plan(planNumber: "P555", beneficiaries: beneficiary, agent: agent1, planHolder: planholder2, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+                ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
 
 
                new Company(name: 'TEST1', address1: 'ASDASD').save(flush: true)
