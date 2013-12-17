@@ -131,14 +131,15 @@ class ClientController {
             return
         }
 
-        try {
-            clientInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'client.label', default: 'Client'), id])
-            redirect(action: "show", id: id)
-        }
+            try {
+                clientInstance.delete(flush: true)
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), id])
+                redirect(action: "list")
+            }
+            catch (DataIntegrityViolationException e) {
+                flash.error = "Client can't be deleted because it is currently assigned to a plan."
+                redirect(action: "show", id: id)
+            }
+
     }
 }

@@ -84,7 +84,8 @@
                             <g:message code="company.zipcode.label" default="Zip Code" />
 
                         </label>
-                        <g:textField name="zipcode" value="${createPlanHolderDto?.company?.zipcode}"/>
+                        <g:textField class='autocomplete-field' name="zipcodes-autocomplete" value="${createPlanHolderDto?.company?.zipcode}" placeholder="Search zipcode..."/>
+                        <g:hiddenField name="zipcode" id="zipcode.id" value="${createPlanHolderDto?.company?.zipcode}"/>
                     </div>
 
                     <div class="fieldcontain ${hasErrors(bean: createPlanHolderDto?.company, field: 'city', 'error')} ">
@@ -126,5 +127,6 @@
                 </fieldset>
 			</g:form>
 		</div>
+        <g:hiddenField name="zipcodesListLink" value="${createLink(controller: 'plan', action: 'zipcodesList')}"/>
     </body>
 </html>
