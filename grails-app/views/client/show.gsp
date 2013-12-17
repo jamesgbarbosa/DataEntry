@@ -169,34 +169,34 @@
 					
 				</li>
 				</g:if>
-                <g:if test="${plans}">
-                    <li class="fieldcontain">
-                        <span id="agent-label" class="property-label">Plans</span>
-                        <g:each in="${plans}" var="plan">
-                            <span class="property-value">
-                                <g:if test="${plan?.planHolder?.clientProfile.id == clientInstance.id}">
-                                    <g:link controller="plan"  action="show" id="${plan?.id}"> ${plan.planNumber}</g:link>
+                %{--<g:if test="${plans}">--}%
+                    %{--<li class="fieldcontain">--}%
+                        %{--<span id="agent-label" class="property-label">Plans</span>--}%
+                        %{--<g:each in="${plans}" var="plan">--}%
+                            %{--<span class="property-value">--}%
+                                %{--<g:if test="${plan?.planHolder?.clientProfile.id == clientInstance.id}">--}%
+                                    %{--<g:link controller="plan"  action="show" id="${plan?.id}"> ${plan.planNumber}</g:link>--}%
                                     %{--<g:link controller="client"  action="show" id="${plan?.planHolder?.clientProfile?.id}">${plan?.planHolder?.clientProfile?.getFullName()}</g:link>--}%
-                                    (Planholder)
-                                </g:if>
-                            </span>
-                            <span class="property-value">
-                                <g:if test="${plan.beneficiaries?.clientProfile.id.contains(clientInstance.id)}">
-                                    <g:link controller="plan"  action="show" id="${plan?.id}"> ${plan.planNumber}</g:link>
-                                    (Beneficiary)
-                                </g:if>
-                            </span>
-                            <span class="property-value">
-                                <g:if test="${plan?.agent?.clientProfile.id == clientInstance.id}">
-                                    <g:link controller="plan"  action="show" id="${plan?.id}"> ${plan.planNumber}</g:link>
-                                    (Agent)
-                                </g:if>
+                                    %{--(Planholder)--}%
+                                %{--</g:if>--}%
+                            %{--</span>--}%
+                            %{--<span class="property-value">--}%
+                                %{--<g:if test="${plan.beneficiaries?.clientProfile.id.contains(clientInstance.id)}">--}%
+                                    %{--<g:link controller="plan"  action="show" id="${plan?.id}"> ${plan.planNumber}</g:link>--}%
+                                    %{--(Beneficiary)--}%
+                                %{--</g:if>--}%
+                            %{--</span>--}%
+                            %{--<span class="property-value">--}%
+                                %{--<g:if test="${plan?.agent?.clientProfile.id == clientInstance.id}">--}%
+                                    %{--<g:link controller="plan"  action="show" id="${plan?.id}"> ${plan.planNumber}</g:link>--}%
+                                    %{--(Agent)--}%
+                                %{--</g:if>--}%
 
-                            </span>
-                        </g:each>
+                            %{--</span>--}%
+                        %{--</g:each>--}%
 
-                    </li>
-                </g:if>
+                    %{--</li>--}%
+                %{--</g:if>--}%
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
