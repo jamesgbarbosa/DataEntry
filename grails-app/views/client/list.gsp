@@ -46,11 +46,14 @@
 				<thead>
 					<tr>
 
-						<th>Name</th>
+						%{--<th>Name</th>--}%
+                        <g:sortableColumn property="name" title="${message(code: 'client.name.label', default: 'Name')}" params="[term: params.term]"  />
+                        %{--<g:sortableColumn property="gender" title="${message(code: 'client.gender.label', default: 'Gender')}" params="[term: params.term]"  />--}%
+                        %{--<g:sortableColumn property="birthdate" title="${message(code: 'client.birthdate.label', default: 'Birthdate')}" params="[term: params.term]"  />--}%
 						<th>Gender</th>
 						<th>Birthdate</th>
 
-						%{--<g:sortableColumn property="gender" title="${message(code: 'client.gender.label', default: 'Gender')}" params="[term: params.term]"  />--}%
+
 					
 						%{--<g:sortableColumn property="birthdate" title="${message(code: 'client.birthdate.label', default: 'Birthdate')}" params="[term: params.term]"  />--}%
 					

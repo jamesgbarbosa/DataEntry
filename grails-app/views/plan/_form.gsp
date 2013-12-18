@@ -116,7 +116,7 @@
         <sup><span class="required-indicator">*</span></sup>
         PNP Price
 	</label>
-	<g:field name="pnpPrice" value="${fieldValue(bean: planInstance, field: 'pnpPrice')}"/>
+	<g:field name="pnpPrice" value="${formatNumber(number: planInstance.pnpPrice, format:'###,##0.00')}"/>
     <g:hasErrors bean="${planInstance}"
                  field="pnpPrice">
         <g:eachError bean="${planInstance}" field="pnpPrice">
@@ -148,7 +148,7 @@
         <sup><span class="required-indicator">*</span></sup>
         <g:message code="plan.modalInstallment.label" default="Modal Installment" />
 	</label>
-	<g:field name="modalInstallment" value="${fieldValue(bean: planInstance, field: 'modalInstallment')}"/>
+	<g:field name="modalInstallment" value="${formatNumber(number: planInstance.modalInstallment, format:'###,##0.00')}"/>
     <g:hasErrors bean="${planInstance}"
                  field="modalInstallment">
         <g:eachError bean="${planInstance}" field="modalInstallment">

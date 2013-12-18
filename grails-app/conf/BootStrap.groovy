@@ -174,13 +174,13 @@ class BootStrap {
                 def beneficiaries = new ArrayList<Beneficiary>()
                 beneficiaries.add(beneficiary)
 
-        new Plan(planNumber: "P12", beneficiaries: beneficiary1, agent: agent1, planHolder: planholder, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+        new Plan(planNumber: "a", beneficiaries: beneficiary1, agent: agent1, planHolder: planholder, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
                 ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
-        new Plan(planNumber: "P123", beneficiaries: beneficiary2, agent: agent, planHolder: planholder, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+        new Plan(planNumber: "v", beneficiaries: beneficiary2, agent: agent, planHolder: planholder, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
                 ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
-        new Plan(planNumber: "Psss", beneficiaries: beneficiary2, agent: agent2, planHolder: planholder1, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+        new Plan(planNumber: "b", beneficiaries: beneficiary2, agent: agent2, planHolder: planholder1, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
                 ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
-        new Plan(planNumber: "P555", beneficiaries: beneficiary, agent: agent1, planHolder: planholder2, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
+        new Plan(planNumber: "ac", beneficiaries: beneficiary, agent: agent1, planHolder: planholder2, product: 'MASTERFUND PRIME', currentIssueDate: new Date(), payingPeriod: 1, maturityPeriod: 1, pnpPrice: 1
                 ,paymentMode: 'ANNUAL', modalInstallment: 1, numberOfUnits: 1, planStatus: 'ACTIVE', withInsurance: false).save(flush:true, failOnError: true)
 
 

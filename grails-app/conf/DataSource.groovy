@@ -33,29 +33,29 @@ environments {
     }
     production {
         dataSource {
-//            dbCreate = "update"
-//            pooled = true
-//            url = "jdbc:postgresql://localhost:5432/dataentry"
-//            username = "postgres"
-//            password = "postgres"
-//            dialect = com.dataentry.TableNamePostgresDialect
-//            driverClassName = "org.postgresql.Driver"
-
-
-
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             pooled = true
-            properties {
-                maxActive = -1
-                minEvictableIdleTimeMillis=1800000
-                timeBetweenEvictionRunsMillis=1800000
-                numTestsPerEvictionRun=3
-                testOnBorrow=true
-                testWhileIdle=true
-                testOnReturn=true
-                validationQuery="SELECT 1"
-            }
+            url = "jdbc:postgresql://localhost:5432/dataentry"
+            username = "postgres"
+            password = "postgres"
+            dialect = com.dataentry.TableNamePostgresDialect
+            driverClassName = "org.postgresql.Driver"
+
+
+
+//            dbCreate = "update"
+//            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//            pooled = true
+//            properties {
+//                maxActive = -1
+//                minEvictableIdleTimeMillis=1800000
+//                timeBetweenEvictionRunsMillis=1800000
+//                numTestsPerEvictionRun=3
+//                testOnBorrow=true
+//                testWhileIdle=true
+//                testOnReturn=true
+//                validationQuery="SELECT 1"
+//            }
         }
     }
 }

@@ -72,7 +72,7 @@
 
                     <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : '' , toDate:params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : '', planHolder:params.planHolder, planHolderCompany: params.planHolderCompany ]" property="product" title="${message(code: 'plan.product.label', default: 'Product Code')}" />
 
-                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : '' , toDate:params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : '', planHolderCompany: params.planHolderCompany ]" property="planHolder" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
+                    <g:sortableColumn params="[planID: params.planID, product: params.product, fromDate: params?.fromDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.fromDate) : '' , toDate:params?.toDate != '' ? formatDate(format:'MM/dd/yyyy',date: params.toDate) : '', planHolderCompany: params.planHolderCompany ]" property="planHolder.clientProfile.lastName" title="${message(code: 'plan.planholder.label', default: 'Planholder Name')}" />
 
 
                 </tr>
