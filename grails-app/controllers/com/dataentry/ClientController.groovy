@@ -73,7 +73,9 @@ class ClientController {
         def total =  clientsSelectionList.size()
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         params.offset = params.offset ? Integer.parseInt(params.offset) : 0
+        clientsSelectionList = clientsSelectionList.sort { it.name}
         clientsSelectionList = clientsSelectionList.subList(params.offset, Math.min(params.offset + params.max, clientsSelectionList.size()))
+
                     [clientInstanceList: clientsSelectionList, clientInstanceTotal: total]
     }
 
