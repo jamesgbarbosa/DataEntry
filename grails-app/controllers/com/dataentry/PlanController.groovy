@@ -20,7 +20,6 @@ class PlanController {
 
     def list(Integer max) {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        params.sort = params.sort ?: 'planHolder.clientProfile.lastName'
         if(params.planID || params.product || params.planHolder || params.fromDate || params.toDate || params.planHolderCompany) {
             params.fromDate = DateUtil.isValidDate(params.fromDate)? Date.parse( 'MM/dd/yyyy', params.fromDate ) : params.fromDate
             params.toDate = DateUtil.isValidDate(params.toDate)? Date.parse( 'MM/dd/yyyy', params.toDate ) : params.toDate
@@ -37,27 +36,27 @@ class PlanController {
                     if(params.fromDate && params.toDate){
                         between("dateCreated",DateGroovyMethods.clearTime(params.fromDate),DateGroovyMethods.clearTime(params.toDate))
                     }
-                    planHolder {
-                        if(params.planHolder!=''){
+                    if(params.planHolder!='' || params.planHolderCompany!='')  {
+                        planHolder {
+                            if(params.planHolder!=''){
                                 clientProfile {
                                     if(params.planHolder) {
                                         eq("id",Long.parseLong(params.planHolder))
 
                                     }
-                             }
-                        }
-                        if(params.planHolderCompany!='') {
-                            company {
-                                if(params.planHolderCompany) {
-                                    eq("id",Long.parseLong(params.planHolderCompany))
+                                }
+                            }
+                            if(params.planHolderCompany!='') {
+                                company {
+                                    if(params.planHolderCompany) {
+                                        eq("id",Long.parseLong(params.planHolderCompany))
 
+                                    }
                                 }
                             }
                         }
                     }
-
                 }
-                order("planHolder.clientProfile.lastName", "desc")
             }
 
             def planHolder
@@ -68,6 +67,7 @@ class PlanController {
             }
             [planInstanceList: plans, planInstanceTotal: plans.getTotalCount(), planHolder:planHolder]
         } else {
+            params.sort = params.sort ?: 'planHolder.clientProfile.lastName'
             params.max = Math.min(max ?: 10, 100)
             [planInstanceList: Plan.list(params), planInstanceTotal: Plan.count()]
         }

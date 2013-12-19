@@ -121,11 +121,13 @@ class UserAccountController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def changePassword = {
+
+        def x = params
         def currentUser = (UserAccount)springSecurityService.getCurrentUser()
         def currentRole = UserAccountRole.findByUserAccount(currentUser).role
 
         if(currentRole.authority == 'ROLE_USER') {
-            if(currentUser.id != params.userId) {
+            if(currentUser.id.toString() != params.userId) {
                 redirect(controller: 'login', action: 'denied')
                 return
             }
