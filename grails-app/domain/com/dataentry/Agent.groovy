@@ -20,7 +20,11 @@ class Agent implements Serializable {
 
     def bindParams(Map params) {
         params.appointmentDate = DateUtil.isValidDate(params.appointmentDate)? Date.parse( 'MM/dd/yyyy', params.appointmentDate ) : params.appointmentDate
-        this.properties = params
+        agency = params?.agency.trim()
+        groupName = params?.groupName.trim()
+        unit = params?.unit.trim()
+        counselorCode = params?.counselorCode.trim()
+        position = params?.position.trim()
     }
 
     static constraints = {

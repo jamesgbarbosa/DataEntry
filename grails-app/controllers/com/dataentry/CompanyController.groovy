@@ -35,7 +35,8 @@ class CompanyController {
 
     def save() {
         params.name = params.name.toUpperCase()
-        def companyInstance = new Company(params)
+        def companyInstance = new Company()
+        companyInstance.bindParams(params)
         if (!companyInstance.save(flush: true)) {
             render(view: "create", model: [companyInstance: companyInstance])
             return

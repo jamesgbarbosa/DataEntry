@@ -111,8 +111,8 @@ class ClientController {
     }
 
     def save() {
-        params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
-        def clientInstance = new Client(params)
+        def clientInstance = new Client()
+        clientInstance.bindParams(params)
         if (!clientInstance.save(flush: true)) {
             render(view: "create", model: [clientInstance: clientInstance])
             return

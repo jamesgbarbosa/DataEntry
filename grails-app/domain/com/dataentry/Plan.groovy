@@ -32,6 +32,11 @@ class Plan implements Serializable {
         params.currentIssueDate = DateUtil.isValidDate(params.currentIssueDate)? Date.parse( 'MM/dd/yyyy', params.currentIssueDate ) : params.currentIssueDate
         params.applicableDate  = DateUtil.isValidDate(params.applicableDate) ? Date.parse( 'MM/dd/yyyy', params.applicableDate ) : params.applicableDate
         this.properties = params
+        planNumber = params?.planNumber.trim()
+        product = params?.product.trim()
+        paymentMode = params?.paymentMode.trim()
+        planStatus = params?.planStatus.trim()
+
     }
 
     def beforeInsert = {

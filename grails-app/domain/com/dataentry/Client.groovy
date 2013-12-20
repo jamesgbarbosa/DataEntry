@@ -25,7 +25,22 @@ class Client implements Serializable {
 
     def bindParams(Map params) {
         params.birthdate = DateUtil.isValidDate(params.birthdate)? Date.parse( 'MM/dd/yyyy', params.birthdate ) : params.birthdate
-        this.properties = params
+        lastName = params.lastName?.trim()
+        firstName = params.firstName?.trim()
+        middleName = params.middleName?.trim()
+        alias = params.alias?.trim()
+        address1 = params.address1?.trim()
+        address2 = params.address2?.trim()
+        address3 = params.address3?.trim()
+        city = params.city?.trim()
+        province = params.province?.trim()
+        zipcode = params.zipcode?.trim()
+        landline = params.landline?.trim()
+        mobile = params.mobile?.trim()
+        officenumber = params.officenumber?.trim()
+        email = params.email?.trim()
+        gender = params.gender?.trim()
+        fullName = params.fullName?.trim()
     }
 
     def beforeInsert = {

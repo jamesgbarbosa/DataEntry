@@ -15,6 +15,19 @@ class Company implements Serializable {
     String province
 
 
+    def bindParams(Map params) {
+        name = params.name?.trim()
+        address1 = params.address1?.trim()
+        address2 = params.address2?.trim()
+        address3 = params.address3?.trim()
+        city = params.city?.trim()
+        province = params.province?.trim()
+        zipcode = params.zipcode?.trim()
+        landline = params.landline?.trim()
+        mobile = params.mobile?.trim()
+        email = params.email?.trim()
+    }
+
     static constraints = {
         name blank: false, nulalble: false, unique: true
         address1 blank: true, nullable: true
