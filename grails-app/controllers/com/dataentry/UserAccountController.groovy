@@ -48,7 +48,10 @@ class UserAccountController {
 
     @Secured(['ROLE_ADMIN'])
     def save = {  RegisterCommand command ->
-
+        command.username = command?.username?.trim()
+        command.name = command?.name?.trim()
+        command.password = command?.password?.trim()
+        command.password2 = command?.password2?.trim()
         if (command.hasErrors()) {
             render view: 'create', model: [command: command]
             return

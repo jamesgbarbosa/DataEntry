@@ -24,7 +24,7 @@ class Client implements Serializable {
     String fullName
 
     def bindParams(Map params) {
-        params.birthdate = DateUtil.isValidDate(params.birthdate)? Date.parse( 'MM/dd/yyyy', params.birthdate ) : params.birthdate
+        birthdate = DateUtil.isValidDate(params.birthdate)? Date.parse( 'MM/dd/yyyy', params.birthdate ) : params.birthdate
         lastName = params.lastName?.trim()
         firstName = params.firstName?.trim()
         middleName = params.middleName?.trim()
@@ -83,9 +83,8 @@ class Client implements Serializable {
     boolean validateClientUniqueness() {
         if(this.firstName && this.lastName && this.birthdate && this.gender ){
             def clients = Client.withCriteria {
-                eq("firstName",this.firstName.toUpperCase())
-                eq("middleName",this.middleName?.toUpperCase())
-                eq("lastName", this.lastName.toUpperCase())
+                eq("firstName",this.firstName.trim().toUpperCase())
+                eq("lastName", this.lastName.trim().toUpperCase())
                 eq("birthdate", this.birthdate)
                 eq("gender", this.gender)
             }

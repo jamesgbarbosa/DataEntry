@@ -113,10 +113,17 @@ class ClientController {
     def save() {
         def clientInstance = new Client()
         clientInstance.bindParams(params)
-        if (!clientInstance.save(flush: true)) {
+        if(clientInstance.validateClientUniqueness()) {
+            if (!clientInstance.save(flush: true)) {
+                render(view: "create", model: [clientInstance: clientInstance])
+                return
+            }
+        } else {
+            flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
             render(view: "create", model: [clientInstance: clientInstance])
             return
         }
+
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
         redirect(action: "show", id: clientInstance.id)
@@ -192,9 +199,14 @@ class ClientController {
         }
         params.birthdate = params.birthdate ? Date.parse( 'MM/dd/yyyy', params.birthdate ) : null
         clientInstance.properties = params
-
-        if (!clientInstance.save(flush: true)) {
-            render(view: "edit", model: [clientInstance: clientInstance])
+        if(clientInstance.validateClientUniqueness()) {
+            if (!clientInstance.save(flush: true)) {
+                render(view: "edit", model: [clientInstance: clientInstance])
+                return
+            }
+        }  else {
+            flash.error = g.message(code:"client.name.gender.birthdate.should.be.unique.error")
+            render(view: "create", model: [clientInstance: clientInstance])
             return
         }
 

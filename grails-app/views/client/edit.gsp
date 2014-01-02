@@ -20,8 +20,14 @@
                 Edit Client
             </h4>
             <g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
+                <div class="message" role="status">${flash.message}</div>
+            </g:if>
+            <g:if test="${flash.error}">
+                <div class="errors" role="status">${flash.error}</div>
+            </g:if>
+            <g:if test="${request.error}">
+                <div class="errors" role="status">${request.error}</div>
+            </g:if>
 			<g:form method="post" >
 				<g:hiddenField name="id" value="${clientInstance?.id}" />
 				<g:hiddenField name="version" value="${clientInstance?.version}" />
